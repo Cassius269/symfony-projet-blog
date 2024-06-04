@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\DemandRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: DemandRepository::class)]
 class Demand
@@ -15,24 +16,37 @@ class Demand
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Le prénom doit être renseigné')]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Le nom de famille doit être renseigné')]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Le mail doit être renseigné')]
+    #[Assert\Email(
+        message: 'Le mail {{ value }} n\'est pas valid'
+    )]
     private ?string $email = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message: 'Parlez-nous de vous')]
+    #[Assert\Length(
+        min: 100,
+        minMessage: 'Veuillez developper votre présentation et votre demande'
+    )]
     private ?string $message = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotNull(message: 'Votre CV est obligatoire dans la demande')]
     private ?string $cv = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $status = null;
 
     #[ORM\Column]
+    #[Assert\Choice([true, false, null])] // Valeurs attendues
     private ?bool $decision = null;
 
     #[ORM\ManyToOne(inversedBy: 'demands')]
