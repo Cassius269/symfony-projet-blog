@@ -2,11 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use App\Repository\UserRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
@@ -33,12 +36,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Le prénom ne peut pas être vide')]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Le nom de famille ne peut pas être vide')]
     private ?string $lastname = null;
 
     #[ORM\Column]
+    #[Assert\Choice([true, false])]
     private ?bool $isAccepted = null;
 
     #[ORM\Column]
@@ -46,6 +52,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
+
+    /**
+     * @var Collection<int, Podcast>
+     */
+    #[ORM\OneToMany(targetEntity: Podcast::class, mappedBy: 'producer')]
+    private Collection $podcasts;
+
+    public function __construct()
+    {
+        $this->podcasts = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -74,22 +91,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return (string) $this->email;
     }
 
-    /**
-     * @see UserInterface
-     * @return list<string>
-     */
     public function getRoles(): array
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
+        return $this->roles;
     }
 
-    /**
-     * @param list<string> $roles
-     */
     public function setRoles(array $roles): static
     {
         $this->roles = $roles;
@@ -97,10 +103,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @see PasswordAuthenticatedUserInterface
-     */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
@@ -177,6 +180,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Podcast>
+     */
+    public function getPodcasts(): Collection
+    {
+        return $this->podcasts;
+    }
+
+    public function addPodcast(Podcast $podcast): static
+    {
+        if (!$this->podcasts->contains($podcast)) {
+            $this->podcasts->add($podcast);
+            $podcast->setProducer($this);
+        }
+
+        return $this;
+    }
+
+    public function removePodcast(Podcast $podcast): static
+    {
+        if ($this->podcasts->removeElement($podcast)) {
+            // set the owning side to null (unless already changed)
+            if ($podcast->getProducer() === $this) {
+                $podcast->setProducer(null);
+            }
+        }
 
         return $this;
     }
