@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\EpisodeRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\EpisodeRepository;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: EpisodeRepository::class)]
 class Episode
@@ -17,6 +18,11 @@ class Episode
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Veuillez renseigner le titre de l\'épisode')]
+    #[Assert\Length(
+        min: 10,
+        minMessage: 'Votre titre est trop court'
+    )]
     private ?string $title = null;
 
     #[ORM\ManyToOne(inversedBy: 'episodes')]
@@ -24,9 +30,15 @@ class Episode
     private ?User $podcaster = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotNull(message: 'Veuillez charger une image d\'illustration de \'épisode')]
     private ?string $imageIllustration = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message: 'Veuillez renseigner un gros resumé de l\'émission')]
+    #[Assert\Length(
+        min: 200,
+        minMessage: 'Le résumé est trop court'
+    )]
     private ?string $content = null;
 
     #[ORM\ManyToOne(inversedBy: 'episodes')]
