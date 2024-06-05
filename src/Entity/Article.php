@@ -17,6 +17,10 @@ class Article
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Veuillez renseigner le titre de l\'article')]
+    #[Assert\Length(
+        min: 12,
+        minMessage: 'Le titre est trop court'
+    )]
     private ?string $title = null;
 
     #[ORM\ManyToOne(inversedBy: 'articles')]
@@ -40,6 +44,10 @@ class Article
 
     #[ORM\Column(nullable: true)]
     private ?int $nbreOfViews = null;
+
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null;
 
     public function getId(): ?int
     {
@@ -114,6 +122,18 @@ class Article
     public function setNbreOfViews(?int $nbreOfViews): static
     {
         $this->nbreOfViews = $nbreOfViews;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): static
+    {
+        $this->category = $category;
 
         return $this;
     }
