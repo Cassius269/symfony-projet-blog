@@ -21,7 +21,7 @@ class Podcast
 
     #[ORM\ManyToOne(inversedBy: 'podcasts')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $producer = null;
+    private ?User $podcaster = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotNull(message: 'Une image d\'illustration du podcast doit être renseignée')]
@@ -47,18 +47,6 @@ class Podcast
     public function setName(string $name): static
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getProducer(): ?User
-    {
-        return $this->producer;
-    }
-
-    public function setProducer(?User $producer): static
-    {
-        $this->producer = $producer;
 
         return $this;
     }
@@ -95,6 +83,18 @@ class Podcast
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getPodcaster(): ?User
+    {
+        return $this->podcaster;
+    }
+
+    public function setPodcaster(?User $podcaster): static
+    {
+        $this->podcaster = $podcaster;
 
         return $this;
     }

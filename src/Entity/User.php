@@ -56,7 +56,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, Podcast>
      */
-    #[ORM\OneToMany(targetEntity: Podcast::class, mappedBy: 'producer')]
+    #[ORM\OneToMany(targetEntity: Podcast::class, mappedBy: 'podcaster')]
     private Collection $podcasts;
 
     /**
@@ -203,7 +203,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->podcasts->contains($podcast)) {
             $this->podcasts->add($podcast);
-            $podcast->setProducer($this);
+            $podcast->setPodcaster($this);
         }
 
         return $this;
@@ -213,8 +213,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->podcasts->removeElement($podcast)) {
             // set the owning side to null (unless already changed)
-            if ($podcast->getProducer() === $this) {
-                $podcast->setProducer(null);
+            if ($podcast->getPodcaster() === $this) {
+                $podcast->setPodcaster(null);
             }
         }
 
