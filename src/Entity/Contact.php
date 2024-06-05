@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\DemandRepository;
+use App\Repository\ContactRepository;
 use Doctrine\DBAL\Types\Types;
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: DemandRepository::class)]
-class Demand
+#[ORM\Entity(repositoryClass: ContactRepository::class)]
+class Contact
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -24,29 +24,27 @@ class Demand
     private ?string $lastname = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'Le mail doit être renseigné')]
-    #[Assert\Email(
-        message: 'Le mail {{ value }} n\'est pas valid'
-    )]
+    #[Assert\NotBlank(message: 'Veuillez renseigner votre email')]
+    #[Assert\Email(message: '{{ value }} n\'est pas un bon format de mail')]
     private ?string $email = null;
 
-    #[ORM\Column(type: Types::TEXT)]
-    #[Assert\NotBlank(message: 'Parlez-nous de vous')]
+    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Veuillez renseigner un objet du message')]
     #[Assert\Length(
-        min: 100,
-        minMessage: 'Veuillez developper votre présentation et votre demande'
+        min: 10,
+        minMessage: 'L\'objet du message est trop court'
+    )]
+    private ?string $subject = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message: 'Le message ne peut pas être vide')]
+    #[Assert\Length(
+        min: 10,
+        minMessage: 'Le contenu du message est trop court'
     )]
     private ?string $message = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotNull(message: 'Votre CV est obligatoire dans la demande')]
-    private ?string $cv = null;
-
-    #[ORM\Column]
-    #[Assert\Choice([true, false, null])] // Valeurs attendues
-    private ?bool $decision = null;
-
-    #[ORM\ManyToOne(inversedBy: 'demands')]
+    #[ORM\ManyToOne(inversedBy: 'contacts')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
@@ -56,9 +54,9 @@ class Demand
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
-    #[ORM\ManyToOne(inversedBy: 'demands')]
+    #[ORM\ManyToOne(inversedBy: 'contacts')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?status $status = null;
+    private ?Status $status = null;
 
     public function getId(): ?int
     {
@@ -101,6 +99,18 @@ class Demand
         return $this;
     }
 
+    public function getSubject(): ?string
+    {
+        return $this->subject;
+    }
+
+    public function setSubject(string $subject): static
+    {
+        $this->subject = $subject;
+
+        return $this;
+    }
+
     public function getMessage(): ?string
     {
         return $this->message;
@@ -109,30 +119,6 @@ class Demand
     public function setMessage(string $message): static
     {
         $this->message = $message;
-
-        return $this;
-    }
-
-    public function getCv(): ?string
-    {
-        return $this->cv;
-    }
-
-    public function setCv(string $cv): static
-    {
-        $this->cv = $cv;
-
-        return $this;
-    }
-
-    public function isDecision(): ?bool
-    {
-        return $this->decision;
-    }
-
-    public function setDecision(bool $decision): static
-    {
-        $this->decision = $decision;
 
         return $this;
     }
@@ -173,12 +159,12 @@ class Demand
         return $this;
     }
 
-    public function getStatus(): ?status
+    public function getStatus(): ?Status
     {
         return $this->status;
     }
 
-    public function setStatus(?status $status): static
+    public function setStatus(?Status $status): static
     {
         $this->status = $status;
 
