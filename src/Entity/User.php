@@ -65,10 +65,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Demand::class, mappedBy: 'user')]
     private Collection $demands;
 
+    /**
+     * @var Collection<int, Episode>
+     */
+    #[ORM\OneToMany(targetEntity: Episode::class, mappedBy: 'podcaster', orphanRemoval: true)]
+    private Collection $episodes;
+
     public function __construct()
     {
         $this->podcasts = new ArrayCollection();
         $this->demands = new ArrayCollection();
+        $this->episodes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -245,6 +252,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($demand->getUser() === $this) {
                 $demand->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Episode>
+     */
+    public function getEpisodes(): Collection
+    {
+        return $this->episodes;
+    }
+
+    public function addEpisode(Episode $episode): static
+    {
+        if (!$this->episodes->contains($episode)) {
+            $this->episodes->add($episode);
+            $episode->setPodcaster($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEpisode(Episode $episode): static
+    {
+        if ($this->episodes->removeElement($episode)) {
+            // set the owning side to null (unless already changed)
+            if ($episode->getPodcaster() === $this) {
+                $episode->setPodcaster(null);
             }
         }
 
