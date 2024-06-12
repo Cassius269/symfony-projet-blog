@@ -1,8 +1,7 @@
+// Importation des partiels
 @import './base/normalize';
-@import './utils/_variables';
+@import './base/globalCustomStyle';
+@import './utils/variables';
+@import './layouts/header';
+@import './components/buttons.scss';
 
-body {
-    h1 {
-        color:$primaryColor;
-    }
-}
