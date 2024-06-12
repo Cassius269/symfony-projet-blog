@@ -1,38 +1,46 @@
 header {
+    width: 85vw;
+    margin: auto;
+
     #headerDivIconesLogoPlusMenu {
         display: flex;
         justify-content: space-between;
     }
-    
+
     nav {
-    position: absolute;
-    right: 62rem;
-    top: -1rem;    
-    transition: all 0.5s ease;/* transition entre l'ouverture ou la fermeture du menu */
-    .headerListLinks {
-        display: flex;
-        justify-content: center;
+        position: absolute;
+        right: 62rem;
+        top: -1rem;
+        transition: all 0.5s ease;
+
+        /* transition entre l'ouverture ou la fermeture du menu */
+        .headerListLinks {
+            display: flex;
+            justify-content: center;
+
             .divLogoExitMenu {
                 width: 10vh;
-                height: 60vh;      
+                height: 60vh;
                 position: relative;
                 top: 1rem;
+
                 .iconeExitMenu {
                     margin: auto;
                     display: block;
                     margin-top: 1rem;
                 }
             }
+
             .headerNavListLinksRight {
                 list-style: none;
-                width: 77vw; 
-                height: 60vh;      
-                background-color: $secondaryColor; 
+                width: 77vw;
+                height: 60vh;
+                background-color: $secondaryColor;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-around;
                 align-items: center;
-    
+
                 .imageProfile {
                     height: 236px;
                     position: relative;
@@ -42,13 +50,15 @@ header {
         }
 
     }
+
     .icone {
-        height: 100px;;
+        height: 100px;
+        ;
     }
-    
-    .mobile-menu{
-        right: 0px;/* cette valeur permet de faire apparaitre le menu caché car par défaut la nav est en position absolute avec right à right: 62rem;
+
+    .mobile-menu {
+        right: 0px;
+        /* cette valeur permet de faire apparaitre le menu caché car par défaut la nav est en position absolute avec right à right: 62rem;
         */
     }
 }
-
