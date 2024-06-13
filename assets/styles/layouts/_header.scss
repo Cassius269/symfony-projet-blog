@@ -1,7 +1,13 @@
-header {
+.header {
+    display: none;
+}
+
+.headerMobile {
     width: 85vw;
     margin: auto;
-
+    @media screen and (max-width: 992px) {
+        display: block;
+    }
     #headerDivIconesLogoPlusMenu {
         display: flex;
         justify-content: space-between;
@@ -13,13 +19,12 @@ header {
         top: -1rem;
         transition: all 0.5s ease;
 
-        /* transition entre l'ouverture ou la fermeture du menu */
         .headerListLinks {
             display: flex;
             justify-content: center;
 
             .divLogoExitMenu {
-                width: 11.5vh;
+                width: 20vw;
                 height: 60vh;
                 position: relative;
                 top: 1rem;
@@ -49,30 +54,59 @@ header {
                     margin: auto;
                     left: 1rem;
                 }
-            }
 
-            .headerNavListLinksRight {
-                list-style: none;
-                height: 300px;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-around;
-                align-items: center;
-                margin-bottom: 20rem;
+                .headerNavListLinksRight {
+                    list-style: none;
+                    height: 300px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    align-items: center;
+                    margin-bottom: 20rem;
+                    gap: 1.5rem;
+                }
             }
-            }
-
         }
-
     }
 
-    .icone {
-        height: 100px;
-        ;
-    }
 
     .mobile-menu {
         right: 0px;
-        /* cette valeur permet de faire apparaitre le menu caché car par défaut la nav est en position absolute avec right à right: 62rem;
-        */
+        /* cette valeur permet de faire apparaitre le menu caché car par défaut la nav est en position absolute avec right à right: 62rem; */
     }
+}
+
+.icone {
+    height: 100px;
+}
+
+
+// Stylisation du header en mobile
+.headerDesktop {
+    @media screen and (min-width: 1024px) {
+        display: block;
+    }
+    .divHeaderDesktop {
+        display: flex;
+        justify-content: space-around;
+       // display: block;// Cacher le headerDesktoppendant le développement du header mobile
+        .headerNavListLinks {
+            display: flex;
+            justify-content: space-between;
+            width: 600px;
+        }
+    
+        .icone, .imageProfile {
+            height: 40px;
+            position: relative;
+            top: 0.5rem;
+        }
+    
+        .active {
+            background: #EC751E;
+            padding: 0.5rem 1rem;
+            color: white;
+        }
+    }
+    
+}

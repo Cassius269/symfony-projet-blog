@@ -1,4 +1,5 @@
-<header>
+<!-- Header sur écran mobile -->
+<header class="header headerMobile">
 	<div id="headerDivIconesLogoPlusMenu">
 		<img src=" {{ asset('images/logo.svg')}} " alt=" icône représentant le logo du site" class="icone">
 		<img src="{{ asset('images/menuBurger.svg') }}" alt="icône représentant un menu burger" class="icone menuBurger">
@@ -12,8 +13,9 @@
 				<a href="" title=""><img src="{{asset('images/iconeProfile.svg')}}" alt="icône représentant le profile utilisateur" class="imageProfile"></a>
 				<ul class="headerNavListLinksRight">
 					<li>
-						<a href="#" title=""></a>
-						<button>Articles</button>
+						<a href="#" title="">
+							<button>Articles</button>
+						</a>
 					</li>
 					<li>
 						<a href="#" title="">
@@ -35,4 +37,34 @@
 		</div>
 
 	</nav>
+</header>
+
+<!-- Header sur écran desktop  -->
+<header class="header headerDesktop">
+	<div class="divHeaderDesktop">
+		<img src=" {{ asset('images/logo.svg')}} " alt=" icône représentant le logo du site" class="icone">
+		<ul class="headerNavListLinks">
+			<li>
+				<a href="#" title="">
+					Articles
+				</a>
+			</li>
+			<li>
+				<a href="#" title="">
+					Podcasts
+				</a>
+			</li>
+			<li>
+				<a href="#" title="">
+					Devenir contributeur
+				</a>
+			</li>
+			<li>
+				<a href="#" title="" class="active">
+					Se connecter
+				</a>
+			</li>
+		</ul>
+		<a href="" title=""><img src="{{asset('images/iconeProfile.svg')}}" alt="icône représentant le profile utilisateur" class="imageProfile"></a>
+	</div>
 </header>
