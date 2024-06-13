@@ -1,0 +1,33 @@
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    padding: 2rem 2rem 3rem 2rem;
+    background: $secondaryColor;
+    color: $fifthColor;
+
+    .headerArticleSocialMedias {
+        margin-right: 1rem;
+
+        .iconesSocialMedias {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows:  45px;
+            gap: 1rem;
+        }
+    
+    }
+    
+    .divEmailPlusPhone {
+        display: grid;
+        grid-template-columns: 60px 100px;
+    }
+
+    ul {
+        margin-right: 2.3rem;
+    }
+}
+img {
+    height: 45px;
+}
