@@ -18,6 +18,9 @@
 			{% block body %}{% endblock %}
 
 		</main>
+		<pre>
+			{{ dump(app.user) }}
+		</pre>
 		{% include "partials/_footer.html.twig" %}
 	</body>
 </html>

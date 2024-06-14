@@ -28,9 +28,18 @@
 						</a>
 					</li>
 					<li>
-						<a href="#" title="">
-							<button id="buttonConnect">Se Connecter</button>
-						</a>
+						{% if app.user %}
+							<a href=" {{ path('logout')}}" title="lien de déconnexion de l'application">
+								<button id="buttonConnect">Se déconnecter</button>
+							</a>
+
+						{% else %}
+							<a href=" {{ path('login')}}" title="lien vers la page de connexion">
+								<button id="buttonConnect">Se connecter</button>
+							</a>
+
+						{% endif %}
+
 					</li>
 				</ul>
 			</div>
@@ -42,7 +51,7 @@
 <!-- Header sur écran desktop  -->
 <header class="header headerDesktop">
 	<div class="divHeaderDesktop">
-		<img src=" {{ asset('images/logo.svg')}} " alt=" icône représentant le logo du site" class="icone">
+		<a href="{{ path('home') }}" title="lien vers la page d'accueil de l'application"><img src=" {{ asset('images/logo.svg')}} " alt=" icône représentant le logo du site" class="icone"></a>
 		<ul class="headerNavListLinks">
 			<li>
 				<a href="#" title="">
@@ -54,17 +63,30 @@
 					Podcasts
 				</a>
 			</li>
-			<li>
-				<a href="#" title="">
+			{% if app.user %}
+				<li>
+
+					<a href="#" title="lien vers la page dashboard" class="linkDashboardDesktop">
+						Dashboard
+					</a>
+				</li>
+				<li>
+					<a href="{{ path('logout')}}" title="lien vers la page devenir contributeur" class="linkLogoutDesktop">
+						Déconnexion
+					</a>
+				</li>
+
+			{% else %}
+				<a href="#" title="lien vers la page de connexion">
 					Devenir contributeur
 				</a>
-			</li>
-			<li>
-				<a href="#" title="" class="active">
-					Nous contacter
-				</a>
-			</li>
-		</ul>
-		<a href="" title=""><img src="{{asset('images/iconeProfile.svg')}}" alt="icône représentant le profile utilisateur" class="imageProfile"></a>
-	</div>
-</header>
+				<li>
+					<a href="#" title="" class="active">
+						Nous contacter
+					</a>
+				</li>
+			{% endif %}
+		</li>
+	</ul>
+	<a href="{{ path('login')}}" title="lien vers la page de connexion"><img src="{{asset('images/iconeProfile.svg')}}" alt="icône représentant le profile utilisateur" class="imageProfile"></a>
+</div></header>

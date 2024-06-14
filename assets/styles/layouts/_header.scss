@@ -104,6 +104,21 @@
             a {
                 font-size: 20px;
             }
+
+            .linkDashboardDesktop {
+                background-color: $primaryColor;
+                color: $fifthColor;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                
+            }
+
+            .linkLogoutDesktop {
+                background-color: $secondaryColor;
+                color: $fifthColor;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+            }
         }
     
         .icone, .imageProfile {
