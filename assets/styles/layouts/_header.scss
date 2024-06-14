@@ -64,6 +64,13 @@
                     align-items: center;
                     margin-bottom: 20rem;
                     gap: 1.5rem;
+
+                    #buttonConnect {
+                        background: #EC751E;
+                        padding: 0.8rem 0;
+                        color: white;
+                        border: none;
+                    }
                 }
             }
         }
@@ -94,6 +101,9 @@
             display: flex;
             justify-content: space-between;
             width: 600px;
+            a {
+                font-size: 20px;
+            }
         }
     
         .icone, .imageProfile {

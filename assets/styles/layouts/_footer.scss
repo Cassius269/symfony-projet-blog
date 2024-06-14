@@ -8,26 +8,86 @@ footer {
     color: $fifthColor;
 
     .headerArticleSocialMedias {
-        margin-right: 1rem;
-
+        margin-right: 1.5rem;
         .iconesSocialMedias {
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-template-rows:  45px;
             gap: 1rem;
+
+            #iconeFacebook {
+                margin-right: 0.4rem;
+                @media screen and (min-width: 1024px){
+                    margin-right: 0.4rem;
+                }
+            }
+            // Media query des icones des social medias
+            @media screen and (min-width: 1024px){
+                    display: flex;
+            }
+        }
+
+        @media screen and (min-width: 1024px){
+            margin-bottom: 6rem;
+
         }
     
+    }
+
+    article {
+        @media screen and (min-width: 1024px){
+            width: 400px;
+            margin-left: 4rem;        }       
     }
     
     .divEmailPlusPhone {
         display: grid;
-        grid-template-columns: 60px 100px;
+        grid-template-columns: 100px 10px;
+        margin-left: -1.7rem;
+        svg {
+            width: 100px;
+            height: 55px;
+            @media screen and (min-width: 1024px){
+                width: 100px;
+                height: 40px;
+            }
+            path{
+                fill:white;
+            }
+        }  
+        
+        p {
+            font-size: $font-size*1.5;
+            @media screen and (min-width: 1024px){
+                position: relative;
+                bottom: 1rem;
+            }
+        }
     }
 
     ul {
-        margin-right: 2.3rem;
+        margin-right: 3rem;
+        @media screen and (min-width: 1024px){
+            margin-bottom: 5rem;
+            width: 300px;
+            font-size: 24px;
+        }
+
+        li {
+            @media screen and (min-width: 1024px){
+                margin-bottom: 0.5rem;
+            }
+        }
     }
-}
-img {
-    height: 45px;
-}
+
+    img {
+        height: 45px;
+    }
+
+    @media screen and (min-width: 1024px) {
+        flex-direction: row;
+        justify-content: space-around;
+
+
+        }
+    }
