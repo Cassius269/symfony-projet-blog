@@ -20,7 +20,8 @@
 	</form>
 	<hr>
 	<h2>Devenir contributeur</h2>
-	<p>Vous souhaitez rejoindre notre
-																																																																														communauté, et enrichir nos pages
-																																																																														avec vos propres contenus?</p>
+	<p>communauté, et enrichir nos pages avec vos propres contenus?</p>
+	{% if error %}
+		<p>{{ error.messageKey | trans(error.messageData,'security') }}</p>
+	{% endif %}
 {% endblock %}
