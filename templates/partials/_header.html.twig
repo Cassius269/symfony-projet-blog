@@ -1,7 +1,7 @@
 <!-- Header sur écran mobile -->
 <header class="header headerMobile">
 	<div id="headerDivIconesLogoPlusMenu">
-		<img src=" {{ asset('images/logo.svg')}} " alt=" icône représentant le logo du site" class="icone">
+		<a href="{{ path('home') }}" title="lien vers la page d'accueil de l'application"><img src=" {{ asset('images/logo.svg')}} " alt=" icône représentant le logo du site" class="icone"></a>
 		<img src="{{ asset('images/menuBurger.svg') }}" alt="icône représentant un menu burger" class="icone menuBurger">
 	</div>
 	<nav>

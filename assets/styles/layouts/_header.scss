@@ -5,6 +5,9 @@
 .headerMobile {
     width: 85vw;
     margin: auto;
+    .icone{
+        height: 40px;
+    }
     @media screen and (max-width: 992px) {
         display: block;
     }

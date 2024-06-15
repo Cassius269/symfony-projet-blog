@@ -1,3 +1,14 @@
+.errorLogin {
+    background: #eaa032;
+    color: #fff;
+    padding: 1rem;
+    position: relative;
+    text-align: center;
+    top: 1rem;
+}
+
+// Stylisation du footer en mobile first puis Desktop : Ecran 414px pour les mobiles et 1024px pour les desktop
+
 footer {
     display: flex;
     flex-direction: column;

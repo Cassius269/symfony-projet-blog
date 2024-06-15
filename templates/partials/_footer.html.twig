@@ -6,6 +6,17 @@
 		{% endfor %}
 	{% endfor %}
 </ul>
+
+{# Affichage des messages d'erreur du login à la page login #}
+{% if app.request.pathinfo == '/login'  %}
+	{% if error %}
+		<p class="errorLogin">{{ error.messageKey | trans(error.messageData,'security') }}</p>
+	{% endif %}
+
+{% endif %}
+
+
+{# Footer commun à toutes les pages de l'application #}
 <footer>
 	<article article="contactUs">
 		<h2>Contactez-nous</h2>

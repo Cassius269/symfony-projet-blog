@@ -1,0 +1,16 @@
+input {
+    border: 1px solid black;
+    height: 50px;
+    label {
+        margin-top: 0.8rem;
+    }
+
+    &::placeholder {
+        color: #714534;
+    }
+
+    &:focus {
+        background-color: $secondaryColor;
+        color: white;
+    }
+}

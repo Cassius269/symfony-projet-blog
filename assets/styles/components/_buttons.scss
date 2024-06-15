@@ -3,3 +3,29 @@ button {
     padding: 1rem 50px 1rem 50px;
     width: 400px;
 }
+
+.primaryButton {
+    background: #ec751e;
+    border: none;
+    border-radius: 30px;
+    color: #fff;
+    height: 50px;
+    margin-top: 1rem;
+    padding: 0;
+    width: 190px;
+    font-size: 24px;
+}
+
+.secondaryButton {
+    border: none;
+    border-radius: 30px;
+    font-size: 24px;
+    height: 50px;
+    margin-top: 1rem;
+    width: 190px;
+    color: #714534;
+    border: 5px solid #714534;
+    width: 240px;
+    padding: 10px;
+    padding-bottom: 35px;
+}
