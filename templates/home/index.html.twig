@@ -2,7 +2,38 @@
 
 {% block title %}Page d'accueil
 {% endblock %}
-
+{% block stylesheets %}
+	{{ parent() }}
+	{{ encore_entry_link_tags('homepage') }}
+{% endblock %}
 {% block body %}
-	<h1>Page d'accueil</h1>
+	<section class="sectionTrendingArticle">
+		<article id="trendingArticle">
+			<p>Direction la Fashion week de Paris. Les tendances se confirment,des pull over-sizes et des pantalons haut-en-couleur ont animés les défilées.
+			</p>
+			<h1>FAHAMI le site des tendances mode et bien
+				<span>+</span>
+			</h1>
+		</article>
+		<a href="#" title="lien vers l'article de la semaine">
+			<button class="primaryButton">Lire l’article maintenant !</button>
+		</a>
+	</section>
+	<section>
+		<form action="" class="formSearch">
+			<input type="search" name="q">
+			<input type="submit" id="searchButton" value="search">
+		</form>
+	</section>
+	<section>
+		<h2>Le TOP article de  la semaine</h2>
+		<p>La semaine a été remplie de défilés et des coup d’éclats créatifs, bien loin des habitudes des saisons passées. Somme-nous entrain de vivre une révolution de la mode en cette année 2024 ?
+		</p>
+		<article>
+			<h3>Le défilé De Diora sera dans les annales</h3>
+			<p>Le défilé a pris un coup de boost avec le retour de Naomi Campbell sur la piste...</p>
+			<button>Lire la suite
+				<img src="{{ asset('images/iconeGotoDetailArticle.svg')}}" alt="icone représentant vers la droite pour lire un article en globalité"></button>
+		</article>
+	</section>
 {% endblock %}

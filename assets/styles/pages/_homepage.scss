@@ -1,0 +1,45 @@
+@import '/assets/styles/utils/variables';
+
+main {
+    .sectionTrendingArticle {
+        margin-top: 4rem;
+
+        #trendingArticle {
+            background-image: url('../../../public/images/illustrations/homeIllustration.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+    
+            p {
+                color: $fifthColor;
+                font-size: $font-size*1.6;
+                font-weight:100;
+                margin-left: 2rem;
+            }
+    
+            h1 {
+                color:$fifthColor;
+                margin-left: 2rem;
+                span {
+                    color:$primaryColor;
+                }
+            }
+
+            
+        }
+
+        a{
+            .primaryButton {
+                width: 300px;
+                display: block;
+                margin: auto;
+                margin-top: 2rem;
+                border-radius: 15px;
+            }
+        }
+    }
+    
+}
