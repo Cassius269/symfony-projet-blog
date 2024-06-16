@@ -2,11 +2,8 @@
 main {
     
     width: 826px;
-    margin-left:0px;
+    margin: auto !important;
 
-    @media screen and (min-width: 1440px) {
-        margin: auto;    
-    }
     div {
         @media screen and (min-width: 1024px) {
             margin-top: 5rem;
