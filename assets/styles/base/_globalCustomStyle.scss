@@ -12,7 +12,10 @@ body {
     }
 
     main {
-        margin: auto;    
+        margin: auto; 
+        @media screen and (min-width: 1024px){
+            margin-bottom: 4rem;
+        }   
     }
 
     p {
