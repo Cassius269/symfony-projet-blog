@@ -1,11 +1,11 @@
 @import '/assets/styles/utils/variables';
+@import '/assets/styles/utils/mixins';
 @import '/assets/styles/components/buttons';
-@import '/assets/styles/components/buttonSearch';
+@import '/assets/styles/components/formSearch';
 
 main {
     .sectionTrendingArticle {
         margin-top: 4rem;
-
         #trendingArticle {
             background-image: url('../../../public/images/illustrations/homeIllustration.png');
             background-repeat: no-repeat;
@@ -44,6 +44,10 @@ main {
                 border-radius: 15px;
             }
         }
+    }
+
+    .sectionTopArticleOfTheWeek {
+      //  @include CentrerElement(850px);
     }
     
 }

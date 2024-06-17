@@ -1,0 +1,7 @@
+// Mixin pour centrer des élements
+// Ce mixin est utile en mobile de centrer des sections de la page d'accueil
+
+@mixin centrerElement($width){
+    width: $width;
+    margin: auto;
+}

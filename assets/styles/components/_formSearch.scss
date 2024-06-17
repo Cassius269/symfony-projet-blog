@@ -1,0 +1,23 @@
+
+
+form {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5rem;
+
+    // L'input servant à contenir le contenu de la requête
+    input[type="image"]{
+        position: relative;
+        right: 3.6rem;
+        width: 45px;
+    }
+    
+    // L'input avec une loupe rechercher
+    input[type="search"]{
+          border: 3px solid black;
+          width: 800px;
+          height: 4rem;
+          border: 4px solid $tertiaryColor;
+          border-radius: 15px;
+      }
+}
