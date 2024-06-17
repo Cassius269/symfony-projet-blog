@@ -20,12 +20,10 @@
 		</a>
 	</section>
 	<section>
-		<form action="" class="formSearch">
-			<input type="search" name="q">
-			<input type="submit" id="searchButton" value="search">
-		</form>
+		{# Inclusion du formulaire de recherche d'article dans la page d'accueil #}
+		{% include "partials/_formSearch.html.twig" %}
 	</section>
-	<section>
+	<section class="sectionTopArticleOfTheWeek">
 		<h2>Le TOP article de  la semaine</h2>
 		<p>La semaine a été remplie de défilés et des coup d’éclats créatifs, bien loin des habitudes des saisons passées. Somme-nous entrain de vivre une révolution de la mode en cette année 2024 ?
 		</p>

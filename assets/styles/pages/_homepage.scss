@@ -1,4 +1,6 @@
 @import '/assets/styles/utils/variables';
+@import '/assets/styles/components/buttons';
+@import '/assets/styles/components/buttonSearch';
 
 main {
     .sectionTrendingArticle {
@@ -34,6 +36,8 @@ main {
         a{
             .primaryButton {
                 width: 300px;
+                background-color: $primaryColor;
+                color: $fifthColor;
                 display: block;
                 margin: auto;
                 margin-top: 2rem;
