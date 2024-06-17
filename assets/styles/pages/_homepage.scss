@@ -1,5 +1,4 @@
 @import '/assets/styles/utils/variables';
-@import '/assets/styles/utils/mixins';
 @import '/assets/styles/components/buttons';
 @import '/assets/styles/components/formSearch';
 
@@ -47,7 +46,43 @@ main {
     }
 
     .sectionTopArticleOfTheWeek {
-      //  @include CentrerElement(850px);
+      // @include CentrerElement(850px);
+      background-color: rgb(183, 173, 173);
+        margin: 3.5rem auto auto auto;
+        width: 850px;
+
+        p {
+            font-size: $font-size*1.5;                
+        }
+
+        .boxArticle {
+            background-image: url('../../../public/images/illustrations/illustrationArticleHome.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 307px;
+            height: 500px;
+            border:2px solid salmon;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            .divResumeArticle {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-end;
+                button {
+                    border: none;
+                    width: 200px;
+                    height: 10px;
+                    background-color: red;
+                    img {
+                        height: 10pxs;
+                    }
+                }
+            }
+            
+        }
     }
     
 }
