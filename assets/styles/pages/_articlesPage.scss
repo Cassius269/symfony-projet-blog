@@ -1,0 +1,89 @@
+@import '/assets/styles/utils/variables';
+@import '/assets/styles/components/buttons';
+@import '/assets/styles/components/formSearch';
+@import '../utils/placeholders';
+
+
+main {
+    .divAllArticles {
+        display: grid;
+        grid-template-columns: 300px 300px;
+        gap: 4rem;
+        margin: 4rem auto 4rem auto;
+        width: 665px;
+        @media screen and (min-width: 1024px) {
+            grid-template-columns: 300px 300px 300px;
+            margin: 4rem auto 4rem auto;    
+            width: 1000px;
+        }
+        article{
+            background-image: url('../../../public/images/illustrations/illustrationArticleHome.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: white;
+            padding: 1rem;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            
+            &:hover {
+                box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+                        }
+            @media screen and (min-width: 1024px) {
+                width: 240px;
+                height: 394px;
+            }
+            .divResumeArticle {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-end;
+                button {
+                    padding:0px !important;
+                    width: 235px;
+                    background: transparent;
+                    color: white;
+                    border: none;
+                    @media screen and (min-width: 1024px){
+                        font-size: 16px;
+                    }
+                    img {
+                        position: relative;
+                        top: 2px;
+                        @media screen and (min-width: 1024px){
+                            top: 4px;
+                            width: 30px;
+                        }
+                    }                  
+                }
+                p{
+                    font-size: 25px;
+                    @media screen and (min-width: 1024px) {
+                        font-size: 18px;
+                    }
+                }
+            }
+            h3 {
+                font-size: calc($font-size*2.8);
+                @media screen and (min-width: 1024px){
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+
+    ul{
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        font-size: 25px;
+        .actualPage {
+            background: $primaryColor;
+            padding: 5px 10px;
+            border-radius: 50px;
+            color: blanchedalmond;
+            position: relative;
+            bottom: 3px;
+                }
+    }
+}

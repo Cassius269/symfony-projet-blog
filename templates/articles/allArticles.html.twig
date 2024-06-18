@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Articles
+{% endblock %}
+{% block stylesheets %}
+	{{parent()}}
+	{{ encore_entry_link_tags('articlesPage') }}
+{% endblock %}
+{% block body %}
+	{% include "partials/_formSearch.html.twig" %}
+	<div class="divAllArticles">
+		<article class="boxArticle">
+			<h3>Le défilé De Diora sera dans les annales</h3>
+			<div class="divResumeArticle">
+				<p>Le défilé a pris un coup de boost avec le retour de Naomi Campbell sur la piste...</p>
+				<a href="">
+					<button>Lire la suite
+						<img src="{{ asset('images/iconeGotoDetailArticle.svg')}}" alt="icone représentant vers la droite pour lire un article en globalité"></button>
+				</a>
+			</div>
+		</article>
+		<article class="boxArticle">
+			<h3>Le défilé De Diora sera dans les annales</h3>
+			<div class="divResumeArticle">
+				<p>Le défilé a pris un coup de boost avec le retour de Naomi Campbell sur la piste...</p>
+				<a href="">
+					<button>Lire la suite
+						<img src="{{ asset('images/iconeGotoDetailArticle.svg')}}" alt="icone représentant vers la droite pour lire un article en globalité"></button>
+				</a>
+			</div>
+		</article>
+		<article class="boxArticle">
+			<h3>Le défilé De Diora sera dans les annales</h3>
+			<div class="divResumeArticle">
+				<p>Le défilé a pris un coup de boost avec le retour de Naomi Campbell sur la piste...</p>
+				<a href="">
+					<button>Lire la suite
+						<img src="{{ asset('images/iconeGotoDetailArticle.svg')}}" alt="icone représentant vers la droite pour lire un article en globalité"></button>
+				</a>
+			</div>
+		</article>
+		<article class="boxArticle">
+			<h3>Le défilé De Diora sera dans les annales</h3>
+			<div class="divResumeArticle">
+				<p>Le défilé a pris un coup de boost avec le retour de Naomi Campbell sur la piste...</p>
+				<a href="">
+					<button>Lire la suite
+						<img src="{{ asset('images/iconeGotoDetailArticle.svg')}}" alt="icone représentant vers la droite pour lire un article en globalité"></button>
+				</a>
+			</div>
+		</article>
+		<article class="boxArticle">
+			<h3>Le défilé De Diora sera dans les annales</h3>
+			<div class="divResumeArticle">
+				<p>Le défilé a pris un coup de boost avec le retour de Naomi Campbell sur la piste...</p>
+				<a href="">
+					<button>Lire la suite
+						<img src="{{ asset('images/iconeGotoDetailArticle.svg')}}" alt="icone représentant vers la droite pour lire un article en globalité"></button>
+				</a>
+			</div>
+		</article>
+		<article class="boxArticle">
+			<h3>Le défilé De Diora sera dans les annales</h3>
+			<div class="divResumeArticle">
+				<p>Le défilé a pris un coup de boost avec le retour de Naomi Campbell sur la piste...</p>
+				<a href="">
+					<button>Lire la suite
+						<img src="{{ asset('images/iconeGotoDetailArticle.svg')}}" alt="icone représentant vers la droite pour lire un article en globalité"></button>
+				</a>
+			</div>
+		</article>
+		<article class="boxArticle">
+			<h3>Le défilé De Diora sera dans les annales</h3>
+			<div class="divResumeArticle">
+				<p>Le défilé a pris un coup de boost avec le retour de Naomi Campbell sur la piste...</p>
+				<a href="">
+					<button>Lire la suite
+						<img src="{{ asset('images/iconeGotoDetailArticle.svg')}}" alt="icone représentant vers la droite pour lire un article en globalité"></button>
+				</a>
+			</div>
+		</article>
+	</div>
+
+
+	<ul>
+		<li>1</li>
+		<li>2</li>
+		<li class="actualPage">3</li>
+		<li>4</li>
+		<li>5</li>
+		<li>6</li>
+		<li>7</li>
+		<li>8</li>
+		<li>9</li>
+		<li>10</li>
+	</ul>
+{% endblock %}
