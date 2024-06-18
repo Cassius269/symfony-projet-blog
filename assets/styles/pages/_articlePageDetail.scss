@@ -1,0 +1,27 @@
+main {
+    width: 830px;
+
+    .imageIllustration {
+        width: 100%;
+        height: 456px;
+    }
+
+    .divAuthorPlusDateOfPublication {
+        display: flex;
+        justify-content: space-around;
+        gap: 30rem;
+
+        >p{// Ciblage du premier P enfant direct de la div "divAuthorPlusDateOfPublication"
+            color: grey;
+        }
+        
+        .divAuthorPlusIconePen {
+            display: flex;
+            width: 120px;
+            img {
+                position: relative;
+                bottom: 1.5rem;
+            }
+        }
+    }
+}
