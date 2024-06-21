@@ -3,7 +3,10 @@ main {
     
     width: 826px;
     margin: auto !important;
-
+    @media screen and (min-width: 1024px){
+        height: 60vh;
+    }
+    
     div {
         @media screen and (min-width: 1024px) {
             margin-top: 5rem;
