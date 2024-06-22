@@ -5,12 +5,26 @@
 
 
 main {
+    h1 {
+        margin-left: 2rem;
+        margin-top: 2rem;
+        @media screen and (min-width: 1024px) {
+            font-size: 30px;
+            margin-left: 3rem
+        }
+    }
     .divAllArticles {
+        // display: grid;
+        // grid-template-columns: 300px 300px;
+        // gap: 4rem;
+        // margin: 4rem auto 4rem auto;
+        // width: 665px;
         display: grid;
-        grid-template-columns: 300px 300px;
+        grid-template-columns: 1fr 1fr;
         gap: 4rem;
-        margin: 4rem auto 4rem auto;
-        width: 665px;
+        /* margin: 4rem auto 4rem auto; */
+        width: 293px;
+
         @media screen and (min-width: 1024px) {
             grid-template-columns: 300px 300px 300px;
             margin: 4rem auto 4rem auto;    
@@ -22,7 +36,8 @@ main {
             background-size: cover;
             color: white;
             padding: 1rem;
-            height: 500px;
+            height: 248px;
+            width: 150px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -40,16 +55,17 @@ main {
                     align-items: flex-end;
                 button {
                     padding:0px !important;
-                    width: 235px;
                     background: transparent;
                     color: white;
                     border: none;
                     @media screen and (min-width: 1024px){
                         font-size: 16px;
+                        width: 235px;
+                        margin-right: -4rem;
                     }
                     img {
                         position: relative;
-                        top: 2px;
+                        top: 6px;
                         @media screen and (min-width: 1024px){
                             top: 4px;
                             width: 30px;
@@ -57,14 +73,18 @@ main {
                     }                  
                 }
                 p{
-                    font-size: 25px;
+                    font-size: 12px;
+                    line-height: 11.8px;
                     @media screen and (min-width: 1024px) {
-                        font-size: 18px;
+                        font-size: 15px;
+                        font-weight: 500;
+                        line-height: 1.1;
                     }
                 }
             }
             h3 {
-                font-size: calc($font-size*2.8);
+               // font-size: calc($font-size*2.8);
+               font-size: 16px;
                 @media screen and (min-width: 1024px){
                     font-size: 20px;
                 }

@@ -41,6 +41,7 @@
 
             .divImageProfilePlusHeaderLinks {
                 background-color: #C68F70;
+                padding-top: 3rem;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-around;
@@ -61,8 +62,9 @@
                     flex-direction: column;
                     justify-content: space-around;
                     align-items: center;
-                    margin-bottom: 20rem;
+                    margin-bottom: 18rem;
                     gap: 1.5rem;
+                    margin-right: 2rem;
 
                     #buttonConnect {
                         background: #EC751E;
@@ -71,8 +73,10 @@
                         border: none;
                     }
 
-                    li {
-                        width: 376px;
+                    button {
+                        width: 230px;
+                        padding: 10px 14px;
+                        font-size: 20px;
                     }
                 }
             }
