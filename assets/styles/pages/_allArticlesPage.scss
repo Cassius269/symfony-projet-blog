@@ -10,21 +10,22 @@ main {
         margin-top: 2rem;
         @media screen and (min-width: 1024px) {
             font-size: 30px;
-            margin-left: 3rem
+           margin-left: 10vw;
         }
     }
     .divAllArticles {
-        // display: grid;
-        // grid-template-columns: 300px 300px;
-        // gap: 4rem;
-        // margin: 4rem auto 4rem auto;
-        // width: 665px;
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 4rem;
-        /* margin: 4rem auto 4rem auto; */
         width: 293px;
+        margin: auto;
+        width: min-content;
 
+        @media screen and (min-content: 768px){
+            grid-template-columns: 1fr 1fr 1fr;
+            margin: auto;
+            width: min-content;
+        }
         @media screen and (min-width: 1024px) {
             grid-template-columns: 300px 300px 300px;
             margin: 4rem auto 4rem auto;    
@@ -41,6 +42,7 @@ main {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            line-height: 1.5rem;
             
             &:hover {
                 box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
@@ -82,7 +84,7 @@ main {
                     }
                 }
             }
-            h3 {
+            h2 {
                // font-size: calc($font-size*2.8);
                font-size: 16px;
                 @media screen and (min-width: 1024px){

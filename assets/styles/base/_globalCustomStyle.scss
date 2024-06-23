@@ -21,6 +21,9 @@ body {
     p {
         line-height: 1.5rem;
         white-space: break-spaces;
+        @media screen and (min-width: 1024px) {
+            font-size: 19px;
+        }
     }
 
     h1 {

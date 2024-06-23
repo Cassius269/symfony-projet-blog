@@ -1,15 +1,32 @@
-main {
-    width: 830px;
+@import './../utils/variables';
 
+main {
+    margin-top: 3rem;
+    width: 85vw;
+    @media screen and (min-width: 1024px) {
+        width: 79vw;
+        margin-top: 5rem;
+
+    }
+
+    h1 {
+        @media screen and (min-width: 1024px) {
+            font-size: 4em;
+        }
+    }
     .imageIllustration {
-        width: 100%;
-        height: 456px;
+        width: 95%;
+        @media screen and (min-width: 1024px) {
+            width: 100%;
+        }
     }
 
     .divAuthorPlusDateOfPublication {
         display: flex;
         justify-content: space-around;
-        gap: 30rem;
+        @media screen and (min-width: 1024px){
+             gap: 30rem;
+        }
 
         >p{// Ciblage du premier P enfant direct de la div "divAuthorPlusDateOfPublication"
             color: grey;
@@ -24,4 +41,70 @@ main {
             }
         }
     }
+
+    #sectionRecommandationArticles {
+        h2 {
+            @media screen and (min-width: 1024px) {
+                font-size: 2rem;
+            }
+        }
+
+            .divAllArticlesRecommandition{
+                article {
+                    display: flex;
+                    align-items: center;
+                    @media screen and (min-width: 1024px){
+                        margin-bottom: 2rem;
+                    }
+                    .imageIllustrationRecommandationArticle{
+                        height: 96px;
+                        width: 156px;
+                        @media screen and (min-width: 768px){
+                            display: grid;
+                            grid-template-columns: 1fr;
+                                height: 144px;
+                             width: 234px;
+                        }
+                        @media screen and (min-width: 1024px){
+                            width: 427px;
+                            height: 227px;
+                    }
+                    }
+                   
+                    .divGlobalInfoAuthor {
+                        @media screen and (min-width: 768px){
+                            width: 100%;
+                        }
+                        .divLinePlusInfoAuther {
+                            display: flex;
+                            @media screen and (min-width: 768px){
+                                display: flex;
+                                margin-top: 1.2rem;
+                            }
+            
+                            p {
+                                background-color: $secondaryColor;
+                                color:$fifthColor;
+                                padding: 4px 1rem;
+                                border-radius: 1rem;
+                                width: 100%;
+                                text-align: center !important;
+                                white-space: unset !important;
+                                @media screen and (min-width: 768px){
+                                    padding: 1vw 1rem;
+                                    font-size: 1.1rem;                                    
+                                }
+                                @media screen and (min-width: 1440px){
+                                    font-size: 1.2rem;
+                                    padding: 1.9rem 1rem;
+                                }
+                                a{
+                                    color: white;
+                                }
+                            }
+                        }
+                    }
+                }
+                }        
+        }
 }

@@ -1,8 +1,9 @@
 // Stylisation uniquement de la page de login pour plus de performance de l'application
 main {
     width: 270px !important;  
-    margin: auto !important;
+    margin: 1rem auto 6rem auto !important;
     @media screen and (min-width: 1024px){
+       margin: auto !important;
         min-height: 60vh;
         min-width: 826px;
     }
