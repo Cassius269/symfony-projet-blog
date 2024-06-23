@@ -21,7 +21,7 @@ class SecurityController extends AbstractController
     {
         $user = new User();
         $user->setFirstname('Fahami')
-            ->setLastname('MOHAMED ALI Fahami')
+            ->setLastname('MOHAMED ALI')
             ->setEmail('fahamygaston@hotmail.com')
             ->setRoles(['ROLE_USER'])
             ->setPassword($userPasswordHasher->hashPassword($user, '123456789')) // Par défaut utiliser un algo de sécurité comme bin2hex(random_bytes(10))
