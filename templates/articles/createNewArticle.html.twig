@@ -1,3 +1,24 @@
 {% extends "base.html.twig" %}
+{% block title %}
+	Créer un nouvel article
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('createArticlePage') }}
+	{# Chargement des scripts de CK Editor via le CDN #}
+	<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/balloon/ckeditor.js"></script>
+	{# Ecrasement du CK Editor via le fichier CK Editor personnalisé #}
+	<script src=" {{asset('js/ckeditor.js')}}"></script>
+{% endblock %}
 {% block body %}
-	{{form(form)}}{% endblock %}
+	<h1>Ecrire un nouvel article</h1>
+	{# La vue du formulaire de création d'article #}
+	{{form_start(form)}}
+	{{form_row(form.title)}}
+	{{form_row(form.imageIllustration)}}
+	{{form_row(form.category)}}
+	<p>Contenu de l'article</p>
+	<div id="editor"></div>
+	{{form_errors(form)}}
+	{{form_end(form)}}
+{% endblock %}

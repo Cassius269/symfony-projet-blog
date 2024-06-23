@@ -2,11 +2,16 @@
 
 namespace App\Controller;
 
+use DateTimeImmutable;
 use App\Entity\Article;
 use App\Form\ArticleType;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route(path: '/articles', name: 'articles_')]
@@ -34,27 +39,51 @@ class ArticleController extends AbstractController
         path: '/author/create-article',
         name: 'createNewArticle'
     )]
-    public function createArticle(Request $request): Response
+    #[IsGranted("ROLE_AUTHOR")]
+    public function createArticle(Request $request, Security $security, EntityManagerInterface $entityManager): Response
     {
-        // Création d'un objet vide Article
-        $article = new Article();
+        /** @var User $user */
+        $user = $security->getUser();
 
-        // Création du formulaire
-        $form = $this->createForm(ArticleType::class, $article);
+        dump($user);
+        if ($user->isAccepted() == true) {
+            // Création d'un objet vide Article
+            $article = new Article();
 
-        // Recuillir la requête
-        $form->handleRequest($request);
+            // Création du formulaire
+            $form = $this->createForm(ArticleType::class, $article);
 
-        // Vérifier la soumission du formulaire et les donneés soumises
-        if ($form->isSubmitted() && $form->isValid()) {
-            dump($article);
+            // Recuillir la requête
+            $form->handleRequest($request);
+
+            // Vérifier la soumission du formulaire et les donneés soumises
+            if ($form->isSubmitted() && $form->isValid()) {
+                dump($article);
+
+                $article->setCreatedAt(new DateTimeImmutable())
+                    ->setAuthor($user);
+
+                // Enregistrer en base de donnée le nouvel article ayant été soumis et validé
+                $entityManager->persist($article);
+                $entityManager->flush($article);
+
+                $this->addFlash('success', 'Votre article a été publié avec succès');
+                return $this->redirectToRoute('articles_showAll');
+            }
+
+            return $this->render(
+                'articles/createNewArticle.html.twig',
+                [
+                    'form' => $form
+                ]
+            );
+        } else {
+            // Envoyer un message d'erreur
+            $this->addFlash('error', 'Vous n\'est pas autorisé(e) à écrire');
+
+
+            $security->logout('false'); // Déconnecter l'utilisateur
+            return new RedirectResponse($this->generateUrl('login')); // rediriger l'utilisateur vers la page de connexion         }
         }
-
-        return $this->render(
-            'articles/createNewArticle.html.twig',
-            [
-                'form' => $form
-            ]
-        );
     }
 }
