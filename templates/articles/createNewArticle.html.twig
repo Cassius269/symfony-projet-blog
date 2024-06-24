@@ -2,6 +2,10 @@
 {% block title %}
 	Créer un nouvel article
 {% endblock %}
+{% block stylesheets %}
+	{{ parent() }}
+	{{ encore_entry_link_tags('createArticlePage') }}
+{% endblock %}
 {% block javascripts %}
 	{{ parent() }}
 	{{ encore_entry_script_tags('createArticlePage') }}
@@ -11,14 +15,20 @@
 	<script src=" {{asset('js/ckeditor.js')}}"></script>
 {% endblock %}
 {% block body %}
-	<h1>Ecrire un nouvel article</h1>
-	{# La vue du formulaire de création d'article #}
-	{{form_start(form)}}
-	{{form_row(form.title)}}
-	{{form_row(form.imageIllustration)}}
-	{{form_row(form.category)}}
-	<p>Contenu de l'article</p>
-	<div id="editor"></div>
-	{{form_errors(form)}}
-	{{form_end(form)}}
+	{% if is_granted("ROLE_AUTHOR") %}
+		<h1>Ecrire un nouvel article</h1>
+		{# La vue du formulaire de création d'article #}
+		{{form_start(form)}}
+		{{form_row(form.title)}}
+		<div>
+			{{form_row(form.imageIllustration)}}
+			<img src="{{ asset('images/iconeFileUpload.svg') }}" alt="icone représentant un fichier">
+		</div>
+		{{form_row(form.category)}}
+		<p>Contenu de l'article</p>
+		<div id="editor"></div>
+		{{form_errors(form)}}
+		{{form_end(form)}}
+
+	{% endif %}
 {% endblock %}

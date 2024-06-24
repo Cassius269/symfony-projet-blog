@@ -29,7 +29,7 @@
 							</a>
 						</li>
 					{% endif %}
-					{% if app.user %}
+					{% if is_granted("IS_AUTHENTICATED_FULLY") %}
 						<li>
 
 							<a href="#" title="lien vers le dashboard">
