@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class ArticleType extends AbstractType
 {
@@ -23,7 +24,32 @@ class ArticleType extends AbstractType
                 'label' => 'Titre'
             ])
             ->add('imageIllustration', FileType::class, [
-                'label' => 'Image d’illustration  principale'
+                'label' => 'Image d’illustration  principale',
+                'constraints' => [
+                    new Assert\Image(
+                        [
+                            'minWidth' => 400,
+                            'minHeight' => 600,
+                            'minWidthMessage' => 'Veuillez insérer une image plus large',
+                            'minHeightMessage' => 'Veuillez insérer une image plus grande en hauteur',
+                            'allowLandscape' => true,
+                            'allowPortrait' => false,
+
+                            'mimeTypes' =>  [
+                                'image/png',
+                                'image/jpeg',
+                                'image/jpg'
+                            ],
+                            'mimeTypesMessage' => 'Le fichier chargé n\'est pas au bon format'
+                        ]
+                    ),
+                    new Assert\NotNull(
+                        [
+                            'message' => 'L\'image d\'illustration est obligatoire'
+                        ]
+                    )
+                ]
+
             ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
@@ -32,7 +58,10 @@ class ArticleType extends AbstractType
             ])
             ->add('content', HiddenType::class)
             ->add('Submit', SubmitType::class, [
-                'label' => 'Publier'
+                'label' => 'Publier',
+                'attr' => [
+                    'class' => 'primaryButton'
+                ]
             ]);
     }
 

@@ -63,6 +63,16 @@ class ArticleController extends AbstractController
                 $article->setCreatedAt(new DateTimeImmutable())
                     ->setAuthor($user);
 
+                $file = $form['imageIllustration']->getData();
+                $validExtensions = ['png', 'jpeg', 'jpg'];
+                $extension = $file->guessExtension();
+
+                // dd($file);
+                if (in_array($extension, $validExtensions)) { // Si l'extension est effectivement valide
+                    $filename = 'images/illustrations' . $article->getTitle(); // nom du fichier
+                    $article->setImageIllustration($filename);
+                    $file->move('images/illustrations', $filename);
+                }
                 // Enregistrer en base de donnée le nouvel article ayant été soumis et validé
                 $entityManager->persist($article);
                 $entityManager->flush($article);

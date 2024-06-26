@@ -28,7 +28,7 @@ class Article
     private ?User $author = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotNull(message: 'Une image d\'illustration du podcast doit être renseignée')]
+    #[Assert\NotNull(message: 'Une image d\'illustration de l\'article doit être renseignée')]
     private ?string $imageIllustration = null;
 
     #[ORM\Column(type: Types::TEXT)]

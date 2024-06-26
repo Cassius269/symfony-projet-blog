@@ -1,6 +1,6 @@
 // On crée CK Editor sur la div ayant l'attribut #editor 
 
-BalloonEditor. create( document.querySelector( '#editor' ), { 
+ClassicEditor. create( document.querySelector( '#editor' ), { 
     cloudServices: { 
         tokenUrl: 'https://110564.cke-cs.com/token/dev/jjMCuDGURbNcVjNAS1ZXzZpawhe0IvLCXeX5?limit=10 ', 
         uploadUrl: 'https://110564.cke-cs.com/easyimage/upload/' 
