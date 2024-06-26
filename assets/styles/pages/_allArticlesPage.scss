@@ -16,13 +16,14 @@ main {
     .divAllArticles {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 4rem;
+        gap: 1rem;
         width: 293px;
         margin: auto;
         width: min-content;
 
         @media screen and (min-content: 768px){
             grid-template-columns: 1fr 1fr 1fr;
+            gap: 4rem;
             margin: auto;
             width: min-content;
         }

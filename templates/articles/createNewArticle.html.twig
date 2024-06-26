@@ -21,8 +21,13 @@
 		{{form_start(form)}}
 		{{form_row(form.title)}}
 		<div>
-			{{form_row(form.imageIllustration)}}
-			<img src="{{ asset('images/iconeFileUpload.svg') }}" alt="icone représentant un fichier">
+			<h4>Image d’illustration  principale</h4>
+			<div id="divRowOfInputImageIllustration">
+				{{ form_widget(form.imageIllustration)}}
+				<img src="{{ asset('images/iconeFileUpload.svg') }}" alt="icone représentant un fichier">
+				<p>JPEG, JPG ou PNG</p>
+				<p>Glissez déposez ou parcourir</p>
+			</div>
 		</div>
 		{{form_row(form.category)}}
 		<p>Contenu de l'article</p>
