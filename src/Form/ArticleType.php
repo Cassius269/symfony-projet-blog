@@ -56,13 +56,7 @@ class ArticleType extends AbstractType
                 'choice_label' => 'name',
                 'label' => 'Catégorie'
             ])
-            ->add('content', HiddenType::class)
-            ->add('Submit', SubmitType::class, [
-                'label' => 'Publier',
-                'attr' => [
-                    'class' => 'primaryButton'
-                ]
-            ]);
+            ->add('content', HiddenType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
