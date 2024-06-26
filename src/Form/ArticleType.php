@@ -21,7 +21,10 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => 'Titre'
+                'label' => 'Titre',
+                'attr' => [
+                    'placeholder' => 'Le titre de l\'article',
+                ]
             ])
             ->add('imageIllustration', FileType::class, [
                 'label' => 'Image d’illustration  principale',
