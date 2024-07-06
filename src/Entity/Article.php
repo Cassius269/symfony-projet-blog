@@ -94,7 +94,7 @@ class Article
         return $this->imageIllustration;
     }
 
-    public function setImageIllustration(string $imageIllustration): static
+    public function setImageIllustration(?string $imageIllustration): static
     {
         $this->imageIllustration = $imageIllustration;
 

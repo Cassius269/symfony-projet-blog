@@ -10,10 +10,12 @@ use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HtmlSanitizer\HtmlSanitizerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 #[Route(path: '/articles', name: 'articles_')]
@@ -112,5 +114,44 @@ class ArticleController extends AbstractController
         }
 
         return $this->redirectToRoute('home');
+    }
+
+    #[Route(path: '/update/{id}', name: 'update')]
+    #[IsGranted('ROLE_AUTHOR')]
+    public function updateArticle(Article $article, Request $request, EntityManagerInterface $entityManager, HtmlSanitizerInterface $htmlSanitizer): Response
+    {
+        if (!$article) { // Si l'article n'existe renvoyer une exception de ressource non trouvée
+            throw $this->createNotFoundException('L\'article n\'existe pas');
+        }
+
+        $form = $this->createForm(ArticleType::class, $article)
+            ->add('imageIllustrationFile', VichFileType::class, [
+                'required' => false,
+            ]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            //dd($form->getData());
+
+            // Nettoyage du contenu de l'article
+            $unsafeContentArticle = $form->get('content')->getData();
+            $safeContentArticle = $htmlSanitizer->sanitize($unsafeContentArticle);
+
+            $article->setContent($safeContentArticle);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Votre article a été mise à jour');
+            return $this->redirectToRoute('home');
+        }
+
+        // Réutiliser le même template que la création d'article d'article 
+        return $this->render(
+            'articles/createNewArticle.html.twig',
+            [
+                'form' => $form,
+                'article' => $article
+            ]
+        );;
     }
 }

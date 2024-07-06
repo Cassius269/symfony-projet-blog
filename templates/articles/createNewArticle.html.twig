@@ -23,9 +23,16 @@
 			{{ form_label(form.title)}}
 			{{ form_widget(form.title)}}
 		</div>
-		<div>
+		<div id="divGlobalInputImage">
 			<p id="labelIllustrationImage">Image d’illustration  principale</p>
-			<div id="divRowOfInputImageIllustration">
+			{% if article.imageIllustration %}
+				<img id="CurrentImageIllustration" src="{{ vich_uploader_asset(article,'imageIllustrationFile')}}" alt="">
+			{% else %}
+				<p>L'article ne dispose pas d'image d'illustration principale</p>
+			{% endif %}
+			<div
+				id="divRowOfInputImageIllustration">
+				{# {% set imageUrl = vich_uploader_asset(article, 'imageIllustrationFile') %} #}
 				{{ form_widget(form.imageIllustrationFile)}}
 				<img src="{{ asset('images/iconeFileUpload.svg') }}" alt="icone représentant un fichier">
 				<p>JPEG, JPG ou PNG</p>
@@ -48,7 +55,12 @@
 		{{form_errors(form)}}
 		<div class="divButtonSubmit">
 			<button class="secondaryButton buttonPreview">Prévisualiser l'article</button>
-			<button type="submit" class="primaryButton">Publier</button>
+			{% if app.request.get('_route') == 'articles_update'  %}
+				<button type="submit" class="primaryButton">Mettre à jour</button>
+			{% else %}
+				<button type="submit" class="primaryButton">Publier</button>
+			{% endif %}
+
 		</div>
 		{{form_end(form)}}
 	{% endif %}

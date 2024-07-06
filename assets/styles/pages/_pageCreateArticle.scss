@@ -36,32 +36,44 @@ main {
                 font-weight: bold;
             }
         }
+		
+        #divGlobalInputImage {
 
-        #labelIllustrationImage {
-            font-weight: bold;
-        }
-        
-        #divRowOfInputImageIllustration {// La DIV contenant l'input de type file pour l'upload d'image
-                border: 2.4px solid #FFA800;
-                display: flex;
-                flex-direction: column;
-                padding: 2rem 0;
-                align-items: center;
-                border-radius: 9px;
-    
+            #labelIllustrationImage {
+                font-weight: bold;
+            }
+            
+            #CurrentImageIllustration {
+                width: 100%;
+                margin-bottom: 0.5rem;
                 @media screen and (min-width: 1024px) {
-                    padding: 2.5rem 0;
+                    margin-bottom: 1rem;
                 }
-                #article_imageIllustrationFile_file {// id par défaut donné par Symfony à l'input file
-                    opacity: 0;
-                    position: absolute;
-                }
-                img {
+            }
+
+            #divRowOfInputImageIllustration {// La DIV contenant l'input de type file pour l'upload d'image
+                    border: 2.4px solid #FFA800;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 2rem 0;
+                    align-items: center;
+                    border-radius: 9px;
+        
                     @media screen and (min-width: 1024px) {
-                        width: 50px;
+                        padding: 2.5rem 0;
                     }
-                }
+                    #article_imageIllustrationFile_file {// id par défaut donné par Symfony à l'input file
+                        opacity: 0;
+                        position: absolute;
+                    }
+                    img {
+                        @media screen and (min-width: 1024px) {
+                            width: 50px;
+                        }
+                    }
+            }
         }
+
             button[type="submit"] {
                 background: #FFA800;
                 width: 170px;
@@ -140,4 +152,10 @@ main {
         display: flex;
     justify-content: space-between;
     }
+}
+
+
+.vich-file {
+    opacity: 0; // Rendre invisible la div contenant l'input Vich-File de mise à jour d'image
+    position: absolute; // Faire disparaitre l'élement de l'ordre d'affichage dans le DOM
 }
