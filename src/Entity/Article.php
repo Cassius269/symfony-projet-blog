@@ -5,9 +5,12 @@ namespace App\Entity;
 use App\Repository\ArticleRepository;
 use Doctrine\DBAL\Types\Types;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
+#[Vich\Uploadable]
 class Article
 {
     #[ORM\Id]
@@ -28,8 +31,10 @@ class Article
     private ?User $author = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotNull(message: 'Une image d\'illustration de l\'article doit être renseignée')]
     private ?string $imageIllustration = null;
+
+    #[Vich\UploadableField(mapping: 'articleiIlustration', fileNameProperty: 'imageIllustration')]
+    private ?File $imageIllustrationFile = null;
 
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\NotBlank(message: 'Le contenu d\'un article ne peut pas être vide')]
@@ -51,6 +56,9 @@ class Article
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $abstract = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $updatedAt = null;
 
     public function getId(): ?int
     {
@@ -151,5 +159,38 @@ class Article
         $this->abstract = $abstract;
 
         return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): static
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of imageIllustrationFile
+     */
+    public function getImageIllustrationFile()
+    {
+        return $this->imageIllustrationFile;
+    }
+
+    /**
+     * Set the value of imageIllustrationFile
+     *
+     * @return  self
+     */
+    public function setImageIllustrationFile($imageIllustrationFile)
+    {
+        $this->imageIllustrationFile = $imageIllustrationFile;
+        if (null !== $imageIllustrationFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
     }
 }
