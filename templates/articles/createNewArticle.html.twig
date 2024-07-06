@@ -1,6 +1,10 @@
 {% extends "base.html.twig" %}
 {% block title %}
-	Créer un nouvel article
+	{% if app.request.get('_route') == 'articles_update'  %}
+		Mettre à jour un article
+	{% else %}
+		Créer un nouvel article
+	{% endif %}
 {% endblock %}
 {% block stylesheets %}
 	{{ parent() }}
@@ -16,7 +20,11 @@
 {% endblock %}
 {% block body %}
 	{% if is_granted("ROLE_AUTHOR") %}
-		<h1>Ecrire un nouvel article</h1>
+		{% if app.request.get('_route') == 'articles_update'  %}
+			<h1>Modifier un article</h1>
+		{% else %}
+			<h1>Ecrire un nouvel article</h1>
+		{% endif %}
 		{# La vue du formulaire de création d'article #}
 		{{form_start(form)}}
 		<div class="divLabelPlusInputTitle">
@@ -25,10 +33,14 @@
 		</div>
 		<div id="divGlobalInputImage">
 			<p id="labelIllustrationImage">Image d’illustration  principale</p>
-			{% if article.imageIllustration %}
-				<img id="CurrentImageIllustration" src="{{ vich_uploader_asset(article,'imageIllustrationFile')}}" alt="">
-			{% else %}
-				<p>L'article ne dispose pas d'image d'illustration principale</p>
+			{% if article is defined %}
+				{% if article %}
+					{% if article.imageIllustration %}
+						<img id="CurrentImageIllustration" src="{{ vich_uploader_asset(article,'imageIllustrationFile')}}" alt="">
+					{% else %}
+						<p>L'article ne dispose pas d'image d'illustration principale</p>
+					{% endif %}
+				{% endif %}
 			{% endif %}
 			<div
 				id="divRowOfInputImageIllustration">

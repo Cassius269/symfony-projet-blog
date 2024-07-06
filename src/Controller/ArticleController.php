@@ -132,7 +132,7 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //dd($form->getData());
+            // dd($form->getData());
 
             // Nettoyage du contenu de l'article
             $unsafeContentArticle = $form->get('content')->getData();
@@ -152,6 +152,6 @@ class ArticleController extends AbstractController
                 'form' => $form,
                 'article' => $article
             ]
-        );;
+        );
     }
 }

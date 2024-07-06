@@ -1,4 +1,4 @@
-// On crée CK Editor sur la div ayant l'attribut #editor 
+// On crée CK Editor sur la balise <textarea>  ayant l'attribut #editor 
 
 ClassicEditor. create( document.querySelector( '#editor' ),  
 //{
@@ -37,6 +37,11 @@ ClassicEditor. create( document.querySelector( '#editor' ),
    }) 
    .then(editor => { 
        let inputHiddenContent = document.querySelector("#article_content"); 
+
+       if(inputHiddenContent.value){// Dans le cas où l'éditeur se trouve dans une situation de mise à jour, c-à-d input hidden avec valeur préremplie
+        editor.setData(inputHiddenContent.value); // Préremplir l'éditeur du contenu présent en base de données
+       }
+
        let form = document.querySelector("form"); 
        form.addEventListener('submit', (event) => { 
        event.preventDefault(); 
