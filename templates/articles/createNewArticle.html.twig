@@ -26,7 +26,7 @@
 		<div>
 			<p id="labelIllustrationImage">Image d’illustration  principale</p>
 			<div id="divRowOfInputImageIllustration">
-				{{ form_widget(form.imageIllustration)}}
+				{{ form_widget(form.imageIllustrationFile)}}
 				<img src="{{ asset('images/iconeFileUpload.svg') }}" alt="icone représentant un fichier">
 				<p>JPEG, JPG ou PNG</p>
 				<p>Glissez déposez ou parcourir</p>
@@ -38,7 +38,11 @@
 		</div>
 		<input type="hidden">
 		<textarea id="editor" placeholder="Contenu de l'article, images secondaires y compris, sans le titre"></textarea>
-		{{form_errors(form.imageIllustration)}}
+		<div class="divLabelPlusTextareaAbstract">
+			{{ form_label(form.abstract)}}
+			{{ form_widget(form.abstract)}}
+		</div>
+		{{form_errors(form.imageIllustrationFile)}}
 		{{form_errors(form.title)}}
 
 		{{form_errors(form)}}

@@ -1,23 +1,28 @@
 {% extends "base.html.twig" %}
 {% block title %}
-	{{article}}
+	{# Titre de la page #}
+	{{article.title}}
 {% endblock %}
 {% block stylesheets %}
 	{{parent()}}
 	{{ encore_entry_link_tags('articlePageDetail') }}
 {% endblock %}
 {% block body %}
-	<section>
-		<h1>Pradada redéfinit l'élégance : Retour sur le Défilé Inoubliable</h1>
-		<img src="{{asset('images/illustrations/illustrationArticleDetail.png')}}" alt="image d'illustration de l'article" class="imageIllustration">
-		<h2>Prada fait entièrement peau neuve</h2>
-		<p>Dans le tourbillon effervescent de la mode, Pradada a fait sensation  avec sa nouvelle collection révolutionnaire. Sous le thème audacieux  "Pradada fait peau neuve", la marque a dévoilé une série de créations  qui ont captivé l'imagination et redéfini les codes de l'élégance  contemporaine.</p>
-		<h2>L'Innovation au Cœur de la Créativité</h2>
-		<p>Au cœur du défilé se trouvait un mélange éblouissant d'innovation et  d'audace. Pradada a repoussé les limites de la conception avec des  silhouettes sculpturales et des mélanges de textures surprenants. Chaque  tenue était une déclaration d'intention, alliant des éléments  classiques revisités à une esthétique futuriste.</p>
+	<section id="sectionArticleDetail">
+		<h1>{{ article.title }}</h1>
+		<figure>
+			<img src="{{ vich_uploader_asset(article, 'imageIllustrationFile') }}" alt="image d'illustration de l'article" class="imageIllustration">
+			<figcaption>Photographe: Jean Dupont
+			</figcaption>
+		</figure>
+		<div>
+			{{ article.content | raw }}
+		</div>
 		<div class="divAuthorPlusDateOfPublication">
-			<p id="dateOfPublication">Publié le 24 mai 2024</p>
+			<p id="dateOfPublication">Publié le
+				{{ article.createdAt | format_date('full', locale="fr")}}</p>
 			<div class="divAuthorPlusIconePen">
-				<p>Yulli Bruneau
+				<p>{{ article.author.fullname }}
 				</p>
 				<img src="{{ asset('images/iconePen.svg')}}" alt="icône représentant un stylo">
 			</div>
@@ -74,5 +79,4 @@
 			</article>
 		</div>
 	</section>
-
 {% endblock %}

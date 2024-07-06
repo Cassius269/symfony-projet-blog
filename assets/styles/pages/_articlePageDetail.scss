@@ -9,39 +9,84 @@ main {
 
     }
 
-    h1 {
-        @media screen and (min-width: 1024px) {
-            font-size: 4em;
-        }
-    }
-    .imageIllustration {
-        width: 95%;
-        @media screen and (min-width: 1024px) {
-            width: 100%;
-        }
-    }
+    #sectionArticleDetail {
+        figure {
+         //   border: thin #c0c0c0 solid;
+                      margin: auto;
 
-    .divAuthorPlusDateOfPublication {
-        display: flex;
-        justify-content: space-around;
-        @media screen and (min-width: 1024px){
-             gap: 30rem;
-        }
+            &:hover {
+                figcaption {
+                    opacity: 1;
+                    transition: all 1s ease;
+                }
+            }
+            .imageIllustration {
+                width: 100%;
+            }
+            figcaption {
+            background-color: $tertiaryColor;
+            color: $fifthColor;
+            font-style: italic;
+            padding: 0.5rem 0;
+            text-align: center;
+            position: relative;
+            bottom: 2.2rem;
+            opacity: 0;
+            @media screen and (min-width: 1024px){
+                padding: 1rem 0;
+                bottom: 3.3rem;
+            }
+            }
+          }
+          
 
-        >p{// Ciblage du premier P enfant direct de la div "divAuthorPlusDateOfPublication"
-            color: grey;
-        }
-        
-        .divAuthorPlusIconePen {
-            display: flex;
-            width: 120px;
-            img {
-                position: relative;
-                bottom: 1.5rem;
+     
+          
+
+        h1 {
+            @media screen and (min-width: 1024px) {
+                font-size: 4em;
             }
         }
+        .imageIllustration {
+            width: 95%;
+            @media screen and (min-width: 1024px) {
+                width: 100%;
+            }
+        }
+    
+        .divAuthorPlusDateOfPublication {
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            @media screen and (min-width: 1024px){
+                display: flex;
+                justify-content: space-around;
+                 gap: 30rem;
+                 font-size: 1rem;
+            }
+            p {// ciblage de toutes les balises <p> enfants
+                line-height: 0 !important;
+                white-space: normal !important;
+            }
+            >p{// Ciblage du premier P enfant direct de la div "divAuthorPlusDateOfPublication"
+                color: grey;
+            }
+            
+            .divAuthorPlusIconePen {
+                display: flex;
+                justify-content: end;
+                img {
+                    @media screen and (min-width: 1024px){
+                        margin-left: 1rem;
+                        width: 45px;
+                    }
+                }
+            }
+        }
+    
     }
-
     #sectionRecommandationArticles {
         h2 {
             @media screen and (min-width: 1024px) {

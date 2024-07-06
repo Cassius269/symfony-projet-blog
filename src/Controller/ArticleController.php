@@ -13,6 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 #[Route(path: '/articles', name: 'articles_')]
 class ArticleController extends AbstractController
@@ -29,6 +30,10 @@ class ArticleController extends AbstractController
     )]
     public function showDetailledArticle(?Article $article): Response
     {
+        // dd($article);
+        if (!$article) {
+            throw new NotFoundHttpException('Article introuvable');
+        }
 
         return $this->render('articles/articleDetail.html.twig', [
             'article' => $article,
@@ -58,24 +63,14 @@ class ArticleController extends AbstractController
 
             // Vérifier la soumission du formulaire et les donneés soumises
             if ($form->isSubmitted() && $form->isValid()) {
-                dump($article);
+                // dd($article);
 
                 $article->setCreatedAt(new DateTimeImmutable())
                     ->setAuthor($user);
 
-                $file = $form['imageIllustration']->getData();
-                $validExtensions = ['png', 'jpeg', 'jpg'];
-                $extension = $file->guessExtension();
-
-                // dd($file);
-                if (in_array($extension, $validExtensions)) { // Si l'extension est effectivement valide
-                    $filename = 'images/illustrations' . $article->getTitle(); // nom du fichier
-                    $article->setImageIllustration($filename);
-                    $file->move('images/illustrations', $filename);
-                }
                 // Enregistrer en base de donnée le nouvel article ayant été soumis et validé
                 $entityManager->persist($article);
-                $entityManager->flush($article);
+                $entityManager->flush();
 
                 $this->addFlash('success', 'Votre article a été publié avec succès');
                 return $this->redirectToRoute('articles_showAll');
@@ -95,5 +90,23 @@ class ArticleController extends AbstractController
             $security->logout('false'); // Déconnecter l'utilisateur
             return new RedirectResponse($this->generateUrl('login')); // rediriger l'utilisateur vers la page de connexion         }
         }
+    }
+
+    #[Route(
+        path: '/remove/{id}',
+        name: 'remove'
+    )]
+    public function removeArticle(Article $article, EntityManagerInterface $entityManager): Response
+    {
+        // Garantir que l'action de suppresion d'un article ne sera autorisée que par l'Admin ou l'auteur de l'article lui-même
+        $this->denyAccessUnlessGranted('ARTICLE_REMOVE', $article); // Gestion de la permission de suppresion par un voter
+
+        if ($article) {
+            $entityManager->remove($article);
+            $entityManager->flush();
+            $this->addFlash("success", "article supprimé");
+        }
+
+        return $this->redirectToRoute('home');
     }
 }
