@@ -13,6 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HtmlSanitizer\HtmlSanitizerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 #[Route(path: '/articles', name: 'articles_')]
@@ -45,7 +46,7 @@ class ArticleController extends AbstractController
         name: 'createNewArticle'
     )]
     #[IsGranted("ROLE_AUTHOR")]
-    public function createArticle(Request $request, Security $security, EntityManagerInterface $entityManager): Response
+    public function createArticle(Request $request, Security $security, EntityManagerInterface $entityManager, HtmlSanitizerInterface $htmlSanitizer): Response
     {
         /** @var User $user */
         $user = $security->getUser();
@@ -64,7 +65,10 @@ class ArticleController extends AbstractController
             // Vérifier la soumission du formulaire et les donneés soumises
             if ($form->isSubmitted() && $form->isValid()) {
                 // dd($article);
+                $unsafeContentArticle = $form->get('content')->getData();
+                $safeContentArticle = $htmlSanitizer->sanitize($unsafeContentArticle);
 
+                $article->setContent($safeContentArticle);
                 $article->setCreatedAt(new DateTimeImmutable())
                     ->setAuthor($user);
 
