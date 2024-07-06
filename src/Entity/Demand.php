@@ -58,7 +58,7 @@ class Demand
 
     #[ORM\ManyToOne(inversedBy: 'demands')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?status $status = null;
+    private ?Status $status = null;
 
     public function getId(): ?int
     {
@@ -173,12 +173,12 @@ class Demand
         return $this;
     }
 
-    public function getStatus(): ?status
+    public function getStatus(): ?Status
     {
         return $this->status;
     }
 
-    public function setStatus(?status $status): static
+    public function setStatus(?Status $status): static
     {
         $this->status = $status;
 
