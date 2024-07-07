@@ -116,7 +116,7 @@ class ArticleController extends AbstractController
         return $this->redirectToRoute('home');
     }
 
-    #[Route(path: '/update/{id}', name: 'update')]
+    #[Route(path: '/author/update-article/{id}', name: 'update')]
     #[IsGranted('ROLE_AUTHOR')]
     public function updateArticle(Article $article, Request $request, EntityManagerInterface $entityManager, HtmlSanitizerInterface $htmlSanitizer): Response
     {

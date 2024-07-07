@@ -7,6 +7,26 @@ divRowOfInputImageIllustration.addEventListener("click", (event) => {// si la di
 
 })
 
+/* Afficher le nom du fichier uploadé */
+if (inputFileType) { // Si l'input existe
+    inputFileType.addEventListener('change', (event) => {// Si la valeur de l'input change, c-à-d quand un fichier est chargé
+        let files = event.target.files;
+        if (files.length > 0) {
+            let file = files[0];
+            let extension = file.type;
+            let paragrapheFilename = document.querySelector("#filename");
+
+            console.log(file); // Affiche le premier fichier sélectionné
+
+            //inputFileType.insertAdjacentHTML("af")
+            paragrapheFilename.textContent = file.name; // Remplir le contenu de la paragraphe par le nom du fichier
+        } else {
+            console.log("Aucun fichier sélectionné");
+        }
+    });
+} else {
+    console.log("L'élément input file n'existe pas");
+}
 
 
 /* Le drag and drop de fichiers images */
