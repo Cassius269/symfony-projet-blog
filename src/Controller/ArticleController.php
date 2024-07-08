@@ -31,7 +31,7 @@ class ArticleController extends AbstractController
         path: '/{id}',
         name: 'showDetailedArticle'
     )]
-    public function showDetailledArticle(?Article $article): Response
+    public function showDetailledArticle(Article $article): Response
     {
         // dd($article);
         if (!$article) {
@@ -105,7 +105,11 @@ class ArticleController extends AbstractController
     public function removeArticle(Article $article, EntityManagerInterface $entityManager): Response
     {
         // Garantir que l'action de suppresion d'un article ne sera autorisée que par l'Admin ou l'auteur de l'article lui-même
-        $this->denyAccessUnlessGranted('ARTICLE_REMOVE', $article); // Gestion de la permission de suppresion par un voter
+        $this->denyAccessUnlessGranted('REMOVE_ARTICLE', $article); // Gestion de la permission de suppresion par un voter
+
+        if (!$article) {
+            throw new NotFoundHttpException('Article introuvable');
+        }
 
         if ($article) {
             $entityManager->remove($article);
@@ -117,10 +121,11 @@ class ArticleController extends AbstractController
     }
 
     #[Route(path: '/author/update-article/{id}', name: 'update')]
-    #[IsGranted('ROLE_AUTHOR')]
     public function updateArticle(Article $article, Request $request, EntityManagerInterface $entityManager, HtmlSanitizerInterface $htmlSanitizer): Response
     {
-        if (!$article) { // Si l'article n'existe renvoyer une exception de ressource non trouvée
+        $this->denyAccessUnlessGranted('UPDATE_ARTICLE', $article); // Gestion de la permission de modification d'un artickle via un voter
+
+        if (!$article) { // Si l'article n'existe pas renvoyer une exception de ressource non trouvée
             throw $this->createNotFoundException('L\'article n\'existe pas');
         }
 
