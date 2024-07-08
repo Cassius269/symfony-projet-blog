@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
@@ -17,12 +18,13 @@ class SecurityController extends AbstractController
         path: '/register',
         name: 'register'
     )]
+    #[IsGranted("ROLE_ADMIN")]
     public function register(EntityManagerInterface $entityManager, UserPasswordHasherInterface $userPasswordHasher): Response
     {
         $user = new User();
         $user->setFirstname('Fahami')
             ->setLastname('MOHAMED ALI')
-            ->setEmail('fahamygaston@hotmail.com')
+            ->setEmail('fahamygaston@gmail.com')
             ->setRoles(['ROLE_AUTHOR'])
             ->setPassword($userPasswordHasher->hashPassword($user, '123456789')) // Par défaut utiliser un algo de sécurité comme bin2hex(random_bytes(10))
             ->setAccepted(true)
