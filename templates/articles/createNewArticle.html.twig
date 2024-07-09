@@ -35,19 +35,17 @@
 			<p id="labelIllustrationImage">Image d’illustration  principale</p>
 			{% if article is defined %}
 				{% if article %}
-					{% if article.imageIllustration %}
-						<img id="CurrentImageIllustration" src="{{ vich_uploader_asset(article,'imageIllustrationFile')}}" alt="">
-					{% else %}
-						<p>L'article ne dispose pas d'image d'illustration principale</p>
-					{% endif %}
+					{# {% if article.imageIllustration %}
+																<img id="CurrentImageIllustration" src="{{ vich_uploader_asset(article,'imageIllustrationFile')}}" alt="">
+															{% else %}
+																<p>L'article ne dispose pas d'image d'illustration principale</p>
+															{% endif %} #}
 				{% endif %}
 			{% endif %}
-			<div
-				id="divRowOfInputImageIllustration">
+			<div id="divRowOfInputImageIllustration">
 				{# {% set imageUrl = vich_uploader_asset(article, 'imageIllustrationFile') %} #}
-				{{ form_widget(form.imageIllustrationFile)}}
-				<img src="{{ asset('images/iconeFileUpload.svg') }}" alt="icone représentant un fichier">
-				<p>JPEG, JPG ou PNG</p>
+				{# {{ form_widget(form.imageIllustrationFile)}} #}
+				<img src="{{ asset('images/iconeFileUpload.svg') }}" alt="icone représentant un fichier"> <p>JPEG, JPG ou PNG</p>
 				<p id="filename"></p>
 				<p>Glissez déposez ou parcourir</p>
 			</div>
@@ -62,7 +60,7 @@
 			{{ form_label(form.abstract)}}
 			{{ form_widget(form.abstract)}}
 		</div>
-		{{form_errors(form.imageIllustrationFile)}}
+		{# {{form_errors(form.imageIllustrationFile)}} #}
 		{{form_errors(form.title)}}
 
 		{{form_errors(form)}}

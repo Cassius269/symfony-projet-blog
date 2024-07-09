@@ -3,14 +3,16 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
+// use Symfony\Component\HttpFoundation\File\File;
+// use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
-#[Vich\Uploadable]
+// #[Vich\Uploadable]
 class Article
 {
     #[ORM\Id]
@@ -29,12 +31,6 @@ class Article
     #[ORM\ManyToOne(inversedBy: 'articles')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $author = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $imageIllustration = null;
-
-    #[Vich\UploadableField(mapping: 'articleiIlustration', fileNameProperty: 'imageIllustration')]
-    private ?File $imageIllustrationFile = null;
 
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\NotBlank(message: 'Le contenu d\'un article ne peut pas être vide')]
@@ -59,6 +55,17 @@ class Article
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
+
+    /**
+     * @var Collection<int, image>
+     */
+    #[ORM\ManyToMany(targetEntity: image::class, inversedBy: 'articles')]
+    private Collection $imageIllustration;
+
+    public function __construct()
+    {
+        $this->imageIllustration = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -89,24 +96,14 @@ class Article
         return $this;
     }
 
-    public function getImageIllustration(): ?string
-    {
-        return $this->imageIllustration;
-    }
 
-    public function setImageIllustration(?string $imageIllustration): static
-    {
-        $this->imageIllustration = $imageIllustration;
-
-        return $this;
-    }
 
     public function getContent(): ?string
     {
         return $this->content;
     }
 
-    public function setContent(?string $content): static
+    public function setContent(string $content): static
     {
         $this->content = $content;
 
@@ -174,23 +171,26 @@ class Article
     }
 
     /**
-     * Get the value of imageIllustrationFile
+     * @return Collection<int, image>
      */
-    public function getImageIllustrationFile()
+    public function getImageIllustration(): Collection
     {
-        return $this->imageIllustrationFile;
+        return $this->imageIllustration;
     }
 
-    /**
-     * Set the value of imageIllustrationFile
-     *
-     * @return  self
-     */
-    public function setImageIllustrationFile($imageIllustrationFile)
+    public function addImageIllustration(image $imageIllustration): static
     {
-        $this->imageIllustrationFile = $imageIllustrationFile;
-        if (null !== $imageIllustrationFile) {
-            $this->updatedAt = new \DateTimeImmutable();
+        if (!$this->imageIllustration->contains($imageIllustration)) {
+            $this->imageIllustration->add($imageIllustration);
         }
+
+        return $this;
+    }
+
+    public function removeImageIllustration(image $imageIllustration): static
+    {
+        $this->imageIllustration->removeElement($imageIllustration);
+
+        return $this;
     }
 }

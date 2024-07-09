@@ -28,34 +28,34 @@ class ArticleType extends AbstractType
                     'placeholder' => 'Le titre de l\'article',
                 ]
             ])
-            ->add('imageIllustrationFile', VichFileType::class, [
-                'label' => 'Image d’illustration  principale',
-                'constraints' => [
-                    new Assert\Image(
-                        [
-                            'minWidth' => 400,
-                            'minHeight' => 600,
-                            'minWidthMessage' => 'Veuillez insérer une image plus large',
-                            'minHeightMessage' => 'Veuillez insérer une image plus grande en hauteur',
-                            'allowLandscape' => true,
-                            'allowPortrait' => false,
+            // ->add('imageIllustrationFile', VichFileType::class, [
+            //     'label' => 'Image d’illustration  principale',
+            //     'constraints' => [
+            //         new Assert\Image(
+            //             [
+            //                 'minWidth' => 400,
+            //                 'minHeight' => 600,
+            //                 'minWidthMessage' => 'Veuillez insérer une image plus large',
+            //                 'minHeightMessage' => 'Veuillez insérer une image plus grande en hauteur',
+            //                 'allowLandscape' => true,
+            //                 'allowPortrait' => false,
 
-                            'mimeTypes' =>  [
-                                'image/png',
-                                'image/jpeg',
-                                'image/jpg'
-                            ],
-                            'mimeTypesMessage' => 'Le fichier chargé n\'est pas au bon format'
-                        ]
-                    ),
-                    new Assert\NotNull(
-                        [
-                            'message' => 'L\'image d\'illustration est obligatoire'
-                        ]
-                    )
-                ]
+            //                 'mimeTypes' =>  [
+            //                     'image/png',
+            //                     'image/jpeg',
+            //                     'image/jpg'
+            //                 ],
+            //                 'mimeTypesMessage' => 'Le fichier chargé n\'est pas au bon format'
+            //             ]
+            //         ),
+            //         new Assert\NotNull(
+            //             [
+            //                 'message' => 'L\'image d\'illustration est obligatoire'
+            //             ]
+            //         )
+            //     ]
 
-            ])
+            // ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',
