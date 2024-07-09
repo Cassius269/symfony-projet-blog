@@ -2,20 +2,22 @@
 
 namespace App\Form;
 
+use App\Entity\User;
 use App\Entity\Article;
 use App\Entity\Category;
-use App\Entity\User;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Vich\UploaderBundle\Form\Type\VichFileType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints as Assert;
-use Vich\UploaderBundle\Form\Type\VichFileType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class ArticleType extends AbstractType
 {
@@ -28,6 +30,13 @@ class ArticleType extends AbstractType
                     'placeholder' => 'Le titre de l\'article',
                 ]
             ])
+            ->add(
+
+                $builder->create("imageIllustration", FormType::class, ['by_reference' => true])
+                    ->add("name", TextType::class)
+
+            )
+
             // ->add('imageIllustrationFile', VichFileType::class, [
             //     'label' => 'Image d’illustration  principale',
             //     'constraints' => [
