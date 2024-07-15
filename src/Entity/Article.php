@@ -57,9 +57,9 @@ class Article
     private ?\DateTimeInterface $updatedAt = null;
 
     /**
-     * @var Collection<int, image>
+     * @var Collection<int, Image>
      */
-    #[ORM\ManyToMany(targetEntity: image::class, inversedBy: 'articles')]
+    #[ORM\ManyToMany(targetEntity: Image::class, inversedBy: 'articles')]
     private Collection $imageIllustration;
 
     public function __construct()
@@ -171,14 +171,14 @@ class Article
     }
 
     /**
-     * @return Collection<int, image>
+     * @return Collection<int, Image>
      */
     public function getImageIllustration(): Collection
     {
         return $this->imageIllustration;
     }
 
-    public function addImageIllustration(image $imageIllustration): static
+    public function addImageIllustration(Image $imageIllustration): static
     {
         if (!$this->imageIllustration->contains($imageIllustration)) {
             $this->imageIllustration->add($imageIllustration);
@@ -187,7 +187,7 @@ class Article
         return $this;
     }
 
-    public function removeImageIllustration(image $imageIllustration): static
+    public function removeImageIllustration(Image $imageIllustration): static
     {
         $this->imageIllustration->removeElement($imageIllustration);
 
