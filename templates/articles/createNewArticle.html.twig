@@ -36,10 +36,10 @@
 			{% if article is defined %}
 				{% if article %}
 					{# {% if article.imageIllustration %}
-																<img id="CurrentImageIllustration" src="{{ vich_uploader_asset(article,'imageIllustrationFile')}}" alt="">
-															{% else %}
-																<p>L'article ne dispose pas d'image d'illustration principale</p>
-															{% endif %} #}
+																					<img id="CurrentImageIllustration" src="{{ vich_uploader_asset(article,'imageIllustrationFile')}}" alt="">
+																				{% else %}
+																					<p>L'article ne dispose pas d'image d'illustration principale</p>
+																				{% endif %} #}
 				{% endif %}
 			{% endif %}
 			<div id="divRowOfInputImageIllustration">
@@ -64,6 +64,12 @@
 		{{form_errors(form.title)}}
 
 		{{form_errors(form)}}
+		{# test #}
+		<div>
+
+			{{ form_label(form.imageIllustration)}}
+			{{ form_widget(form.imageIllustration)}}
+		</div>
 		<div class="divButtonSubmit">
 			<button class="secondaryButton buttonPreview">Prévisualiser l'article</button>
 			{% if app.request.get('_route') == 'articles_update'  %}

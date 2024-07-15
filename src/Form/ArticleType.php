@@ -31,10 +31,17 @@ class ArticleType extends AbstractType
                 ]
             ])
             ->add(
-
-                $builder->create("imageIllustration", FormType::class, ['by_reference' => true])
-                    ->add("name", TextType::class)
-
+                'imageIllustration',
+                CollectionType::class,
+                [
+                    'required' => false,
+                    'label' => "Image d'illustration",
+                    'entry_type' => ImageType::class,
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'delete_empty' => true,
+                    'by_reference' => false,
+                ]
             )
 
             // ->add('imageIllustrationFile', VichFileType::class, [
