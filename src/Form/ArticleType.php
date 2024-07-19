@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use App\Entity\Article;
 use App\Entity\Category;
+use App\Entity\MainImageIllustration;
 use Symfony\Component\Form\AbstractType;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -31,19 +32,13 @@ class ArticleType extends AbstractType
                 ]
             ])
             ->add(
-                'imageIllustration',
-                CollectionType::class,
+                'mainImageIllustration',
+                MainImageIllustrationType::class,
                 [
-                    'required' => false,
-                    'label' => "Image d'illustration",
-                    'entry_type' => ImageType::class,
-                    'allow_add' => true,
-                    'allow_delete' => true,
-                    'delete_empty' => true,
-                    'by_reference' => false,
+                    'label' => false,
+                    'priority' => 6000,
                 ]
             )
-
             // ->add('imageIllustrationFile', VichFileType::class, [
             //     'label' => 'Image d’illustration  principale',
             //     'constraints' => [
@@ -75,7 +70,7 @@ class ArticleType extends AbstractType
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',
-                'label' => 'Catégorie'
+                'label' => 'Catégorie de l\'article'
             ])
             ->add('content', HiddenType::class)
             ->add(

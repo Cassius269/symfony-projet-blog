@@ -77,6 +77,19 @@ main {
             }
         }
 
+        .divInfoImageIllustrationPrincipale {
+            margin-top:1rem;
+            div {
+                display: flex;
+                flex-direction: column;
+                label {
+                    margin-top: 1rem;
+                }
+                input {
+                    margin-top: 1rem;
+                }
+            }
+        }
             button[type="submit"] {
                 background: #FFA800;
                 width: 170px;

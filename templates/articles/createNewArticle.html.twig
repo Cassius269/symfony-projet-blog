@@ -36,10 +36,10 @@
 			{% if article is defined %}
 				{% if article %}
 					{# {% if article.imageIllustration %}
-																					<img id="CurrentImageIllustration" src="{{ vich_uploader_asset(article,'imageIllustrationFile')}}" alt="">
-																				{% else %}
-																					<p>L'article ne dispose pas d'image d'illustration principale</p>
-																				{% endif %} #}
+																																																																																																					<img id="CurrentImageIllustration" src="{{ vich_uploader_asset(article,'imageIllustrationFile')}}" alt="">
+																																																																																																				{% else %}
+																																																																																																					<p>L'article ne dispose pas d'image d'illustration principale</p>
+																																																																																																				{% endif %} #}
 				{% endif %}
 			{% endif %}
 			<div id="divRowOfInputImageIllustration">
@@ -50,26 +50,20 @@
 				<p>Glissez déposez ou parcourir</p>
 			</div>
 		</div>
+		{{ form_row(form.mainImageIllustration,{'attr':{'class':'divInfoImageIllustrationPrincipale'}})}}
 		<div class="divLabelPlusInputSelectCategory">
 			{{ form_label(form.category)}}
 			{{ form_widget(form.category)}}
 		</div>
 		<input type="hidden">
-		<textarea id="editor" placeholder="Contenu de l'article, images secondaires y compris, sans le titre"></textarea>
+		<textarea id="editor" placeholder="Contenu de l' article, images secondaires y compris, sans le titre"></textarea>
 		<div class="divLabelPlusTextareaAbstract">
 			{{ form_label(form.abstract)}}
 			{{ form_widget(form.abstract)}}
 		</div>
 		{# {{form_errors(form.imageIllustrationFile)}} #}
 		{{form_errors(form.title)}}
-
 		{{form_errors(form)}}
-		{# test #}
-		<div>
-
-			{{ form_label(form.imageIllustration)}}
-			{{ form_widget(form.imageIllustration)}}
-		</div>
 		<div class="divButtonSubmit">
 			<button class="secondaryButton buttonPreview">Prévisualiser l'article</button>
 			{% if app.request.get('_route') == 'articles_update'  %}

@@ -56,16 +56,9 @@ class Article
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
-    /**
-     * @var Collection<int, Image>
-     */
-    #[ORM\ManyToMany(targetEntity: Image::class, inversedBy: 'articles')]
-    private Collection $imageIllustration;
-
-    public function __construct()
-    {
-        $this->imageIllustration = new ArrayCollection();
-    }
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?MainImageIllustration $mainImageIllustration = null;
 
     public function getId(): ?int
     {
@@ -168,26 +161,14 @@ class Article
         return $this;
     }
 
-    /**
-     * @return Collection<int, Image>
-     */
-    public function getImageIllustration(): Collection
+    public function getMainImageIllustration(): ?MainImageIllustration
     {
-        return $this->imageIllustration;
+        return $this->mainImageIllustration;
     }
 
-    public function addImageIllustration(Image $imageIllustration): static
+    public function setMainImageIllustration(?MainImageIllustration $mainImageIllustration): static
     {
-        if (!$this->imageIllustration->contains($imageIllustration)) {
-            $this->imageIllustration->add($imageIllustration);
-        }
-
-        return $this;
-    }
-
-    public function removeImageIllustration(Image $imageIllustration): static
-    {
-        $this->imageIllustration->removeElement($imageIllustration);
+        $this->mainImageIllustration = $mainImageIllustration;
 
         return $this;
     }
