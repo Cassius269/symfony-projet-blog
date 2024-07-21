@@ -35,11 +35,11 @@
 			<p id="labelIllustrationImage">Image d’illustration  principale</p>
 			{% if article is defined %}
 				{% if article %}
-					{# {% if article.imageIllustration %}
-																																																																																																					<img id="CurrentImageIllustration" src="{{ vich_uploader_asset(article,'imageIllustrationFile')}}" alt="">
-																																																																																																				{% else %}
-																																																																																																					<p>L'article ne dispose pas d'image d'illustration principale</p>
-																																																																																																				{% endif %} #}
+					{% if article.mainImageIllustration %}
+						<img id="CurrentImageIllustration" src="{{ vich_uploader_asset(article.mainImageIllustration,'imageFile')}}" alt="">
+					{% else %}
+						<p>L'article ne dispose pas d'image d'illustration principale</p>
+					{% endif %}
 				{% endif %}
 			{% endif %}
 			<div id="divRowOfInputImageIllustration">
@@ -75,4 +75,12 @@
 		</div>
 		{{form_end(form)}}
 	{% endif %}
+
+	{# Si l'utilisateur est en mode édition, le bouton apparaitra #}
+	{% if is_granted("ROLE_AUTHOR") and article is defined %}
+		<a href="{{ path('articles_remove', {'id': article.id})}}">
+			<button id="deleteButton">Supprimer l'article</button>
+		</a>
+	{% endif %}
+
 {% endblock %}

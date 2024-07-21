@@ -16,9 +16,20 @@ button {
     color: #fff;
     height: 50px;
     margin-top: 1rem;
-    padding: 0;
     width: 190px;
-    font-size: 24px;
+    width: 150px;
+    
+    @media screen and (min-width:1024px) {
+        background: #ec751e;
+        border: none;
+        border-radius: 30px;
+        color: #fff;
+        height: 50px;
+        margin-top: 1rem;
+        padding: 0;
+        width: 190px;
+        font-size: 24px;
+    }
 }
 
 .secondaryButton {

@@ -36,9 +36,14 @@ main {
                 font-weight: bold;
             }
         }
-		
+       
+       .labelOfImageIllustrionFormType {
+         background-color: #FFA800;
+         padding: 0.3rem;
+        }
+        
         #divGlobalInputImage {
-
+            margin-bottom: 1.5rem;
             #labelIllustrationImage {
                 font-weight: bold;
             }
@@ -62,7 +67,7 @@ main {
                     @media screen and (min-width: 1024px) {
                         padding: 2.5rem 0;
                     }
-                    #article_imageIllustrationFile_file {// id par défaut donné par Symfony à l'input file
+                    #article_mainImageIllustration_imageFile_file {// id par défaut donné par Symfony à l'input file
                         opacity: 0;
                         position: absolute;
                     }
@@ -75,10 +80,11 @@ main {
                         color: $tertiaryColor;
                     }
             }
+
+
         }
 
         .divInfoImageIllustrationPrincipale {
-            margin-top:1rem;
             div {
                 display: flex;
                 flex-direction: column;
@@ -88,7 +94,17 @@ main {
                 input {
                     margin-top: 1rem;
                 }
+                #labelOfphotographer {
+                    background-color: #FFA800;
+                    padding: 0.3rem;                    
+                }
+
+                #article_mainImageIllustration_source_help {
+                    color: $tertiaryColor;
+                }
             }
+
+
         }
             button[type="submit"] {
                 background: #FFA800;
@@ -167,6 +183,17 @@ main {
     .divButtonSubmit {
         display: flex;
     justify-content: space-between;
+    }
+
+    #deleteButton {
+        @extend .primaryButton;// Etendre les propriétés du primaryButton
+        background-color: red !important;
+         font-size: 1rem;
+        @media screen and (min-width: 1024px) {
+            margin-top: 1rem;
+            font-size: 24px;
+            width: 211px;
+        }
     }
 }
 

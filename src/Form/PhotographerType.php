@@ -14,13 +14,22 @@ class PhotographerType extends AbstractType
     {
         $builder
             ->add('firstname', TextType::class, [
-                'label' => 'Prénom'
+                'label' => 'Prénom',
+                'attr' => [
+                    'placeholder' => 'Le prénom du photographe'
+                ]
             ])
             ->add('lastname', TextType::class, [
-                'label' => 'Nom de famille'
+                'label' => 'Nom de famille',
+                'attr' => [
+                    'placeholder' => 'Le nom de famille du photographe'
+                ]
             ])
             ->add('pseudonyme', TextType::class, [
-                'label' => 'Pseudonyme'
+                'label' => 'Pseudonyme',
+                'attr' => [
+                    'placeholder' => 'Le nom d\'artiste du photographe si il(elle) en possède'
+                ]
             ]);
     }
 

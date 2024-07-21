@@ -56,7 +56,7 @@ class Article
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
-    #[ORM\ManyToOne(inversedBy: 'articles')]
+    #[ORM\ManyToOne(inversedBy: 'articles', cascade: ['persist'], fetch: "EAGER")]
     #[ORM\JoinColumn(nullable: false)]
     private ?MainImageIllustration $mainImageIllustration = null;
 

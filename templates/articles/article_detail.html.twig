@@ -8,11 +8,16 @@
 	{{ encore_entry_link_tags('articlePageDetail') }}
 {% endblock %}
 {% block body %}
+	<pre>
+	
+</pre>
+	{{ dump(article) }}
 	<section id="sectionArticleDetail">
 		<h1>{{ article.title }}</h1>
 		<figure>
-			<img src="{{ vich_uploader_asset(article, 'imageIllustrationFile') }}" alt="image d'illustration de l'article" class="imageIllustration">
-			<figcaption>Photographe: Jean Dupont
+			<img src="{{ vich_uploader_asset(mainImageIllustration, 'imageFile') }}" alt="image d'illustration de l'article" class="imageIllustration">
+			<figcaption>Photographe:
+				{{ mainImageIllustration.photographer.fullname ?? mainImageIllustration.photographer.pseudonyme}}
 			</figcaption>
 		</figure>
 		<div>
@@ -27,6 +32,14 @@
 				<img src="{{ asset('images/iconePen.svg')}}" alt="icône représentant un stylo">
 			</div>
 		</div>
+
+		{# Ajout d'un bouton de modifiation de l'article si l'auteur de l'article consulte l'article #}
+		{% if article.author == app.user %}
+			<a href="{{ path('articles_update',{'id': article.id})}}" class="linkUpdateArticle">
+				<button id="buttonUpdateArticle">Modifier l'article</button>
+			</a>
+		{% endif %}
+
 	</section>
 	<section id="sectionRecommandationArticles">
 		<h2>Les recommandations</h2>

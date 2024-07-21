@@ -24,7 +24,7 @@ class ArticleController extends AbstractController
     #[Route('/', name: 'showAll')]
     public function index(): Response
     {
-        return $this->render('articles/allArticlesPage.html.twig', []);
+        return $this->render('articles/all_articles_page.html.twig', []);
     }
 
     #[Route(
@@ -34,12 +34,15 @@ class ArticleController extends AbstractController
     public function showDetailledArticle(Article $article): Response
     {
         // dd($article);
-        if (!$article) {
+        if (!$article) { // dans le cas où l'article n'existe pas 
             throw new NotFoundHttpException('Article introuvable');
+        } else { // Dans le cas où l'article existe, chercher son image d'illustration
+            $mainImageIllustration = $article->getMainImageIllustration();
         }
 
-        return $this->render('articles/articleDetail.html.twig', [
+        return $this->render('articles/article_detail.html.twig', [
             'article' => $article,
+            'mainImageIllustration' => $mainImageIllustration
         ]);
     }
 
@@ -67,12 +70,16 @@ class ArticleController extends AbstractController
             // Vérifier la soumission du formulaire et les donneés soumises
             if ($form->isSubmitted() && $form->isValid()) {
                 // dd($article);
+                // Nettoyage des données contre les injections de code malveillantes
                 $unsafeContentArticle = $form->get('content')->getData();
                 $safeContentArticle = $htmlSanitizer->sanitize($unsafeContentArticle);
 
                 $article->setContent($safeContentArticle);
                 $article->setCreatedAt(new DateTimeImmutable())
                     ->setAuthor($user);
+
+                // Gestion de la photo
+                $article->getMainImageIllustration()->setCreatedAt(new \DateTimeImmutable());
 
                 // Enregistrer en base de donnée le nouvel article ayant été soumis et validé
                 $entityManager->persist($article);
@@ -83,7 +90,7 @@ class ArticleController extends AbstractController
             }
 
             return $this->render(
-                'articles/createNewArticle.html.twig',
+                'articles/create_new_article.html.twig',
                 [
                     'form' => $form
                 ]
@@ -129,10 +136,7 @@ class ArticleController extends AbstractController
             throw $this->createNotFoundException('L\'article n\'existe pas');
         }
 
-        $form = $this->createForm(ArticleType::class, $article)
-            ->add('imageIllustrationFile', VichFileType::class, [
-                'required' => false,
-            ]);
+        $form = $this->createForm(ArticleType::class, $article);
 
         $form->handleRequest($request);
 
@@ -152,7 +156,7 @@ class ArticleController extends AbstractController
 
         // Réutiliser le même template que la création d'article d'article 
         return $this->render(
-            'articles/createNewArticle.html.twig',
+            'articles/create_new_article.html.twig',
             [
                 'form' => $form,
                 'article' => $article

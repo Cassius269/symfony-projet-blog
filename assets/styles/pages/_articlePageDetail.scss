@@ -1,4 +1,5 @@
 @import './../utils/variables';
+@import './../components/buttons';
 
 main {
     margin-top: 3rem;
@@ -85,7 +86,15 @@ main {
                 }
             }
         }
+
+        .linkUpdateArticle {
+            display: flex;
+            justify-content: end;
+            #buttonUpdateArticle {
+                @extend .primaryButton;// étendre des propriétés se trouvant dans le composant bouton principal
     
+             }
+        }
     }
     #sectionRecommandationArticles {
         h2 {

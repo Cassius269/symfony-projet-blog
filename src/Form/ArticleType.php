@@ -11,7 +11,6 @@ use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -26,7 +25,7 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => 'Titre',
+                'label' => 'Titre de l\'article',
                 'attr' => [
                     'placeholder' => 'Le titre de l\'article',
                 ]
@@ -35,38 +34,14 @@ class ArticleType extends AbstractType
                 'mainImageIllustration',
                 MainImageIllustrationType::class,
                 [
-                    'label' => false,
-                    'priority' => 6000,
+                    'label' => 'Informations sur l\'image principale',
+                    'label_attr' => [
+                        'class' => 'labelOfImageIllustrionFormType'
+                    ]
                 ]
             )
             // ->add('imageIllustrationFile', VichFileType::class, [
-            //     'label' => 'Image d’illustration  principale',
-            //     'constraints' => [
-            //         new Assert\Image(
-            //             [
-            //                 'minWidth' => 400,
-            //                 'minHeight' => 600,
-            //                 'minWidthMessage' => 'Veuillez insérer une image plus large',
-            //                 'minHeightMessage' => 'Veuillez insérer une image plus grande en hauteur',
-            //                 'allowLandscape' => true,
-            //                 'allowPortrait' => false,
 
-            //                 'mimeTypes' =>  [
-            //                     'image/png',
-            //                     'image/jpeg',
-            //                     'image/jpg'
-            //                 ],
-            //                 'mimeTypesMessage' => 'Le fichier chargé n\'est pas au bon format'
-            //             ]
-            //         ),
-            //         new Assert\NotNull(
-            //             [
-            //                 'message' => 'L\'image d\'illustration est obligatoire'
-            //             ]
-            //         )
-            //     ]
-
-            // ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',
