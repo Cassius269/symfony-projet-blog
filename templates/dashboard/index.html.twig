@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{# {% if app.user is defined %}
+																												Dashboard de
+																												{{ app.user.fullname}}
+																											{% endif %} #}
+{% endblock %}
+
+{% block body %}
+	<h1>Dashboard
+	</h1>
+	{% include "partials/_form_search.html.twig" %}
+
+	{% if is_granted("ROLE_AUTHOR") %}
+		<section>
+			<div>
+				<h2>Publier un nouvel article</h2>
+				<img src="{{ asset('/images/iconeArticle.png') }}" alt="">
+				<a href="{{ path('articles_createNewArticle') }}" title="lien vers la page de création d'une nouvel article">
+					<button>Ecrire un nouvel article</button>
+				</a>
+			</div>
+			<div>
+				<h2>Gérer  les  articles</h2>
+				<img src="{{ asset('/images/iconeUserInterface.png') }}" alt="">
+				<a href="" title="lien vers la page de gestion des contenus">
+					<button>Gérer les articles</button>
+				</a>
+			</div>
+		</section>
+	{% elseif is_granted("ROLE_PODCASTOR") %}
+		role podocastor
+	{% elseif is_granted("ROLE_ADMIN") %}
+		role admin
+	{% endif %}
+
+{% endblock %}

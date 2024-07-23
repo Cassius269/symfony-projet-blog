@@ -32,7 +32,7 @@
 					{% if is_granted("IS_AUTHENTICATED_FULLY") %}
 						<li>
 
-							<a href="#" title="lien vers le dashboard">
+							<a href="{{ path('dashboard') }}" title="lien vers le dashboard">
 								<button id="buttonConnect">Dashboard</button>
 							</a>
 						</li>
@@ -74,7 +74,7 @@
 		{% if app.user %}
 			<li>
 
-				<a href="#" title="lien vers la page dashboard" class="linkDashboardDesktop">
+				<a href="{{ path('dashboard') }}" title="lien vers la page dashboard" class="linkDashboardDesktop">
 					Dashboard
 				</a>
 			</li>
