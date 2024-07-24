@@ -1,0 +1,184 @@
+@import '/assets/styles/utils/variables';
+@import '/assets/styles/components/buttons';
+@import '/assets/styles/components/formSearch';
+@import '../utils/placeholders';
+
+    main {
+        width: 352px;
+
+        // Stylisation de la page dashboard pour tablette
+        @media screen and (min-width:768px) {
+            width: 85%;
+            height: 70vh;
+        }
+        // Stylisation de la page dashboard pour petits écrans d'ordinateurs
+        @media screen and (min-width:1024px) {
+            width: 90%;
+        }
+        // Stylisation de la page dashboard pour écrans d'ordinateurs moyens
+        @media screen and (min-width:1440px) {
+            width: 84%;
+        }
+        // Stylisation de la page dashboard pour écrans d'ordinateurs de grande taille
+        @media screen and (min-width:1920px) {
+            width: 79.5%;
+        }
+        section {
+            display: grid;
+            grid-template-columns: 100fr 100fr;
+            margin-top: 1rem;
+                hr {
+                display: none; 
+            }
+        
+        .divIconePlusAction {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+                img {
+                    width: 90px;
+                    // Centrer les images
+                    display: block;
+                    margin: auto;
+                }
+
+                #iconePeople {
+                    margin-top: 1.9rem;
+                }
+
+                h2 {
+                    font-size: 14px;
+                    text-align: center; // Centrer les sous-titres des actions dans le dashboard
+                    @media screen and (min-width:1024px) {
+                        font-size: 1.4rem;
+                    }
+                }
+                }
+        
+                button {
+                    font-size: 12px;
+                    // Centrer les boutons
+                    display: block;
+                    margin: 1rem auto;
+                }
+
+    
+                .primaryButton {
+                    @media screen and (min-width: 1024px) {
+                        width: 371px;
+                        height: 64px;
+                    }
+                }
+
+                .secondaryButton {
+                    // Ecraser les propriétés de la classe secondaryButton ajouté à certains boutons du dashboard
+                    height: 43px;
+                    width: 147px;
+                    padding: 0px;
+
+                    @media screen and (min-width: 1024px) {
+                        width: 283px;
+                        height: 64px;
+                    }
+                }
+
+                .buttonManagePodcast{
+                    width: 131px;  
+                    @media screen and (min-width: 1024px) {
+                        width: 283px;
+                        height: 64px;
+                    }              
+                }
+
+                .buttonPublishPodcast {
+                    width: 148px;
+                    @media screen and (min-width: 1024px) {
+                        width: 283px;
+                        height: 64px;
+                    }
+                }
+
+                .numberNotificationDashboard {
+                    background: yellow;
+                    width: 30px;
+                    border-radius: 50%;
+                    height: 32px;
+                    text-align: center;
+                    position: relative;
+                    bottom: 1.5rem;
+                    right: 1.5rem;
+                    @media screen and (min-width: 1024px){
+                        font-size: 24px;
+                    }
+                }
+
+                .divNumberNotifPlusIcone {
+                    display: flex;
+                    flex-direction: row-reverse;
+
+                    @media screen and (min-width: 1024px){
+                        margin-top: 1.5rem;
+                    }
+
+                    #numberNotifReadMessages{
+                         // Stylisation du chiffre d'affichage des notifications pour tablettes
+                        @media screen and (min-width: 768px) {
+                            right: 5.5rem;
+                        }
+                        
+                        // Stylisation de la page dashboard pour petits écrans d'ordinateurs
+                        @media screen and (min-width: 1024px) {
+                            right: 9.5rem;
+                        }
+
+                        // Stylisation de la page dashboard pour écrans d'ordinateurs moyens
+                        @media screen and (min-width:1440px) {
+                            right: 28rem;
+                        }
+
+                        @media screen and (min-width:1920px) {
+                            right: 20rem;
+                        }
+
+                    }
+               
+
+                    #iconeManagePeople{
+                        margin-top: 1px;
+                    }
+                }
+
+                #numberNotifManagerNewDemandCollab {
+                    // Stylisation du chiffre d'affichage des notifications du nombre de messages à lire pour tablettes
+                    @media screen and (min-width:768px) {
+                        right: 7rem;
+                    }
+
+                    // Stylisation de la page dashboard pour petits écrans d'ordinateurs
+                    @media screen and (min-width: 1024px) {
+                        right: 10.1rem;
+                    }
+
+                    @media screen and (min-width:1137px) {
+                        right: 15rem;
+                    }
+                     // Stylisation de la page dashboard pour écrans d'ordinateurs moyens
+                     @media screen and (min-width:1440px) {
+                        right: 15rem;
+                    }
+
+                     // Stylisation de la page dashboard pour grands écrans d'ordinateurs 
+                     @media screen and (min-width:1440px) {
+                        right: 29rem;
+                    }
+
+                    @media screen and (min-width:1920px) {
+                        right: 21rem;
+                    }
+
+                   
+                }
+
+               
+                }
+            }
+   

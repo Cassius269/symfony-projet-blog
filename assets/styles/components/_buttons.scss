@@ -16,9 +16,8 @@ button {
     color: #fff;
     height: 50px;
     margin-top: 1rem;
-    width: 190px;
-    width: 150px;
-    
+    width: 189px;
+    height: 43px;
     @media screen and (min-width:1024px) {
         background: #ec751e;
         border: none;
@@ -35,13 +34,37 @@ button {
 .secondaryButton {
     border: none;
     border-radius: 30px;
-    font-size: 24px;
     height: 50px;
     margin-top: 1rem;
     width: 190px;
     color: #714534;
-    border: 5px solid #714534;
+    background-color: white;
+    border: 3px solid #714534;//3px
     width: 240px;
     padding: 10px;
     padding-bottom: 35px;
+    font-size: 12px;
+    @media screen and (min-width:1024px) {
+        font-size: 24px;
+        border: 5px solid #714534;
+    }
+}
+
+
+.tertiaryButton {
+    border: none;
+    height: 50px;
+    margin-top: 1rem;
+    width: 190px;
+    color: $primaryColor;
+    background-color: white;
+    border-bottom: 3px solid $primaryColor;//3px
+    width: 120px;
+    padding: 10px;
+    font-size: 12px;
+    @media screen and (min-width:1024px) {
+        font-size: 24px;
+        border-bottom: 5px solid $primaryColor;//3px
+        width: auto;
+    }
 }

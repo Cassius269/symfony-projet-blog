@@ -26,6 +26,7 @@ Encore
     .addEntry('allArticlesPage','./assets/styles/pages/_allArticlesPage.scss')
     .addEntry('articlePageDetail','./assets/styles/pages/_articlePageDetail.scss')
     .addEntry('createArticlePage',['./assets/js/ckeditor.js','./assets/styles/pages/_pageCreateArticle.scss', './assets/js/clickOnInputFileType.js' ])
+    .addEntry("dashboard",'./assets/styles/pages/_dashboard.scss')
 
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
