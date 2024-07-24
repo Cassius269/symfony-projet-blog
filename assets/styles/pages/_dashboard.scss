@@ -24,9 +24,12 @@
             width: 79.5%;
         }
         section {
-            display: grid;
-            grid-template-columns: 100fr 100fr;
-            margin-top: 1rem;
+            // display: grid;
+            // grid-template-columns: 100fr 100fr;
+            // margin-top: 1rem;
+            display: flex;
+            justify-content: space-around;
+
                 hr {
                 display: none; 
             }
