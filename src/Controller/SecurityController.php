@@ -18,9 +18,10 @@ class SecurityController extends AbstractController
         path: '/register',
         name: 'register'
     )]
-    #[IsGranted("ROLE_ADMIN")]
+    #[IsGranted("ROLE_ADMIN")] // Action réservé à un utilisateur ayant le rôle ADMIN
     public function register(EntityManagerInterface $entityManager, UserPasswordHasherInterface $userPasswordHasher): Response
     {
+        
         $user = new User();
         $user->setFirstname('Fahami')
             ->setLastname('MOHAMED ALI')
@@ -30,11 +31,11 @@ class SecurityController extends AbstractController
             ->setAccepted(true)
             ->setCreatedAt(new \DateTimeImmutable());
 
-
         $entityManager->persist($user);
         $entityManager->flush();
 
-        // return $this->render('security/index.html.twig', []);
+        $this->addFlash('success', 'Un nouvel utilisateur a été enregistré');
+        return $this->redirectToRoute('home');
     }
 
 

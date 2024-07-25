@@ -55,9 +55,8 @@ class DemandType extends AbstractType
             ->add('status', EntityType::class, [
                 'class' => Status::class,
                 'choice_label' => 'id',
-            ])
-            ->add('submit', SubmitType::class);
-    }
+            ]);
+        }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
