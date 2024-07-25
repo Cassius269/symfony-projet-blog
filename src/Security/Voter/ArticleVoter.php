@@ -33,7 +33,7 @@ class ArticleVoter extends Voter
             case self::REMOVE:
                 // logic to determine if the user can EDIT
                 // return true or false
-                if ($subject->getAuthor()->getUserIdentifier() === $user->getUserIdentifier() || $user->getRoles() == "ROLE_ADMIN") {
+                if ($subject->getAuthor()->getUserIdentifier() === $user->getUserIdentifier() || $user->getRoles() == "ROLE_ADMIN") { // Si l'action de supprimer un article a été initié par son auteur ou un Admin, alors permission autorisée
                     return true;
                 }
                 break;
@@ -41,7 +41,7 @@ class ArticleVoter extends Voter
             case self::UPDATE:
                 // logic to determine if the user can VIEW
                 // return true or false
-                if ($subject->getAuthor()->getUserIdentifier() === $user->getUserIdentifier()) {
+                if ($subject->getAuthor()->getUserIdentifier() === $user->getUserIdentifier()) { // Si le mail de l'auteur d'un objet article est le même que celui de l'utilisateur connecté, alors permission autorisée
                     return true;
                 }
                 break;

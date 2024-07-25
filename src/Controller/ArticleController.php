@@ -31,7 +31,7 @@ class ArticleController extends AbstractController
         path: '/{id}',
         name: 'showDetailedArticle'
     )]
-    public function showDetailledArticle(Article $article): Response
+    public function showDetailledArticle(Article $article, EntityManagerInterface $entityManager): Response
     {
         // dd($article);
         if (!$article) { // dans le cas où l'article n'existe pas 
@@ -39,6 +39,11 @@ class ArticleController extends AbstractController
         } else { // Dans le cas où l'article existe, chercher son image d'illustration
             $mainImageIllustration = $article->getMainImageIllustration();
         }
+
+        // Mettre à jour le compteur du nombre de vue d'un article
+        $actualNumberOfViews = $article->getNbreOfViews();
+        $article->setNbreOfViews($actualNumberOfViews + 1);
+        $entityManager->flush($article);
 
         return $this->render('articles/article_detail.html.twig', [
             'article' => $article,
@@ -74,9 +79,10 @@ class ArticleController extends AbstractController
                 $unsafeContentArticle = $form->get('content')->getData();
                 $safeContentArticle = $htmlSanitizer->sanitize($unsafeContentArticle);
 
-                $article->setContent($safeContentArticle);
-                $article->setCreatedAt(new DateTimeImmutable())
-                    ->setAuthor($user);
+                $article->setContent($safeContentArticle)
+                    ->setCreatedAt(new DateTimeImmutable())
+                    ->setAuthor($user)
+                    ->setNbreOfViews(0); // Iniitialiser le compteur du nombre de vues d'un articles à zéro
 
                 // Gestion de la photo
                 $article->getMainImageIllustration()->setCreatedAt(new \DateTimeImmutable());
@@ -90,7 +96,7 @@ class ArticleController extends AbstractController
             }
 
             return $this->render(
-                'articles/create_new_article.html.twig',
+                'articles/create_or_edit_article.html.twig',
                 [
                     'form' => $form
                 ]
@@ -128,6 +134,7 @@ class ArticleController extends AbstractController
     }
 
     #[Route(path: '/author/update-article/{id}', name: 'update')]
+    #[IsGranted("ROLE_AUTHOR")]
     public function updateArticle(Article $article, Request $request, EntityManagerInterface $entityManager, HtmlSanitizerInterface $htmlSanitizer): Response
     {
         $this->denyAccessUnlessGranted('UPDATE_ARTICLE', $article); // Gestion de la permission de modification d'un artickle via un voter
@@ -148,6 +155,7 @@ class ArticleController extends AbstractController
             $safeContentArticle = $htmlSanitizer->sanitize($unsafeContentArticle);
 
             $article->setContent($safeContentArticle);
+            $article->setUpdatedAt(new \DateTime());
             $entityManager->flush();
 
             $this->addFlash('success', 'Votre article a été mise à jour');
@@ -156,7 +164,7 @@ class ArticleController extends AbstractController
 
         // Réutiliser le même template que la création d'article d'article 
         return $this->render(
-            'articles/create_new_article.html.twig',
+            'articles/create_or_edit_article.html.twig',
             [
                 'form' => $form,
                 'article' => $article

@@ -147,6 +147,7 @@
                     }
                 }
 
+                // En raison du placement du nombre de demandes, le responsive doit être être adapté en fonction de la taille d'écran
                 #numberNotifManagerNewDemandCollab {
                     // Stylisation du chiffre d'affichage des notifications du nombre de messages à lire pour tablettes
                     @media screen and (min-width:768px) {
@@ -178,7 +179,6 @@
                    
                 }
 
-               
                 }
             }
    

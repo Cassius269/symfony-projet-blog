@@ -27,6 +27,7 @@ class PhotographerType extends AbstractType
             ])
             ->add('pseudonyme', TextType::class, [
                 'label' => 'Pseudonyme',
+                'required' => false,
                 'attr' => [
                     'placeholder' => 'Le nom d\'artiste du photographe si il(elle) en possède'
                 ]
