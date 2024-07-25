@@ -25,6 +25,11 @@ if (inputFileType) { // Si l'input existe
             console.log("Aucun fichier sélectionné");
         }
     });
+
+    // Créer un gestionnaire d'évenement qui écoute l'input de type File au click programatique de la DIV parente
+    inputFileType.addEventListener("click", (e) => {
+        e.stopPropagation(); // Stopper le bouillonnement de l'évenement vers le parent si la DIV globale contenant l'input et l'icone d'image est cliqué
+    })
 } else {
     console.log("L'élément input file n'existe pas");
 }
