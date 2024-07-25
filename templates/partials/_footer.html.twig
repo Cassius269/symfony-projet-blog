@@ -1,20 +1,8 @@
-{# Affichage des messages flash #}
-<ul class="listMessage">
-	{% for typeOfMessage,message in app.flashes(["success","error"]) %}
-		{% for flashMessage in message %}
-			<li class="flash-{{typeOfMessage}}">{{flashMessage}}</li>
-		{% endfor %}
-	{% endfor %}
-</ul>
-
-{# Affichage des messages d'erreur du login à la page login #}
-{% if app.request.pathinfo == '/login'  %}
+{# Affichage des messages d'erreur du login à la page login #}{% if app.request.pathinfo == '/login'  %}
 	{% if error %}
 		<p class="errorLogin">{{ error.messageKey | trans(error.messageData,'security') }}</p>
 	{% endif %}
-
 {% endif %}
-
 
 {# Footer commun à toutes les pages de l'application #}
 <footer>

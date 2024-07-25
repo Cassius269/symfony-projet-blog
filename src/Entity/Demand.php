@@ -6,8 +6,11 @@ use App\Repository\DemandRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: DemandRepository::class)]
+#[Vich\Uploadable]
 class Demand
 {
     #[ORM\Id]
@@ -39,15 +42,27 @@ class Demand
     private ?string $message = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotNull(message: 'Votre CV est obligatoire dans la demande')]
-    private ?string $cv = null;
+    private ?string $cv = null; // propriété qui stocke le nom et l'adresse du fichier uplaodé
 
-    #[ORM\Column]
+
+    #[Vich\UploadableField(mapping: 'cv', fileNameProperty: 'cv')]
+    #[Assert\NotNull(
+        message: 'Le CV est obligatoire'
+    )]
+    #[Assert\File(
+        mimeTypes: [
+            'application/pdf'
+        ],
+        mimeTypesMessage: 'Votre fichier n\'est pas au bon format'
+    )]
+    private ?File $cvFile = null;
+
+    #[ORM\Column(nullable: true)]
     #[Assert\Choice([true, false, null])] // Valeurs attendues
     private ?bool $decision = null;
 
     #[ORM\ManyToOne(inversedBy: 'demands')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?User $user = null;
 
     #[ORM\Column]
@@ -57,7 +72,7 @@ class Demand
     private ?\DateTimeInterface $updatedAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'demands')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Status $status = null;
 
     public function getId(): ?int
@@ -109,18 +124,6 @@ class Demand
     public function setMessage(string $message): static
     {
         $this->message = $message;
-
-        return $this;
-    }
-
-    public function getCv(): ?string
-    {
-        return $this->cv;
-    }
-
-    public function setCv(string $cv): static
-    {
-        $this->cv = $cv;
 
         return $this;
     }
@@ -181,6 +184,47 @@ class Demand
     public function setStatus(?Status $status): static
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of cvFile
+     */
+    public function getCvFile()
+    {
+        return $this->cvFile;
+    }
+
+    /**
+     * Set the value of cvFile
+     *
+     * @return  self
+     */
+    public function setCvFile($cvFile)
+    {
+        $this->cvFile = $cvFile;
+        if (null !== $cvFile) { // Pour éviter des erreurs, le bundle Vich Uploader recommande de mettre une propriété en même temps que la mutation d'une valeur de CV à une demande
+            $this->setUpdatedAt(new \DateTime());
+        }
+    }
+
+    /**
+     * Get the value of cv
+     */
+    public function getCv()
+    {
+        return $this->cv;
+    }
+
+    /**
+     * Set the value of cv
+     *
+     * @return  self
+     */
+    public function setCv($cv)
+    {
+        $this->cv = $cv;
 
         return $this;
     }

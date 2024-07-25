@@ -24,7 +24,7 @@
 					</li>
 					{% if app.user == null %}
 						<li>
-							<a href="#" title="">
+							<a href="{{ path('admin_get_demand_members') }}" title="Lien vers la page devenir contributeur">
 								<button>Devenir Contributeur</button>
 							</a>
 						</li>
@@ -85,7 +85,7 @@
 			</li>
 
 		{% else %}
-			<a href="#" title="lien vers la page de connexion">
+			<a href="{{ path('admin_get_demand_members') }}" title="Lien vers la page devenir contributeur">
 				Devenir contributeur
 			</a>
 			<li>
@@ -96,4 +96,7 @@
 		{% endif %}
 	</li>
 </ul>
-<a href="{{ path('login')}}" title="lien vers la page de connexion"><img src="{{asset('images/iconeProfile.svg')}}" alt="icône représentant le profile utilisateur" class="imageProfile"></a></div></header>
+<a href="{{ path('login')}}" title="lien vers la page de connexion"><img src="{{asset('images/iconeProfile.svg')}}" alt="icône représentant le profile utilisateur" class="imageProfile"></a></div></header>{# Affichage des messages flash #}<ul class="listMessage">{% for typeOfMessage,message in app.flashes(["success","error"]) %}
+{% for flashMessage in message %}
+	<li class="flash-{{typeOfMessage}}">{{flashMessage}}</li>
+{% endfor %}{% endfor %}</ul>
