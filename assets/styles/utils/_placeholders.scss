@@ -49,3 +49,23 @@
         }
     }
 }
+
+// Rendre le main responsive pour les pages de formulaire devenir membre, création d'article
+%mainResponsive {
+    width: 84vw;
+    max-width: 800px;
+    margin-bottom: 2.5rem !important;
+    @media screen and (min-width: 1024px) {
+        margin: auto;
+    }
+}
+
+// Stylisation de DIV comprenant un input et son label en display flex rangé en colonne verticale
+%divLabelPlusInput {
+            display: flex;
+            flex-direction: column;
+
+            label {
+                font-weight: bold;
+            }
+}

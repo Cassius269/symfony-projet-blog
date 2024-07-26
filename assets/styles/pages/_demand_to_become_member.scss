@@ -1,0 +1,49 @@
+@import '../utils/mixins.scss'; // Les mixins sont prioritaires dans les règles d'importation
+@import '/assets/styles/utils/variables';
+@import '/assets/styles/components/buttons';
+@import '../utils/placeholders'; 
+
+main {
+    // Stylisation du main à l'aide du placeholder "%mainResponsive"
+    @extend %mainResponsive;
+
+    h1 {
+        margin: 3rem 0;
+        }
+
+    form {
+        // Importer le mixin permettant de styliser le block graphique d'upload de fichier de CV
+        @include makeDesignClickSpace('#demand_cvFile_file', '#divRowOfInputCvFile');
+
+        // Stylisation des bloc de DIV enfants direct du formulaire
+        .divLabelPlusInput {
+            @extend %divLabelPlusInput;
+            margin-bottom: 1rem;
+            
+        }
+
+        input {
+            border-radius: 8px;
+        }
+
+        // Stylisation de la taille de police de caractères
+        @media screen and (min-width: 1024px) {
+            font-size: 1.2rem;
+        }
+
+        // Stylisation du bouton "Submit" par l'extension des propriétés du composant de bouton primaire
+        input[type="submit"] {
+            @extend .primaryButton;
+            margin-top: 1rem;
+         }
+
+         // Stylisation de toutes les labels d'input
+         label {
+            font-weight: bold;
+        }
+
+        // #labelCvFile {
+        //     margin-bottom: 2rem;
+        // }
+}
+}

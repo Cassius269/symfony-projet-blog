@@ -21,13 +21,22 @@ class DemandType extends AbstractType
     {
         $builder
             ->add('firstname', TextType::class, [
-                'label' => 'Prénom'
+                'label' => 'Prénom',
+                'attr' => [
+                    'placeholder' => 'Jean'
+                ]
             ])
             ->add('lastname', TextType::class, [
-                'label' => 'Nom de famille'
+                'label' => 'Nom de famille',
+                'attr' => [
+                    'placeholder' => 'DUPONT'
+                ]
             ])
             ->add('email', EmailType::class, [
-                'label' => 'Email'
+                'label' => 'Email',
+                'attr' => [
+                    'placeholder' => 'jeandupont@email.com'
+                ]
             ])
             ->add('message', TextareaType::class, [
                 'label' => 'Parlez-nous de vous'
@@ -38,6 +47,9 @@ class DemandType extends AbstractType
                 [
                     'label' => 'Uploader votre CV',
                     'required' => true, // Uplod de CV obligatoire
+                    'label_attr' => [
+                        'id' => 'labelCvFile'
+                    ]
                     //     'constraints' => ([
                     //         new Assert\NotNull() => [ // Ajout d'une contrainte sur le champs du CV pour que le CV soit chargé obligatoirement
                     //             'message' => 'Le CV est obligatoire'
@@ -56,7 +68,7 @@ class DemandType extends AbstractType
                 'class' => Status::class,
                 'choice_label' => 'id',
             ]);
-        }
+    }
 
     public function configureOptions(OptionsResolver $resolver): void
     {

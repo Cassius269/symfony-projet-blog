@@ -1,3 +1,4 @@
+@import '../utils/mixins.scss'; // Les mixins sont prioritaires dans les règles d'importation
 @import '/assets/styles/utils/variables';
 @import '/assets/styles/components/buttons';
 @import '../utils/placeholders';
@@ -20,21 +21,8 @@ main {
             font-size: 1.2rem;
         }
 
-        input {
-            height: 30px;
-            @media screen and (min-width: 1024px) {
-                height: 50px;
- 
-            }
-        }
-
         .divLabelPlusInputTitle {
-            display: flex;
-            flex-direction: column;
-
-            label {
-                font-weight: bold;
-            }
+            @extend %divLabelPlusInput;
         }
        
        .labelOfImageIllustrionFormType {
@@ -55,33 +43,9 @@ main {
                     margin-bottom: 1rem;
                 }
             }
-
-            #divRowOfInputImageIllustration {// La DIV contenant l'input de type file pour l'upload d'image
-                    border: 2.4px solid #FFA800;
-                    display: flex;
-                    flex-direction: column;
-                    padding: 2rem 0;
-                    align-items: center;
-                    border-radius: 9px;
-        
-                    @media screen and (min-width: 1024px) {
-                        padding: 2.5rem 0;
-                    }
-                    #article_mainImageIllustration_imageFile_file {// id par défaut donné par Symfony à l'input file
-                        opacity: 0;
-                        position: absolute;
-                    }
-                    img {
-                        @media screen and (min-width: 1024px) {
-                            width: 50px;
-                        }
-                    }
-                    #filename {
-                        color: $tertiaryColor;
-                    }
-            }
-
-
+            
+            // Inclusion du mixin makeDesignClickSpace pour styliser le visuel de l'upload de fichier d'image d'illustration d'un article
+            @include makeDesignClickSpace('#article_mainImageIllustration_imageFile_file','#divRowOfInputImageIllustration');
         }
 
         .divInfoImageIllustrationPrincipale {
@@ -103,25 +67,9 @@ main {
                     color: $tertiaryColor;
                 }
             }
-
-
         }
             button[type="submit"] {
-                background: #FFA800;
-                width: 170px;
-                padding: 10px 0 25px 0;
-                font-size: 1rem;
-                height: 40px;
-                @media screen and (min-width: 1024px) {
-                    border: none;
-                    border-radius: 30px;
-                    color: #fff;
-                    height: 50px;
-                    margin-top: 1rem;
-                    padding: 0;
-                    width: 190px;
-                    font-size: 24px;
-                }
+               @extend .primaryButton;
             }
             .buttonPreview {
                 width: 170px;

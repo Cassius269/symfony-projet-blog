@@ -1,7 +1,41 @@
+// Les mixins sont comme des fonctions à paramètre(s)
+
 // Mixin pour centrer des élements
 // Ce mixin est utile en mobile de centrer des sections de la page d'accueil
-
 @mixin centrerElement($width){
     width: $width;
     margin: auto;
 }
+
+// Déclaration d'une mixin pour styliser le bloc d'élements graphique pour l'upload de fichiers
+@mixin makeDesignClickSpace($selectorInputFile, $selectorDivInputFilePlusImage){
+ 
+    #{$selectorDivInputFilePlusImage} {// La DIV contenant l'input de type file pour l'upload d'image
+        border: 2.4px solid #FFA800;
+        display: flex;
+        flex-direction: column;
+        padding: 2rem 0;
+        align-items: center;
+        border-radius: 9px;
+
+        @media screen and (min-width: 1024px) {
+            padding: 2.5rem 0;
+        }
+
+        #{$selectorInputFile} {// id par défaut donné par Symfony à l'input file
+            opacity: 0;
+            position: absolute;
+        }
+        img {
+            @media screen and (min-width: 1024px) {
+                width: 50px;
+            }
+        }
+        #filename {
+            color: $tertiaryColor;
+        }
+
+    }
+}
+
+

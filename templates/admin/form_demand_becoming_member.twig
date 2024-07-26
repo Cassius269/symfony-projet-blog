@@ -2,24 +2,41 @@
 
 {% block title %}Rejoignez-nous
 {% endblock %}
-
+{% block stylesheets %}
+	{{ parent() }}
+	{{ encore_entry_link_tags('demandToBecomeMember') }}
+{% endblock %}
 {% block body %}
 	<h1>Rejoignez-nous</h1>
 
+	{# Début du formulaire #}
 	{{ form_start(form)}}
-	{{ form_row(form.firstname)}}
-		{{ form_row(form.lastname)}}
-			{{ form_row(form.email)}}
-	{{ form_row(form.message)}}
-	{# {{ form_row(form.cvFile)}} #}
+	<div class="divLabelPlusInput">
+		{{ form_label(form.firstname) }}
+		{{ form_widget(form.firstname) }}
+	</div>
+	<div class="divLabelPlusInput">
+		{{ form_label(form.lastname) }}
+		{{ form_widget(form.lastname) }}
+	</div>
+	<div class="divLabelPlusInput">
+		{{ form_label(form.email) }}
+		{{ form_widget(form.email) }}
+	</div>
+	<div class="divLabelPlusInput">
+		{{ form_label(form.message) }}
+		{{ form_widget(form.message) }}
+	</div>
 	{{ form_label(form.cvFile)}}
-		<div id="divRowOfInputCvFile">
-				<p>Glissez déposez ou parcourir</p>
-				<img src="{{ asset('images/iconeFileUpload.svg') }}" alt="icone représentant un fichier"> <p>PDF</p>
-				<p id="filename"></p>
-				{{ form_widget(form.cvFile) }}
-		</div>	
-		<button>Envoyer</button>
+	<div id="divRowOfInputCvFile">
+		<p>Glissez déposez ou parcourir</p>
+		<img src="{{ asset('images/iconeFileUpload.svg') }}" alt="icone représentant un fichier">
+		<p>PDF</p>
+		<p id="filename"></p>
+		{{ form_widget(form.cvFile) }}
+	</div>
+	<input type="submit" value="Envoyer"/>
 	{{ form_end(form, {render_rest: false})}}
+	{# Fin du formulaire #}
 
-	{% endblock %} 
+{% endblock %}

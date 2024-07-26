@@ -21,7 +21,7 @@ class SecurityController extends AbstractController
     #[IsGranted("ROLE_ADMIN")] // Action réservé à un utilisateur ayant le rôle ADMIN
     public function register(EntityManagerInterface $entityManager, UserPasswordHasherInterface $userPasswordHasher): Response
     {
-        
+
         $user = new User();
         $user->setFirstname('Fahami')
             ->setLastname('MOHAMED ALI')

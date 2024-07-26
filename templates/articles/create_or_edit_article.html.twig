@@ -20,6 +20,7 @@
 {% endblock %}
 {% block body %}
 	{% if is_granted("ROLE_AUTHOR") %}
+		{# Modification du gros titre de la page en fonction du chemin de la route #}
 		{% if app.request.get('_route') == 'articles_update'  %}
 			<h1>Modifier un article</h1>
 		{% else %}
