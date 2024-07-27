@@ -1,5 +1,7 @@
 // Création d'une fonction de mise à disposition de l'éditeur CK Editor
+
 // Exportation de la fonction editWithCKEditor dès sa création
+
 export function editWithCKEditor(typeOfEditor, IDinputHiddenContent ){
     // On crée CK Editor sur la balise <textarea>  ayant l'attribut #editor 
 
