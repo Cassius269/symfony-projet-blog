@@ -45,5 +45,20 @@ main {
         // #labelCvFile {
         //     margin-bottom: 2rem;
         // }
+
+        textarea {
+            height: 386px;
+            width: 96%;
+            resize: none;
+            padding: 2%;
+        }
+
+        // Stylisation de la DIV parente contenant l'input de type checkbox du consentement RGPD et son label 
+        #divLabelPlusInputRGPD {
+            display: flex;
+            flex-direction: row-reverse;
+            gap: 1rem;
+            margin-top: 4rem;
+        }
 }
 }

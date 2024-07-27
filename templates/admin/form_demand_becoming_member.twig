@@ -24,6 +24,10 @@
 		{{ form_widget(form.email) }}
 	</div>
 	<div class="divLabelPlusInput">
+		{{ form_label(form.phone) }}
+		{{ form_widget(form.phone) }}
+	</div>
+	<div class="divLabelPlusInput">
 		{{ form_label(form.message) }}
 		{{ form_widget(form.message) }}
 	</div>
@@ -35,8 +39,25 @@
 		<p id="filename"></p>
 		{{ form_widget(form.cvFile) }}
 	</div>
+
+	<div id="divLabelPlusInputRGPD">
+		{{ form_label(form.rgpd)}}
+		{{ form_widget(form.rgpd)}}
+	</div>
+
+	{# ajout de façon automatisé de l'input contenant le token CSRF Dynamique #}
+	{{ form_rest(form)}}
 	<input type="submit" value="Envoyer"/>
 	{{ form_end(form, {render_rest: false})}}
 	{# Fin du formulaire #}
 
-{% endblock %}
+	{# Affichage des erreurs globales lors de la soumission #}
+	{{ form_errors(form)}}
+
+	{# Affichage des erreurs liés au non-respect des contraintes de validation des données #}
+	{{ form_errors(form.firstname)}}
+	{{ form_errors(form.lastname)}}
+	{{ form_errors(form.message)}}
+	{{ form_errors(form.phone)}}
+	{{ form_errors(form.rgpd)}}
+{{ form_errors(form.cvFile)}}{% endblock %}

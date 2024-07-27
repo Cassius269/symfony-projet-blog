@@ -36,7 +36,7 @@ class Demand
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\NotBlank(message: 'Parlez-nous de vous')]
     #[Assert\Length(
-        min: 100,
+        min: 100, // minimum 100 charactères dans le message
         minMessage: 'Veuillez developper votre présentation et votre demande'
     )]
     private ?string $message = null;
@@ -74,6 +74,13 @@ class Demand
     #[ORM\ManyToOne(inversedBy: 'demands')]
     #[ORM\JoinColumn(nullable: true)]
     private ?Status $status = null;
+
+    #[ORM\Column(length: 255)]
+    #[Assert\Regex(
+        pattern: '#^(?:\+33|0)[67](?:[ .-]?\d{2}){4}$#',
+        message: 'Votre saisie n\'est pas correct'
+    )]
+    private ?string $phone = null;
 
     public function getId(): ?int
     {
@@ -225,6 +232,18 @@ class Demand
     public function setCv($cv)
     {
         $this->cv = $cv;
+
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(string $phone): static
+    {
+        $this->phone = $phone;
 
         return $this;
     }

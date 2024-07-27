@@ -5,15 +5,13 @@ namespace App\Form;
 use App\Entity\Demand;
 use App\Entity\Status;
 use Symfony\Component\Form\AbstractType;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Vich\UploaderBundle\Form\Type\VichFileType;
-use Symfony\Component\Validator\Constraints as Assert;
 
 class DemandType extends AbstractType
 {
@@ -63,6 +61,9 @@ class DemandType extends AbstractType
                     //     ]
                 ]
             )
+            ->add('phone', TextType::class, [
+                'label' => 'Téléphone'
+            ])
             ->add('decision')
             ->add('status', EntityType::class, [
                 'class' => Status::class,
