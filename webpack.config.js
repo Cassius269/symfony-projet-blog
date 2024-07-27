@@ -25,7 +25,7 @@ Encore
     .addEntry('homepage','./assets/styles/pages/_homepage.scss')
     .addEntry('allArticlesPage','./assets/styles/pages/_allArticlesPage.scss')
     .addEntry('articlePageDetail','./assets/styles/pages/_articlePageDetail.scss')
-    .addEntry('createArticlePage',['./assets/js/ckeditor.js','./assets/styles/pages/_pageCreateArticle.scss', './assets/js/clickOnInputFileType.js' ])
+    .addEntry('createArticlePage',['./assets/js/pages/create_or_update_article.js','./assets/styles/pages/_pageCreateArticle.scss'])
     .addEntry("dashboard",'./assets/styles/pages/_dashboard.scss')
     .addEntry('demandToBecomeMember','./assets/styles/pages/_demand_to_become_member.scss')
 
