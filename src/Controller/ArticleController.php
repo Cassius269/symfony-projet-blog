@@ -34,8 +34,8 @@ class ArticleController extends AbstractController
     public function showDetailledArticle(Article $article, EntityManagerInterface $entityManager): Response
     {
         // dd($article);
-        if (!$article) { // dans le cas où l'article n'existe pas 
-            throw new NotFoundHttpException('Article introuvable');
+        if (!$article) { // Si il n'y pas d'article trouvé, envoyer un message d'exception
+            throw $this->createNotFoundException('Article introuvable');
         } else { // Dans le cas où l'article existe, chercher son image d'illustration
             $mainImageIllustration = $article->getMainImageIllustration();
         }

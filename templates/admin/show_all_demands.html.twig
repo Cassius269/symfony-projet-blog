@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+{% block title %}Liste des demandes
+{% endblock %}
+{% block stylesheets %}
+	{{ parent() }}
+	{{ encore_entry_link_tags('allDemandsPage') }}
+{% endblock %}
+{% block body %}
+	<h1>La liste des demandes de contributions</h1>
+
+	{# Inclusion de la barre de recherche #}
+	{% include "partials/_form_search.html.twig" %}
+
+	{# Affichage des demandes sous forme de tableau #}
+	<table>
+		<thead>
+			<tr>
+				<th>Nom</th>
+				<th>Prénom</th>
+				<th>Email</th>
+				<th>Décision</th>
+				{# <th>Status</th> #}
+			</tr>
+		</thead>
+		<tbody>
+			{% for demand in demands %}
+				{# Définir l'index en cours de la boucle#}
+				{% set actualIndex = loop.index %}
+				<a href="" title="lien vers la page de détail d'une étude de demande">
+					<tr class="{{ actualIndex is even ? 'paire' : 'impaire' }}">
+						<td>{{ demand.firstname}}</td>
+						<td>{{ demand.lastname }}</td>
+						<td id="email">{{ demand.email }}</td>
+						<td>{{ demand.decision ?? 'En attente' }}</td>
+						{# <td>{{ demand.status}}</td> #}
+					</tr>
+				</a>
+			{% endfor %}
+		</tbody>
+	</table>
+
+
+	{# Inclusion du partial de la liste de numérotation des pages #}
+	{% include "partials/_list_numerotation_page.html.twig" %}
+{% endblock %}

@@ -2,6 +2,7 @@
 @import '/assets/styles/utils/variables';
 @import '/assets/styles/components/buttons';
 @import '../utils/placeholders'; 
+@import '../components/formSearch';
 
 main {
     // Stylisation du main à l'aide du placeholder "%mainResponsive"
@@ -15,7 +16,20 @@ main {
         // Importer le mixin permettant de styliser le block graphique d'upload de fichier de CV
         @include makeDesignClickSpace('#demand_cvFile_file', '#divRowOfInputCvFile');
 
-        // Stylisation des bloc de DIV enfants direct du formulaire
+        // Stylisation du bloc de DIV comprenant les DIV enfants des champs et label de firstname et lastname
+        #divFirstnamePlusLastname {
+            @media screen and (min-width: 768px) {
+                display: flex;
+                justify-content: space-between;
+                gap: 2rem;
+                .divLabelPlusInput {
+                    flex: 1;
+                }
+            }
+
+        }
+
+        // Stylisation de tous les blocs de DIV enfants direct du formulaire
         .divLabelPlusInput {
             @extend %divLabelPlusInput;
             margin-bottom: 1rem;

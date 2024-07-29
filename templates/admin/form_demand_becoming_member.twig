@@ -14,13 +14,15 @@
 
 	{# Début du formulaire #}
 	{{ form_start(form)}}
-	<div class="divLabelPlusInput">
-		{{ form_label(form.firstname) }}
-		{{ form_widget(form.firstname) }}
-	</div>
-	<div class="divLabelPlusInput">
-		{{ form_label(form.lastname) }}
-		{{ form_widget(form.lastname) }}
+	<div id="divFirstnamePlusLastname">
+		<div class="divLabelPlusInput">
+			{{ form_label(form.firstname) }}
+			{{ form_widget(form.firstname) }}
+		</div>
+		<div class="divLabelPlusInput">
+			{{ form_label(form.lastname) }}
+			{{ form_widget(form.lastname) }}
+		</div>
 	</div>
 	<div class="divLabelPlusInput">
 		{{ form_label(form.email) }}

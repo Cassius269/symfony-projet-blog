@@ -1,0 +1,60 @@
+@import '../utils/mixins.scss'; // Les mixins sont prioritaires dans les règles d'importation
+@import '/assets/styles/utils/variables';
+@import '/assets/styles/components/buttons';
+@import '../utils/placeholders'; 
+@import '../components/formSearch';
+
+main {
+    // Stylisation du main à l'aide du placeholder "%mainResponsive"
+    @extend %mainResponsive;
+    height: 54vh;
+    h1 {
+        margin: 3rem 0;
+        }
+    
+        table {
+            border-collapse: collapse; 
+            margin: 2rem auto;
+            font-size: 11px;
+            @media screen and (min-width: 768px) {
+                font-size: 16px;
+            }
+            @media screen and (min-width: 1024px) {
+                  font-size: 19px;
+            }
+            // Stylisation de l'entête du tableau
+            thead {
+                background: #000000;
+                color: white;
+                th {
+                    padding: 6px;
+                }
+            }
+            // Stylisation du corps du tableau
+            tbody {
+                    .paire { // Stylisation des rangées de donnée à l'index paire
+                        background: #ededed;
+                        color: black;
+                    }
+                
+                    .impaire {// Stylisation des rangées de donnée à l'index impaire
+                        background-color: #FFA800;
+
+                    }
+
+                    td {
+                        padding: 0.5rem;
+                    }   
+                    #email {// Stylisation des champs emails du tableau
+                        text-decoration: underline;
+                    }
+            }
+        }
+
+        //Stylisation de la numérotation des pages
+            .listNumerotationPage {
+                @extend %numerotationPage;
+            }
+
+            
+}

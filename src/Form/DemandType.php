@@ -37,7 +37,10 @@ class DemandType extends AbstractType
                 ]
             ])
             ->add('message', TextareaType::class, [
-                'label' => 'Parlez-nous de vous'
+                'label' => 'Parlez-nous de vous',
+                'attr' => [
+                    'placeholder' => 'Votre parcours par exemple...',
+                ]
             ])
             ->add(
                 'cvFile',
@@ -62,7 +65,10 @@ class DemandType extends AbstractType
                 ]
             )
             ->add('phone', TextType::class, [
-                'label' => 'Téléphone'
+                'label' => 'Téléphone',
+                'attr' => [
+                    'placeholder' => '06********'
+                ]
             ])
             ->add('decision')
             ->add('status', EntityType::class, [

@@ -69,3 +69,20 @@
                 font-weight: bold;
             }
 }
+
+//Stylisation de la liste de numérotation des pages
+
+%numerotationPage {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 25px;
+    .actualPage {
+        background: $primaryColor;
+        padding: 5px 10px;
+        border-radius: 50px;
+        color: blanchedalmond;
+        position: relative;
+        bottom: 3px;
+            }
+}
