@@ -29,6 +29,7 @@ Encore
     .addEntry("dashboard",'./assets/styles/pages/_dashboard.scss')
     .addEntry('demandToBecomeMember',['./assets/styles/pages/_demand_to_become_member.scss', './assets/js/pages/demand_to_become_member.js'])
     .addEntry('allDemandsPage',['./assets/styles/pages/_allDemandsPage.scss'] )
+    .addEntry('demandDetailPage',['./assets/styles/pages/_demandDetailPage.scss'])
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

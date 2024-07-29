@@ -13,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route('/admin', name: 'admin_')]
+#[Route('/admin', name: 'admin_')] // Préfixe des routes de l'Admin
 class AdminController extends AbstractController
 {
     // Action pour faire une demande de devenir contributeur
@@ -70,5 +70,12 @@ class AdminController extends AbstractController
         return $this->render('admin/show_all_demands.html.twig', [
             'demands' => $demands,
         ]);
+    }
+
+    #[Route(path: '/list-demands/{id}', name: 'detail_demand')]
+    public function giveResponseToDemand(Demand $demand): Response
+    {
+        dd($demand);
+        return $this->render("admin/demand_detail.scss", []);
     }
 }

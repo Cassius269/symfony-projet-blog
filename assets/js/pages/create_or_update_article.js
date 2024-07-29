@@ -1,4 +1,4 @@
-// Importation du module ckEditor
+// Importation du module ckEditor depuis le dossier des fonctionnalités
 import { editWithCKEditor } from '../features/ckeditor';
 
 // Importation du module clickOnInputFileType

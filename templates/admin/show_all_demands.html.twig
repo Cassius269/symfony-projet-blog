@@ -26,15 +26,15 @@
 			{% for demand in demands %}
 				{# Définir l'index en cours de la boucle#}
 				{% set actualIndex = loop.index %}
-				<a href="" title="lien vers la page de détail d'une étude de demande">
-					<tr class="{{ actualIndex is even ? 'paire' : 'impaire' }}">
-						<td>{{ demand.firstname}}</td>
-						<td>{{ demand.lastname }}</td>
-						<td id="email">{{ demand.email }}</td>
-						<td>{{ demand.decision ?? 'En attente' }}</td>
-						{# <td>{{ demand.status}}</td> #}
-					</tr>
-				</a>
+				<tr class="{{ actualIndex is even ? 'paire' : 'impaire' }}" onclick="location.href='{{ path('admin_detail_demand',{ 'id': demand.id})}}';">
+
+					<td>{{ demand.firstname}}</td>
+					<td>{{ demand.lastname }}</td>
+					<td id="email">{{ demand.email }}</td>
+					<td>{{ demand.decision ?? 'En attente' }}</td>
+
+					{# <td>{{ demand.status}}</td> #}
+				</tr>
 			{% endfor %}
 		</tbody>
 	</table>

@@ -13,6 +13,9 @@ main {
         }
 
     form {
+        display: flex;
+        flex-direction: column;
+        
         // Importer le mixin permettant de styliser le block graphique d'upload de fichier de CV
         @include makeDesignClickSpace('#demand_cvFile_file', '#divRowOfInputCvFile');
 

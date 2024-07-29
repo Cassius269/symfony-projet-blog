@@ -10,6 +10,7 @@ main {
     height: 54vh;
     h1 {
         margin: 3rem 0;
+        text-align: center;
         }
     
         table {
@@ -41,11 +42,19 @@ main {
                         background-color: #FFA800;
 
                     }
+                        tr {
+                            transition: background-color 0.5s; 
 
-                    td {
-                        padding: 0.5rem;
-                    }   
-                    #email {// Stylisation des champs emails du tableau
+                            &:hover {
+                                background-color: rgb(95, 75, 75);
+                                color: white;
+                                cursor: pointer;
+                            }
+                            td {
+                                padding: 0.5rem;
+                            }
+                        }   
+                     #email {// Stylisation des champs emails du tableau
                         text-decoration: underline;
                     }
             }
