@@ -57,7 +57,7 @@ class AdminController extends AbstractController
     // Action pour afficher la liste de toutes les demandes
 
     #[Route(path: '/list-demands', name: 'list_demands')]
-    // #[IsGranted('ROLE_ADMIN')] // Seul un utilisateur ayant le rôle "ROLE_ADMIN" à cette route
+    #[IsGranted('ROLE_ADMIN')] // Seul un utilisateur ayant le rôle "ROLE_ADMIN" à cette route
     public function showAllDemands(DemandRepository $demandRepository): Response
     {
         // Chercher toutes les demandes
@@ -73,9 +73,12 @@ class AdminController extends AbstractController
     }
 
     #[Route(path: '/list-demands/{id}', name: 'detail_demand')]
+    #[IsGranted('ROLE_ADMIN')] // Seul un utilisateur ayant le rôle "ROLE_ADMIN" à cette route
     public function giveResponseToDemand(Demand $demand): Response
     {
-        dd($demand);
-        return $this->render("admin/demand_detail.scss", []);
+        dump($demand);
+        return $this->render("admin/demand_detail.html.twig", [
+            'demand' => $demand
+        ]);
     }
 }

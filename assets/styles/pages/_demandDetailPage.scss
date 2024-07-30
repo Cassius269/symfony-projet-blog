@@ -1,4 +1,15 @@
+@import '../utils/mixins.scss'; // Les mixins sont prioritaires dans les règles d'importation
+@import '/assets/styles/utils/variables';
+@import '/assets/styles/components/buttons';
+@import '../utils/placeholders'; 
+
 main {
-    background-color: grey;
+    // Stylisation du main à l'aide du placeholder "%mainResponsive"
+    @extend %mainResponsive;
+
+    // Stylisation de l'affichage du CV
+    embed {
+        height: 400px;
+    }
 }
 

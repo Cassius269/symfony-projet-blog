@@ -9,7 +9,6 @@
         // Stylisation de la page dashboard pour tablette
         @media screen and (min-width:768px) {
             width: 85%;
-            height: 70vh;
         }
         // Stylisation de la page dashboard pour petits écrans d'ordinateurs
         @media screen and (min-width:1024px) {
@@ -108,7 +107,8 @@
                     right: 1.5rem;
                     @media screen and (min-width: 1024px){
                         font-size: 24px;
-                    }
+                    }                    
+
                 }
 
                 .divNumberNotifPlusIcone {
@@ -130,9 +130,16 @@
                             right: 9.5rem;
                         }
 
+                        @media screen and (min-width: 1072px) {
+                            right: 9.5rem;
+                        }
+
+                        @media screen and (min-width: 1391px) {
+                            right: 9.5rem;
+                        }
                         // Stylisation de la page dashboard pour écrans d'ordinateurs moyens
                         @media screen and (min-width:1440px) {
-                            right: 28rem;
+                            right: 14rem;
                         }
 
                         @media screen and (min-width:1920px) {
@@ -164,7 +171,7 @@
                     }
                      // Stylisation de la page dashboard pour écrans d'ordinateurs moyens
                      @media screen and (min-width:1440px) {
-                        right: 15rem;
+                        right: 15rem !important;
                     }
 
                      // Stylisation de la page dashboard pour grands écrans d'ordinateurs 

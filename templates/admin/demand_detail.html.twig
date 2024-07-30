@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+{% block title %}Devenir collaborateur
+{% endblock %}
+{% block stylesheets %}
+	{{ parent() }}
+	{{ encore_entry_link_tags('demandDetailPage')}}
+{% endblock %}
+{% block body %}
+	<h1>detail page réponse</h1>
+	{# Section présentant le contenu de la demande #}
+	<section>
+		{# Présenter l'idendité du demandeur(se) #}
+		<ul>
+			<li>
+				<span>De :</span>
+				{{ demand.fullname}}</li>
+			<li>
+				<span>Objet :</span>
+				Candidature pour devenir auteur sur Fahami.com
+			</li>
+		</ul>
+		{# Afficher le contenu du message de la demande #}
+		<p>{{ demand.message }}</p>
+		{# Afficher le CV #}
+		<p>CV</p>
+		<embed type="application/pdf" src="{{ vich_uploader_asset(demand,"cvFile") }}"/>
+	</section>
+
+	{# Section présentant le formulaire de traitement de la demande #}
+	<section>
+		<h2>Les autorisations accordées</h2>
+	</section>
+{% endblock %}
