@@ -14,7 +14,8 @@
 		<ul>
 			<li>
 				<span>De :</span>
-				{{ demand.fullname}}</li>
+				{{ demand.fullname}}
+				({{ demand.email }})</li>
 			<li>
 				<span>Objet :</span>
 				Candidature pour devenir auteur sur Fahami.com
@@ -22,7 +23,7 @@
 		</ul>
 
 		{# Afficher le contenu du message de la demande #}
-		<p>{{ demand.message }}</p>
+		<p id="message">{{ demand.message }}</p>
 
 		{# Afficher le CV #}
 		<article>
@@ -30,6 +31,7 @@
 			{# Vue desktop de l'emplacement du CV #}
 			<embed
 			type="application/pdf" src="{{ vich_uploader_asset(demand,"cvFile") }}" class="desktop"/>
+
 			{# Vue mobile de l'emplacement du CV #}
 			<div class="mobile">
 				<a href="{{ vich_uploader_asset(demand,"cvFile") }}" id="linkViewCV">
@@ -44,6 +46,6 @@
 
 	{# Section présentant le formulaire de traitement de la demande #}
 	<section class="sectionGivingAccess">
-		<h2>Les autorisations accordées</h2>
+		<h2>Les autorisations accordées:</h2>
 	</section>
 {% endblock %}

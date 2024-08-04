@@ -7,12 +7,45 @@ main {
     // Stylisation du main à l'aide du placeholder "%mainResponsive"
     @extend %mainResponsive;
 
+    // Stylisation du titre
+    h1 {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
 
     .sectionPresentDemand{
+        margin-bottom: 5rem;
+
+        // Stylisation de l'entête du message 
+        ul {
+            padding-inline-start: 0px; // Ramener le block <ul> à son emplacement initial sans saut vers la droite
+            li {
+                font-weight: bold;
+                margin-bottom: 8px;
+                @media screen and (min-width: 768px) {
+                    font-size: 1.2rem;
+                }
+                span {
+                    color: $primaryColor;
+                }
+            }
+        }
+        // Stylisation de la balise <p> du message du demandeur(se)
+        #message {
+            border: 6px solid #714534;
+            border-radius: 5px;
+            padding: 2rem;
+            @media screen and (min-width: 414px) {
+                border-radius: 12px;
+            }
+        }
+    
     // Stylisation de l'affichage du CV
     embed {
         height: 90vh;
         width: 100%;
+        // border: 6px solid #714534;
+        border-radius: 12px;
     }
    
       
@@ -39,14 +72,22 @@ main {
                 display: flex;
                 flex-direction: column;
                 
-                img { // Stylisation de l'icone de fichier
+                img { // Stylisation de l'icone de fichier de CV
                     height: 90px;
                 }
-                button { // Stylisation du bouton "Télécharger"
+                button { // Stylisation du bouton "Télécharger" concernant le CV
                     margin: auto;
                 }
         }
     }
+    }
+
+    // Stylisation de la section de gestion des permissions des nouveaux demandeurs
+    .sectionGivingAccess {
+        // Stylisation du sous-titre de la section
+        h2 {
+            color: $primaryColor;
+        }
     }
 }
 
