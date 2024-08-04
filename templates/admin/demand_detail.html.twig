@@ -6,9 +6,10 @@
 	{{ encore_entry_link_tags('demandDetailPage')}}
 {% endblock %}
 {% block body %}
-	<h1>detail page réponse</h1>
+	<h1>Devenir collaborateur</h1>
 	{# Section présentant le contenu de la demande #}
-	<section>
+	<section
+		class="sectionPresentDemand">
 		{# Présenter l'idendité du demandeur(se) #}
 		<ul>
 			<li>
@@ -19,15 +20,30 @@
 				Candidature pour devenir auteur sur Fahami.com
 			</li>
 		</ul>
+
 		{# Afficher le contenu du message de la demande #}
 		<p>{{ demand.message }}</p>
+
 		{# Afficher le CV #}
-		<p>CV</p>
-		<embed type="application/pdf" src="{{ vich_uploader_asset(demand,"cvFile") }}"/>
+		<article>
+			<h2>Le CV</h2>
+			{# Vue desktop de l'emplacement du CV #}
+			<embed
+			type="application/pdf" src="{{ vich_uploader_asset(demand,"cvFile") }}" class="desktop"/>
+			{# Vue mobile de l'emplacement du CV #}
+			<div class="mobile">
+				<a href="{{ vich_uploader_asset(demand,"cvFile") }}" id="linkViewCV">
+					<img src="/images/iconeFileUpload.svg" alt="icone représentant un fichier">
+				</a>
+				<a href="{{ vich_uploader_asset(demand,"cvFile") }}" id="linkViewCV" download>
+					<button class="primaryButton">Télécharger</button>
+				</a>
+			</div>
+		</article>
 	</section>
 
 	{# Section présentant le formulaire de traitement de la demande #}
-	<section>
+	<section class="sectionGivingAccess">
 		<h2>Les autorisations accordées</h2>
 	</section>
 {% endblock %}

@@ -7,9 +7,46 @@ main {
     // Stylisation du main à l'aide du placeholder "%mainResponsive"
     @extend %mainResponsive;
 
+
+    .sectionPresentDemand{
     // Stylisation de l'affichage du CV
     embed {
-        height: 400px;
+        height: 90vh;
+        width: 100%;
+    }
+   
+      
+
+        // Affichage du cv en fonction de l'écran (mobile ou desktop)
+        .desktop {
+            @media screen and (min-width: 414px) {
+                display: none;
+            }
+            @media screen and (min-width: 768px) {
+                display: block;
+            }
+        }
+
+        .mobile {
+            @media screen and (min-width: 414px) {
+                display: block;
+            }
+            @media screen and (min-width: 768px) {
+                display: none;
+            }
+
+            #linkViewCV {
+                display: flex;
+                flex-direction: column;
+                
+                img { // Stylisation de l'icone de fichier
+                    height: 90px;
+                }
+                button { // Stylisation du bouton "Télécharger"
+                    margin: auto;
+                }
+        }
+    }
     }
 }
 
