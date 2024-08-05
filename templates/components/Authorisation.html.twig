@@ -1,0 +1,12 @@
+<div{{attributes}}>
+	<!-- component html -->
+	{{ form_start(form)}}
+	{{ form_row(form.authorisations)}}
+	{% if form.podcasts is defined %}
+		{{ form_row(form.podcasts) }}
+		<p>hello</p>
+	{% endif %}
+	<div id="inputsSubmit">
+		<input type="submit" value="Refuser" class="secondaryButton" data-live-action-param="save" data-action="live#action:prevent">
+		<input type="submit" value="Accepter" class="primaryButton">
+		{{ form_end(form, {render_rest: false})}}</div>

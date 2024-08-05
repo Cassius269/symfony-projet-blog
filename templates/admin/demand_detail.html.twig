@@ -15,10 +15,16 @@
 			<li>
 				<span>De :</span>
 				{{ demand.fullname}}
-				({{ demand.email }})</li>
+				({{ demand.email }})
+			</li>
 			<li>
 				<span>Objet :</span>
 				Candidature pour devenir auteur sur Fahami.com
+			</li>
+			<li>
+				<span>Date :
+				</span>
+				{{ demand.createdAt |  format_datetime('full',locale="fr") }}
 			</li>
 		</ul>
 
@@ -45,7 +51,11 @@
 	</section>
 
 	{# Section présentant le formulaire de traitement de la demande #}
-	<section class="sectionGivingAccess">
-		<h2>Les autorisations accordées:</h2>
+	<section
+		class="sectionGivingAccess">
+
+		{# Charger le composant Twig de formulaire dynamique de l'entité User #}
+		<twig:Authorisation/>
 	</section>
+
 {% endblock %}

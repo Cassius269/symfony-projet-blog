@@ -14,7 +14,7 @@ main {
     }
 
     .sectionPresentDemand{
-        margin-bottom: 5rem;
+        margin-bottom: 4rem;
 
         // Stylisation de l'entête du message 
         ul {
@@ -84,9 +84,38 @@ main {
 
     // Stylisation de la section de gestion des permissions des nouveaux demandeurs
     .sectionGivingAccess {
-        // Stylisation du sous-titre de la section
-        h2 {
-            color: $primaryColor;
+        form {
+                // Stylisation du label principal de la div row comportant le label et l'input de type checkbox
+                 #labelAuthorisations {
+                color: $primaryColor;
+                font-size: 1.5rem;
+                    }
+            #user_authorisations{
+                display: grid;
+                grid-template-columns: 10px 1fr;
+                grid-template-rows: 1fr 1fr;
+
+                label {
+                    position: relative;
+                    top: 1rem;
+                    left: 6px;
+                    height: 23px !important;
+                }
+            }
+            
+
+            // Stylisation des deux input de soumission du formulaire de traitetement de demande
+            #inputsSubmit {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                @media screen and (min-width: 768px) {
+                 justify-content: space-between;   
+                 flex-direction: row;
+                }
+                
+            }
         }
     }
 }

@@ -78,7 +78,7 @@ class Demand
     #[ORM\Column(length: 255)]
     #[Assert\Regex(
         pattern: '#^(?:\+33|0)[67](?:[ .-]?\d{2}){4}$#',
-        message: 'Votre saisie n\'est pas correct'
+        message: 'Votre numéro de téléphone n\'est pas correct'
     )]
     private ?string $phone = null;
 

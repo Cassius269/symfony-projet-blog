@@ -2,16 +2,18 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Demand;
+use App\Form\UserType;
 use App\Form\DemandType;
 use App\Repository\DemandRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/admin', name: 'admin_')] // Préfixe des routes de l'Admin
 class AdminController extends AbstractController
@@ -74,11 +76,22 @@ class AdminController extends AbstractController
 
     #[Route(path: '/list-demands/{id}', name: 'detail_demand')]
     #[IsGranted('ROLE_ADMIN')] // Seul un utilisateur ayant le rôle "ROLE_ADMIN" à cette route
-    public function giveResponseToDemand(Demand $demand): Response
+    public function giveResponseToDemand(Demand $demand, Request $request, EntityManagerInterface $entityManager): Response
     {
         dump($demand);
+        $user = new User();
+
+        // Personnaliser l'affichage du formulaire lié à l'utilisateur
+        // $form = $this->createForm(UserType::class, $user);
+
+        // $form->handleRequest($request);
+
+        // if ($form->isSubmitted() && $form->isValid()) {
+        // Traitement du formulaire
+        // }
         return $this->render("admin/demand_detail.html.twig", [
-            'demand' => $demand
+            'demand' => $demand,
+            // 'form' => $form
         ]);
     }
 }
