@@ -1,0 +1,68 @@
+@import './../utils/mixins';
+@import './../utils/variables';
+@import './../components/buttons';
+@import './../utils/placeholders';
+
+main  {
+    // Stylisation du main
+    @extend %mainResponsive;
+
+    // Stylisation de la section de présentation des podcasts
+    #sectionPodcasts {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        @media screen and (min-width: 1024px) {
+            flex-direction: row;
+        }
+    // Stylisation du block article concernant le podcast "Oeil de la mode"
+    #articleOeilDeLaMode {
+        @include makeDesignArticlePodcast('../../../public/images/illustrations/illustration_oeil_de_la_mode.png');
+    }
+
+    // Stylisation du block article concernant le call-to-action "Participer maintenant !"
+    #slogan{
+        background: $primaryColor;
+        color:white;
+        border-radius: 10px;
+        // Gérer la disposition entre le texte du slogan et le call-to-action "Participer maintenant !"
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        @media screen and (min-width: 1024px) {
+            max-width: 400px;
+        }
+        h2 {
+            padding: 1rem 1rem 0 1rem;
+        }
+        p {
+            padding: 0px 1rem 0 1rem;
+        }
+        div {
+            background-color: black;
+            border-radius: 0px 0px 10px 10px;
+            button {
+                background-color: black;
+                color:white;
+                margin: auto;
+                display: block;
+                padding: 1rem;
+                border: none;
+            }
+        } 
+    }
+
+    // Stylisation du block article concernant le podcast "La mode parle"
+    #articleLaModeParle{
+        @include makeDesignArticlePodcast('../../../public/images/illustrations/illustration_la_mode_parle.png')
+    }
+    }
+
+    // Stylisation de la section du top podcasts de la semaine
+    #topEmissions {
+        // Stylisation des lecteurs audio
+        .sectionGlobaleLecteur {
+            @include makeDesignAudioPlayer(); 
+        }
+    }
+}

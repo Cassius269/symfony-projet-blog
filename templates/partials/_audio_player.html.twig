@@ -1,0 +1,27 @@
+<div class="sectionGlobaleLecteur">
+	<h2>L'oeil de la mode</h2>
+	<article class="ImageIllustrationEmission">
+		<h3 class="titreEmission">La mode en 2024</h2>
+	</article>
+	<div class="sectionLecteurAudio">
+		<div class="lecteurAudioWithButtons">
+			<audio src="{{ asset("/upload/podcast/hardheaded_ilovethewayyousee.mp3") }}"></audio>
+			<button id="buttonPlay">
+				<img class="iconeButton" src="{{ asset("/images/play-circle.svg") }}" alt="icône représentant le bouton play">
+			</button>
+		</div>
+		<div class="inputPlusTrackTime">
+			<p>
+				<span id="elapsed">0:00</span>
+			</p>
+			<input id="track" type="range" min="0" value="0" max="">
+			<p>
+				<span id="track-fullTime">1:00</span>
+			</p>
+		</div>
+		<div class="desktop">
+			<input type="range" id="volume" min="0" max="1" value="0.5" step="0.01">
+			<span id="volume-value">100%</span>
+		</div>
+	</div>
+</div>

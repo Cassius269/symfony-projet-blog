@@ -30,6 +30,8 @@ Encore
     .addEntry('demandToBecomeMember',['./assets/styles/pages/_demand_to_become_member.scss', './assets/js/pages/demand_to_become_member.js'])
     .addEntry('allDemandsPage',['./assets/styles/pages/_allDemandsPage.scss'] )
     .addEntry('demandDetailPage',['./assets/styles/pages/_demandDetailPage.scss'])
+    .addEntry('allPodcasts',['./assets/styles/pages/_allPodcasts.scss'])
+    .addEntry('audioPlayer',['./assets/js/pages/audioPlayer.js'])
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -64,7 +66,7 @@ Encore
 
     // enables Sass/SCSS support
     .enableSassLoader()
-    .enableStimulusBridge('./assets/controllers.json')
+    .enableStimulusBridge('./assets/controllers.json') // configuration de Stimulus
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
 
