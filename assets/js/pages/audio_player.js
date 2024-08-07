@@ -56,13 +56,13 @@ divButtons.addEventListener("click", (event)=>{
 
             event.target.setAttribute("src", "/images/media-pause.svg");
             event.target.setAttribute("alt", "icône représentant le bouton pause");
-            event.target.parentNode.style.right = "14px";
+            // event.target.parentNode.style.right = "14px";
             audio.play();// jouer la musique
         }else {
             console.log("c'est le bouton pause");
             event.target.setAttribute("src", "/images/play-circle.svg");
             event.target.setAttribute("alt", "icône représentant le bouton play");
-            event.target.parentNode.style.right = "28px";
+            // event.target.parentNode.style.right = "28px";
             audio.pause(); // mettre en pause de la musique
         }
     }

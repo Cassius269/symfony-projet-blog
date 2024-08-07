@@ -40,11 +40,26 @@
 	<section id="topEmissions">
 		<h2>Le TOP émission de  la semaine</h2>
 		<p>La semaine a été  ponctuée par des invités phares, telle que Farelll  Wall... On vous  laisse découvrir les passionnantes discussions avec nos invités</p>
+		<div
+			class="topFourEpisodes">
+			{# Affichage des lecteurs audio des podcasts #}
+			{% set link =  "/upload/podcast/hardheaded_ilovethewayyousee.mp3" %}
+			{# Stockage de l'url de l'audio dans une variable link #}
+			{% include '/partials/_audio_player.html.twig' with { url: link } %}
 
-		{# Affichage des lecteurs audio des podcasts #}
-		{% include "/partials/_audio_player.html.twig" %}
-		{% include "/partials/_audio_player.html.twig" %}
-		{% include "/partials/_audio_player.html.twig" %}
-		{% include "/partials/_audio_player.html.twig" %}
+			{% set link =  "/upload/podcast/hardheaded_ilovethewayyousee.mp3" %}
+			{# Stockage de l'url de l'audio dans une variable link #}
+			{% include '/partials/_audio_player.html.twig' with { url: link } %}
+
+			{% set link =  "/upload/podcast/hardheaded_ilovethewayyousee.mp3" %}
+			{# Stockage de l'url de l'audio dans une variable link #}
+			{% include '/partials/_audio_player.html.twig' with { url: link } %}
+
+			{% set link =  "/upload/podcast/hardheaded_ilovethewayyousee.mp3" %}
+			{# Stockage de l'url de l'audio dans une variable link #}
+			{% include '/partials/_audio_player.html.twig' with { url: link } %}
+		</div>
+
+
 	</section>
 {% endblock %}

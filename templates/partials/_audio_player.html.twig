@@ -5,17 +5,17 @@
 	</article>
 	<div class="sectionLecteurAudio">
 		<div class="lecteurAudioWithButtons">
-			<audio src="{{ asset("/upload/podcast/hardheaded_ilovethewayyousee.mp3") }}"></audio>
+			<audio src="{{ url }}"></audio>
 			<button id="buttonPlay">
 				<img class="iconeButton" src="{{ asset("/images/play-circle.svg") }}" alt="icône représentant le bouton play">
 			</button>
 		</div>
 		<div class="inputPlusTrackTime">
-			<p>
+			<p id="paragraphElapsedTime">
 				<span id="elapsed">0:00</span>
 			</p>
 			<input id="track" type="range" min="0" value="0" max="">
-			<p>
+			<p id="paragraphDurationPodcast">
 				<span id="track-fullTime">1:00</span>
 			</p>
 		</div>

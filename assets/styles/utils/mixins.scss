@@ -88,6 +88,18 @@
       
       .inputPlusTrackTime {
         display: flex;
+        @media screen and (min-width: 1024px) {
+          #paragraphElapsedTime {
+            position: relative;
+            right: 20rem;    
+          }
+          #paragraphDurationPodcast {
+            color: red;
+            position: relative;
+            right: 19rem;
+            bottom: 4px;
+          }
+        }
       }
       
       .sectionLecteurAudio {
@@ -98,7 +110,6 @@
         display: flex;
         justify-content: space-around;
         max-height: 4rem;
-
       }
       
       .ImageIllustrationEmission {
@@ -107,12 +118,20 @@
         background-repeat: no-repeat;
         height: 147px;
         margin: auto;
-        width: 296px;
+        max-width: 296px;
         display: flex;
         justify-content: center;
         align-content: flex-end;
         align-items: baseline;
         align-items: center;
+        @media screen and (min-width: 768px) {
+            max-width: 600px;
+            height: 277px;
+        }
+        @media screen and (min-width: 1024px) {
+          height: 147px;
+          max-width: 296px;
+        }
       }
       
       .titreEmission {
@@ -124,10 +143,13 @@
       
       
       .sectionGlobaleLecteur {
+        min-width: 355px;
+        margin: auto;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        background-color: grey;
       }
       
       #buttonPlay {
@@ -137,6 +159,15 @@
         position: relative;
         right: 28px;
         top: 4px;
+        @media screen and (min-width: 768px) {
+          right: 49px;
+         }
+
+         @media screen and (min-width: 1024px) {
+          right: 168px;
+           bottom: 5px;
+           top: -5px;
+         }
       }
       #track {
         // -webkit-appearance: none;/* Personnalisation de l'affichage de la barre de la piste audio pour Mozzila */
@@ -146,6 +177,9 @@
         position: relative;
         top: 10px;
         margin: 0px 5px;
+        @media screen and (min-width: 1024px){
+          right: 19rem;
+        }
       }
 
       // Masquer le bouton du volume en version mobile
@@ -153,6 +187,14 @@
         display: none;
         @media screen and (min-width: 768px) {
             display: block;
+            span {
+              position: relative;
+              bottom: 16px;
+            }
+           
         }
+        @media screen and (min-width: 768px) {
+          display: none;
+      }
       }
 }
