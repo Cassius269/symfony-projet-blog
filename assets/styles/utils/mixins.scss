@@ -71,130 +71,262 @@
 
 // Mixin pour styliser les lecteurs audio
 @mixin makeDesignAudioPlayer(){
-    p {
-    line-height: 0px;
-     white-space: normal; 
-    }
-    .lecteurAudioWithButtons button {
-        border: none;
-        background-color: white;
-      }
+  // Ca sera finalement un placeholder plutot qu'une mixin
+    // p {
+    // line-height: 0px;
+    //  white-space: normal; 
+    // }
+    // .lecteurAudioWithButtons button {
+    //     border: none;
+    //     background-color: white;
+    //   }
       
-      .iconeButton {
-        width: 4rem;
-      }
-      
-      
-      
-      .inputPlusTrackTime {
-        display: flex;
-        @media screen and (min-width: 1024px) {
-          #paragraphElapsedTime {
-            position: relative;
-            right: 20rem;    
-          }
-          #paragraphDurationPodcast {
-            color: red;
-            position: relative;
-            right: 19rem;
-            bottom: 4px;
-          }
-        }
-      }
-      
-      .sectionLecteurAudio {
-        align-items: center;
-        background: #b9acac;
-        background: #d9d9d9;
-        border-radius: 42px;
-        display: flex;
-        justify-content: space-around;
-        max-height: 4rem;
-      }
-      
-      .ImageIllustrationEmission {
-        background-image: url("https://img.freepik.com/premium-photo/girl-has-urban-lifestyle_273609-54804.jpg");
-        background-size: cover;
-        background-repeat: no-repeat;
-        height: 147px;
-        margin: auto;
-        max-width: 296px;
-        display: flex;
-        justify-content: center;
-        align-content: flex-end;
-        align-items: baseline;
-        align-items: center;
-        @media screen and (min-width: 768px) {
-            max-width: 600px;
-            height: 277px;
-        }
-        @media screen and (min-width: 1024px) {
-          height: 147px;
-          max-width: 296px;
-        }
-      }
-      
-      .titreEmission {
-        position: relative;
-        top: 2rem;
-         right: 4rem;
-        color: white;
-      }
+    //   .iconeButton {
+    //     width: 4rem;
+    //   }
       
       
-      .sectionGlobaleLecteur {
-        min-width: 355px;
-        margin: auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background-color: grey;
-      }
       
-      #buttonPlay {
-        background: transparent;
-        border-radius: 50px;
-        height: 67px;
-        position: relative;
-        right: 28px;
-        top: 4px;
-        @media screen and (min-width: 768px) {
-          right: 49px;
-         }
+    //   .inputPlusTrackTime {
+    //     display: flex;
+    //     @media screen and (min-width: 1024px) {
+    //       #paragraphElapsedTime {
+    //         position: relative;
+    //         right: 20rem;    
+    //       }
+    //       #paragraphDurationPodcast {
+    //         color: red;
+    //         position: relative;
+    //         right: 19rem;
+    //         bottom: 4px;
+    //       }
+    //     }
+    //   }
+      
+    //   .sectionLecteurAudio {
+    //     align-items: center;
+    //     background: #b9acac;
+    //     background: #d9d9d9;
+    //     border-radius: 42px;
+    //     display: flex;
+    //     justify-content: space-around;
+    //     max-height: 4rem;
+    //   }
+      
+    //   .ImageIllustrationEmission {
+    //     background-image: url("https://img.freepik.com/premium-photo/girl-has-urban-lifestyle_273609-54804.jpg");
+    //     background-size: cover;
+    //     background-repeat: no-repeat;
+    //     height: 147px;
+    //     margin: auto;
+    //     max-width: 296px;
+    //     display: flex;
+    //     justify-content: center;
+    //     align-content: flex-end;
+    //     align-items: baseline;
+    //     align-items: center;
+    //     @media screen and (min-width: 768px) {
+    //         max-width: 600px;
+    //         height: 277px;
+    //     }
+    //     @media screen and (min-width: 1024px) {
+    //       height: 147px;
+    //       max-width: 296px;
+    //     }
+    //   }
+      
+    //   .titreEmission {
+    //     position: relative;
+    //     top: 2rem;
+    //      right: 4rem;
+    //     color: white;
+    //   }
+      
+      
+    //   .sectionGlobaleLecteur {
+    //     min-width: 355px;
+    //     margin: auto;
+    //     display: flex;
+    //     flex-direction: column;
+    //     justify-content: center;
+    //     align-items: center;
+    //     background-color: grey;
+    //   }
+      
+    //   #buttonPlay {
+    //     background: transparent;
+    //     border-radius: 50px;
+    //     height: 67px;
+    //     position: relative;
+    //     right: 28px;
+    //     top: 4px;
+    //     @media screen and (min-width: 768px) {
+    //       right: 49px;
+    //      }
 
-         @media screen and (min-width: 1024px) {
-          right: 168px;
-           bottom: 5px;
-           top: -5px;
-         }
-      }
-      #track {
-        // -webkit-appearance: none;/* Personnalisation de l'affichage de la barre de la piste audio pour Mozzila */
-        background-color: #020202;
-        border-radius: 50px;
-        height: 7px;
-        position: relative;
-        top: 10px;
-        margin: 0px 5px;
-        @media screen and (min-width: 1024px){
-          right: 19rem;
-        }
-      }
+    //      @media screen and (min-width: 1024px) {
+    //       right: 168px;
+    //        bottom: 5px;
+    //        top: -5px;
+    //      }
+    //   }
+    //   #track {
+    //     // -webkit-appearance: none;/* Personnalisation de l'affichage de la barre de la piste audio pour Mozzila */
+    //     background-color: #020202;
+    //     border-radius: 50px;
+    //     height: 7px;
+    //     position: relative;
+    //     top: 10px;
+    //     margin: 0px 5px;
+    //     @media screen and (min-width: 1024px){
+    //       right: 19rem;
+    //     }
+    //   }
 
-      // Masquer le bouton du volume en version mobile
-      .desktop {
-        display: none;
-        @media screen and (min-width: 768px) {
-            display: block;
-            span {
-              position: relative;
-              bottom: 16px;
-            }
+    //   // Masquer le bouton du volume en version mobile
+    //   .desktop {
+    //     display: none;
+    //     @media screen and (min-width: 768px) {
+    //         display: block;
+    //         span {
+    //           position: relative;
+    //           bottom: 16px;
+    //         }
            
+    //     }
+    //     @media screen and (min-width: 768px) {
+    //       display: none;
+    //   }
+    //   }
+
+
+      // Début du test 
+      p {
+        line-height: 0px;
+         white-space: normal; 
         }
-        @media screen and (min-width: 768px) {
-          display: none;
-      }
-      }
+        .lecteurAudioWithButtons button {
+            border: none;
+            background-color: white;
+          }
+          
+          .iconeButton {
+            width: 4rem;
+          }
+          
+          
+          
+          .inputPlusTrackTime {
+            display: flex;
+            @media screen and (min-width: 1024px) {
+              .paragraphElapsedTime {
+                position: relative;
+                right: 20rem;    
+              }
+              .paragraphDurationPodcast {
+                color: red;
+                position: relative;
+                right: 19rem;
+                bottom: 4px;
+              }
+            }
+          }
+          
+          .sectionLecteurAudio {
+            align-items: center;
+            background: #b9acac;
+            background: #d9d9d9;
+            border-radius: 42px;
+            display: flex;
+            justify-content: space-around;
+            max-height: 4rem;
+          }
+          
+          .ImageIllustrationEmission {
+            background-image: url("https://img.freepik.com/premium-photo/girl-has-urban-lifestyle_273609-54804.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 147px;
+            margin: auto;
+            max-width: 296px;
+            display: flex;
+            justify-content: center;
+            align-content: flex-end;
+            align-items: baseline;
+            align-items: center;
+            @media screen and (min-width: 768px) {
+                max-width: 600px;
+                height: 277px;
+            }
+            @media screen and (min-width: 1024px) {
+              height: 147px;
+              max-width: 296px;
+            }
+          }
+          
+          .titreEmission {
+            position: relative;
+            top: 2rem;
+             right: 4rem;
+            color: white;
+          }
+          
+          
+          .sectionGlobaleLecteur {
+            min-width: 355px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: grey;
+          }
+          
+          .buttonPlay {
+            background: transparent !important;
+            border-radius: 50px;
+            height: 67px;
+            position: relative;
+            right: 28px;
+            top: 4px;
+            @media screen and (min-width: 768px) {
+              right: 49px;
+             }
+    
+             @media screen and (min-width: 1024px) {
+              right: 168px;
+               bottom: 5px;
+               top: -5px;
+             }
+          }
+          .track {
+            // -webkit-appearance: none;/* Personnalisation de l'affichage de la barre de la piste audio pour Mozzila */
+            background-color: #020202;
+            border-radius: 50px;
+            height: 7px;
+            position: relative;
+            top: 10px;
+            margin: 0px 5px;
+            @media screen and (min-width: 1024px){
+              right: 19rem;
+            }
+          }
+    
+          // Masquer le bouton du volume en version mobile
+          .desktop {
+            display: none;
+            @media screen and (min-width: 768px) {
+                display: block;
+                span {
+                  position: relative;
+                  bottom: 16px;
+                }
+               
+            }
+            @media screen and (min-width: 768px) {
+              display: none;
+          }
+          }
+    
+
 }

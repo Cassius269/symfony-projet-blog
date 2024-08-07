@@ -6,7 +6,11 @@
 main  {
     // Stylisation du main
     @extend %mainResponsive;
-
+    margin-top: 1.5rem !important;
+    @media screen and (min-width: 1024px) {
+        max-width: none; // Désactiver le max-width
+        margin-top: 3rem !important;
+    }
     // Stylisation de la section de présentation des podcasts
     #sectionPodcasts {
         display: flex;
@@ -60,17 +64,51 @@ main  {
     }
 
     // Stylisation de la section du top podcasts de la semaine
-    #topEmissions {
+    // #sectionTopEmissions {
+    //     margin-top: 3rem;
+    //     @media screen and (min-width: 768px) {
+    //         margin-top: 3rem;
+    //     }
+    //     .topFourEpisodes {
+    //         // Mise en page des lecteurs sur les écrans de plus de 1024pixels
+    //         @media screen and (min-width: 1024px) {
+    //             display: grid;
+    //             gap: 9rem;
+    //             grid-template-columns: 400px 400px;
+    //         }
+
+    //     // Stylisation des lecteurs audio
+    //     .sectionGlobaleLecteur {
+    //         @include makeDesignAudioPlayer(); 
+    //     }
+    //     }
+    // }
+
+    // Début du test 
+    #sectionTopEmissions {
         margin-top: 3rem;
         @media screen and (min-width: 768px) {
             margin-top: 3rem;
         }
-        .topFourEpisodes {
+        #articleTopEmission {
+            background-color: #fa6c30;
+            color:$fifthColor;
+            padding: 1rem;
+            border: 1px solid black;
+            border-left: none;
+            border-right: none;
+        }
+
+        .divTopFourEpisodes {
             // Mise en page des lecteurs sur les écrans de plus de 1024pixels
             @media screen and (min-width: 1024px) {
                 display: grid;
                 gap: 9rem;
                 grid-template-columns: 400px 400px;
+                // Centrer le block des lecteurs
+                margin: auto;
+                width: 1000px;
+                margin-top: 1rem;
             }
 
         // Stylisation des lecteurs audio

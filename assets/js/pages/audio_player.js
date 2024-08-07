@@ -1,28 +1,9 @@
-window.addEventListener("load",()=>{
-    console.log("hello");
-    // On recupère tous les élements nécessaires
-let audio = document.querySelector("audio");
-let track = document.querySelector("#track");
-let elapsed = document.querySelector("#elapsed");
-let trackFullTime = document.querySelector("#track-fullTime");
-let buttonPlay = document.querySelector("#buttonPlay");
-let divButtons = document.querySelector(".lecteurAudioWithButtons")
-//let buttonPause = document.querySelector("#buttonPause");
-//let buttonStop = document.querySelector("#buttonStop");
-let volume = document.querySelector("#volume");
-let volumeValue = document.querySelector("#volume-value");
-let iconeButtonPlay = document.querySelector(".iconeButton");
+window.addEventListener("load",()=> {
+    let main = document.querySelector("main");
+    console.log(main);
 
-// on récupère la durée du MP3
-let audioDuration = audio.duration;
-
-console.log(`durée de la piste musicale : ${audioDuration} secondes`);
-
-// on met le max du range de la track à la taille de la durée de l'audio
-track.max = audioDuration;
-
-// Créer une fonction qui récupère les minutes et les secondes de la piste de musique
-function buildDuration(duree){
+    // Créer une fonction qui récupère les minutes et les secondes de la piste de musique
+    function buildDuration(duree){
     // Recupérer les minutes
     minutes = duree/60;
     secondes = 0; // Déclarer par défaut les secondes à 0
@@ -36,66 +17,73 @@ function buildDuration(duree){
         minutes = Math.trunc(minutes);
     }
 
-    return `${minutes}:${secondes<10 ? "0"+secondes : secondes}`
-}
-
-buildDuration(audioDuration);
+    return `${minutes}:${secondes<10 ? "0"+secondes : secondes}`; 
+    }
 
 
-trackFullTime.textContent = buildDuration(audioDuration);
-
-
-// Gerer les boutons 
-
-divButtons.addEventListener("click", (event)=>{
-    if(event.target.nodeName == "IMG"){
-        if(event.target.getAttribute("src") === "/images/play-circle.svg"){
-            console.log(audio)
-
-            console.log("c'est le bounton play");
-
-            event.target.setAttribute("src", "/images/media-pause.svg");
-            event.target.setAttribute("alt", "icône représentant le bouton pause");
-            // event.target.parentNode.style.right = "14px";
-            audio.play();// jouer la musique
-        }else {
-            console.log("c'est le bouton pause");
-            event.target.setAttribute("src", "/images/play-circle.svg");
-            event.target.setAttribute("alt", "icône représentant le bouton play");
-            // event.target.parentNode.style.right = "28px";
-            audio.pause(); // mettre en pause de la musique
+    // Fonction pour mettre en pause toutes les pistes d'abord avant de lancer/reprendre une piste audio
+    function setPauseAllEpisodes() {
+        let episodes = document.querySelectorAll("audio");
+        episodes.forEach((element) => {
+            element.pause();
+            element.nextElementSibling.firstElementChild.src = "/images/play-circle.svg";     
+        })
+        console.log(episodes);
+    }
+    // Mise en place de la délégation évenementielle
+    main.addEventListener("click", (event)=> {
+        if(event.target.nodeName == "IMG"){
+            if(event.target.getAttribute("src") === "/images/play-circle.svg"){  
+                setPauseAllEpisodes();
+                console.log("button play");
+                console.log(event.target.parentNode.previousElementSibling);// Affichage de la balise audio de l'icone play appuyé
+                event.target.src = "/images/media-pause.svg";
+                event.target.parentNode.previousElementSibling.play();// Cibler la balise audio et faire play()
+        }else if (event.target.getAttribute("src") === "/images/media-pause.svg"){ 
+                 event.target.parentNode.previousElementSibling.pause(); // mettre en pause le podcast en ciblant la balise audio avec la méthode pause()
+                 event.target.src = "/images/play-circle.svg";            
+                 console.log("bouton pause");
+        }
         }
     }
-})
+     )
 
-// Mettre un écouteur d'évenement sur les changements de valeur de la track piste de l'audio au clic sur l'input
-track.addEventListener("change",(event)=>{
+    // Délégation évenementielle sur le main pour modifier en temps réél la durée courante de la piste audio au clic de l'input range contenant la piste audio
 
-    // Exprimer la durée écoulée en minutes et secondes
-    elapsedTime = event.target.value;
-    audio.currentTime = elapsedTime; // modifier en temps réelle la valeur du temps actuelle de l'audio avec l'indicateur du temps passé
+    main.addEventListener("change", (event)=> {
+        console.log(event.target);
+        if(event.target.classList.contains("track")){// Si c'est un input ayant la class "track" (piste de progression de l'épisode)
 
-    elapsed.textContent = buildDuration(elapsedTime) // utiliser la fonction personnalisée de transformée des secondes en minutes et seconde
-console.log("elapsed time",elapsedTime);
-console.log(event);
+        // Exprimer la durée écoulée en minutes et secondes
+        elapsedTime = event.target.value; 
+        inputTrack = event.target.parentNode.nextElementSibling.firstElementChild;
+        spanElapsedTime = event.target.previousElementSibling.firstElementChild;
+        console.log("span elapsed time",elapsedTime);
+        console.log(spanElapsedTime);
+        event.target.parentNode.previousElementSibling.firstElementChild.currentTime = elapsedTime; // modifier en temps réelle la valeur du temps actuelle de l'audio avec l'indicateur du temps passé
 
-})
+        spanElapsedTime.textContent = buildDuration(elapsedTime) // utiliser la fonction personnalisée de transformer des secondes en minutes et seconde
+        console.log("elapsed time",elapsedTime);
+        console.log(event);
+        }
 
-// Visualiser le parcours de la piste audio
-audio.addEventListener("timeupdate",()=>{
-    track.value = audio.currentTime;
-    elapsed.textContent = buildDuration(audio.currentTime) // utiliser la fonction personnalisée de transformée des secondes en minutes et seconde
+    })
 
-    if(audio.currentTime.toFixed(2) === audioDuration.toFixed(2)){// dans le cas où la piste est finie, remettre le bouton play
-    iconeButtonPlay.setAttribute("src", "/images/play-circle.svg");
-    iconeButtonPlay.setAttribute("alt", "icône représentant le bouton play");
-}
- })
-
- // Evenement pour changer le volume
- volume.addEventListener("input", ()=>{
-    audio.volume = volume.value;
-
-    volumeValue.textContent =Math.round(volume.value*100)+"%";
- })
- })
+    // Boucle de toutes les pistes audio et ecoute de l'évenement "timeupdate" pour mettre à jour le passé
+    let audios = document.querySelectorAll("audio");
+    audios.forEach((element) => {
+        console.log(element)
+        element.addEventListener("timeupdate", () => {
+            let track = element.parentNode.nextElementSibling.firstElementChild.nextElementSibling;
+            let spanElapsedTime = element.parentNode.nextElementSibling.firstElementChild.firstElementChild;
+           
+            track.value = element.currentTime; // modifier la valeur de l'input track pour qu'il correspond à la durée en cours
+            spanElapsedTime.textContent = buildDuration(element.currentTime) // utiliser la fonction personnalisée de transformée des secondes en minutes et seconde pour l'affichage du temps écoulé
+            if(element.currentTime.toFixed(2) === element.duration.toFixed(2)){// dans le cas où la piste est finie, remettre le bouton play
+            iconeButtonPlay.setAttribute("src", "assets/images/play-circle.svg");
+            iconeButtonPlay.setAttribute("alt", "icône représentant le bouton play");
+            }
+        })
+           
+        }
+)})
