@@ -25,26 +25,4 @@ final class Authorisation extends AbstractController
         // Création du formulaire dynamique pour ajout des champs dynamique dans la page de traitement de la demande
         return $this->createForm(UserType::class, $user);
     }
-
-
-    // Methode test pour traiter la requête du formulaire
-    #[LiveAction]
-    public function save(Request $request, EntityManagerInterface $entityManager)
-    {
-        $this->form->handleRequest($request);
-        if ($this->form->isSubmitted() && $this->form->isValid()) {
-            dd("hello");
-
-            $user = $this->form->getData();
-
-            // Persist the user
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            $this->addFlash('success', 'La demande a été traitée');
-            return $this->redirectToRoute('home');
-        }
-
-        return $this->redirectToRoute('admin_detail_demand');
-    }
 }
