@@ -7,6 +7,7 @@ use App\Entity\Demand;
 use App\Form\UserType;
 use App\Form\DemandType;
 use App\Repository\DemandRepository;
+use App\Services\AwsManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -74,23 +75,18 @@ class AdminController extends AbstractController
         ]);
     }
 
+    // Action pour étudier une demande de devenir collaborateur en particulier
     #[Route(path: '/list-demands/{id}', name: 'detail_demand')]
     #[IsGranted('ROLE_ADMIN')] // Seul un utilisateur ayant le rôle "ROLE_ADMIN" à cette route
-    public function giveResponseToDemand(Demand $demand, Request $request, EntityManagerInterface $entityManager): Response
+    public function giveResponseToDemand(Demand $demand, Request $request, EntityManagerInterface $entityManager, AwsManager $awsStorage): Response
     {
         dump($demand);
         $user = new User();
 
-        // Personnaliser l'affichage du formulaire lié à l'utilisateur
-        // $form = $this->createForm(UserType::class, $user);
-
-        // $form->handleRequest($request);
-
-        // if ($form->isSubmitted() && $form->isValid()) {
-        // Traitement du formulaire
-        // }
+        $cvFile = $awsStorage->readCVFiles($demand);
         return $this->render("admin/demand_detail.html.twig", [
             'demand' => $demand,
+            'cvFile' => $cvFile,
             // 'form' => $form
         ]);
     }

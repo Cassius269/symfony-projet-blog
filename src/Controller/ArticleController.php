@@ -5,14 +5,14 @@ namespace App\Controller;
 use DateTimeImmutable;
 use App\Entity\Article;
 use App\Form\ArticleType;
+use App\Services\AwsManager;
 use Doctrine\ORM\EntityManagerInterface;
+use League\Flysystem\FilesystemOperator;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\HtmlSanitizer\HtmlSanitizerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -31,13 +31,14 @@ class ArticleController extends AbstractController
         path: '/{id}',
         name: 'showDetailedArticle'
     )]
-    public function showDetailledArticle(Article $article, EntityManagerInterface $entityManager): Response
+    public function showDetailledArticle(Article $article, EntityManagerInterface $entityManager, AwsManager $awsManager): Response
     {
         // dd($article);
         if (!$article) { // Si il n'y pas d'article trouvé, envoyer un message d'exception
             throw $this->createNotFoundException('Article introuvable');
-        } else { // Dans le cas où l'article existe, chercher son image d'illustration
+        } else { // Dans le cas où l'article existe, chercher son image d'illustration depuis le service S3 d'Amazon AWS
             $mainImageIllustration = $article->getMainImageIllustration();
+            $file = $awsManager->readFile($article);
         }
 
         // Mettre à jour le compteur du nombre de vue d'un article
@@ -47,7 +48,8 @@ class ArticleController extends AbstractController
 
         return $this->render('articles/article_detail.html.twig', [
             'article' => $article,
-            'mainImageIllustration' => $mainImageIllustration
+            'mainImageIllustration' => $mainImageIllustration,
+            'file' => $file
         ]);
     }
 

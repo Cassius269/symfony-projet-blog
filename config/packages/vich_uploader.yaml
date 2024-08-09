@@ -1,12 +1,24 @@
 vich_uploader:
   db_driver: orm
+  storage: flysystem # utilser la couche d’abstraction Flysystem pour gérer le stockage
 
   mappings:
+    # Intégration d'AWS S3 pour les stocker chez Amazon AWS S3
     articleIllustration:
       uri_prefix: "%app.path.article_illustrations%" # chemin d'accès de la ressource depuis l'application web
-      upload_destination: "%kernel.project_dir%/public/%app.path.article_illustrations%" # dossier de destination des images d'illustrations principales
+      upload_destination: aws.storage # Envoyer les images d'illustrations à Amazon AWS S3
       namer: Vich\UploaderBundle\Naming\SmartUniqueNamer # stratégie de nommage des fichiers
     cv:
       uri_prefix: "%app.path.cv%" # chemin d'accès de la ressource depuis l'application web
-      upload_destination: "%kernel.project_dir%/public/%app.path.cv%" # dossier de destination des CV soumis
+      upload_destination: aws.storage # Envoyer les CV au service S3 d'Amazon
       namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+
+    # Utilisation de Vich Uploader uniquement
+    # articleIllustration:
+    #   uri_prefix: "%app.path.article_illustrations%" # chemin d'accès de la ressource depuis l'application web
+    #   upload_destination: "%kernel.project_dir%/public/%app.path.article_illustrations%" # dossier de destination des images d'illustrations principales
+    #   namer: Vich\UploaderBundle\Naming\SmartUniqueNamer # stratégie de nommage des fichiers
+    # cv:
+    #   uri_prefix: "%app.path.cv%" # chemin d'accès de la ressource depuis l'application web
+    #   upload_destination: "%kernel.project_dir%/public/%app.path.cv%" # dossier de destination des CV soumis
+    #   namer: Vich\UploaderBundle\Naming\SmartUniqueNamer

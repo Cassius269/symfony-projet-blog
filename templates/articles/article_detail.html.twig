@@ -8,14 +8,10 @@
 	{{ encore_entry_link_tags('articlePageDetail') }}
 {% endblock %}
 {% block body %}
-	<pre>
-	
-</pre>
-	{{ dump(article) }}
 	<section id="sectionArticleDetail">
 		<h1>{{ article.title }}</h1>
 		<figure>
-			<img src="{{ vich_uploader_asset(mainImageIllustration, 'imageFile') }}" alt="image d'illustration de l'article" class="imageIllustration">
+			<img src="{{ file }}" alt="image d'illustration de l'article" class="imageIllustration">
 			<figcaption>Photographe:
 				{{ mainImageIllustration.photographer.fullname ?? mainImageIllustration.photographer.pseudonyme}}
 			</figcaption>
