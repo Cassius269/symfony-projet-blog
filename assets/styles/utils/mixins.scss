@@ -201,3 +201,21 @@
     
 
 }
+
+// Styliser le mot mode
+@mixin stylishWithBackgroundColor($color) {
+  background-color: $color;
+  color: black;
+  padding: 2px 4px 4px 7px;
+  border-radius: 9px;
+}
+
+// Stylisation des messages intermédiaires dans la page de tous les podcasts et détail de pocast
+@mixin intermediaryMessage($color) {
+  background-color: $color;
+  border: 1px solid #000;
+  border-left: none;
+  border-right: none;
+  color: #fff;
+  padding: 1rem;
+}

@@ -93,6 +93,9 @@ main  {
         // Stylisation des lecteurs audio
         .sectionGlobaleLecteur {
             @include makeDesignAudioPlayer(); 
+            span {
+                @include stylishWithBackgroundColor(#FFE81A)
+            }
         }
         }
     }

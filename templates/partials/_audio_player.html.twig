@@ -1,5 +1,7 @@
 <div class="sectionGlobaleLecteur">
-	<h2>{{ podcast }}</h2>
+	<h2>{{ podcast | replace ({"mode": ""}) }}
+		<span>mode</span>
+	</h2>
 	<article class="ImageIllustrationEmission">
 		<h3 class="titreEmission">{{ title }}</h2>
 	</article>

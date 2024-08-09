@@ -13,24 +13,30 @@
 {% block body %}
 	<section id="sectionPresentionPodcast">
 		<h1>
-			Les podcast
+			{{ podcast.name }}
 		</h1>
 		<p>Nos podcasts ont pour mission de décortiquer le monde de la mode et ses contours</p>
 
 
 		<div id="divCallToAction">
 			<article>
-				<h2>L'oeil de la mode</h2>
+				<h2>L'oeil de
+					<span>la mode</span>
+				</h2>
 				<p>Notre mission : aiguiser votre regard sur la mode, et les tendances</p>
-				<button>Découvrez notre dernier podcast</button>
+				<a href="" title="lien vers la page du dernier podcast">
+					<button>Découvrez notre dernier podcast</button>
+				</a>
 			</article>
 		</div>
 
 	</section>
 
 	<section id="sectionSlogan">
-		<p>Plongez dans les Émissions, les Oreilles en Premier Découvrez le Meilleur de la Radio numérique en un Clic
+		<img src="{{ asset('/images/icone_stylisation_message1.svg') }}" alt="icone représentant des enpattements jaunes">
+		<p id="contentMessage">Plongez dans les Émissions, les Oreilles en Premier Découvrez le Meilleur de la Radio numérique en un Clic
 		</p>
+		<img src="{{ asset('/images/icone_stylisation_message2.svg') }}" alt="icone représentant des enpattements jaunes">
 	</section>
 
 	<section>
@@ -40,6 +46,11 @@
 			{% set link =  "/upload/podcast/hardheaded_ilovethewayyousee.mp3" %}
 			{% include '/partials/_audio_player.html.twig' with { url: link, podcast: "L'oeil de la mode", title: "La mode en 2024" } %}
 			{% include '/partials/_audio_player.html.twig' with { url: link, podcast: "L'oeil de la mode", title: "La mode en 2024" } %}
+			{% include '/partials/_audio_player.html.twig' with { url: link, podcast: "L'oeil de la mode", title: "La mode en 2024" } %}
+			{% include '/partials/_audio_player.html.twig' with { url: link, podcast: "L'oeil de la mode", title: "La mode en 2024" } %}
 		</div>
 	</section>
+
+	{# Inclusion du partial de la liste de numérotation des pages #}
+	{% include "partials/_list_numerotation_page.html.twig" %}
 {% endblock %}

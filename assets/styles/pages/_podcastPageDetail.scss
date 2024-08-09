@@ -49,10 +49,16 @@ main {
                     @media screen and (min-width: 1024px){
                         font-size: 30px;
                     }
+                    span { // Stylisation du mot "mode"
+                      @include stylishWithBackgroundColor(#FFE81A)
+                    }
                 }
                 p {
                     width: 198px;
                     line-height: normal;
+                    @media screen and (min-width: 1024px){
+                        width: 470px;
+                    }
                 }
                 button {
                     position: relative;
@@ -87,7 +93,39 @@ main {
 
     // Stylisation des lecteurs audio
     .sectionGlobaleLecteur {
+        margin-top: 2rem;
         @include makeDesignAudioPlayer(); 
+        span {
+            @include stylishWithBackgroundColor(#FFE81A)
+        }
     }
     }
+
+    // Stylisation de la section du message intermediaire
+    #sectionSlogan {
+        display: flex;
+        justify-content: space-around;
+        @include intermediaryMessage(black);
+        margin-top: 2rem;
+        @media screen and (min-width: 1024px) {
+            margin-top: 4rem;
+        }
+
+        #contentMessage {
+            text-align: center;
+            position: relative;
+            font-size: 13px;
+            top: 2rem;
+            @media screen and (min-width: 768px) {
+                top: 2rem;
+                font-size: 20px;
+            }
+        }
+    }
+
+    //Stylisation de la liste de numérotation des pages
+ul {
+    margin-top: 7rem;
+    @extend %numerotationPage;
+}
 }
