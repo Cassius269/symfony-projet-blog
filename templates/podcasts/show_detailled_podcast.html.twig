@@ -17,11 +17,15 @@
 		</h1>
 		<p>Nos podcasts ont pour mission de décortiquer le monde de la mode et ses contours</p>
 
-		<article>
-			<h2>L'oeil de la mode</h2>
-			<p>Notre mission : aiguiser votre regard sur la mode, et les tendances</p>
-			<button>Découvrez notre dernier podcast</button>
-		</article>
+
+		<div id="divCallToAction">
+			<article>
+				<h2>L'oeil de la mode</h2>
+				<p>Notre mission : aiguiser votre regard sur la mode, et les tendances</p>
+				<button>Découvrez notre dernier podcast</button>
+			</article>
+		</div>
+
 	</section>
 
 	<section id="sectionSlogan">
@@ -34,8 +38,8 @@
 			class="divTopFourEpisodes">
 			{# Affichage des lecteurs audio des podcasts #}
 			{% set link =  "/upload/podcast/hardheaded_ilovethewayyousee.mp3" %}
-			{% include '/partials/_audio_player.html.twig' with { url: link } %}
-			{% include '/partials/_audio_player.html.twig' with { url: link } %}
+			{% include '/partials/_audio_player.html.twig' with { url: link, podcast: "L'oeil de la mode", title: "La mode en 2024" } %}
+			{% include '/partials/_audio_player.html.twig' with { url: link, podcast: "L'oeil de la mode", title: "La mode en 2024" } %}
 		</div>
 	</section>
 {% endblock %}
