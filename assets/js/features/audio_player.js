@@ -31,6 +31,19 @@ export function playEpisode(){
             })
             console.log(episodes);
         }
+
+     // Créer une fonction qui affiche toute la durée des pistes audio des épisodes           
+        function displayAllEpisodeFullTime(){
+            let audios = document.querySelectorAll("audio");
+            audios.forEach((element) => {
+                let spanFullTime = element.parentNode.nextElementSibling.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild; // naviguer jusqu'à la balise <span> contenant la durée total
+                console.log("span full time",spanFullTime )
+                spanFullTime.textContent = buildDuration(element.duration) // utiliser la fonction personnalisée de transformée des secondes en minutes et seconde pour l'affichage de la durée de la piste audio
+            })
+
+        }   
+        displayAllEpisodeFullTime();
+
         // Mise en place de la délégation évenementielle
         main.addEventListener("click", (event)=> {
             if(event.target.nodeName == "IMG"){
@@ -77,7 +90,7 @@ export function playEpisode(){
             element.addEventListener("timeupdate", () => {
                 let track = element.parentNode.nextElementSibling.firstElementChild.nextElementSibling;
                 let spanElapsedTime = element.parentNode.nextElementSibling.firstElementChild.firstElementChild;
-               
+
                 track.value = element.currentTime; // modifier la valeur de l'input track pour qu'il correspond à la durée en cours
                 spanElapsedTime.textContent = buildDuration(element.currentTime) // utiliser la fonction personnalisée de transformée des secondes en minutes et seconde pour l'affichage du temps écoulé
                 if(element.currentTime.toFixed(2) === element.duration.toFixed(2)){// dans le cas où la piste est finie, remettre le bouton play
@@ -85,7 +98,8 @@ export function playEpisode(){
                 iconeButtonPlay.setAttribute("alt", "icône représentant le bouton play");
                 }
             })
-               
             }
+
+
     )})
 }

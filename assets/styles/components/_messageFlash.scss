@@ -1,20 +1,4 @@
-// .flash-error {
-//     background: #ff4b2b;
-//     padding: 1rem;
-//     color: white;
-//     position: relative;
-//     top: 1rem;
-// }
-
-// .flash-success {
-//     background: #5fecac;
-//     padding: 1rem;
-//     color: white;
-//     position: relative;
-//     top: 1rem;
-// }
-
-%commonCSS {
+%commonCSS { // Le SCSS commun aux messages de succès et d'erreurs
     padding: 1rem;
     color: white;
     position: relative;
@@ -30,6 +14,6 @@ ul:has(.flash-error ){
 
 
 ul:has(.flash-success){
-    background: #5fecac;
+    background: #eaa032;
     @extend %commonCSS;
 }

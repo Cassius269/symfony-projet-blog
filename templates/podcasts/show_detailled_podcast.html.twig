@@ -1,0 +1,41 @@
+{% extends "base.html.twig" %}
+{% block title %}Le podcast
+	{{ podcast.name}}
+{% endblock %}
+{% block stylesheets %}
+	{{ parent() }}
+	{{ encore_entry_link_tags('podcastPageDetail') }}
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('allPodcasts') }}
+{% endblock %}
+{% block body %}
+	<section id="sectionPresentionPodcast">
+		<h1>
+			Les podcast
+		</h1>
+		<p>Nos podcasts ont pour mission de décortiquer le monde de la mode et ses contours</p>
+
+		<article>
+			<h2>L'oeil de la mode</h2>
+			<p>Notre mission : aiguiser votre regard sur la mode, et les tendances</p>
+			<button>Découvrez notre dernier podcast</button>
+		</article>
+	</section>
+
+	<section id="sectionSlogan">
+		<p>Plongez dans les Émissions, les Oreilles en Premier Découvrez le Meilleur de la Radio numérique en un Clic
+		</p>
+	</section>
+
+	<section>
+		<div
+			class="divTopFourEpisodes">
+			{# Affichage des lecteurs audio des podcasts #}
+			{% set link =  "/upload/podcast/hardheaded_ilovethewayyousee.mp3" %}
+			{% include '/partials/_audio_player.html.twig' with { url: link } %}
+			{% include '/partials/_audio_player.html.twig' with { url: link } %}
+		</div>
+	</section>
+{% endblock %}

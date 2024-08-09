@@ -31,6 +31,7 @@ Encore
     .addEntry('allDemandsPage',['./assets/styles/pages/_allDemandsPage.scss'] )
     .addEntry('demandDetailPage',['./assets/styles/pages/_demandDetailPage.scss'])
     .addEntry('allPodcasts',['./assets/styles/pages/_allPodcasts.scss','./assets/js/pages/all_podcasts.js'])
+    .addEntry('podcastPageDetail',['./assets/styles/pages/_podcastPageDetail.scss'])
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

@@ -64,27 +64,6 @@ main  {
     }
 
     // Stylisation de la section du top podcasts de la semaine
-    // #sectionTopEmissions {
-    //     margin-top: 3rem;
-    //     @media screen and (min-width: 768px) {
-    //         margin-top: 3rem;
-    //     }
-    //     .topFourEpisodes {
-    //         // Mise en page des lecteurs sur les écrans de plus de 1024pixels
-    //         @media screen and (min-width: 1024px) {
-    //             display: grid;
-    //             gap: 9rem;
-    //             grid-template-columns: 400px 400px;
-    //         }
-
-    //     // Stylisation des lecteurs audio
-    //     .sectionGlobaleLecteur {
-    //         @include makeDesignAudioPlayer(); 
-    //     }
-    //     }
-    // }
-
-    // Début du test 
     #sectionTopEmissions {
         margin-top: 3rem;
         @media screen and (min-width: 768px) {
