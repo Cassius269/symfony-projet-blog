@@ -1,0 +1,13 @@
+<script>
+	let listeNotifications = document.querySelector("#listNotifications");
+const eventSource = new EventSource("{{ mercure('notifications')|escape('js') }}");
+eventSource.onmessage = event => { // Will be called every time an update is published by the server
+notif = JSON.parse(event.data)
+console.log(notif);
+// Accéder directement au message dans la propriété 'status'
+if (notif.status) {
+listeNotifications.insertAdjacentHTML("afterbegin", "<li>" + notif.status + "</li>");
+} else { // paragraphe.textContent = "Status non disponible";
+}
+}
+</script>

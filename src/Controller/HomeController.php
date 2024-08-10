@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use Symfony\Component\Mercure\Update;
+use App\Services\Notificator;
 use Symfony\Component\Mercure\HubInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -18,13 +18,11 @@ class HomeController extends AbstractController
 
     // Test de mercure
     #[Route('/publish', name: 'publish')]
-    public function publish(HubInterface $hub): Response
+    public function publish(HubInterface $hub, Notificator $notif): Response
     {
-        $update = new Update(
-            'notifications',
-            json_encode(['status' => 'message envoyé'])
-        );
-        $hub->publish($update);
+        $user = $this->getUser();
+        $notif->send('Un mail a été envoyé par John Dow', 'email', $user);
+
         return new Response('Notification envoyée!');
     }
 }

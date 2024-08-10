@@ -25,19 +25,6 @@
 		</main>
 		{% include "partials/_footer.html.twig" %}
 	</body>
-	<script>
-		let listeNotifications = document.querySelector("#listNotifications");
-const eventSource = new EventSource("{{ mercure('notifications')|escape('js') }}");
-eventSource.onmessage = event => { // Will be called every time an update is published by the server
-notif = JSON.parse(event.data)
-console.log(notif);
-// Accéder directement au message dans la propriété 'status'
-if (notif.status) {
-listeNotifications.insertAdjacentHTML("afterbegin", "<li>" + notif.status + "</li>");
-paragraphe.textContent += notif.status;
-} else {
-paragraphe.textContent = "Status non disponible";
-}
-}
-	</script>
+	{# inclusion du script de gestion des notifications de l'Admin #}
+	{% include "/partials/_script_notifications.html.twig" %}
 </html>
