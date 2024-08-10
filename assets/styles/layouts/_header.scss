@@ -104,7 +104,7 @@
         display: flex;
         justify-content: space-around;
        // display: block;// Cacher le headerDesktoppendant le développement du header mobile
-        .headerNavListLinks {
+        .headerDivListLinksPlusNotififications {
             display: flex;
             justify-content: space-between;
             width: 600px;
@@ -138,6 +138,12 @@
             background: #EC751E;
             padding: 0.5rem 1rem;
             color: white;
+        }
+
+        ul {
+            display: flex;
+            justify-content: space-around;
+            width: 562px;
         }
     }
     

@@ -1,0 +1,54 @@
+
+// Stylisation des notifications reçues par l'Admin
+
+#iconeRingNotifications {
+        display: flex;
+        flex-direction: column;
+   @media screen and (min-width: 1024px) {
+        position: relative;
+        left: 4rem;
+   }
+
+   @media screen and (min-width: 1440px) {
+    left: 10rem;
+   }
+    #divNotificationPlusNumber {
+        position: relative;
+        top: 1rem;
+        margin: auto;
+
+        #iconeNotif {
+            height: 30px;
+            width: 30px;
+            margin: auto;
+        }
+
+        #numberOfNotifcations {
+            height: 20px;
+            width: 20px;
+            position: relative;
+            bottom: 4rem;
+            left: 2rem;
+            font-size: 20px;
+            background-color: aqua;
+            text-align: center;
+            border-radius: 50%;
+        }
+    }
+    #listNotifications {
+        width: 300px;
+        min-height: 100px;
+        padding: 1rem;
+        background-color: #EEC196;
+        position: absolute;
+        margin: 3rem 0 0 -18rem; // Le margin a l'avantage de ne pas changer la position de l'élément en fonction de la taille de l'écran
+        list-style-type: none;
+        display: flex;
+        flex-direction: column;
+        z-index: 1;// mettre les notifications au dessus de tout sur le plan visuel
+    } 
+    .clickAndShow {
+        display: none !important;
+    }
+}
+

@@ -60,45 +60,51 @@
 </nav></header><!-- Header sur écran desktop  --><header class="header headerDesktop">
 <div class="divHeaderDesktop">
 	<a href="{{ path('home') }}" title="lien vers la page d'accueil de l'application"><img src=" {{ asset('images/logo.svg')}} " alt=" icône représentant le logo du site" class="icone"></a>
-	<ul class="headerNavListLinks">
-		<li>
-			<a href="{{path('articles_showAll')}}" title="lien vers la page des articles">
-				Articles
-			</a>
-		</li>
-		<li>
-			<a href="{{ path('podcasts_show_all') }}" title="lien vers la page de présentation de tous les podcasts">
-				Podcasts
-			</a>
-		</li>
-		{% if app.user %}
+	<div class="headerDivListLinksPlusNotififications">
+		<ul>
 			<li>
+				<a href="{{path('articles_showAll')}}" title="lien vers la page des articles">
+					Articles
+				</a>
+			</li>
+			<li>
+				<a href="{{ path('podcasts_show_all') }}" title="lien vers la page de présentation de tous les podcasts">
+					Podcasts
+				</a>
+			</li>
+			{% if app.user %}
+				<li>
 
-				<a href="{{ path('dashboard') }}" title="lien vers la page dashboard" class="linkDashboardDesktop">
-					Dashboard
-				</a>
-			</li>
-			<li>
-				<a href="{{ path('logout')}}" title="lien vers la page devenir contributeur" class="linkLogoutDesktop">
-					Déconnexion
-				</a>
-			</li>
+					<a href="{{ path('dashboard') }}" title="lien vers la page dashboard" class="linkDashboardDesktop">
+						Dashboard
+					</a>
+				</li>
+				<li>
+					<a href="{{ path('logout')}}" title="lien vers la page devenir contributeur" class="linkLogoutDesktop">
+						Déconnexion
+					</a>
+				</li>
 
-		{% else %}
-			<li>
-				<a href="{{ path('admin_get_demand_members') }}" title="Lien vers la page devenir contributeur">
-					Devenir contributeur
-				</a>
-			</li>
-			<li>
-				<a href="#" title="" class="active">
-					Nous contacter
-				</a>
-			</li>
-		{% endif %}
-	</li>
-</ul>
+			{% else %}
+				<li>
+					<a href="{{ path('admin_get_demand_members') }}" title="Lien vers la page devenir contributeur">
+						Devenir contributeur
+					</a>
+				</li>
+				<li>
+					<a href="#" title="" class="active">
+						Nous contacter
+					</a>
+				</li>
+			{% endif %}
+		</li>
+	</ul>
+	{% include "/partials/_notifications.html.twig" %}
+</div>
+
 <a href="{{ path('login')}}" title="lien vers la page de connexion"><img src="{{asset('images/iconeProfile.svg')}}" alt="icône représentant le profile utilisateur" class="imageProfile"></a></div></header>{# Affichage des messages flash #}<ul class="listMessage">{% for typeOfMessage,message in app.flashes(["success","error"]) %}
 {% for flashMessage in message %}
 	<li class="flash-{{typeOfMessage}}">{{flashMessage}}</li>
-{% endfor %}{% endfor %}</ul>
+{% endfor %}{% endfor %}</ul>{#
+						    position: relative;
+						    right: 25rem;#}

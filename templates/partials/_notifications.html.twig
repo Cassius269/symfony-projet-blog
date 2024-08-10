@@ -1,0 +1,11 @@
+{# Partial contenant le bout de code HTML des notifications #}
+
+{# Seul l'Admin est autorisé à recevoir des notifications #}
+	{% if is_granted("ROLE_ADMIN") %}
+		<div id="iconeRingNotifications"> <div id="divNotificationPlusNumber">
+			<img id="iconeNotif" src="{{ asset('images/iconeBell.svg')}}" alt="icône représent une cloche pour les notifications">
+			<p id="numberOfNotifcations">0</p>
+		</div>
+		<ul id="listNotifications" class="clickAndShow"></ul>
+	</div>
+{% endif %}
