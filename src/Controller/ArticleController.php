@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use DateTimeImmutable;
 use App\Entity\Article;
+use App\Entity\Notification;
 use App\Form\ArticleType;
 use App\Services\AwsManager;
+use App\Services\Notificator;
 use Doctrine\ORM\EntityManagerInterface;
 use League\Flysystem\FilesystemOperator;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -58,7 +60,7 @@ class ArticleController extends AbstractController
         name: 'createNewArticle'
     )]
     #[IsGranted("ROLE_AUTHOR")]
-    public function createArticle(Request $request, Security $security, EntityManagerInterface $entityManager, HtmlSanitizerInterface $htmlSanitizer): Response
+    public function createArticle(Request $request, Security $security, EntityManagerInterface $entityManager, HtmlSanitizerInterface $htmlSanitizer, Notificator $notif): Response
     {
         /** @var User $user */
         $user = $security->getUser();
@@ -91,9 +93,27 @@ class ArticleController extends AbstractController
 
                 // Enregistrer en base de donnée le nouvel article ayant été soumis et validé
                 $entityManager->persist($article);
+                $this->addFlash('success', 'Votre article a été publié avec succès');
                 $entityManager->flush();
 
-                $this->addFlash('success', 'Votre article a été publié avec succès');
+                // Créer un objet de notification à stocker en base de données
+                $type = "article";
+                $idObject =  $article->getId();
+                $message = 'Un article a été créé';
+
+                $notification = new Notification();
+                $notification->setCreatedAt(new \DateTimeImmutable())
+                    ->setAuthor($user)
+                    ->setType($type)
+                    ->setRead(false)
+                    ->setContent($message);
+                $entityManager->persist($notification);
+
+                // Envoyer une notification à l'Admin avant de redirigier l'utilisateur
+                $notif->send($message, $type, $idObject);
+
+                $entityManager->flush();
+
                 return $this->redirectToRoute('articles_showAll');
             }
 

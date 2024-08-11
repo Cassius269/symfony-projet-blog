@@ -42,9 +42,16 @@ class Podcast
     #[ORM\OneToMany(targetEntity: Episode::class, mappedBy: 'podcast', orphanRemoval: true)]
     private Collection $episodes;
 
+    /**
+     * @var Collection<int, Notification>
+     */
+    #[ORM\OneToMany(targetEntity: Notification::class, mappedBy: 'podcast')]
+    private Collection $notifications;
+
     public function __construct()
     {
         $this->episodes = new ArrayCollection();
+        $this->notifications = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -136,6 +143,36 @@ class Podcast
             // set the owning side to null (unless already changed)
             if ($episode->getPodcast() === $this) {
                 $episode->setPodcast(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Notification>
+     */
+    public function getNotifications(): Collection
+    {
+        return $this->notifications;
+    }
+
+    public function addNotification(Notification $notification): static
+    {
+        if (!$this->notifications->contains($notification)) {
+            $this->notifications->add($notification);
+            $notification->setPodcast($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNotification(Notification $notification): static
+    {
+        if ($this->notifications->removeElement($notification)) {
+            // set the owning side to null (unless already changed)
+            if ($notification->getPodcast() === $this) {
+                $notification->setPodcast(null);
             }
         }
 

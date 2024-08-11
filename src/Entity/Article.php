@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Symfony\Component\Validator\Constraints as Assert;
 // use Symfony\Component\HttpFoundation\File\File;
@@ -10,7 +12,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
-// #[Vich\Uploadable]
 class Article
 {
     #[ORM\Id]
@@ -57,6 +58,17 @@ class Article
     #[ORM\ManyToOne(inversedBy: 'articles', cascade: ['persist'], fetch: "EAGER")]
     #[ORM\JoinColumn(nullable: false)]
     private ?MainImageIllustration $mainImageIllustration = null;
+
+    /**
+     * @var Collection<int, Notification>
+     */
+    #[ORM\OneToMany(targetEntity: Notification::class, mappedBy: 'article')]
+    private Collection $notifications;
+
+    public function __construct()
+    {
+        $this->notifications = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -167,6 +179,36 @@ class Article
     public function setMainImageIllustration(?MainImageIllustration $mainImageIllustration): static
     {
         $this->mainImageIllustration = $mainImageIllustration;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Notification>
+     */
+    public function getNotifications(): Collection
+    {
+        return $this->notifications;
+    }
+
+    public function addNotification(Notification $notification): static
+    {
+        if (!$this->notifications->contains($notification)) {
+            $this->notifications->add($notification);
+            $notification->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNotification(Notification $notification): static
+    {
+        if ($this->notifications->removeElement($notification)) {
+            // set the owning side to null (unless already changed)
+            if ($notification->getArticle() === $this) {
+                $notification->setArticle(null);
+            }
+        }
 
         return $this;
     }

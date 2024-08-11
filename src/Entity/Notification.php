@@ -33,6 +33,12 @@ class Notification
     #[ORM\JoinColumn(nullable: false)]
     private ?User $author = null;
 
+    #[ORM\ManyToOne(inversedBy: 'notifications')]
+    private ?Article $article = null;
+
+    #[ORM\ManyToOne(inversedBy: 'notifications')]
+    private ?Podcast $podcast = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -106,6 +112,30 @@ class Notification
     public function setAuthor(?User $author): static
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getArticle(): ?Article
+    {
+        return $this->article;
+    }
+
+    public function setArticle(?Article $article): static
+    {
+        $this->article = $article;
+
+        return $this;
+    }
+
+    public function getPodcast(): ?Podcast
+    {
+        return $this->podcast;
+    }
+
+    public function setPodcast(?Podcast $podcast): static
+    {
+        $this->podcast = $podcast;
 
         return $this;
     }

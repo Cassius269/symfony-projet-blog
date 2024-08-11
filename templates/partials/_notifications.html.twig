@@ -1,11 +1,21 @@
 {# Partial contenant le bout de code HTML des notifications #}
 
 {# Seul l'Admin est autorisé à recevoir des notifications #}
+{% set unReadNotifications = app.session.get('unReadNotifications') %}
+
 	{% if is_granted("ROLE_ADMIN") %}
 		<div id="iconeRingNotifications"> <div id="divNotificationPlusNumber">
-			<img id="iconeNotif" src="{{ asset('images/iconeBell.svg')}}" alt="icône représent une cloche pour les notifications">
-			<p id="numberOfNotifcations">0</p>
+			<img
+			id="iconeNotif" src="{{ asset('images/iconeBell.svg')}}" alt="icône représent une cloche pour les notifications">
+			{# <p id="numberOfNotifcations">{{ unReadNotifications|length }}</p> #}
+			<p id="numberOfNotifcations">{{ unReadNotifications|length }}</p>
+
 		</div>
-		<ul id="listNotifications" class="clickAndShow"></ul>
+		{# Afficher par défaut les notifications non lues #}
+		<ul id="listNotifications" class="clickAndShow">
+			{% for notif in unReadNotifications %}
+				<li>{{ notif.content }}</li>
+			{% endfor %}
+		</ul>
 	</div>
 {% endif %}

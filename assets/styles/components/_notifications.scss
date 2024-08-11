@@ -36,7 +36,7 @@
         }
     }
     #listNotifications {
-        width: 300px;
+        max-width: 388px;
         min-height: 100px;
         padding: 1rem;
         background-color: #EEC196;
@@ -45,7 +45,13 @@
         list-style-type: none;
         display: flex;
         flex-direction: column;
+        justify-content: flex-start; // Placer les notifications en haut de la liste
         z-index: 1;// mettre les notifications au dessus de tout sur le plan visuel
+        border-radius: 14px;
+        // Stylisation des liens clickables des notifications
+        a {
+            font-size: 18px;
+        }
     } 
     .clickAndShow {
         display: none !important;

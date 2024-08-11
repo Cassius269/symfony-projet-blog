@@ -2,11 +2,11 @@
 
 namespace App\Controller;
 
-use App\Services\Notificator;
-use Symfony\Component\Mercure\HubInterface;
+use App\Services\Notificator; // Service personnalisé de création de notifiications instantannées grâce à Mercure
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class HomeController extends AbstractController
 {
@@ -16,12 +16,12 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', []);
     }
 
-    // Test de mercure
+    // Test du service personnalisé d'envoi de notifications instantannnées à l'aide de mercure
     #[Route('/publish', name: 'publish')]
-    public function publish(HubInterface $hub, Notificator $notif): Response
+    #[IsGranted("ROLE_ADMIN")] // Protégér la route de test contre toute tentative d'autres utilisateurs
+    public function publish(Notificator $notif): Response
     {
-        $user = $this->getUser();
-        $notif->send('Un mail a été envoyé par John Dow', 'email', $user);
+        $notif->send('Un mail a été envoyé', 'demand', 20);
 
         return new Response('Notification envoyée!');
     }
