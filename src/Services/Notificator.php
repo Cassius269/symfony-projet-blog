@@ -25,16 +25,16 @@ class Notificator
     public function send(string $message, string $type, int $idObject): void
     {
         $authorFullName = $this->security->getUser()->getFullName();
-        $numberOfNotifcations = count($this->notificationRepository->getUnreadNotifications());
+        $unReadNotifications = count($this->notificationRepository->getUnreadNotifications());
 
         $update = new Update(
             'notifications',
             json_encode([
                 'message' => $message . " par " . $authorFullName,
                 'type' => $type,
-                'author' => $authorFullName, // Attribuer l'auteur d'une notification comme étant l'utilisateur connecté faisant l'action à l'origin de la notification instantannée
+                'author' => $authorFullName, // Attribuer l'auteur d'une notification comme étant l'utilisateur connecté faisant l'action à l'origine de la notification instantannée
                 'idObject' => $idObject,
-                'numberOfNotifcations' => $numberOfNotifcations,
+                'unReadNotifications' => $unReadNotifications,
             ])
         );
         $this->hub->publish($update);

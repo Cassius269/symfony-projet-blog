@@ -6,10 +6,11 @@ use DateTimeImmutable;
 use App\Entity\Article;
 use App\Entity\Notification;
 use App\Form\ArticleType;
+use App\Repository\NotificationRepository;
 use App\Services\AwsManager;
 use App\Services\Notificator;
 use Doctrine\ORM\EntityManagerInterface;
-use League\Flysystem\FilesystemOperator;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,21 +32,46 @@ class ArticleController extends AbstractController
 
     #[Route(
         path: '/{id}',
-        name: 'showDetailedArticle'
+        name: 'showDetailedArticle',
     )]
-    public function showDetailledArticle(Article $article, EntityManagerInterface $entityManager, AwsManager $awsManager): Response
-    {
+    public function showDetailledArticle(
+        Article $article,
+        EntityManagerInterface $entityManager,
+        AwsManager $awsManager,
+        Request $request,
+        NotificationRepository $notificationRepository,
+        Notificator $notificator
+    ): Response {
+        $idNotif = $request->get('id_notif');
+
+        // dd($idNotif);
         // dd($article);
+
         if (!$article) { // Si il n'y pas d'article trouvé, envoyer un message d'exception
             throw $this->createNotFoundException('Article introuvable');
         } else { // Dans le cas où l'article existe, chercher son image d'illustration depuis le service S3 d'Amazon AWS
             $mainImageIllustration = $article->getMainImageIllustration();
-            $file = $awsManager->readFile($article);
+            $file = $awsManager->readFile($article); // Récuperer en lecture le fichier image d'illustration sur AWS S3 en utilisant le service personnalisé AwsManager
         }
+
+        // Changer l'état d'une notification en déjà lue au clic par l'Admin
+        if ($this->getUser()) { // Si c'est un utilisateur connecté qui accède
+            if ($this->getUser()->getRoles() === ["ROLE_ADMIN"]) { // Vérifier si c'est un Admin qui accède à un article ( en partant du principe qu'il a accès aux notifications (instannaées ou pas))
+                dump('L\'utilisateur connecté est un Admin');
+                // Chercher la notification à l'origine de l'action de notification
+                // Plusieurs objets notifications peuvent êre reliées à un même objet article pour differentes actions (update, delete, remove)
+                if ($idNotif) { // Si l'Admin accède à l'URL avec un paramètre "id_notification" disponible
+                    $notification = $notificationRepository->findById($idNotif)[0];
+                    $notification->setRead(true); //
+
+                }
+            }
+        }
+
 
         // Mettre à jour le compteur du nombre de vue d'un article
         $actualNumberOfViews = $article->getNbreOfViews();
-        $article->setNbreOfViews($actualNumberOfViews + 1);
+        $article->setNbreOfViews($actualNumberOfViews + 1); // Incrémenter le nombre de vues à chaque lecture d'un article
         $entityManager->flush($article);
 
         return $this->render('articles/article_detail.html.twig', [
@@ -96,9 +122,9 @@ class ArticleController extends AbstractController
                 $this->addFlash('success', 'Votre article a été publié avec succès');
                 $entityManager->flush();
 
-                // Créer un objet de notification à stocker en base de données
+                // Créer un objet de notification lié à la création de l'article, à stocker en base de données
                 $type = "article";
-                $idObject =  $article->getId();
+                $idObject =  $article->getId(); // récuperer la clé primaire de l'objet article nouvellement créé
                 $message = 'Un article a été créé';
 
                 $notification = new Notification();
@@ -106,7 +132,8 @@ class ArticleController extends AbstractController
                     ->setAuthor($user)
                     ->setType($type)
                     ->setRead(false)
-                    ->setContent($message);
+                    ->setContent($message)
+                    ->setArticle($article);
                 $entityManager->persist($notification);
 
                 // Envoyer une notification à l'Admin avant de redirigier l'utilisateur

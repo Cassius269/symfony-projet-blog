@@ -13,6 +13,7 @@
         // Stylisation de la page dashboard pour petits écrans d'ordinateurs
         @media screen and (min-width:1024px) {
             width: 90%;
+            min-height: 60vh;
         }
         // Stylisation de la page dashboard pour écrans d'ordinateurs moyens
         @media screen and (min-width:1440px) {

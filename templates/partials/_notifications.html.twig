@@ -1,20 +1,33 @@
 {# Partial contenant le bout de code HTML des notifications #}
 
-{# Seul l'Admin est autorisé à recevoir des notifications #}
-{% set unReadNotifications = app.session.get('unReadNotifications') %}
 
-	{% if is_granted("ROLE_ADMIN") %}
-		<div id="iconeRingNotifications"> <div id="divNotificationPlusNumber">
-			<img
-			id="iconeNotif" src="{{ asset('images/iconeBell.svg')}}" alt="icône représent une cloche pour les notifications">
-			{# <p id="numberOfNotifcations">{{ unReadNotifications|length }}</p> #}
+{% if is_granted("ROLE_ADMIN") %}
+	{# Seul l'Admin est autorisé à recevoir des notifications #}
+	{% set unReadNotifications = app.session.get('unReadNotifications') %}
+	<div id="iconeRingNotifications">
+		<div id="divNotificationPlusNumber">
+			<img id="iconeNotif" src="{{ asset('images/iconeBell.svg')}}" alt="icône représent une cloche pour les notifications">
 			<p id="numberOfNotifcations">{{ unReadNotifications|length }}</p>
 
 		</div>
 		{# Afficher par défaut les notifications non lues #}
 		<ul id="listNotifications" class="clickAndShow">
 			{% for notif in unReadNotifications %}
-				<li>{{ notif.content }}</li>
+				{% if notif.type is same as 'article' %}
+					{# Si la notification est lié à un article, le lien de l'article devient cliquable #}
+					<li>
+						<a href="{{ path('articles_showDetailedArticle', {id: notif.article.id, id_notif: notif.id})}}">{{ notif.content }}
+							par
+							{{ notif.author.fullname}}</a>
+					</li>
+				{% elseif  notif.type is same as 'episode' %}
+					{# Si la notification est lié à un épisode de podcast, le lien du podcast devient cliquable #}
+					<li>
+						<a href="">{{ notif.content }}
+							par
+							{{ notif.author.fullname}}</a>
+					</li>
+				{% endif %}
 			{% endfor %}
 		</ul>
 	</div>

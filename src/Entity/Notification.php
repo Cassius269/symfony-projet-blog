@@ -29,7 +29,7 @@ class Notification
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
-    #[ORM\ManyToOne(inversedBy: 'notifications')]
+    #[ORM\ManyToOne(inversedBy: 'notifications', fetch: "EAGER")]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $author = null;
 

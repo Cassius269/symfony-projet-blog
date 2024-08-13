@@ -1,5 +1,6 @@
 <script>
-	let listeNotifications = document.querySelector("#listNotifications");
+	// Fonctionnalité: afficher dynamiquement les notifications instantannées
+let listeNotifications = document.querySelector("#listNotifications");
 
 const eventSource = new EventSource("{{ mercure('notifications')|escape('js') }}");
 eventSource.onmessage = event => { // Will be called every time an update is published by the server
@@ -10,17 +11,17 @@ if (notif.message) { // Si une notification a été détectée
 if (notif.type === "article") { // Si la notification concerne un article
 console.log("notif de type ", notif.type);
 incrementNumberOfNotifcations();
-listeNotifications.insertAdjacentHTML("afterbegin", "<li><a href='/articles/20'>" + notif.message + "</a></li>");
+listeNotifications.insertAdjacentHTML("afterbegin", "<li><a href='/articles/" + notif.idObject + "'>" + notif.message + "</a></li>");
 } else if (notif.type === "demand") {
 console.log("notif de type ", notif.type);
 incrementNumberOfNotifcations();
-listeNotifications.insertAdjacentHTML("afterbegin", "<li><a href='/articles/20'>" + notif.message + "</a></li>");
+listeNotifications.insertAdjacentHTML("afterbegin", "<li><a href='/admin/list-demands/" + notif.idObject + "'>" + notif.message + "</a></li>");
 }
 }
 }
 
 function incrementNumberOfNotifcations() {
 let numberOfNotifcations = document.querySelector("#numberOfNotifcations");
-numberOfNotifcations.textContent = notif.numberOfNotifcations;
+numberOfNotifcations.textContent ++; // Prendre la valeur contenu dans l'élement et l'incrémenter à chaque notification
 }
 </script>

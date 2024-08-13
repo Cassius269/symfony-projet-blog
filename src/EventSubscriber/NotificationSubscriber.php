@@ -19,11 +19,13 @@ class NotificationSubscriber implements EventSubscriberInterface
     // Action de récupération du nombre de notifications non et assignation dans la session en cours
     public function onRequestEvent(RequestEvent $event): void
     {
+        // Récupérer la session
         $session = $event->getRequest()->getSession();
+        // Rechercher les notifications non lues
         $unReadNotifications = $this->notificationRepository->getUnreadNotifications();
 
+        // Stocker dans la session les notifications non lues
         $session->set("unReadNotifications", $unReadNotifications);
-        dump($session);
     }
 
     public static function getSubscribedEvents(): array
