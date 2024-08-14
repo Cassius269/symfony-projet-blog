@@ -8,14 +8,13 @@
 {% endblock %}
 {% block body %}
 	<section class="sectionTrendingArticle">
-		<article id="trendingArticle">
-			<p>Direction la Fashion week de Paris. Les tendances se confirment,des pull over-sizes et des pantalons haut-en-couleur ont animés les défilées.
-			</p>
+		<article id="trendingArticle" style="background-image: url({{ topArticle.image }})">
+			<p>{{ topArticle.abstract | slice(0,100) }}...</p>
 			<h1>FAHAMI le site des tendances mode et bien
 				<span>+</span>
 			</h1>
 		</article>
-		<a href="#" title="lien vers l'article de la semaine">
+		<a href="{{ path("articles_showDetailedArticle", {id: topArticle.id }) }}" title="lien vers l'article de la semaine">
 			<button class="primaryButton">Lire l'article maintenant !</button>
 		</a>
 	</section>
@@ -29,37 +28,21 @@
 		</p>
 
 		<div class="divArticlesOfTheWeek">
-			<article class="boxArticle">
-				<h3>Le défilé De Diora sera dans les annales</h3>
-				<div class="divResumeArticle">
-					<p>Le défilé a pris un coup de boost avec le retour de Naomi Campbell sur la piste...</p>
-					<a href="">
-						<button>Lire la suite
-							<img src="{{ asset('images/iconeGotoDetailArticle.svg')}}" alt="icone représentant vers la droite pour lire un article en globalité"></button>
-					</a>
-				</div>
-			</article>
-			<article class="boxArticle">
-				<h3>Le défilé De Diora sera dans les annales</h3>
-				<div class="divResumeArticle">
-					<p>Le défilé a pris un coup de boost avec le retour de Naomi Campbell sur la piste...</p>
-					<a href="">
-						<button>Lire la suite
-							<img src="{{ asset('images/iconeGotoDetailArticle.svg')}}" alt="icone représentant vers la droite pour lire un article en globalité"></button>
-					</a>
-				</div>
-			</article>
-			<article class="boxArticle">
-				<h3>Le défilé De Diora sera dans les annales</h3>
-				<div class="divResumeArticle">
-					<p>Le défilé a pris un coup de boost avec le retour de Naomi Campbell sur la piste...</p>
-					<a href="">
-						<button>Lire la suite
-							<img src="{{ asset('images/iconeGotoDetailArticle.svg')}}" alt="icone représentant vers la droite pour lire un article en globalité"></button>
-					</a>
-				</div>
-			</article>
+			{% for article in topArticles %}
+				<article class="boxArticle" style="background-image: url({{ article.image }})">
+					<h3>{{ article.title }}</h3>
+					<div
+						class="divResumeArticle">
+						{# Afficher les 55 premiers caractères du résumé #}
+						<p>{{ article.abstract | slice(0,55) }}...
+						</p>
+						<a href="{{ path("articles_showDetailedArticle", {id: article.id }) }}">
+							<button>Lire la suite
+								<img src="{{ asset('images/iconeGotoDetailArticle.svg')}}" alt="icone représentant vers la droite pour lire un article en globalité"></button>
+						</a>
+					</div>
+				</article>
+			{% endfor %}
 		</div>
-
 	</section>
 {% endblock %}

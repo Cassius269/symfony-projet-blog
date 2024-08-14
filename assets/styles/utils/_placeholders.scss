@@ -1,9 +1,9 @@
 // utilisation de placeholder pour regrouper le style d'une boite article
 
 %boxArticle {
-    background-image: url('../../../public/images/illustrations/illustrationArticleHome.png');
-    background-repeat: no-repeat;
     background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;// centrer l'image au centre de la balise article
     height: 500px;
     color: white;
     padding: 1rem;
@@ -38,8 +38,8 @@
             }                  
         }
         p{
-            font-size: 18px;
-            line-height: 1.5rem;
+            line-height: normal;
+            white-space: normal;
         }
     }
     h3 {

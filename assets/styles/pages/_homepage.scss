@@ -20,7 +20,7 @@ main {
             justify-content: flex-end;
     
             @media screen and (min-width: 1024px) {
-                height: 450px;
+                height: 100vh;// Dans les écrans d'ordinateure de plus de 1024px l'article tendance prendra toute la hauteur de l'écran
                 display: flex;
                 flex-direction: column-reverse;
                 justify-content: center;
@@ -103,7 +103,7 @@ main {
                 justify-content: space-around;
             }
             .boxArticle {
-                @extend %boxArticle; // utilisation du placeholder *boxArticle
+                @extend %boxArticle; // utilisation du placeholder %boxArticle
             }
         }
     }
