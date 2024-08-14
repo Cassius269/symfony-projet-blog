@@ -55,16 +55,19 @@ class ArticleController extends AbstractController
         }
 
         // Changer l'état d'une notification en déjà lue au clic par l'Admin
-        if ($this->getUser()) { // Si c'est un utilisateur connecté qui accède
-            if ($this->getUser()->getRoles() === ["ROLE_ADMIN"]) { // Vérifier si c'est un Admin qui accède à un article ( en partant du principe qu'il a accès aux notifications (instannaées ou pas))
-                dump('L\'utilisateur connecté est un Admin');
-                // Chercher la notification à l'origine de l'action de notification
-                // Plusieurs objets notifications peuvent êre reliées à un même objet article pour differentes actions (update, delete, remove)
-                if ($idNotif) { // Si l'Admin accède à l'URL avec un paramètre "id_notification" disponible
-                    $notification = $notificationRepository->findById($idNotif)[0];
-                    $notification->setRead(true); //
+        if ($this->getUser() && $this->getUser()->getRoles() === ["ROLE_ADMIN"]) { // Si c'est un utilisateur connecté qui accède et qu'il est Admin
+            dump('L\'utilisateur connecté est un Admin');
+            // Chercher la notification à l'origine de l'action de notification
+            // Plusieurs objets notifications peuvent êre reliées à un même objet article pour differentes actions (update, delete, remove)
+            if ($idNotif) { // Si l'Admin accède à l'URL avec un paramètre "id_notification" disponible
+                $notification = $notificationRepository->findById($idNotif)[0]; // Chercher la notification
+                $notification->setRead(true); // Mettre à jour la notification à déjà lue
+                $entityManager->flush(); // Mettre à jour la base de données
 
-                }
+                // Stocker dans la session à nouveau les notifications non lues réactualisées
+                $unReadNotifications = $notificationRepository->getUnreadNotifications();
+                $session = $request->getSession(); // Obtenir la session
+                $session->set('unReadNotifications', $unReadNotifications);
             }
         }
 
@@ -72,7 +75,7 @@ class ArticleController extends AbstractController
         // Mettre à jour le compteur du nombre de vue d'un article
         $actualNumberOfViews = $article->getNbreOfViews();
         $article->setNbreOfViews($actualNumberOfViews + 1); // Incrémenter le nombre de vues à chaque lecture d'un article
-        $entityManager->flush($article);
+        $entityManager->flush();
 
         return $this->render('articles/article_detail.html.twig', [
             'article' => $article,

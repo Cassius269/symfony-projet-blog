@@ -26,6 +26,11 @@ class AdminController extends AbstractController
     )]
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
+        if ($this->getUser()) { // Si un utilisateur est connecté, il ne peut pas envoyer demande et sera redirigé à la page d'accueil
+            $this->addFlash('error', 'Vous ne pouvez pas soumettre une nouvelle demande de devenir membre');
+            return $this->redirectToRoute('home');
+        }
+
         // Construction du formulaire
         $demand = new Demand();
         $form = $this->createForm(DemandType::class, $demand)
