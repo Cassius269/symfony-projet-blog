@@ -187,7 +187,7 @@ class ArticleController extends AbstractController
 
     #[Route(path: '/author/update-article/{id}', name: 'update')]
     #[IsGranted("ROLE_AUTHOR")]
-    public function updateArticle(Article $article, Request $request, EntityManagerInterface $entityManager, HtmlSanitizerInterface $htmlSanitizer): Response
+    public function updateArticle(Article $article, Request $request, EntityManagerInterface $entityManager, HtmlSanitizerInterface $htmlSanitizer, AwsManager $awsManager): Response
     {
         $this->denyAccessUnlessGranted('UPDATE_ARTICLE', $article); // Gestion de la permission de modification d'un artickle via un voter
 
@@ -198,6 +198,7 @@ class ArticleController extends AbstractController
         $form = $this->createForm(ArticleType::class, $article);
 
         $form->handleRequest($request);
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             // dd($form->getData());
@@ -219,7 +220,9 @@ class ArticleController extends AbstractController
             'articles/create_or_edit_article.html.twig',
             [
                 'form' => $form,
-                'article' => $article
+                'article' => $article,
+                'mainImageIllustrationFile' =>  $awsManager->readFile($article) // Obtenir le fichier image d'illustration de l'article
+
             ]
         );
     }

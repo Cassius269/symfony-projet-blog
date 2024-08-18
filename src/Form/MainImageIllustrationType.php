@@ -46,7 +46,8 @@ class MainImageIllustrationType extends AbstractType
                             'mimeTypes' =>  [
                                 'image/png',
                                 'image/jpeg',
-                                'image/jpg'
+                                'image/jpg',
+                                'image/webp',
                             ],
                             'mimeTypesMessage' => 'Le fichier chargé n\'est pas au bon format'
                         ]

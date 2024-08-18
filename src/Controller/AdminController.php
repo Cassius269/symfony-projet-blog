@@ -4,10 +4,11 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Demand;
-use App\Form\UserType;
+use App\Entity\Notification;
 use App\Form\DemandType;
 use App\Repository\DemandRepository;
 use App\Services\AwsManager;
+use App\Services\Notificator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +25,7 @@ class AdminController extends AbstractController
         path: '/becoming-member',
         name: 'get_demand_members',
     )]
-    public function index(Request $request, EntityManagerInterface $entityManager): Response
+    public function index(Request $request, EntityManagerInterface $entityManager, DemandRepository $demandRepository, Notificator $notificator): Response
     {
         if ($this->getUser()) { // Si un utilisateur est connecté, il ne peut pas envoyer demande et sera redirigé à la page d'accueil
             $this->addFlash('error', 'Vous ne pouvez pas soumettre une nouvelle demande de devenir membre');
@@ -45,16 +46,39 @@ class AdminController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // dd($form);
+            // Vérifier si le demandeur a déjà fait une demande
+            $lastdemand = $demandRepository->findOneBy([
+                'email' => $demand->getEmail()
+            ]);
+
+            if ($lastdemand) { // Si une demande a déjà été effectuée par cet utilisateur, afficher un message d'erreur
+                $this->addFlash('error', "Une demande vous concernant a déjà été enregistrée");
+                return $this->redirectToRoute('admin_get_demand_members');
+            }
+
             // Traitement des données recuillies
             $demand->setCreatedAt(new \DateTimeImmutable());
-            // $demand->setUser(null);
             // Persister et envoyer en base de données la demande
             $entityManager->persist($demand);
-            $entityManager->flush();
 
             $this->addFlash('success', 'Votre demande a été envoyée avec succès'); // Afficher un message de succès
 
-            return $this->redirectToRoute('home'); // Renvoyer le demandeur à la page d'accueil
+            // Envoyer une notification instantannée à l'Admin
+            $notificator->send("Une nouvelle demande", "demand", $demand->getId());
+
+            // Créer un objet notification à stocker en base de données pour rappel
+            $notification = new Notification();
+            $notification->setCreatedAt(new \DateTimeImmutable())
+                ->setType('demand')
+                ->setRead(false)
+                ->setContent('Une nouvelle demande a été créé')
+                ->setDemand($demand);
+            // ->setAuthor(null);
+            $entityManager->persist($notification);
+            $entityManager->flush();
+
+            // Renvoyer le demandeur à la page d'accueil
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('admin/form_demand_becoming_member.twig', [

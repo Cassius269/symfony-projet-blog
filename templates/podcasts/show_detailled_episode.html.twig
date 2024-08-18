@@ -1,0 +1,71 @@
+{% extends "base.html.twig" %}
+{% block title %}Emission
+{% endblock %}
+{% block stylesheets %}
+	{{ parent() }}
+	{{ encore_entry_link_tags('episodePageDetail') }}
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('episodePageDetail') }}
+{% endblock %}
+{% block body %}
+	{# Déclaration d'une variable URL contenant le lien à la source de l'audio de l'émission #}
+	{% set link =  "/upload/podcast/hardheaded_ilovethewayyousee.mp3" %}
+	{% include "partials/_audio_player.html.twig" with { url: link, podcast: "L'oeil de la mode", title: "La mode en 2024", classMainEpisode: "mainEpisodeArticle" }   %}
+
+	<section id="sectionGuests">
+		<article>
+			<h2>Nos invités</h1>
+			<ul>
+				<li>
+					<span>Marc Lambert</span>
+					Photographe de mode</li>
+				<li>
+					<span>Claire Dupont</span>
+					Styliste de renom</li>
+				<li>
+					<span>Sophie Martin</span>
+					Blogueuse mode
+				</li>
+			</ul>
+		</li>
+	</article>
+</section>
+<section id="sectionContentEpisode">
+	{% set resume = "Résumé de l’émission" %}
+	<h2>{{ resume | upper }}</h2>
+	<article>
+		<p>Dans cette émission spéciale consacrée aux tendances printemps-été 2024, nos invités experts nous ont offert un aperçu captivant de l'univers de la mode :</p>
+		<ul>
+			<li>
+				<p>
+					<span>Les tendances a venir:
+					</span>Claire Dupont, styliste renommée, a dévoilé les couleurs et les coupes phares pour la saison à venir. Des tons pastel délicats aux nuances audacieuses, elle a mis en lumière les tendances qui marqueront les collections estivales. Les épaulettes font leur grand retour et les coupes fluides sont à l'honneur.</p>
+			</li>
+			<li>
+				<p>
+					<span>L'Art de la Photographie de Mode :</span>
+					Marc Lambert, photographe de renom, nous a transportés dans le monde de la photographie de mode. Il a partagé son expérience des séances photo avec les grandes maisons de couture, soulignant l'importance des images dans l'industrie. Marc a également mis en lumière les coulisses créatives qui donnent vie aux campagnes iconiques.</p>
+			</li>
+			<li>
+				<p>
+					<span>Mode accessible et durable :</span>
+					Sophie Martin, blogueuse influente, a prodigué ses conseils pour rester stylé sans se ruiner. Elle a souligné l'importance des pièces vintage et des achats réfléchis. Sophie a encouragé l'adoption d'une approche durable de la mode en privilégiant les vêtements de qualité et intemporels.</p>
+			</li>
+			<li>
+				<p>
+					<span>Conseils pratiques :</span>
+					Les auditeurs ont bénéficié de conseils pratiques pour composer des looks tendance tout en respectant leur budget. Sophie a partagé ses astuces pour dénicher des trésors dans les friperies et Marc a encouragé à investir dans des pièces intemporelles qui résistent à l'épreuve du temps.</p>
+			</li>
+		</ul>
+
+		<p>Enfin, l'émission a été rythmée par des interactions avec les auditeurs, permettant à chacun de partager ses expériences et de poser des questions directement à nos experts.</p>
+	</article>
+</section>
+<section id="sectionAudioPlayers">
+	<h2>Les recommandations</h2>
+	{% set link =  "/upload/podcast/hardheaded_ilovethewayyousee.mp3" %}
+	{% include "partials/_audio_player.html.twig" with { url: link, podcast: "L'oeil de la mode", title: "La mode en 2024" }   %}
+	{% include "partials/_audio_player.html.twig" with { url: link, podcast: "L'oeil de la mode", title: "La mode en 2024" }   %}
+</section>{% endblock %}

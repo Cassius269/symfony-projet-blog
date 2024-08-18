@@ -34,8 +34,7 @@ main  {
         justify-content: space-between;
         flex-direction: column;
         @media screen and (min-width: 1024px) {
-            max-width: 400px;
-        }
+            max-width: 319px;        }
         h2 {
             text-align: center;
             padding: 1rem 1rem 0 1rem;
@@ -53,6 +52,7 @@ main  {
                 display: block;
                 padding: 1rem;
                 border: none;
+                max-width: 319px;
             }
         } 
     }
@@ -80,15 +80,7 @@ main  {
 
         .divTopFourEpisodes {
             // Mise en page des lecteurs sur les écrans de plus de 1024pixels
-            @media screen and (min-width: 1024px) {
-                display: grid;
-                gap: 9rem;
-                grid-template-columns: 400px 400px;
-                // Centrer le block des lecteurs
-                margin: auto;
-                width: 1000px;
-                margin-top: 1rem;
-            }
+                @extend %stylizeAudioPlayerGreaterScreens;
 
         // Stylisation des lecteurs audio
         .sectionGlobaleLecteur {

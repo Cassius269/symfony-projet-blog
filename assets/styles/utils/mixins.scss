@@ -125,6 +125,7 @@
             align-content: flex-end;
             align-items: baseline;
             align-items: center;
+            border-radius: 12px 12px 0 0;
             @media screen and (min-width: 768px) {
                 max-width: 600px;
                 height: 277px;
@@ -143,14 +144,16 @@
           }
           
           
-          .sectionGlobaleLecteur {
-            min-width: 355px;
-            margin: auto;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-color: grey;
+          // .sectionGlobaleLecteur {
+          //   // min-width: 355px;
+          //   // margin: auto;
+          //   // display: flex;
+          //   // flex-direction: column;
+          //   // justify-content: center;
+          //   // align-items: center;
+          //   // background-color: grey;
+
+          // }
           }
           
           .buttonPlay {
@@ -199,8 +202,6 @@
           }
           }
     
-
-}
 
 // Styliser le mot mode
 @mixin stylishWithBackgroundColor($color) {

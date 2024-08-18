@@ -30,7 +30,7 @@ class Notification
     private ?\DateTimeInterface $updatedAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'notifications', fetch: "EAGER")]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?User $author = null;
 
     #[ORM\ManyToOne(inversedBy: 'notifications')]
@@ -38,6 +38,9 @@ class Notification
 
     #[ORM\ManyToOne(inversedBy: 'notifications')]
     private ?Podcast $podcast = null;
+
+    #[ORM\ManyToOne(inversedBy: 'notifications')]
+    private ?Demand $demand = null;
 
     public function getId(): ?int
     {
@@ -136,6 +139,18 @@ class Notification
     public function setPodcast(?Podcast $podcast): static
     {
         $this->podcast = $podcast;
+
+        return $this;
+    }
+
+    public function getDemand(): ?Demand
+    {
+        return $this->demand;
+    }
+
+    public function setDemand(?Demand $demand): static
+    {
+        $this->demand = $demand;
 
         return $this;
     }

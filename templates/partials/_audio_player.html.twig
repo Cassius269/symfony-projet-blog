@@ -1,12 +1,18 @@
 <div class="sectionGlobaleLecteur">
-	<h2>{{ podcast | replace ({"mode": ""}) }}
-		<span>mode</span>
-	</h2>
-	<article class="ImageIllustrationEmission">
-		<h3 class="titreEmission">{{ title }}</h2>
-	</article>
+	<a href="" title="lien vers la page de détail d'un podcast et ses émissions">
+		<h2>{{ podcast | replace ({"mode": ""}) }}
+			<span>mode</span>
+		</h2>
+	</a>
+	<a href="" title="lien vers l'émission">
+		<article class="ImageIllustrationEmission {{ classMainEpisode ?? " "}}">
+			<h3 class="titreEmission">{{ title }}</h2>
+		</article>
+	</a>
 	<div class="sectionLecteurAudio">
-		<div class="lecteurAudioWithButtons">
+		<div
+			class="lecteurAudioWithButtons">
+			{# url correspond  à la source du fichier audio du podcast #}
 			<audio src="{{ url }}"></audio>
 			<button class="buttonPlay">
 				<img class="iconeButton" src="{{ asset("/images/play-circle.svg") }}" alt="icône représentant le bouton play">

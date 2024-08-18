@@ -1,0 +1,65 @@
+@import './../utils/mixins';
+@import './../utils/variables';
+@import './../components/buttons';
+@import './../utils/placeholders';
+
+
+main {
+    // Stylisation du main à l'aide du placeholder "%mainResponsive"
+    @extend %mainResponsive;
+
+    // Stylisation du lecteur principal portant sur l'émission principal
+    .mainEpisodeArticle {
+        @media screen and (min-width: 1024px) {
+            height: 277px !important;
+            max-width: 600px !important;
+            background-color: green;  
+        }
+    }
+    // Stylisation de toutes les bulles de liste de la page de détail d'une émission
+    ul {
+        list-style-type: disc;
+        li::marker {
+                color: red;
+                font-size: 34px;
+        }
+    }
+
+    #sectionGuests {
+          ul {
+                span {
+                    font-size: 20px;
+                    font-weight: bold;
+                }
+            }
+    }
+
+    #sectionContentEpisode {
+        ul {
+            p {
+                white-space: normal !important;
+                span {
+                    font-size: 20px;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+
+    // Stylisation de tous les lecteurs audio de la page de détail d'une émission
+    .sectionGlobaleLecteur {
+            @include makeDesignAudioPlayer();
+            span {
+                @include stylishWithBackgroundColor(#FFE81A)
+            }
+    }
+
+    // Stylisation des marges externes de chaque section de la page de détail d'une émission
+    section {
+       margin: 2rem 0px;
+       @media screen and (min-width: 768px) {
+        margin: 3rem 0px;
+
+       }
+    }
+}

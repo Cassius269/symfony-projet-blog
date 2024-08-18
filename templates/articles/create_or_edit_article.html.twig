@@ -38,7 +38,7 @@
 			{% if article is defined %}
 				{% if article %}
 					{% if article.mainImageIllustration %}
-						<img id="CurrentImageIllustration" src="{{ vich_uploader_asset(article.mainImageIllustration,'imageFile')}}" alt="">
+						<img id="CurrentImageIllustration" src="{{ mainImageIllustrationFile }}" alt="">
 					{% else %}
 						<p>L'article ne dispose pas d'image d'illustration principale</p>
 					{% endif %}

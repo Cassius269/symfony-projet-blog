@@ -86,3 +86,20 @@
         bottom: 3px;
             }
 }
+
+// Styliser les lecteurs audio sur les écrands de 1024px et plus
+%stylizeAudioPlayerGreaterScreens {
+    @media screen and (min-width: 1024px) {
+        // display: grid;
+        //         // gap: 9rem;
+        //         grid-template-columns: 400px 400px;
+        //         // Centrer le block des lecteurs
+        //         margin: auto;
+        //         // width: 1000px;
+        //         margin-top: 1rem;
+                display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+}

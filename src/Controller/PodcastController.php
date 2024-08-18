@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Episode;
 use App\Entity\Podcast;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,5 +23,14 @@ class PodcastController extends AbstractController
         return $this->render('/podcasts/show_detailled_podcast.html.twig', [
             'podcast' => $podcast,
         ]);
+    }
+
+    #[Route(
+        path: '/podcasts/{podcast}/{episode}',
+        name: 'show_detailled_episode'
+    )]
+    public function showDetailledEpisode(Podcast $podcast, Episode $episode): Response
+    {
+        return $this->render('podcasts/show_detailled_episode.html.twig', []);
     }
 }
