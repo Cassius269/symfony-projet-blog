@@ -8,6 +8,7 @@ use App\Services\Notificator; // Service personnalisé de création de notifiica
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class HomeController extends AbstractController
@@ -20,6 +21,10 @@ class HomeController extends AbstractController
             [],
             ['nbreOfViews' => 'DESC']
         );
+
+        if (!$topArticle) {
+            throw  $this->createNotFoundException("Aucun article disponible");
+        }
 
         $file = $awsManager->readFile($topArticle);
         $topArticle->setImage($file);
