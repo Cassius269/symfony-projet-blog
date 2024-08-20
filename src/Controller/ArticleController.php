@@ -6,6 +6,7 @@ use DateTimeImmutable;
 use App\Entity\Article;
 use App\Entity\Notification;
 use App\Form\ArticleType;
+use App\Repository\ArticleRepository;
 use App\Repository\NotificationRepository;
 use App\Services\AwsManager;
 use App\Services\Notificator;
@@ -55,7 +56,7 @@ class ArticleController extends AbstractController
 
         // Changer l'état d'une notification en déjà lue au clic par l'Admin
         if ($this->getUser() && $this->getUser()->getRoles() === ["ROLE_ADMIN"]) { // Si c'est un utilisateur connecté qui accède et qu'il est Admin
-            $idNotif = $request->get('id_notif'); 
+            $idNotif = $request->get('id_notif');
             // dd($idNotif);
 
             dump('L\'utilisateur connecté est un Admin');
@@ -63,6 +64,7 @@ class ArticleController extends AbstractController
             // Plusieurs objets notifications peuvent êre reliées à un même objet article pour differentes actions (update, delete, remove)
             if ($idNotif) { // Si l'Admin accède à l'URL avec un paramètre "id_notification" disponible
                 $notification = $notificationRepository->findById($idNotif)[0]; // Chercher la notification
+                // dd($notification);
                 $notification->setRead(true); // Mettre à jour la notification à déjà lue
                 $entityManager->flush(); // Mettre à jour la base de données
 
@@ -91,7 +93,7 @@ class ArticleController extends AbstractController
         name: 'createNewArticle'
     )]
     #[IsGranted("ROLE_AUTHOR")]
-    public function createArticle(Request $request, Security $security, EntityManagerInterface $entityManager, HtmlSanitizerInterface $htmlSanitizer, Notificator $notif): Response
+    public function createArticle(Request $request, Security $security, EntityManagerInterface $entityManager, HtmlSanitizerInterface $htmlSanitizer, Notificator $notif, ArticleRepository $articleRepository): Response
     {
         /** @var User $user */
         $user = $security->getUser();
@@ -113,6 +115,19 @@ class ArticleController extends AbstractController
                 // Nettoyage des données contre les injections de code malveillantes
                 $unsafeContentArticle = $form->get('content')->getData();
                 $safeContentArticle = $htmlSanitizer->sanitize($unsafeContentArticle);
+
+                // Vérifier si l'article n'est pas déjà publié
+                $similarArticle = $articleRepository->findOneBy([
+                    "title" => $form->get("title")->getData(),
+                    "content" => $safeContentArticle // recherche que le contenu safe
+                ]);
+
+                // Si l'article existe déjà, relancer la route de création d'article
+
+                if ($similarArticle) {
+                    $this->addFlash('error', "Un article similaire existe");
+                    return $this->redirectToRoute('articles_createNewArticle');
+                }
 
                 $article->setContent($safeContentArticle)
                     ->setCreatedAt(new DateTimeImmutable())
@@ -140,11 +155,10 @@ class ArticleController extends AbstractController
                     ->setContent($message)
                     ->setArticle($article);
                 $entityManager->persist($notification);
+                $entityManager->flush();
 
                 // Envoyer une notification à l'Admin avant de redirigier l'utilisateur
-                $notif->send($message, $type, $idObject);
-
-                $entityManager->flush();
+                $notif->send($message, $type, $idObject, $notification->getId());
 
                 return $this->redirectToRoute('articles_showAll');
             }

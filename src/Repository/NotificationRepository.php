@@ -45,7 +45,7 @@ class NotificationRepository extends ServiceEntityRepository
     public function getUnreadNotifications()
     {
         return $this->createQueryBuilder('n') // n est une alias personnalisé désignant un objet Notification
-            ->orderBy('n.createdAt', 'ASC') // le nom des champs doit correspondre à la syntaxe présente sur les propriétés de l'entité Notification
+            ->orderBy('n.createdAt', 'DESC') // le nom des champs doit correspondre à la syntaxe présente sur les propriétés de l'entité Notification
             ->where('n.isRead = false')
             ->getQuery()
             ->getResult();

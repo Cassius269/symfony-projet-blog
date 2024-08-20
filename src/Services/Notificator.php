@@ -22,7 +22,7 @@ class Notificator
     }
 
     // public function send(string $message, string $type, User $author)
-    public function send(string $message, string $type, int $idObject): void
+    public function send(string $message, string $type, int $idObject, int $idNotif): void
     {
         $author = $this->security->getUser();
         $authorFullName = $author != null ?  $author->getFullName() : "un utilisateur non connecté";
@@ -35,6 +35,7 @@ class Notificator
                 'type' => $type,
                 'author' => $authorFullName, // Attribuer l'auteur d'une notification comme étant l'utilisateur connecté faisant l'action à l'origine de la notification instantannée
                 'idObject' => $idObject,
+                'idNotif' => $idNotif,
                 'unReadNotifications' => $unReadNotifications,
             ])
         );

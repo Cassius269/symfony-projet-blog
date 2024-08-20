@@ -11,11 +11,11 @@ if (notif.message) { // Si une notification a été détectée
 if (notif.type === "article") { // Si la notification concerne un article
 console.log("notif de type ", notif.type);
 incrementNumberOfNotifcations();
-listeNotifications.insertAdjacentHTML("afterbegin", "<li><a href='/articles/" + notif.idObject + "'>" + notif.message + "</a></li>");
+listeNotifications.insertAdjacentHTML("afterbegin", "<li><a href='/articles/" + notif.idObject + "?id_notif=" + notif.idNotif + "'>" + notif.message + "</a></li>");
 } else if (notif.type === "demand") {
 console.log("notif de type ", notif.type);
 incrementNumberOfNotifcations();
-listeNotifications.insertAdjacentHTML("afterbegin", "<li><a href='/admin/list-demands/" + notif.idObject + "'>" + notif.message + "</a></li>");
+listeNotifications.insertAdjacentHTML("afterbegin", "<li><a href='/admin/list-demands/" + notif.idObject + "?id_notif=" + notif.idNotif + "''>" + notif.message + "</a></li>");
 }
 }
 }
