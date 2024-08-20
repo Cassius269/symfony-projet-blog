@@ -11,7 +11,7 @@
 	{{ encore_entry_link_tags('dashboard') }}
 {% endblock %}
 {% block body %}
-	<h1>Dashboard</h1>
+	<h1>Dashboard de  {{ app.user.fullname }}</h1>
 	{% include "partials/_form_search.html.twig" %}{# Affichage des élements du dashboard en fonction du rôle de l'utilisateur #}{% if is_granted("ROLE_AUTHOR") %}
 		<section>
 			{# Publier un nouvel article #}

@@ -42,10 +42,9 @@ class ArticleController extends AbstractController
         NotificationRepository $notificationRepository,
         Notificator $notificator
     ): Response {
-        $idNotif = $request->get('id_notif');
-
         // dd($idNotif);
         // dd($article);
+        // dd($this->getUser());
 
         if (!$article) { // Si il n'y pas d'article trouvé, envoyer un message d'exception
             throw $this->createNotFoundException('Article introuvable');
@@ -56,6 +55,9 @@ class ArticleController extends AbstractController
 
         // Changer l'état d'une notification en déjà lue au clic par l'Admin
         if ($this->getUser() && $this->getUser()->getRoles() === ["ROLE_ADMIN"]) { // Si c'est un utilisateur connecté qui accède et qu'il est Admin
+            $idNotif = $request->get('id_notif'); 
+            // dd($idNotif);
+
             dump('L\'utilisateur connecté est un Admin');
             // Chercher la notification à l'origine de l'action de notification
             // Plusieurs objets notifications peuvent êre reliées à un même objet article pour differentes actions (update, delete, remove)
