@@ -1,6 +1,7 @@
 <script>
 	// Fonctionnalité: afficher dynamiquement les notifications instantannées
 let listeNotifications = document.querySelector("#listNotifications");
+let numberOfNotifcationsElement = document.querySelector("#numberOfNotifcations");
 
 const eventSource = new EventSource("{{ mercure('notifications')|escape('js') }}");
 eventSource.onmessage = event => { // Will be called every time an update is published by the server
@@ -10,18 +11,33 @@ console.log(notif);
 if (notif.message) { // Si une notification a été détectée
 if (notif.type === "article") { // Si la notification concerne un article
 console.log("notif de type ", notif.type);
-incrementNumberOfNotifcations();
+incrementNumberOfNotifcations(numberOfNotifcationsElement);
 listeNotifications.insertAdjacentHTML("afterbegin", "<li><a href='/articles/" + notif.idObject + "?id_notif=" + notif.idNotif + "'>" + notif.message + "</a></li>");
 } else if (notif.type === "demand") {
 console.log("notif de type ", notif.type);
-incrementNumberOfNotifcations();
+incrementNumberOfNotifcations(numberOfNotifcationsElement);
+
 listeNotifications.insertAdjacentHTML("afterbegin", "<li><a href='/admin/list-demands/" + notif.idObject + "?id_notif=" + notif.idNotif + "''>" + notif.message + "</a></li>");
 }
 }
+showNumberOfUnreadNotification(numberOfNotifcationsElement);
+
 }
 
-function incrementNumberOfNotifcations() {
-let numberOfNotifcations = document.querySelector("#numberOfNotifcations");
-numberOfNotifcations.textContent ++; // Prendre la valeur contenu dans l'élement et l'incrémenter à chaque notification
+// Fonction pour incrémenter le nombre de notifications non lues à chaque nouvelle notification
+function incrementNumberOfNotifcations(elementNumberNotification) {
+elementNumberNotification.textContent ++; // Prendre la valeur contenu dans l'élement et l'incrémenter à chaque notification
 }
+
+// Fonction pour afficher le nombre de notifications non lues uniquement si il y en a
+function showNumberOfUnreadNotification(elementNumberNotification){
+	if(elementNumberNotification.textContent == 0){
+		elementNumberNotification.style.visibility = "hidden";
+	}else {
+				elementNumberNotification.style.visibility = "visible";
+	}
+}
+
+showNumberOfUnreadNotification(numberOfNotifcationsElement);
+
 </script>

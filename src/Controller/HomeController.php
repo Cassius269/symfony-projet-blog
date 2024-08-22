@@ -52,7 +52,7 @@ class HomeController extends AbstractController
     #[IsGranted("ROLE_ADMIN")] // Protégér la route de test contre toute tentative d'autres utilisateurs
     public function publish(Notificator $notif): Response
     {
-        $notif->send('Un mail a été envoyé', 'demand', 20, 10);
+        $notif->send('Une demande a été envoyée', 'demand', 20, 10);
 
         return new Response('Notification envoyée!');
     }

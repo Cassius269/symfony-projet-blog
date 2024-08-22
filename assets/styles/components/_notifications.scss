@@ -37,8 +37,9 @@
     }
     #listNotifications {
         max-width: 388px;
-        min-height: 100px;
-        padding: 1rem;
+        min-height: 40px;
+        height: auto;
+        padding: 1rem 1rem 1rem 2rem;
         background-color: #EEC196;
         position: absolute;
         margin: 3rem 0 0 -18rem; // Le margin a l'avantage de ne pas changer la position de l'élément en fonction de la taille de l'écran
