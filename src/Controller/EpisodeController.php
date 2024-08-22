@@ -19,9 +19,9 @@ class EpisodeController extends AbstractController
     public function showDetailledEpisode(Podcast $podcast, Episode $episode, EpisodeRepository $episodeRepository): Response
     {
         // dd($podcast->getName());
-        $randomEpisodes = $episodeRepository->getSimilarRandomContents("Episode", $podcast->getName(), 3);
+        $randomEpisodes = $episodeRepository->getSimilarRandomEpisodes($podcast,3);
 
-        dd($randomEpisodes);
+        //dd($randomEpisodes);
         return $this->render('episodes/show_detailled_episode.html.twig', [
             'randomEpisodes' => $randomEpisodes,
         ]);

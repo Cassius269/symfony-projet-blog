@@ -62,4 +62,31 @@ main {
 
        }
     }
+
+    // Stylisation de la section contenant les recommandations d'épisodes de podcast
+    #sectionAudioPlayers {
+        .divAllPlayers {
+            @media screen and (width >= 1024px ) {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 4rem;
+                .inputPlusTrackTime {
+                    width: 10px;
+                }
+            }
+                        .sectionGlobaleLecteur {
+                            h3 {
+                                right: 0px !important; 
+                                top: 2.5rem !important; 
+                            }
+                            .sectionLecteurAudio {
+                                @media screen and (width >= 1024px ) {
+                                    width: 442px;
+
+                                }
+                            }
+
+                    }
+   
+}}
 }

@@ -44,23 +44,24 @@
                 padding-top: 3rem;
                 display: flex;
                 flex-direction: column;
-                justify-content: space-around;
                 width: 80.4vw;
                 position: relative;
                 top: 1rem;
                 height: 449px;// ajouter
-                .imageProfile {
-                    height: 90px;
-                    display: block;
-                    margin: auto;
+                #linkDefaultProfile {
+                    .imageProfile {
+                        height: 90px;
+                        display: block;
+                        margin: auto;
+                    }
                 }
-
+                
                 .headerNavListLinksRight {
+                    height: 284px;
                     list-style: none;
-                    height: 90px;
                     display: flex;
                     flex-direction: column;
-                    justify-content: space-around;
+                    // justify-content: space-around;
                     align-items: center;
                     margin-bottom: 18rem;
                     gap: 1.5rem;

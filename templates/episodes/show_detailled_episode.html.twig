@@ -67,8 +67,11 @@
 {% if randomEpisodes %}
 	<section id="sectionAudioPlayers">
 		<h2>Les recommandations</h2>
+		<div class="divAllPlayers">
 		{% for episode in randomEpisodes %}
 			{% include "partials/_audio_player.html.twig" with { url: episode.audio, podcast: episode.podcast.name, title: episode.title }   %}
 		{% endfor %}
+		</div>
+		
 	</section>
 {% endif %}{% endblock %}
