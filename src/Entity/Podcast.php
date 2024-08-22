@@ -48,6 +48,9 @@ class Podcast
     #[ORM\OneToMany(targetEntity: Notification::class, mappedBy: 'podcast')]
     private Collection $notifications;
 
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $slogan = null;
+
     public function __construct()
     {
         $this->episodes = new ArrayCollection();
@@ -175,6 +178,18 @@ class Podcast
                 $notification->setPodcast(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSlogan(): ?string
+    {
+        return $this->slogan;
+    }
+
+    public function setSlogan(string $slogan): static
+    {
+        $this->slogan = $slogan;
 
         return $this;
     }

@@ -57,6 +57,9 @@ class Episode
     #[ORM\ManyToMany(targetEntity: Guest::class, inversedBy: 'episodes')]
     private Collection $guest;
 
+    #[ORM\Column(length: 255)]
+    private ?string $audio = null;
+
     public function __construct()
     {
         $this->guest = new ArrayCollection();
@@ -171,6 +174,18 @@ class Episode
     public function removeGuest(Guest $guest): static
     {
         $this->guest->removeElement($guest);
+
+        return $this;
+    }
+
+    public function getAudio(): ?string
+    {
+        return $this->audio;
+    }
+
+    public function setAudio(string $audio): static
+    {
+        $this->audio = $audio;
 
         return $this;
     }

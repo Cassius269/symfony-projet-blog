@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Article;
+use App\Repository\Trait\Reposositorytrait;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -11,6 +12,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ArticleRepository extends ServiceEntityRepository
 {
+    use Reposositorytrait; // Utilisation des méthodes se trouvant dans le trait Reposositorytrait
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Article::class);

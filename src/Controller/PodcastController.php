@@ -24,13 +24,4 @@ class PodcastController extends AbstractController
             'podcast' => $podcast,
         ]);
     }
-
-    #[Route(
-        path: '/podcasts/{podcast}/{episode}',
-        name: 'show_detailled_episode'
-    )]
-    public function showDetailledEpisode(Podcast $podcast, Episode $episode): Response
-    {
-        return $this->render('podcasts/show_detailled_episode.html.twig', []);
-    }
 }

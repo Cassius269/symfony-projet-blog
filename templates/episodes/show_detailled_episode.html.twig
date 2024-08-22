@@ -63,9 +63,12 @@
 		<p>Enfin, l'émission a été rythmée par des interactions avec les auditeurs, permettant à chacun de partager ses expériences et de poser des questions directement à nos experts.</p>
 	</article>
 </section>
-<section id="sectionAudioPlayers">
-	<h2>Les recommandations</h2>
-	{% set link =  "/upload/podcast/hardheaded_ilovethewayyousee.mp3" %}
-	{% include "partials/_audio_player.html.twig" with { url: link, podcast: "L'oeil de la mode", title: "La mode en 2024" }   %}
-	{% include "partials/_audio_player.html.twig" with { url: link, podcast: "L'oeil de la mode", title: "La mode en 2024" }   %}
-</section>{% endblock %}
+{# Si des épisodes existent au point d'en faire de suggestion, alors les afficher en recommandation #}
+{% if randomEpisodes %}
+	<section id="sectionAudioPlayers">
+		<h2>Les recommandations</h2>
+		{% for episode in randomEpisodes %}
+			{% include "partials/_audio_player.html.twig" with { url: episode.audio, podcast: episode.podcast.name, title: episode.title }   %}
+		{% endfor %}
+	</section>
+{% endif %}{% endblock %}
