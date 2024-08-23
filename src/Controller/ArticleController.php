@@ -27,18 +27,25 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ArticleController extends AbstractController
 {
     #[Route('/', name: 'showAll')]
-    public function index(ArticleRepository $articleRepository, Request $request, PaginatorInterface $paginator): Response
+    public function index(ArticleRepository $articleRepository, Request $request, PaginatorInterface $paginator, AwsManager $awsManager): Response
     {
         // Récupération des articles du récent au plus ancien
         $data = $articleRepository->findBy([], [
             'createdAt' => 'DESC',
-        ] );
+        ]);
 
         // dd($data);
-
+        // Assignation des fichiers images stockés en objets chez AWS S3
+        foreach ($data as $article) {
+            // Obtenir le fichier image d'illustration de l'article
+            $file = $awsManager->readFile($article);
+            $article->setImage($file);
+        }
         // Mise en place de la logique de pagination
         $articles = $paginator->paginate(
-            $data, $request->query->getInt('page',1), 4
+            $data,
+            $request->query->getInt('page', 1), // 1 est le numéro de page initial
+            6 // 6 est la limite de résultat par page
         );
 
 

@@ -12,81 +12,31 @@
 {% block body %}
 	{% include "partials/_form_search.html.twig" %}
 	<h1>Les articles</h1>
-	<div class="divAllArticles">
-		<article class="boxArticle">
-			<h2>Le défilé De Diora sera dans les annales</h2>
-			<div class="divResumeArticle">
-				<p>Le défilé a pris un coup de boost avec le retour de Naomi Campbell sur la piste...</p>
-				<a href="">
-					<button>Lire la suite
-						<img src="{{ asset('images/iconeGotoDetailArticle.svg')}}" alt="icone représentant vers la droite pour lire un article en globalité"></button>
-				</a>
-			</div>
-		</article>
-		<article class="boxArticle">
-			<h2>Le défilé De Diora sera dans les annales</h2>
-			<div class="divResumeArticle">
-				<p>Le défilé a pris un coup de boost avec le retour de Naomi Campbell sur la piste...</p>
-				<a href="">
-					<button>Lire la suite
-						<img src="{{ asset('images/iconeGotoDetailArticle.svg')}}" alt="icone représentant vers la droite pour lire un article en globalité"></button>
-				</a>
-			</div>
-		</article>
-		<article class="boxArticle">
-			<h2>Le défilé De Diora sera dans les annales</h2>
-			<div class="divResumeArticle">
-				<p>Le défilé a pris un coup de boost avec le retour de Naomi Campbell sur la piste...</p>
-				<a href="">
-					<button>Lire la suite
-						<img src="{{ asset('images/iconeGotoDetailArticle.svg')}}" alt="icone représentant vers la droite pour lire un article en globalité"></button>
-				</a>
-			</div>
-		</article>
-		<article class="boxArticle">
-			<h3>Le défilé De Diora sera dans les annales</h3>
-			<div class="divResumeArticle">
-				<p>Le défilé a pris un coup de boost avec le retour de Naomi Campbell sur la piste...</p>
-				<a href="">
-					<button>Lire la suite
-						<img src="{{ asset('images/iconeGotoDetailArticle.svg')}}" alt="icone représentant vers la droite pour lire un article en globalité"></button>
-				</a>
-			</div>
-		</article>
-		<article class="boxArticle">
-			<h3>Le défilé De Diora sera dans les annales</h3>
-			<div class="divResumeArticle">
-				<p>Le défilé a pris un coup de boost avec le retour de Naomi Campbell sur la piste...</p>
-				<a href="">
-					<button>Lire la suite
-						<img src="{{ asset('images/iconeGotoDetailArticle.svg')}}" alt="icone représentant vers la droite pour lire un article en globalité"></button>
-				</a>
-			</div>
-		</article>
-		<article class="boxArticle">
-			<h3>Le défilé De Diora sera dans les annales</h3>
-			<div class="divResumeArticle">
-				<p>Le défilé a pris un coup de boost avec le retour de Naomi Campbell sur la piste...</p>
-				<a href="">
-					<button>Lire la suite
-						<img src="{{ asset('images/iconeGotoDetailArticle.svg')}}" alt="icone représentant vers la droite pour lire un article en globalité"></button>
-				</a>
-			</div>
-		</article>
-		<article class="boxArticle">
-			<h3>Le défilé De Diora sera dans les annales</h3>
-			<div class="divResumeArticle">
-				<p>Le défilé a pris un coup de boost avec le retour de Naomi Campbell sur la piste...</p>
-				<a href="">
-					<button>Lire la suite
-						<img src="{{ asset('images/iconeGotoDetailArticle.svg')}}" alt="icone représentant vers la droite pour lire un article en globalité"></button>
-				</a>
-			</div>
-		</article>
-	</div>
+	{% if articles is defined %}
+		<div class="divAllArticles">
+			{% for article in articles %}
+				<article class="boxArticle" style="background-image: url({{ article.image }})">
+					<h3>{{ article.title }}</h3>
+					<div
+						class="divResumeArticle">
+						{# Afficher les 55 premiers caractères du résumé #}
+						<p>{{ article.abstract | slice(0,55) }}...
+						</p>
+						<a href="{{ path("articles_showDetailedArticle", {id: article.id }) }}">
+							<button>Lire la suite
+								<img src="{{ asset('images/iconeGotoDetailArticle.svg')}}" alt="icone représentant vers la droite pour lire un article en globalité" loading="lazy"></button>
+						</a>
+					</div>
+				</article>
+			{% endfor %}
+		</div>
+	{% else %}
+		<p id="messageNoArticle">Aucun article publié pour l'instant</p>
+	{% endif %}
 
 
-	{# Inclusion du partial de la liste de numérotation des pages #}
-	{{ knp_pagination_render(articles) }}
-	{% include "partials/_list_numerotation_page.html.twig" %}
+	{# Mise en place du HTML de pagination grâce à la fonction Twig knp_pagination_render() apportée par KnpPaginator #}
+	{% if articles is defined %}
+		{{ knp_pagination_render(articles) }}
+	{% endif %}
 {% endblock %}

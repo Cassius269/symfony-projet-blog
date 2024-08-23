@@ -1,6 +1,7 @@
 @import '/assets/styles/utils/variables';
 @import '/assets/styles/components/buttons';
 @import '/assets/styles/components/formSearch';
+@import '/assets/styles/components/_paginator';
 @import '../utils/placeholders';
 
 
@@ -33,70 +34,22 @@ main {
             width: 1000px;
         }
         article{
-            background-image: url('../../../public/images/illustrations/illustrationArticleHome.png');
-            background-repeat: no-repeat;
-            background-size: cover;
-            color: white;
-            padding: 1rem;
-            height: 248px;
-            width: 150px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            line-height: 1.5rem;
-            
-            &:hover {
-                box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-                        }
-            @media screen and (min-width: 1024px) {
-                width: 240px;
-                height: 394px;
-            }
-            .divResumeArticle {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: flex-end;
-                button {
-                    padding:0px !important;
-                    background: transparent;
-                    color: white;
-                    border: none;
-                    @media screen and (min-width: 1024px){
-                        font-size: 16px;
-                        width: 235px;
-                        margin-right: -4rem;
-                    }
-                    img {
-                        position: relative;
-                        top: 6px;
-                        @media screen and (min-width: 1024px){
-                            top: 4px;
-                            width: 30px;
-                        }
-                    }                  
-                }
-                p{
-                    font-size: 12px;
-                    line-height: 11.8px;
-                    @media screen and (min-width: 1024px) {
-                        font-size: 15px;
-                        font-weight: 500;
-                        line-height: 1.1;
-                    }
-                }
-            }
-            h2 {
-               // font-size: calc($font-size*2.8);
-               font-size: 16px;
-                @media screen and (min-width: 1024px){
-                    font-size: 20px;
-                }
-            }
+            //ici
+            @extend %boxArticle;
         }
     }
 
 //Stylisation de la liste de numérotation des pages
 ul {
     @extend %numerotationPage;
+}
+
+// Stylisation de l'annonce qu'aucun article n'est disponible à la page de tous les articles
+#messageNoArticle {
+    text-align: center;
+    height: 40vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column-reverse;
 }
 }

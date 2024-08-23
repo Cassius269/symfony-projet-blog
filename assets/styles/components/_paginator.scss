@@ -1,0 +1,16 @@
+.pagination {
+    text-align: center;
+    @media screen and (width > 768px) {
+        font-size: 25px;
+    }
+    span {
+    border-radius: 50px;
+    bottom: 3px;
+    padding: 5px 10px;
+    position: relative;
+    }
+    .current {
+        background: #fa6c30;
+        color: #ffebcd;
+    }
+}

@@ -25,7 +25,7 @@ class HomeController extends AbstractController
         if (!$topArticle) {
             throw  $this->createNotFoundException("Aucun article disponible");
         }
-
+        // Récuperer le fichier image de l'article principal
         $file = $awsManager->readFile($topArticle);
         $topArticle->setImage($file);
 
