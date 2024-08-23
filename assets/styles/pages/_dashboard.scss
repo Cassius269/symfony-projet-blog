@@ -23,6 +23,13 @@
         @media screen and (min-width:1920px) {
             width: 79.5%;
         }
+
+        h1 {
+            margin-top: 2rem;
+            @media screen and (width > 768px) {
+                margin-top: 4rem;
+            }
+        }
         section {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -63,6 +70,7 @@
 
     
                 .primaryButton {
+                    margin-top: 23px;
                     @media screen and (min-width: 1024px) {
                         width: auto;                        
                         height: 64px;
