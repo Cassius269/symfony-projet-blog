@@ -37,17 +37,17 @@ button {
     border-radius: 30px;
     height: 50px;
     margin-top: 1rem;
-    width: 190px;
     color: #714534;
     background-color: white;
     border: 3px solid #714534;//3px
-    width: 240px;
-    padding: 10px;
-    padding-bottom: 35px;
-    font-size: 12px;
-    @media screen and (min-width:1024px) {
+    width: auto;
+    font-size: 12px;    
+    @media screen and (width > 1024px) {
         font-size: 24px;
-        border: 5px solid #714534;
+        padding: 0.4rem 2rem;
+        width: auto;
+        height: 64px;
+        width: 371px;
     }
 }
 

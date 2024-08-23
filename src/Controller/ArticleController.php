@@ -4,18 +4,19 @@ namespace App\Controller;
 
 use DateTimeImmutable;
 use App\Entity\Article;
-use App\Entity\Notification;
 use App\Form\ArticleType;
-use App\Repository\ArticleRepository;
-use App\Repository\NotificationRepository;
+use App\Entity\Notification;
 use App\Services\AwsManager;
 use App\Services\Notificator;
+use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bridge\Doctrine\Attribute\MapEntity;
+use App\Repository\NotificationRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\HtmlSanitizer\HtmlSanitizerInterface;
@@ -26,9 +27,24 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ArticleController extends AbstractController
 {
     #[Route('/', name: 'showAll')]
-    public function index(): Response
+    public function index(ArticleRepository $articleRepository, Request $request, PaginatorInterface $paginator): Response
     {
-        return $this->render('articles/all_articles_page.html.twig', []);
+        // Récupération des articles du récent au plus ancien
+        $data = $articleRepository->findBy([], [
+            'createdAt' => 'DESC',
+        ] );
+
+        // dd($data);
+
+        // Mise en place de la logique de pagination
+        $articles = $paginator->paginate(
+            $data, $request->query->getInt('page',1), 4
+        );
+
+
+        return $this->render('articles/all_articles_pages.html.twig', [
+            'articles' => $articles
+        ]);
     }
 
     #[Route(

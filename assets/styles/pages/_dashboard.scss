@@ -64,21 +64,26 @@
     
                 .primaryButton {
                     @media screen and (min-width: 1024px) {
-                        width: 371px;
+                        width: auto;                        
                         height: 64px;
+                        padding: 0 4rem;
                     }
                 }
 
                 .secondaryButton {
-                    // Ecraser les propriétés de la classe secondaryButton ajouté à certains boutons du dashboard
-                    height: 43px;
-                    width: 147px;
-                    padding: 0px;
+                //     // Ecraser les propriétés de la classe secondaryButton ajouté à certains boutons du dashboard
+                //     height: 43px;
+                //     width: 147px;
+                //     padding: 0px;
+                @media screen and (width < 1024px){
+                    width: 177px;
 
-                    @media screen and (min-width: 1024px) {
-                        width: 283px;
-                        height: 64px;
-                    }
+                }
+
+                //     @media screen and (min-width:1024px) {
+                //         width: auto;
+                //         padding: 1rem 2rem;
+                //     }
                 }
 
                 .buttonManagePodcast{
