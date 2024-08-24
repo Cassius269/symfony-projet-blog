@@ -4,12 +4,13 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Demand;
-use App\Entity\Notification;
 use App\Form\DemandType;
-use App\Repository\DemandRepository;
+use App\Entity\Notification;
 use App\Services\AwsManager;
 use App\Services\Notificator;
+use App\Repository\DemandRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\NotificationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -107,12 +108,33 @@ class AdminController extends AbstractController
     // Action pour étudier une demande de devenir collaborateur en particulier
     #[Route(path: '/list-demands/{id}', name: 'detail_demand')]
     #[IsGranted('ROLE_ADMIN')] // Seul un utilisateur ayant le rôle "ROLE_ADMIN" à cette route
-    public function giveResponseToDemand(Demand $demand, Request $request, EntityManagerInterface $entityManager, AwsManager $awsStorage): Response
+    public function giveResponseToDemand(Demand $demand, Request $request, EntityManagerInterface $entityManager, AwsManager $awsStorage, NotificationRepository $notificationRepository): Response
     {
         dump($demand);
         $user = new User();
 
         $cvFile = $awsStorage->readCVFiles($demand);
+
+        // Changer l'état d'une notification en déjà lue au clic par l'Admin
+        if ($this->getUser() && $this->getUser()->getRoles() === ["ROLE_ADMIN"]) { // Si c'est un utilisateur connecté qui accède et qu'il est Admin
+            $idNotif = $request->get('id_notif');
+            // dd($idNotif);
+
+            dump('L\'utilisateur connecté est un Admin');
+            // Chercher la notification à l'origine de l'action de notification
+            // Plusieurs objets notifications peuvent êre reliées à un même objet article pour differentes actions (update, delete, remove)
+            if ($idNotif) { // Si l'Admin accède à l'URL avec un paramètre "id_notification" disponible
+                $notification = $notificationRepository->findById($idNotif)[0]; // Chercher la notification
+                // dd($notification);
+                $notification->setRead(true); // Mettre à jour la notification à déjà lue
+                $entityManager->flush(); // Mettre à jour la base de données
+
+                // Stocker dans la session à nouveau les notifications non lues réactualisées
+                $unReadNotifications = $notificationRepository->getUnreadNotifications();
+                $session = $request->getSession(); // Obtenir la session
+                $session->set('unReadNotifications', $unReadNotifications);
+            }
+        }
         return $this->render("admin/demand_detail.html.twig", [
             'demand' => $demand,
             'cvFile' => $cvFile,
