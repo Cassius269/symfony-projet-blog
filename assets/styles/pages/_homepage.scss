@@ -4,7 +4,7 @@
 @import '../utils/placeholders';
 
 main {
-    margin-bottom: 60rem !important;
+    margin-bottom: 9rem !important;
     @media screen and (min-width: 1024px) {
         margin:0px auto  6rem auto !important;
     }
@@ -98,6 +98,7 @@ main {
             display: flex;
             flex-direction: column;
             gap: 3rem;
+            align-items: center !important;
             @media screen and (min-width: 1024px) {
                 flex-direction: row;
                 justify-content: space-around;

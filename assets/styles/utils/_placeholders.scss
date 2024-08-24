@@ -60,6 +60,15 @@
             font-size: 20px;
         }
     }
+
+    h3 {
+        font-size: 11px;
+        line-height: normal;
+        @media screen and (min-width: 768px){
+            font-size: 1.17em;
+            line-height: 1.5rem;;
+        }
+    }
 }
 
 // Rendre le main responsive pour les pages de formulaire devenir membre, création d'article

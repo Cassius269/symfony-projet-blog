@@ -11,7 +11,7 @@ services:
   # default configuration for services in *this* file
   _defaults:
     autowire: true # injection automatique des dépendances
-    autoconfigure: true # enregistrement automatique des services nouvelles créées en tant que service
+    autoconfigure: true # enregistrement automatique des services nouvellement créées en tant que service
 
   # makes classes in src/ available to be used as services
   # this creates a service per class whose id is the fully-qualified class name

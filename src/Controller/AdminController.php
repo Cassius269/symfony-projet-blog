@@ -63,9 +63,6 @@ class AdminController extends AbstractController
 
             $this->addFlash('success', 'Votre demande a été envoyée avec succès'); // Afficher un message de succès
 
-            // Envoyer une notification instantannée à l'Admin
-            $notificator->send("Une nouvelle demande", "demand", $demand->getId());
-
             // Créer un objet notification à stocker en base de données pour rappel
             $notification = new Notification();
             $notification->setCreatedAt(new \DateTimeImmutable())
@@ -77,7 +74,10 @@ class AdminController extends AbstractController
             $entityManager->persist($notification);
             $entityManager->flush();
 
-            // Renvoyer le demandeur à la page d'accueil
+            // Envoyer une notification instantannée à l'Admin
+            $notificator->send("Une nouvelle demande", "demand", $demand->getId(), $notification->getId());
+
+            // Rediriger le demandeur à la page d'accueil
             return $this->redirectToRoute('home');
         }
 
