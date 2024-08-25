@@ -80,9 +80,12 @@
 
 	{# Si l'utilisateur est en mode édition, le bouton apparaitra #}
 	{% if is_granted("ROLE_AUTHOR") and article is defined %}
-		<a href="{{ path('articles_remove', {'id': article.id})}}">
-			<button id="deleteButton">Supprimer l'article</button>
-		</a>
+		{# <a href="{{ path('articles_remove', {'id': article.id})}}">
+																																						</a> #}
+		{# Debut du test de la protection CSRF #}
+			<form action="{{ path('articles_remove', {'id': article.id })}}" method="POST"> <input type="hidden" name="_token" value="{{ csrf_token('delete-article-' ~ article.id) }}">
+			<button type="submit" id="deleteButton">Supprimer l'article</button>
+		</form>
 	{% endif %}
 
 {% endblock %}

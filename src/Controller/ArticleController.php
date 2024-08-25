@@ -16,7 +16,6 @@ use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\HtmlSanitizer\HtmlSanitizerInterface;
@@ -206,21 +205,36 @@ class ArticleController extends AbstractController
         path: '/remove/{id}',
         name: 'remove'
     )]
-    public function removeArticle(Article $article, EntityManagerInterface $entityManager): Response
+    public function removeArticle(Article $article, EntityManagerInterface $entityManager, Request $request): Response
     {
         // Garantir que l'action de suppresion d'un article ne sera autorisée que par l'Admin ou l'auteur de l'article lui-même
         $this->denyAccessUnlessGranted('REMOVE_ARTICLE', $article); // Gestion de la permission de suppresion par un voter
+
 
         if (!$article) {
             throw new NotFoundHttpException('Article introuvable');
         }
 
-        if ($article) {
-            $entityManager->remove($article);
-            $entityManager->flush();
-            $this->addFlash("success", "article supprimé");
+        // Vérifier la validité du token CSRF avant de procéder à la suppresion de l'article
+        $submittedToken = $request->request->get('_token');
+        $intention = 'delete-article' . $article->getId();
+        dd([
+            'intention' => $intention,
+            'submittedToken' => $submittedToken,
+            'isValid' => $this->isCsrfTokenValid($intention, $submittedToken)
+        ]);
+
+        if ($this->isCsrfTokenValid('delete-article' . $article->getId(), $submittedToken)) {
+            if ($article) {
+                $entityManager->remove($article);
+                $entityManager->flush();
+                $this->addFlash("success", "Article supprimé"); // Envoi d'un message de succès
+            }
+        } else {
+            $this->addFlash('error', 'Token CSRF invalide');
         }
 
+        // Rediriger l'utilsateur vers la page d'accueil de l'application si suppression réussi
         return $this->redirectToRoute('home');
     }
 

@@ -21,8 +21,9 @@ security:
         #always_remember_me: true
       provider: app_user_provider
       form_login:
-        login_path: login
-        check_path: login
+        login_path: login # nom de la route de connexion d'un utilisateur à l'application
+        check_path: login # route de vérification des données entrées par l'utilisateur lors de la connexion
+        enable_csrf: true # Option pour vérifier le jeton CSRF à la connexion de l'utilisateur
       logout:
         path: /logout
       login_throttling:

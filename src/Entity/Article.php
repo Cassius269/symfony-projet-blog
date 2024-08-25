@@ -64,7 +64,7 @@ class Article
     /**
      * @var Collection<int, Notification>
      */
-    #[ORM\OneToMany(targetEntity: Notification::class, mappedBy: 'article')]
+    #[ORM\OneToMany(targetEntity: Notification::class, cascade: ["remove"], mappedBy: 'article')]
     private Collection $notifications;
 
     public function __construct()

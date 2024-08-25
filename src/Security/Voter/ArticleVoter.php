@@ -21,7 +21,7 @@ class ArticleVoter extends Voter
 
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
-        $user = $token->getUser();
+        $user = $token->getUser(); // Récupération de l'utilisateur connecté
 
         // if the user is anonymous, do not grant access
         if (!$user instanceof UserInterface) {
