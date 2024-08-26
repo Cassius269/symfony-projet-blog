@@ -83,7 +83,8 @@
 		{# <a href="{{ path('articles_remove', {'id': article.id})}}">
 																																						</a> #}
 		{# Debut du test de la protection CSRF #}
-			<form action="{{ path('articles_remove', {'id': article.id })}}" method="POST"> <input type="hidden" name="_token" value="{{ csrf_token('delete-article-' ~ article.id) }}">
+		<form action="{{ path('articles_remove', {'id': article.id })}}" method="POST">
+			<input type="hidden" name="_token" value="{{ csrf_token('delete-article-' ~ article.id) }}">
 			<button type="submit" id="deleteButton">Supprimer l'article</button>
 		</form>
 	{% endif %}

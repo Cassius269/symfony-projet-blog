@@ -222,9 +222,9 @@ class ArticleController extends AbstractController
             'intention' => $intention,
             'submittedToken' => $submittedToken,
             'isValid' => $this->isCsrfTokenValid($intention, $submittedToken)
-        ]);
+        ], $this->isCsrfTokenValid('delete-article-' . $article->getId(), $submittedToken));
 
-        if ($this->isCsrfTokenValid('delete-article' . $article->getId(), $submittedToken)) {
+        if ($this->isCsrfTokenValid('delete-article-' . $article->getId(), $submittedToken)) {
             if ($article) {
                 $entityManager->remove($article);
                 $entityManager->flush();
