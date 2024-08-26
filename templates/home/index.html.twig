@@ -29,19 +29,19 @@
 
 		<div class="divArticlesOfTheWeek">
 			{% for article in topArticles %}
-				<article class="boxArticle" style="background-image: url({{ article.image }})">
-					<h3>{{ article.title }}</h3>
-					<div
-						class="divResumeArticle">
-						{# Afficher les 55 premiers caractères du résumé #}
-						<p>{{ article.abstract | slice(0,55) }}...
-						</p>
-						<a href="{{ path("articles_showDetailedArticle", {id: article.id }) }}">
+				<a href="{{ path("articles_showDetailedArticle", {id: article.id }) }}">
+					<article class="boxArticle" style="background-image: url({{ article.image }})">
+						<h3>{{ article.title }}</h3>
+						<div
+							class="divResumeArticle">
+							{# Afficher les 55 premiers caractères du résumé #}
+							<p>{{ article.abstract | slice(0,55) }}...
+							</p>
 							<button>Lire la suite
 								<img src="{{ asset('images/iconeGotoDetailArticle.svg')}}" alt="icone représentant vers la droite pour lire un article en globalité" loading="lazy"></button>
-						</a>
-					</div>
-				</article>
+						</div>
+					</article>
+				</a>
 			{% endfor %}
 		</div>
 	</section>
