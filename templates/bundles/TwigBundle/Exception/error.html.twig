@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+{% block title %}Erreur serveur{% endblock %}
+{% block stylesheets %}
+{{ parent()}}
+{{ encore_entry_link_tags('errorMessages')}}
+{% endblock %}
+{% block body %}
+{# Message d'erreur pour les accès refusées #}
+    <h1>Erreur technique</p>
+    <p>
+        Veuillez contacter l'Administrateur à l'adresse:  <a>contact@fahami.fr</a>.
+    </p>
+
+{% endblock %}

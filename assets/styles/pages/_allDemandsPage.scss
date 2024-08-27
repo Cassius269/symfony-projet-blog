@@ -7,7 +7,9 @@
 main {
     // Stylisation du main à l'aide du placeholder "%mainResponsive"
     @extend %mainResponsive;
-    // height: 54vh;
+    @media screen and (min-width: 1024px) {
+        height: 54vh;
+    }
     h1 {
         margin: 3rem 0;
         text-align: center;

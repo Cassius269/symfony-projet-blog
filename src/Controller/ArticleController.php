@@ -220,18 +220,12 @@ class ArticleController extends AbstractController
 
         // Vérifier la validité du token CSRF avant de procéder à la suppresion de l'article
         $submittedToken = $request->request->get('_token');
-        $intention = 'delete-article' . $article->getId();
-        dd([
-            'intention' => $intention,
-            'submittedToken' => $submittedToken,
-            'isValid' => $this->isCsrfTokenValid($intention, $submittedToken)
-        ], $this->isCsrfTokenValid('delete-article-' . $article->getId(), $submittedToken));
 
         if ($this->isCsrfTokenValid('delete-article-' . $article->getId(), $submittedToken)) {
             if ($article) {
                 $entityManager->remove($article);
                 $entityManager->flush();
-                $this->addFlash("success", "Article supprimé"); // Envoi d'un message de succès
+                $this->addFlash("success", "Article supprimé avec succès"); // Envoi d'un message de succès
             }
         } else {
             $this->addFlash('error', 'Token CSRF invalide');

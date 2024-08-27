@@ -1,0 +1,13 @@
+main {
+    height: 67vh;
+        h1, p {
+        text-align: center;
+    }
+
+    h1 {
+        margin-top: 1rem;
+        @media screen and (min-width: 768px){
+        margin-top: 2rem;
+        }
+    }
+}
