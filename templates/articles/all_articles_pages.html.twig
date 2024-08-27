@@ -12,7 +12,8 @@
 {% block body %}
 	{% include "partials/_form_search.html.twig" %}
 	<h1>Les articles</h1>
-	{% if articles is defined %}
+	
+	{% if articles.items is not empty%}
 		<div class="divAllArticles">
 			{% for article in articles %}
 				<a href="{{ path("articles_showDetailedArticle", {id: article.id }) }}">

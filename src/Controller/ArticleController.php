@@ -25,7 +25,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 #[Route(path: '/articles', name: 'articles_')]
 class ArticleController extends AbstractController
 {
-    #[Route('/', name: 'showAll')]
+    #[Route(path:'/', name: 'showAll', methods: 'GET')]
     public function index(ArticleRepository $articleRepository, Request $request, PaginatorInterface $paginator, AwsManager $awsManager): Response
     {
         // Récupération des articles du récent au plus ancien
@@ -56,6 +56,7 @@ class ArticleController extends AbstractController
     #[Route(
         path: '/{id}',
         name: 'showDetailedArticle',
+        methods: 'GET'
     )]
     public function showDetailledArticle(
         Article $article,
@@ -112,7 +113,8 @@ class ArticleController extends AbstractController
 
     #[Route(
         path: '/author/create-article',
-        name: 'createNewArticle'
+        name: 'createNewArticle', 
+        methods: ['GET', 'POST']
     )]
     #[IsGranted("ROLE_AUTHOR")]
     public function createArticle(Request $request, Security $security, EntityManagerInterface $entityManager, HtmlSanitizerInterface $htmlSanitizer, Notificator $notif, ArticleRepository $articleRepository): Response
@@ -203,7 +205,8 @@ class ArticleController extends AbstractController
 
     #[Route(
         path: '/remove/{id}',
-        name: 'remove'
+        name: 'remove', 
+        methods: 'POST'
     )]
     public function removeArticle(Article $article, EntityManagerInterface $entityManager, Request $request): Response
     {
@@ -238,7 +241,7 @@ class ArticleController extends AbstractController
         return $this->redirectToRoute('home');
     }
 
-    #[Route(path: '/author/update-article/{id}', name: 'update')]
+    #[Route(path: '/author/update-article/{id}', name: 'update', methods: ['GET', 'POST'])]
     #[IsGranted("ROLE_AUTHOR")]
     public function updateArticle(Article $article, Request $request, EntityManagerInterface $entityManager, HtmlSanitizerInterface $htmlSanitizer, AwsManager $awsManager): Response
     {

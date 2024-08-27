@@ -13,7 +13,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'home')]
+    #[Route(path:'/', name: 'home', methods: 'GET')]
     public function index(ArticleRepository $articleRepository, AwsManager $awsManager): Response
     {
         // Récuperer l'article top 1, le plus lu par les utilisateurs

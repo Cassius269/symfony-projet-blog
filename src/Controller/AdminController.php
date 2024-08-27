@@ -25,6 +25,7 @@ class AdminController extends AbstractController
     #[Route(
         path: '/becoming-member',
         name: 'get_demand_members',
+        methods: ['GET', 'POST']
     )]
     public function index(Request $request, EntityManagerInterface $entityManager, DemandRepository $demandRepository, Notificator $notificator): Response
     {
@@ -69,7 +70,7 @@ class AdminController extends AbstractController
             $notification->setCreatedAt(new \DateTimeImmutable())
                 ->setType('demand')
                 ->setRead(false)
-                ->setContent('Une nouvelle demande a été créé')
+                ->setContent('Une nouvelle demande a été créée')
                 ->setDemand($demand);
             // ->setAuthor(null);
             $entityManager->persist($notification);
@@ -89,7 +90,11 @@ class AdminController extends AbstractController
 
     // Action pour afficher la liste de toutes les demandes
 
-    #[Route(path: '/list-demands', name: 'list_demands')]
+    #[Route(
+        path: '/list-demands', 
+        name: 'list_demands',
+        methods: 'GET'
+    )]
     #[IsGranted('ROLE_ADMIN')] // Seul un utilisateur ayant le rôle "ROLE_ADMIN" à cette route
     public function showAllDemands(DemandRepository $demandRepository): Response
     {
@@ -106,7 +111,7 @@ class AdminController extends AbstractController
     }
 
     // Action pour étudier une demande de devenir collaborateur en particulier
-    #[Route(path: '/list-demands/{id}', name: 'detail_demand')]
+    #[Route(path: '/list-demands/{id}', name: 'detail_demand', methods: ['GET', 'POST'])] // Les méthodes sont GET et POST car il y a un formulaire intégré prévu
     #[IsGranted('ROLE_ADMIN')] // Seul un utilisateur ayant le rôle "ROLE_ADMIN" à cette route
     public function giveResponseToDemand(Demand $demand, Request $request, EntityManagerInterface $entityManager, AwsManager $awsStorage, NotificationRepository $notificationRepository): Response
     {

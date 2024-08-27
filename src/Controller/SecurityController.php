@@ -42,7 +42,8 @@ class SecurityController extends AbstractController
     // Action pour connecter un utilisateur
     #[Route(
         path: '/login',
-        name: 'login'
+        name: 'login',
+        methods: ['GET','POST']
     )]
     public function connect(AuthenticationUtils $authenticationUtils): Response
     {

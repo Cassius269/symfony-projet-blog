@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DashboardController extends AbstractController
 {
-    #[Route('/dashboard', name: 'dashboard')]
+    #[Route(path:'/dashboard', name: 'dashboard', methods: 'GET')]
     #[IsGranted("IS_AUTHENTICATED_FULLY")]
     public function index(): Response
     {

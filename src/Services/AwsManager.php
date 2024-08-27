@@ -36,10 +36,9 @@ class AwsManager
     {
         $cvFileName = $demand->getCv(); // Récupérer le nom du fichier depuis la base de données
         $file = $this->awsStorage->read($cvFileName); // Récupérer le fichier depuis le service AWS S3
-        $file = base64_encode($file); // convertir le fichier binaire recupéré en base 64
-        $mimeType = $this->awsStorage->mimeType($demand->getCv()); // Récuperer l'extension du fichier
-        $file = "data:" . $mimeType . ";base64," . $file; // On assigne l'extension du fichier binaire au fichier encodé en base 64
-
+        $file = base64_encode($file); // convertir le fichier objet recupéré en base 64
+  
+        $file = "data:application/pdf;base64,".$file; // On assigne l'extension de l'objet récupéré au fichier encodé en base 64
         return $file;
     }
 }
