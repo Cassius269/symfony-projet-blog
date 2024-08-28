@@ -11,7 +11,8 @@
 	{{ encore_entry_link_tags('dashboard') }}
 {% endblock %}
 {% block body %}
-	<h1>Dashboard de  {{ app.user.fullname }}</h1>
+	<h1>Dashboard de
+		{{ app.user.fullname }}</h1>
 	{% include "partials/_form_search.html.twig" %}{# Affichage des élements du dashboard en fonction du rôle de l'utilisateur #}{% if is_granted("ROLE_AUTHOR") %}
 		<section>
 			{# Publier un nouvel article #}
@@ -67,7 +68,7 @@
 			<div class="divIconePlusAction">
 				<h2>Gérer  les demandes d’admission</h2>
 				<div class="divNumberNotifPlusIcone">
-					<p class="numberNotificationDashboard" id="numberNotifManagerNewDemandCollab">2</p>
+					<p class="numberNotificationDashboard" id="numberNotifManagerNewDemandCollab">{{ demands | length }}</p>
 					<img src=" {{ asset('/images/iconeUserInterface.png') }} " alt=" " id="iconeManagePeople"></div>
 				<a href="{{ path('admin_list_demands') }}" title="lien vers la page de gestion des demandes de devenir contributeur">
 					<button class="primaryButton">Gérer  les demandes d’admissions</button>
