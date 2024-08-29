@@ -25,7 +25,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 #[Route(path: '/articles', name: 'articles_')]
 class ArticleController extends AbstractController
 {
-    #[Route(path:'/', name: 'showAll', methods: 'GET')]
+    #[Route(path: '/', name: 'showAll', methods: 'GET')]
     public function index(ArticleRepository $articleRepository, Request $request, PaginatorInterface $paginator, AwsManager $awsManager): Response
     {
         // Récupération des articles du récent au plus ancien
@@ -59,7 +59,7 @@ class ArticleController extends AbstractController
         methods: 'GET'
     )]
     public function showDetailledArticle(
-        Article $article,
+        ?Article $article,
         EntityManagerInterface $entityManager,
         AwsManager $awsManager,
         Request $request,
@@ -113,7 +113,7 @@ class ArticleController extends AbstractController
 
     #[Route(
         path: '/author/create-article',
-        name: 'createNewArticle', 
+        name: 'createNewArticle',
         methods: ['GET', 'POST']
     )]
     #[IsGranted("ROLE_AUTHOR")]
@@ -205,10 +205,10 @@ class ArticleController extends AbstractController
 
     #[Route(
         path: '/remove/{id}',
-        name: 'remove', 
+        name: 'remove',
         methods: 'POST'
     )]
-    public function removeArticle(Article $article, EntityManagerInterface $entityManager, Request $request): Response
+    public function removeArticle(?Article $article, EntityManagerInterface $entityManager, Request $request): Response
     {
         // Garantir que l'action de suppresion d'un article ne sera autorisée que par l'Admin ou l'auteur de l'article lui-même
         $this->denyAccessUnlessGranted('REMOVE_ARTICLE', $article); // Gestion de la permission de suppresion par un voter
@@ -237,7 +237,7 @@ class ArticleController extends AbstractController
 
     #[Route(path: '/author/update-article/{id}', name: 'update', methods: ['GET', 'POST'])]
     #[IsGranted("ROLE_AUTHOR")]
-    public function updateArticle(Article $article, Request $request, EntityManagerInterface $entityManager, HtmlSanitizerInterface $htmlSanitizer, AwsManager $awsManager): Response
+    public function updateArticle(?Article $article, Request $request, EntityManagerInterface $entityManager, HtmlSanitizerInterface $htmlSanitizer, AwsManager $awsManager): Response
     {
         $this->denyAccessUnlessGranted('UPDATE_ARTICLE', $article); // Gestion de la permission de modification d'un artickle via un voter
 

@@ -59,7 +59,7 @@ class Article
     #[ORM\JoinColumn(nullable: false)]
     private ?MainImageIllustration $mainImageIllustration = null;
 
-    private ?String $image = null;
+    private ?string $image = null;
 
     /**
      * @var Collection<int, Notification>
