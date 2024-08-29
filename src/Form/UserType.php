@@ -51,12 +51,13 @@ class UserType extends AbstractType
             ->addDependent('podcasts', 'authorisations', function (DependentField $field, ?array $authorisations) {
                 // Mettre une condition pour l'affichage du champs dynamique
                 // Si la valeur de la sélection checkbox inclut "Peut publier une émission" alors afficher le champ dynamique
-                if ($authorisations !== null && in_array(2, $authorisations)) {                    // Création du champs "podcasts" non mappée en base de données
-                    $field->add(TextType::class, [
-                        'mapped' => false,
-                        "label" => "Sous-categorie"
-                    ]);
+                if (! $authorisations) {   // Création du champs "podcasts" non mappée en base de données
+                    return;
                 }
+                $field->add(TextType::class, [
+                    'mapped' => false,
+                    "label" => "Sous-categorie"
+                ]);
             });
     }
 
