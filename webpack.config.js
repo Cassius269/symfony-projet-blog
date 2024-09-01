@@ -11,6 +11,12 @@ Encore
     .setOutputPath('public/build/')
     // public path used by the web server to access the output path
     .setPublicPath('/build')
+    // Ajouter la possibilité de compiler les images se trouvant dans les assets précisément dans "./assets/images"
+    .copyFiles({
+        from: './assets/images', // Dossier de départ
+        to: 'images/[path][name].[hash:8].[ext]', // dossier de destination
+        pattern: /\.(png|jpg|jpeg|gif|svg|webp)$/ // Extensions acceptées pour la compilation
+    })
     // only needed for CDN's or subdirectory deploy
     //.setManifestKeyPrefix('build/')
 

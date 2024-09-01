@@ -22,7 +22,7 @@ main  {
         }
     // Stylisation du block article concernant le podcast "Oeil de la mode"
     #articleOeilDeLaMode {
-        @include makeDesignArticlePodcast('../../../public/images/illustrations/illustration_oeil_de_la_mode.png');
+        @include makeDesignArticlePodcast('../../images/illustrations/illustration_oeil_de_la_mode.png');
     }
 
     // Stylisation du block article concernant le call-to-action "Participer maintenant !"
@@ -60,7 +60,7 @@ main  {
 
     // Stylisation du block article concernant le podcast "La mode parle"
     #articleLaModeParle{
-        @include makeDesignArticlePodcast('../../../public/images/illustrations/illustration_la_mode_parle.png')
+        @include makeDesignArticlePodcast('../../images/illustrations/illustration_la_mode_parle.png')
     }
     }
 
