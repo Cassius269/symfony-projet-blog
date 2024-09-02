@@ -2,17 +2,19 @@
 
 namespace App\Entity;
 
-use App\Repository\MainImageIllustrationRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Serializable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
+use App\Repository\MainImageIllustrationRepository;
+use Symfony\Component\Serializer\Annotation\Ignore;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: MainImageIllustrationRepository::class)]
 #[Vich\Uploadable]
-class MainImageIllustration
+class MainImageIllustration implements Serializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -26,6 +28,7 @@ class MainImageIllustration
     private ?string $imageName = null;
 
     #[Vich\UploadableField(mapping: 'articleIllustration', fileNameProperty: 'imageName')]
+    #[Ignore]
     private ?File $imageFile = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -50,6 +53,7 @@ class MainImageIllustration
     {
         $this->articles = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -182,5 +186,33 @@ class MainImageIllustration
         $this->imageName = $imageName;
 
         return $this;
+    }
+
+    // Fonctions de sérialisation et désérialisation d'un objet image d'illustration au moment de la mise à jour d'un article
+
+    public function serialize() // La méthode serialize permet de transformer les données en quelque chose de compréhensible et stockable en session
+    {
+        return serialize([
+            $this->id,
+            $this->title,
+            $this->imageName,
+            $this->source,
+            $this->createdAt,
+            $this->updatedAt,
+            // Ne pas sérialiser $this->imageFile car le fichier est envoyé à AWS S3 directement
+        ]);
+    }
+
+    public function unserialize($serialized) // permet de récuperer les données sérialisées
+    {
+        list(
+            $this->id,
+            $this->title,
+            $this->imageName,
+            $this->source,
+            $this->createdAt,
+            $this->updatedAt
+        ) = unserialize($serialized);
+        // $this->imageFile reste null après la désérialisation
     }
 }
