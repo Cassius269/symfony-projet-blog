@@ -18,7 +18,7 @@
 			{# Publier un nouvel article #}
 			<div class="divIconePlusAction">
 				<h2>Publier un nouvel article</h2>
-				<img src="{{ asset('/images/iconeArticle.png') }}" alt="">
+				<img src="{{ asset('build//images/iconeArticle.png') }}" alt="">
 				<a href="{{ path('articles_createNewArticle') }}" title="lien vers la page de création d'une nouvel article">
 					<button class="secondaryButton">Ecrire un nouvel article</button>
 				</a>
@@ -27,7 +27,7 @@
 			{# Gérer les articles publiés #}
 			<div class="divIconePlusAction">
 				<h2>Gérer  les  articles</h2>
-				<img src="{{ asset('/images/iconeUserInterface.png') }}" alt="">
+				<img src="{{ asset('build/images/iconeUserInterface.png') }}" alt="">
 				<a href="" title="lien vers la page de gestion des contenus">
 					<button class="primaryButton">Gérer les articles</button>
 				</a>
@@ -38,7 +38,7 @@
 			{# Publier un nouveau numéro de podcast #}
 			<div class="divIconePlusAction">
 				<h2>Publier un nouveau numéro</h2>
-				<img src="{{ asset('/images/iconeEmission.png') }}" alt="">
+				<img src="{{ asset('build/images/iconeEmission.png') }}" alt="">
 				<a href="" title="lien vers la page de création d'une nouveau numéro de podcast">
 					<button class="secondaryButton buttonPublishPodcast">Publier un nouveau numéro</button>
 				</a>
@@ -46,7 +46,7 @@
 			<hr>
 			<div class="divIconePlusAction">
 				<h2>Gérer  le podcast</h2>
-				<img src="{{ asset('/images/iconePodcast.png') }}" alt="">
+				<img src="{{ asset('build/images/iconePodcast.png') }}" alt="">
 				<a href="" title="lien vers la page de gestion des contenus">
 					<button class="primaryButton buttonManagePodcast">Gérer le podcast</button>
 				</a>
@@ -57,7 +57,7 @@
 			{# Gérer les collaborateurs #}
 			<div class="divIconePlusAction">
 				<h2>Gérer les collaborateurs</h2>
-				<img src="{{ asset('/images/iconeEquipe.png') }}" alt="" id="iconePeople">
+				<img src="{{ asset('build/images/iconeEquipe.png') }}" alt="" id="iconePeople">
 				<a href="" title="lien vers la page de gestion des collaborateurs">
 					<button class="secondaryButton">Gérer  les collaborateurs</button>
 				</a>
@@ -69,7 +69,7 @@
 				<h2>Gérer  les demandes d’admission</h2>
 				<div class="divNumberNotifPlusIcone">
 					<p class="numberNotificationDashboard" id="numberNotifManagerNewDemandCollab">{{ demands | length }}</p>
-					<img src=" {{ asset('/images/iconeUserInterface.png') }} " alt=" " id="iconeManagePeople"></div>
+					<img src=" {{ asset('build/images/iconeUserInterface.png') }} " alt=" " id="iconeManagePeople"></div>
 				<a href="{{ path('admin_list_demands') }}" title="lien vers la page de gestion des demandes de devenir contributeur">
 					<button class="primaryButton">Gérer  les demandes d’admissions</button>
 				</a>
@@ -80,7 +80,7 @@
 				<h2>Lire les messages</h2>
 				<div class="divNumberNotifPlusIcone">
 					<p class="numberNotificationDashboard" id="numberNotifReadMessages">2</p>
-					<img src="{{ asset('/images/emailIconeDashboard.png') }}" alt="">
+					<img src="{{ asset('build/images/emailIconeDashboard.png') }}" alt="">
 				</div>
 				<a href="" title="lien vers la page de gestion des contenus">
 					<button class="tertiaryButton">Lire les messages</button>
@@ -91,7 +91,7 @@
 			{# Gérer les podcacts en tant qu'Administrateur du site #}
 			<div class="divIconePlusAction">
 				<h2>Gérer les podcasts</h2>
-				<img src="{{ asset('/images/iconePodcast.png') }}" alt="">
+				<img src="{{ asset('build/images/iconePodcast.png') }}" alt="">
 				<a href="" title="lien vers la page de gestion des contenus">
 					<button class="tertiaryButton">Gérer les podcasts</button>
 				</a>

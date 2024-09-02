@@ -47,7 +47,7 @@
 			<div id="divRowOfInputImageIllustration">
 				{# {% set imageUrl = vich_uploader_asset(article, 'imageIllustrationFile') %} #}
 				{# {{ form_widget(form.imageIllustrationFile)}} #}
-				<img src="{{ asset('images/iconeFileUpload.svg') }}" alt="icone représentant un fichier"> <p>JPEG, JPG ou PNG</p>
+				<img src="{{ asset('build/images/iconeFileUpload.svg') }}" alt="icone représentant un fichier"> <p>JPEG, JPG ou PNG</p>
 				<p id="filename"></p>
 				<p>Glissez déposez ou parcourir</p>
 			</div>
@@ -81,10 +81,9 @@
 	{# Si l'utilisateur est en mode édition, le bouton apparaitra #}
 	{% if is_granted("ROLE_AUTHOR") and article is defined %}
 		{# <a href="{{ path('articles_remove', {'id': article.id})}}">
-																																						</a> #}
+																																								</a> #}
 		{# Debut du test de la protection CSRF #}
-		<form action="{{ path('articles_remove', {'id': article.id })}}" method="POST">
-			<input type="hidden" name="_token" value="{{ csrf_token('delete-article-' ~ article.id) }}">
+			<form action="{{ path('articles_remove', {'id': article.id })}}" method="POST"> <input type="hidden" name="_token" value="{{ csrf_token('delete-article-' ~ article.id) }}">
 			<button type="submit" id="deleteButton">Supprimer l'article</button>
 		</form>
 	{% endif %}
