@@ -6,7 +6,7 @@
 	{% set unReadNotifications = app.session.get('unReadNotifications') %}
 	<div id="iconeRingNotifications">
 		<div id="divNotificationPlusNumber">
-			<img id="iconeNotif" src="{{ asset('images/iconeBell.svg')}}" alt="icône représent une cloche pour les notifications">
+			<img id="iconeNotif" src="{{ asset('build/images/iconeBell.svg')}}" alt="icône représent une cloche pour les notifications">
 			<p id="numberOfNotifcations">{{ unReadNotifications|length }}</p>
 
 		</div>

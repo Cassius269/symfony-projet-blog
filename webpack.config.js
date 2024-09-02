@@ -14,8 +14,8 @@ Encore
     // Ajouter la possibilité de compiler les images se trouvant dans les assets précisément dans "./assets/images"
     .copyFiles({
         from: './assets/images', // Dossier de départ
-        to: 'images/[path][name].[hash:8].[ext]', // dossier de destination
-        pattern: /\.(png|jpg|jpeg|gif|svg|webp)$/ // Extensions acceptées pour la compilation
+        to: 'images/[path][name].[hash:8].[ext]', // dossier de destination avec hashage des fichiers images
+        pattern: /\.(png|jpg|jpeg|gif|svg|webp)$/ // Extensions acceptées pour le transfert du dossier de départ à la destination
     })
     // only needed for CDN's or subdirectory deploy
     //.setManifestKeyPrefix('build/')

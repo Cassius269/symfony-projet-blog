@@ -2,7 +2,7 @@
 <header class="header headerMobile">
 	<div id="headerDivIconesLogoPlusMenu">
 		<a href="{{ path('home') }}" title="lien vers la page d'accueil de l'application"><img src=" {{ asset('build/images/logo.svg')}} " alt=" icône représentant le logo du site" class="icone"></a>
-		<img src="{{ asset('images/menuBurger.svg') }}" alt="icône représentant un menu burger" class="icone menuBurger">
+		<img src="{{ asset('build/images/menuBurger.svg') }}" alt="icône représentant un menu burger" class="icone menuBurger">
 	</div>
 	<nav>
 		<div class="headerListLinks">
@@ -106,5 +106,5 @@
 {% for flashMessage in message %}
 	<li class="flash-{{typeOfMessage}}">{{flashMessage}}</li>
 {% endfor %}{% endfor %}</ul>{#
-									    position: relative;
-									    right: 25rem;#}
+											    position: relative;
+											    right: 25rem;#}
