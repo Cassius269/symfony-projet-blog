@@ -122,7 +122,7 @@ class ArticleController extends AbstractController
         /** @var User $user */
         $user = $security->getUser();
 
-        dump($user);
+        // dump($user);
         if ($user->isAccepted() == true) {
             // Création d'un objet vide Article
             $article = new Article();
