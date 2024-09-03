@@ -53,7 +53,138 @@ class MainImageIllustration
         $this->articles = new ArrayCollection();
     }
 
-    // ... other methods ...
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(?string $title): static
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function getSource(): ?string
+    {
+        return $this->source;
+    }
+
+    public function setSource(?string $source): static
+    {
+        $this->source = $source;
+
+        return $this;
+    }
+
+    public function getPhotographer(): ?Photographer
+    {
+        return $this->photographer;
+    }
+
+    public function setPhotographer(?Photographer $photographer): static
+    {
+        $this->photographer = $photographer;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Article>
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Article $article): static
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles->add($article);
+            $article->setMainImageIllustration($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Article $article): static
+    {
+        if ($this->articles->removeElement($article)) {
+            // set the owning side to null (unless already changed)
+            if ($article->getMainImageIllustration() === $this) {
+                $article->setMainImageIllustration(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): static
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of imageFile
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * Set the value of imageFile
+     *
+     * @return  self
+     */
+    public function setImageFile($imageFile)
+    {
+        $this->imageFile = $imageFile;
+        if (null !== $imageFile) {
+
+            // It is required that at least one field changes if you are using doctrine 
+
+            // otherwise the event listeners won't be called and the file is lost 
+
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function setImageName(?string $imageName): static
+    {
+        $this->imageName = $imageName;
+
+        return $this;
+    }
 
     public function __serialize(): array
     {
