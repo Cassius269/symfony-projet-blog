@@ -4,14 +4,9 @@ services:
   mercure:
     image: dunglas/mercure
     restart: unless-stopped
-    environment:
-      # Uncomment the following line to disable HTTPS,
-      SERVER_NAME: ':80'
-    env_file:
+    env_file: 
       - .env
-      - .env.local
-    # Comment the following line to disable the development mode
-    command: /usr/bin/caddy run --config /etc/caddy/Caddyfile.dev --adapter caddyfile
+      - .env.local #
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:30000/healthz" ]
       timeout: 5s
@@ -20,7 +15,6 @@ services:
     volumes:
       - mercure_data:/data
       - mercure_config:/config
-      - ./config/docker/Caddyfile.dev:/etc/caddy/Caddyfile.dev:ro
     ports:
       - "30000:80"
 
