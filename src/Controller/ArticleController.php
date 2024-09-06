@@ -82,7 +82,7 @@ class ArticleController extends AbstractController
             $idNotif = $request->get('id_notif');
             // dd($idNotif);
 
-            dump('L\'utilisateur connecté est un Admin');
+            // dump('L\'utilisateur connecté est un Admin');
             // Chercher la notification à l'origine de l'action de notification
             // Plusieurs objets notifications peuvent êre reliées à un même objet article pour differentes actions (update, delete, remove)
             if ($idNotif) { // Si l'Admin accède à l'URL avec un paramètre "id_notification" disponible

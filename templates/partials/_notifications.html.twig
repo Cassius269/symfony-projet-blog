@@ -31,8 +31,7 @@
 					{# Si la notification est lié à un épisode de podcast, le lien du podcast devient cliquable #}
 					<li>
 						<a href="{{ path('admin_detail_demand', {id: notif.demand.id, id_notif: notif.id})}}">{{ notif.content }}
-							par
-							{{ notif.author.fullname ?? 'un utilisateur non connecté'}}</a>
+							par un utilisateur non connecté</a>
 					</li>
 				{% endif %}
 			{% endfor %}

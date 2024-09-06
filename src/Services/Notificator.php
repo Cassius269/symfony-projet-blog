@@ -24,8 +24,14 @@ class Notificator
     // public function send(string $message, string $type, User $author)
     public function send(string $message, string $type, int $idObject, int $idNotif): void
     {
-        $author = $this->security->getUser();
-        $authorFullName = $author->getFullName();
+        // On récupère l'utilisateur connecté et son nom complet
+        if ($this->security->getUser()) { // Dans le cas où l'utilisateur est connecté
+            $author = $this->security->getUser();
+            $authorFullName = $author->getFullName();
+        } else { // Sinon si l'utilisateur n'est pas connecté
+            $authorFullName = "utilisateur non connecté";
+        }
+
         $unReadNotifications = count($this->notificationRepository->getUnreadNotifications());
 
         $update = new Update(
