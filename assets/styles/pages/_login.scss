@@ -26,10 +26,9 @@ main {
                 }
             }
             .secondaryButton {
-                padding: 0px;
                 @media screen and (min-width: 1024px) {
-                    width: 300px;
-                    padding: 0.6rem 1rem;
+                    // width: 300px;
+                    padding: .6rem 2rem;
                     height: 57px;
                 }
             }

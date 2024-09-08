@@ -11,89 +11,96 @@
 	{{ encore_entry_link_tags('dashboard') }}
 {% endblock %}
 {% block body %}
-<h1>Dashboard de
-	{{ app.user.fullname }}</h1>
-{% include "partials/_form_search.html.twig" %}{# Affichage des élements du dashboard en fonction du rôle de l'utilisateur #}{% if is_granted("ROLE_AUTHOR") %}
-	<section>
-		{# Publier un nouvel article #}
-		<div class="divIconePlusAction">
-			<h2>Publier un nouvel article</h2>
-			<img src="{{ asset('build/images/iconeArticle.png') }}" alt="">
-			<a href="{{ path('articles_createNewArticle') }}" title="lien vers la page de création d'une nouvel article">
-				<button class="secondaryButton">Ecrire un nouvel article</button>
-			</a>
-		</div>
-		<hr>
-		{# Gérer les articles publiés #}
-		<div class="divIconePlusAction">
-			<h2>Gérer  les  articles</h2>
-			<img src="{{ asset('build/images/iconeUserInterface.png') }}" alt="">
-			<a href="" title="lien vers la page de gestion des contenus">
-				<button class="primaryButton">Gérer les articles</button>
-			</a>
-		</div>
-	</section>
-{% elseif is_granted("ROLE_PODCASTOR") %}
-	<section>
-		{# Publier un nouveau numéro de podcast #}
-		<div class="divIconePlusAction">
-			<h2>Publier un nouveau numéro</h2>
-			<img src="{{ asset('build/images/iconeEmission.png') }}" alt="">
-			<a href="" title="lien vers la page de création d'une nouveau numéro de podcast">
-				<button class="secondaryButton buttonPublishPodcast">Publier un nouveau numéro</button>
-			</a>
-		</div>
-		<hr>
-		<div class="divIconePlusAction">
-			<h2>Gérer  le podcast</h2>
-			<img src="{{ asset('build/images/iconePodcast.png') }}" alt="">
-			<a href="" title="lien vers la page de gestion des contenus">
-				<button class="primaryButton buttonManagePodcast">Gérer le podcast</button>
-			</a>
-		</div>
-	</section>
-{% elseif is_granted("ROLE_ADMIN") %}
-	<section>
-		{# Gérer les collaborateurs #}
-		<div class="divIconePlusAction">
-			<h2>Gérer les collaborateurs</h2>
-			<img src="{{ asset('build/images/iconeEquipe.png') }}" alt="" id="iconePeople">
-			<a href="" title="lien vers la page de gestion des collaborateurs">
-				<button class="secondaryButton">Gérer  les collaborateurs</button>
-			</a>
-		</div>
-		<hr>
+	<h1>Dashboard de
+		{{ app.user.fullname }}</h1>
+	{% include "partials/_form_search.html.twig" %}
+	{# Affichage des élements du dashboard en fonction du rôle de l'utilisateur #}
+	{% if is_granted("ROLE_AUTHOR") %}
+		{# Section pour les auteurs #}
+		<section>
+			{# Publier un nouvel article #}
+			<div class="divIconePlusAction">
+				<h2>Publier un nouvel article</h2>
+				<img src="{{ asset('build/images/iconeArticle.png') }}" alt="">
+				<a href="{{ path('articles_createNewArticle') }}" title="lien vers la page de création d'une nouvel article">
+					<button class="secondaryButton">Ecrire un nouvel article</button>
+				</a>
+			</div>
+			<hr>
+			{# Gérer les articles publiés #}
+			<div class="divIconePlusAction">
+				<h2>Gérer  les  articles</h2>
+				<img src="{{ asset('build/images/iconeUserInterface.png') }}" alt="">
+				<a href="" title="lien vers la page de gestion des contenus" id="linkToPublishArticle">
+					<button class="primaryButton">Gérer les articles</button>
+				</a>
+			</div>
+		</section>
+	{% elseif is_granted("ROLE_PODCASTOR") %}
+		{# Section pour les podcasteurs #}
+		<section>
+			{# Publier un nouveau numéro de podcast #}
+			<div class="divIconePlusAction">
+				<h2>Publier un nouveau numéro</h2>
+				<img src="{{ asset('build/images/iconeEmission.png') }}" alt="">
+				<a href="" title="lien vers la page de création d'une nouveau numéro de podcast">
+					<button class="secondaryButton buttonPublishPodcast">Publier un nouveau numéro</button>
+				</a>
+			</div>
+			<hr>
+			<div class="divIconePlusAction">
+				<h2>Gérer  le podcast</h2>
+				<img src="{{ asset('build/images/iconePodcast.png') }}" alt="">
+				<a href="" title="lien vers la page de gestion des contenus">
+					<button class="primaryButton buttonManagePodcast">Gérer le podcast</button>
+				</a>
+			</div>
+		</section>
+	{% elseif is_granted("ROLE_ADMIN") %}
+		{# Section pour l'Admin #}
+		<section>
+			{# Gérer les collaborateurs #}
+			<div class="divIconePlusAction">
+				<h2>Gérer les collaborateurs</h2>
+				<img src="{{ asset('build/images/iconeEquipe.png') }}" alt="" id="iconePeople">
+				<a href="" title="lien vers la page de gestion des collaborateurs">
+					<button class="secondaryButton">Gérer  les collaborateurs</button>
+				</a>
+			</div>
+			<hr>
 
-		{# Gérer les demandes d'admission#}
-		<div class="divIconePlusAction">
-			<h2>Gérer  les demandes d’admission</h2>
-			<div class="divNumberNotifPlusIcone">
-				<p class="numberNotificationDashboard" id="numberNotifManagerNewDemandCollab">{{ demands | length }}</p>
-				<img src=" {{ asset('build/images/iconeUserInterface.png') }} " alt=" " id="iconeManagePeople"></div>
-		<a href="{{ path('admin_list_demands') }}" title="lien vers la page de gestion des demandes de devenir contributeur">
-			<button class="primaryButton">Gérer  les demandes d’admissions</button>
-		</a>
-	</div>
+			{# Gérer les demandes d'admission#}
+			<div class="divIconePlusAction">
+				<h2>Gérer  les demandes d’admission</h2>
+				<div class="divNumberNotifPlusIcone">
+					<p class="numberNotificationDashboard" id="numberNotifManagerNewDemandCollab">{{ demands | length }}</p>
+					<img src=" {{ asset('build/images/iconeUserInterface.png') }} " alt=" " id="iconeManagePeople"></div>
+				<a href="{{ path('admin_list_demands') }}" title="lien vers la page de gestion des demandes de devenir contributeur">
+					<button class="primaryButton">Gérer  les demandes d’admissions</button>
+				</a>
+			</div>
 
-	{# Gérer les messages reçus #}
-	<div class="divIconePlusAction">
-		<h2>Lire les messages</h2>
-		<div class="divNumberNotifPlusIcone">
-			<p class="numberNotificationDashboard" id="numberNotifReadMessages">2</p>
-			<img src="{{ asset('build/images/emailIconeDashboard.png') }}" alt="">
-		</div>
-		<a href="" title="lien vers la page de gestion des contenus">
-			<button class="tertiaryButton">Lire les messages</button>
-		</a>
-	</div>
-	<hr>
+			{# Gérer les messages reçus #}
+			<div class="divIconePlusAction">
+				<h2>Lire les messages</h2>
+				<div class="divNumberNotifPlusIcone">
+					<p class="numberNotificationDashboard" id="numberNotifReadMessages">2</p>
+					<img src="{{ asset('build/images/emailIconeDashboard.png') }}" alt="">
+				</div>
+				<a href="" title="lien vers la page de gestion des contenus">
+					<button class="tertiaryButton">Lire les messages</button>
+				</a>
+			</div>
+			<hr>
 
-	{# Gérer les podcacts en tant qu'Administrateur du site #}
-	<div class="divIconePlusAction">
-		<h2>Gérer les podcasts</h2>
-		<img src="{{ asset('build/images/iconePodcast.png') }}" alt="">
-		<a href="" title="lien vers la page de gestion des contenus">
-			<button class="tertiaryButton">Gérer les podcasts</button>
-		</a>
-	</div>
-</section>{% endif %}{% endblock %}
+			{# Gérer les podcacts en tant qu'Administrateur du site #}
+			<div class="divIconePlusAction">
+				<h2>Gérer les podcasts</h2>
+				<img src="{{ asset('build/images/iconePodcast.png') }}" alt="">
+				<a href="" title="lien vers la page de gestion des contenus">
+					<button class="tertiaryButton">Gérer les podcasts</button>
+				</a>
+			</div>
+		</section>
+	{% endif %}
+{% endblock %}

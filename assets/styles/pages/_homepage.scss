@@ -55,18 +55,17 @@ main {
 
         a{
             .primaryButton {// Le bouton 'lire l'article maintenant !' de la page d'accueil
-                width: 270px;
                 background-color: #FA6C30;
                 color: white;
                 display: block;
                 margin: auto;
                 margin-top: 2rem;
                 border-radius: 15px;
-                padding-left: 3px;
                 @media screen and (min-width: 1024px){
-                    position: relative;
-                    bottom: 7.5rem;
-                    right: 19.7rem;          
+                    position: absolute;
+                    margin-left: 4rem;
+                    bottom: 3rem;
+                    left: -1rem;
                 }
             }
         }

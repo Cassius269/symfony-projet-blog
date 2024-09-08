@@ -40,10 +40,8 @@
 
 			{# Vue mobile de l'emplacement du CV #}
 			<div class="mobile">
-				<a href="{{ vich_uploader_asset(demand,"cvFile") }}" id="linkViewCV">
-					<img src="/images/iconeFileUpload.svg" alt="icone représentant un fichier">
-				</a>
-				<a href="{{ vich_uploader_asset(demand,"cvFile") }}" id="linkViewCV" download>
+				<a href="{{ cvFile }}" id="linkViewCV" download>
+					<img src="{{ asset("build/images/iconeFileUpload.svg") }}" alt="icone représentant un fichier">
 					<button class="primaryButton">Télécharger</button>
 				</a>
 			</div>
