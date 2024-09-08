@@ -19,71 +19,65 @@
 	<script src=" {{asset('js/ckeditor.js')}}"></script>
 {% endblock %}
 {% block body %}
-	{% if is_granted("ROLE_AUTHOR") %}
-		{# Modification du gros titre de la page en fonction du chemin de la route #}
-		{% if app.request.get('_route') == 'articles_update'  %}
-			<h1>Modifier un article</h1>
-		{% else %}
-			<h1>Ecrire un nouvel article</h1>
-		{% endif %}
-		{# La vue du formulaire de création d'article #}
-		{{form_start(form)}}
-		<div class="divLabelPlusInputTitle">
-			{{ form_label(form.title)}}
-			{{ form_widget(form.title)}}
-		</div>
-		{# Affichage de l'image d'illustration principale en mode mise à jour d'article #}
-		<div id="divGlobalInputImage">
-			<p id="labelIllustrationImage">Image d’illustration  principale</p>
-			{% if article is defined %}
-				{% if article %}
-					{% if article.mainImageIllustration %}
-						<img id="CurrentImageIllustration" src="{{ mainImageIllustrationFile }}" alt="">
-					{% else %}
-						<p>L'article ne dispose pas d'image d'illustration principale</p>
-					{% endif %}
+	{# Modification du gros titre de la page en fonction du chemin de la route #}
+	{% if app.request.get('_route') == 'articles_update'  %}
+		<h1>Modifier un article</h1>
+	{% else %}
+		<h1>Ecrire un nouvel article</h1>
+	{% endif %}
+	{# La vue du formulaire de création d'article #}
+	{{form_start(form)}}
+	<div class="divLabelPlusInputTitle">
+		{{ form_label(form.title)}}
+		{{ form_widget(form.title)}}
+	</div>
+	{# Affichage de l'image d'illustration principale en mode mise à jour d'article #}
+	<div id="divGlobalInputImage">
+		<p id="labelIllustrationImage">Image d’illustration  principale</p>
+		{% if article is defined %}
+			{% if article %}
+				{% if article.mainImageIllustration %}
+					<img id="CurrentImageIllustration" src="{{ mainImageIllustrationFile }}" alt="">
+				{% else %}
+					<p>L'article ne dispose pas d'image d'illustration principale</p>
 				{% endif %}
 			{% endif %}
-			<div id="divRowOfInputImageIllustration">
-				{# {% set imageUrl = vich_uploader_asset(article, 'imageIllustrationFile') %} #}
-				{# {{ form_widget(form.imageIllustrationFile)}} #}
-				<img src="{{ asset('build/images/iconeFileUpload.svg') }}" alt="icone représentant un fichier"> <p>JPEG, JPG ou PNG</p>
-				<p id="filename"></p>
-				<p>Glissez déposez ou parcourir</p>
-			</div>
+		{% endif %}
+		<div id="divRowOfInputImageIllustration">
+			{# {% set imageUrl = vich_uploader_asset(article, 'imageIllustrationFile') %} #}
+			{# {{ form_widget(form.imageIllustrationFile)}} #}
+			<img src="{{ asset('build/images/iconeFileUpload.svg') }}" alt="icone représentant un fichier"> <p>JPEG, JPG ou PNG</p>
+			<p id="filename"></p>
+			<p>Glissez déposez ou parcourir</p>
 		</div>
-		{{ form_row(form.mainImageIllustration,{'attr':{'class':'divInfoImageIllustrationPrincipale'}})}}
-		<div class="divLabelPlusInputSelectCategory">
-			{{ form_label(form.category)}}
-			{{ form_widget(form.category)}}
-		</div>
-		{# <input type="hidden"> #}
-		<textarea id="editor" placeholder="Contenu de l' article, images secondaires y compris, sans le titre"></textarea>
-		<div class="divLabelPlusTextareaAbstract">
-			{{ form_label(form.abstract)}}
-			{{ form_widget(form.abstract)}}
-		</div>
-		{# {{form_errors(form.imageIllustrationFile)}} #}
-		{{form_errors(form.title)}}
-		{{form_errors(form)}}
-		<div class="divButtonSubmit">
-			<button class="secondaryButton buttonPreview">Prévisualiser l'article</button>
-			{% if app.request.get('_route') == 'articles_update'  %}
-				<button type="submit" class="primaryButton">Mettre à jour</button>
-			{% else %}
-				<button type="submit" class="primaryButton">Publier</button>
-			{% endif %}
+	</div>
+	{{ form_row(form.mainImageIllustration,{'attr':{'class':'divInfoImageIllustrationPrincipale'}})}}
+	<div class="divLabelPlusInputSelectCategory">
+		{{ form_label(form.category)}}
+		{{ form_widget(form.category)}}
+	</div>
+	<textarea id="editor" placeholder="Contenu de l' article, images secondaires y compris, sans le titre"></textarea>
+	<div class="divLabelPlusTextareaAbstract">
+		{{ form_label(form.abstract)}}
+		{{ form_widget(form.abstract)}}
+	</div>
+	{{form_errors(form.title)}}
+	{{form_errors(form)}}
+	<div class="divButtonSubmit">
+		<button class="secondaryButton buttonPreview">Prévisualiser l'article</button>
+		{% if app.request.get('_route') == 'articles_update'  %}
+			<button type="submit" class="primaryButton">Mettre à jour</button>
+		{% else %}
+			<button type="submit" class="primaryButton">Publier</button>
+		{% endif %}
 
-		</div>
-		{{form_end(form)}}
-	{% endif %}
+	</div>
+	{{form_end(form)}}
 
 	{# Si l'utilisateur est en mode édition, le bouton apparaitra #}
-	{% if is_granted("ROLE_AUTHOR") and article is defined %}
-		{# <a href="{{ path('articles_remove', {'id': article.id})}}">
-																																								</a> #}
-		{# Debut du test de la protection CSRF #}
-			<form action="{{ path('articles_remove', {'id': article.id })}}" method="POST"> <input type="hidden" name="_token" value="{{ csrf_token('delete-article-' ~ article.id) }}">
+	{% if article is defined %}
+		<form action="{{ path('articles_remove', {'id': article.id })}}" method="POST">
+			<input type="hidden" name="_token" value="{{ csrf_token('delete-article-' ~ article.id) }}">
 			<button type="submit" id="deleteButton">Supprimer l'article</button>
 		</form>
 	{% endif %}

@@ -1,10 +1,4 @@
-%commonCSS { // Le SCSS commun aux messages de succès et d'erreurs
-    padding: 1rem;
-    color: white;
-    position: relative;
-    top: 1rem;
-    text-align: center;
-}
+@import './../utils/placeholders.scss'; // Importation des placeholders et dedans le CSS commun des messages d'erreur
 
 ul:has(.flash-error ){
     background: #ff4b2b;

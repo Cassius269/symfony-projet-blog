@@ -8,3 +8,4 @@
 @import './components/messageFlash';
 @import './components/buttons';
 @import './components/input';
+@import '../components/notifications'; // importation du composant "notifications.scss" car les notifications doivent être accessibles à l'Admin dans toutes les pages de l'application

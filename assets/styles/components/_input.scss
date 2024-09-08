@@ -1,3 +1,4 @@
+// Stylisation par défaut des boutons dans toutes les pages
 input {
     border: 1px solid black;
     height: 50px;
@@ -9,8 +10,8 @@ input {
         color: #714534;
     }
 
-    &:focus {
-        background-color: $secondaryColor;
+    &:focus {// Quand on clique sur un input, la couleur du background change et la couleur du texte
+        background: #FFC107;
         color: white;
     }
 }

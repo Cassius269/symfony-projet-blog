@@ -17,7 +17,7 @@ security:
       lazy: true
       remember_me:
         secret: "%kernel.secret%"
-        lifetime: 2419200 # 1 month in seconds
+        lifetime: 2419200 # 1 mois in seconds
         #always_remember_me: true
       provider: app_user_provider
       form_login:
