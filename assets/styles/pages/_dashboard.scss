@@ -59,11 +59,6 @@
                         font-size: 1.4rem;
                     }
                 }
-
-                #linkToPublishArticle {
-                    position: relative;
-                    top: 1rem;
-                }
                 }
         
                 button {
@@ -76,25 +71,18 @@
     
                 .primaryButton {
                     margin-top: 23px;
+                    padding: 0px 1.5rem;
                     @media screen and (min-width: 1024px) {
                         padding: 0 4rem;
                     }
                 }
 
                 .secondaryButton {
-                //     // Ecraser les propriétés de la classe secondaryButton ajouté à certains boutons du dashboard
-                //     height: 43px;
-                //     width: 147px;
-                //     padding: 0px;
-                
+                    top: 10px !important;
                 @media screen and (width < 1024px){
                     width: auto;
-                }
-
-                //     @media screen and (min-width:1024px) {
-                //         width: auto;
-                //         padding: 1rem 2rem;
-                //     }
+                    top: 23px;
+                    }
                 }
 
                 .buttonManagePodcast{

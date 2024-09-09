@@ -70,13 +70,12 @@ main {
         }
             button[type="submit"] {
                @extend .primaryButton;
+               width: auto;
+               padding: 0px 2rem;
             }
             .buttonPreview {
-                width: 170px;
-                padding: 10px 0 24px 0;
+                width: auto;
                 font-size: 1rem;
-                height: 40px;
-
                 @media screen and (min-width: 1024px) {
                     border: none;
                     border-radius: 30px;
@@ -86,10 +85,7 @@ main {
                     color: #714534;
                     border: 5px solid #714534;
                     width: auto;
-                    padding: 0px 3rem;
-                    padding-top: 0rem;
-                    height: 55px;
-                }
+                               }
                 }
 
         ul li {

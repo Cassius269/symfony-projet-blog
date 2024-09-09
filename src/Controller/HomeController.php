@@ -13,26 +13,24 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class HomeController extends AbstractController
 {
-    #[Route(path:'/', name: 'home', methods: 'GET')]
+    #[Route(path: '/', name: 'home', methods: 'GET')]
     public function index(ArticleRepository $articleRepository, AwsManager $awsManager): Response
     {
         // Récuperer l'article top 1, le plus lu par les utilisateurs
-        $topArticle = $articleRepository->findOneBy(
-            [],
-            ['nbreOfViews' => 'DESC']
-        );
+        $topArticle = $articleRepository->findTopArticle();
+        // dd($topArticle);
 
-        if (!$topArticle) {
+        if (!$topArticle) { // Si il n'y pas d'article top 1, envoyer un message d'erreur
             throw  $this->createNotFoundException("Aucun article disponible");
         }
+
         // Récuperer le fichier image de l'article principal
         $file = $awsManager->readFile($topArticle);
         $topArticle->setImage($file);
 
-        // dd($topArticle);
         // Récupérer le top 3 des Artciles dans l'ordre décroissant (du plus grand nombre de vues au plus petit nombre de vues)
         $topArticles = $articleRepository->getTopArticles(3);
-
+        // dd($topArticles);
         // Mettre à jour à la vue la source du fichier image de chaque article, sans mise à jour de la base de données
         foreach ($topArticles as $article) {
             // Obtenir le fichier image d'illustration de l'article
