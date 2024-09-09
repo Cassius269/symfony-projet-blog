@@ -22,27 +22,29 @@
 		{# Inclusion du formulaire de recherche d'article dans la page d'accueil #}
 		{% include "partials/_form_search.html.twig" %}
 	</section>
-	<section class="sectionTopArticleOfTheWeek">
-		<h2>Le TOP articles de  la semaine</h2>
-		<p>La semaine a été remplie de défilés et des coup d’éclats créatifs, bien loin des habitudes des saisons passées. Somme-nous entrain de vivre une révolution de la mode en cette année 2024 ?
-		</p>
+	{% if topArticles %}
+		<section class="sectionTopArticleOfTheWeek">
+			<h2>Le TOP articles de  la semaine</h2>
+			<p>La semaine a été remplie de défilés et des coup d’éclats créatifs, bien loin des habitudes des saisons passées. Somme-nous entrain de vivre une révolution de la mode en cette année 2024 ?
+			</p>
 
-		<div class="divArticlesOfTheWeek">
-			{% for article in topArticles %}
-				<a href="{{ path("articles_showDetailedArticle", {id: article.id }) }}">
-					<article class="boxArticle" style="background-image: url({{ article.image }})">
-						<h3>{{ article.title }}</h3>
-						<div
-							class="divResumeArticle">
-							{# Afficher les 55 premiers caractères du résumé #}
-							<p>{{ article.abstract | slice(0,55) }}...
-							</p>
-							<button>Lire la suite
-								<img src="{{ asset('build/images/iconeGotoDetailArticle.svg')}}" alt="icone représentant vers la droite pour lire un article en globalité" loading="lazy"></button>
-						</div>
-					</article>
-				</a>
-			{% endfor %}
-		</div>
-	</section>
+			<div class="divArticlesOfTheWeek">
+				{% for article in topArticles %}
+					<a href="{{ path("articles_showDetailedArticle", {id: article.id }) }}">
+						<article class="boxArticle" style="background-image: url({{ article.image }})">
+							<h3>{{ article.title }}</h3>
+							<div
+								class="divResumeArticle">
+								{# Afficher les 55 premiers caractères du résumé #}
+								<p>{{ article.abstract | slice(0,55) }}...
+								</p>
+								<button>Lire la suite
+									<img src="{{ asset('build/images/iconeGotoDetailArticle.svg')}}" alt="icone représentant vers la droite pour lire un article en globalité" loading="lazy"></button>
+							</div>
+						</article>
+					</a>
+				{% endfor %}
+			</div>
+		</section>
+	{% endif %}
 {% endblock %}

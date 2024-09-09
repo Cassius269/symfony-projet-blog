@@ -21,7 +21,7 @@ class HomeController extends AbstractController
         // dd($topArticle);
 
         if (!$topArticle) { // Si il n'y pas d'article top 1, envoyer un message d'erreur
-            throw  $this->createNotFoundException("Aucun article disponible");
+            throw  $this->createNotFoundException("Aucun article datant de moins de 7 jours disponible");
         }
 
         // Récuperer le fichier image de l'article principal
