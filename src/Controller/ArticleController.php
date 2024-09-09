@@ -195,10 +195,9 @@ class ArticleController extends AbstractController
             );
         } else {
             // Envoyer un message d'erreur
-            $this->addFlash('error', 'Vous n\'est pas autorisé(e) à écrire');
+            $this->addFlash('error', 'Vous n\'êtes pas autorisé(e) à écrire un article');
 
 
-            $security->logout('false'); // Déconnecter l'utilisateur
             return new RedirectResponse($this->generateUrl('login')); // rediriger l'utilisateur vers la page de connexion         }
         }
     }
