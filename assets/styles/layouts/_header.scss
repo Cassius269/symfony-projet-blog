@@ -40,7 +40,7 @@
             }
 
             .divImageProfilePlusHeaderLinks {
-                background-color: #C68F70;
+                background-color: $secondaryColor;
                 padding-top: 3rem;
                 display: flex;
                 flex-direction: column;
@@ -68,9 +68,9 @@
                     margin-right: 2rem;
 
                     #buttonConnect {
-                        background: #EC751E;
+                        background: $fourthColor;
                         padding: 0.8rem 0;
-                        color: white;
+                        color: $fifthColor;
                         border: none;
                     }
 
@@ -136,9 +136,9 @@
         }
     
         .active {
-            background: #EC751E;
+            background: $fourthColor;
             padding: 0.5rem 1rem;
-            color: white;
+            color:  $fifthColor;
         }
 
         ul {

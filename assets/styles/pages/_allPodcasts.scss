@@ -28,7 +28,7 @@ main  {
     // Stylisation du block article concernant le call-to-action "Participer maintenant !"
     #slogan{
         background: $primaryColor;
-        color:white;
+        color: $fifthColor;
         border-radius: 10px;
         // Gérer la disposition entre le texte du slogan et le call-to-action "Participer maintenant !"
         display: flex;
@@ -48,7 +48,7 @@ main  {
             border-radius: 0px 0px 10px 10px;
             button {
                 background-color: black;
-                color:white;
+                color: $fifthColor;
                 margin: auto;
                 display: block;
                 padding: 1rem;

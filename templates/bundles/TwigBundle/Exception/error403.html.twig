@@ -1,13 +1,15 @@
 {% extends "base.html.twig" %}
-{% block title %}Accès non autorisé{% endblock %}
+{% block title %}Accès non autorisé
+{% endblock %}
 {% block stylesheets %}
-{{ parent()}}
-{{ encore_entry_script_tags('errorMessages')}}
+	{{ parent()}}
+	{{ encore_entry_link_tags('errorMessages')}}
 {% endblock %}
 {% block body %}
-{# Messagee d'erreur pour les accès refusées #}
-    <h1>Accès refusé</p>
-    <p>Vous n'avez pas le droit d'accéder à cette partie de l'application. <br><a href="{{ path('home') }}">Retourner à la page d'accueil</a>.
-    </p>
+	{# Messagee d'erreur pour les accès refusées #}
+	<h1>Accès refusé</p>
+	<p>Vous n'avez pas le droit d'accéder à cette partie de l'application.
+		<br><a href="{{ path('home') }}">Retourner à la page d'accueil</a>.
+	</p>
 
 {% endblock %}

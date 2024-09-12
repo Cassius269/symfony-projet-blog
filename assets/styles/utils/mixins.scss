@@ -54,7 +54,7 @@
     button {
         background: transparent;
         min-width: 134px;
-        color:white;
+        color: $fifthColor;
         border: none;
         font-size: 1rem;
         // Relever le bouton légèrement vers le haut
@@ -78,7 +78,7 @@
         }
         .lecteurAudioWithButtons button {
             border: none;
-            background-color: white;
+            background-color:  $fifthColor;
           }
           
           .iconeButton {
@@ -140,7 +140,7 @@
             position: relative;
             top: 2rem;
              right: 4rem;
-            color: white;
+            color:  $fifthColor;
           }
           
           

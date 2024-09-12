@@ -1,13 +1,14 @@
 {% extends "base.html.twig" %}
-{% block title %}Page non trouvée{% endblock %}
+{% block title %}Page non trouvée
+{% endblock %}
 {% block stylesheets %}
-{{ parent()}}
-{{ encore_entry_link_tags('errorMessages')}}
+	{{ parent()}}
+	{{ encore_entry_link_tags('errorMessages')}}
 {% endblock %}
 {% block body %}
-{# Messageee d'erreur pour les ressources non trouvées #}
-    <h1>Page non trouvée</p>
-    <p>La ressource demandée n'existe peu-être pas.<br><a href="{{ path('home') }}">Retourner à la page d'accueil</a>.
-    </p>
+	{# Messageee d'erreur pour les ressources non trouvées #}
+	<h1>Page non trouvée</p>
+	<p>La ressource demandée n'existe peut-être pas.<br><a href="{{ path('home') }}">Retourner à la page d'accueil</a>.
+	</p>
 
 {% endblock %}

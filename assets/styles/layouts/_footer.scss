@@ -63,7 +63,7 @@ footer {
                 height: 40px;
             }
             path{
-                fill:white;
+                fill: $fifthColor;
             }
         }  
         
@@ -87,6 +87,9 @@ footer {
         li {
             @media screen and (min-width: 1024px){
                 margin-bottom: 0.5rem;
+            }
+            a {
+                color: $fifthColor;
             }
         }
     }

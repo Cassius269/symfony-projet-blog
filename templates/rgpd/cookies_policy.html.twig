@@ -1,0 +1,46 @@
+{# C'est la page des mentions légales #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Mentions légales
+{% endblock %}
+{% block stylesheets %}
+	{{ parent() }}
+	{{	encore_entry_link_tags('rgpd')}}
+{% endblock %}
+{% block body %}
+	<h1>Politique de Cookies</h1>
+	<section>
+		<h2>Introduction</h2>
+		<p>Ce site de blog utilise des cookies de manière limitée, uniquement pour gérer les connexions des utilisateurs. Cette politique explique comment nous utilisons ces cookies et vos droits les concernant.</p>
+	</section>
+	<section>
+		<h2>Notre utilisation des cookies</h2>
+		<p>Nous n'utilisons que des cookies essentiels à la gestion des connexions utilisateurs. Aucun autre type de cookie n'est enregistré sur votre appareil lors de votre visite sur notre site.</p>
+	</section>
+	<section>
+		<h2>Cookies de connexion</h2>
+		<p>Les cookies de connexion sont utilisés exclusivement pour:</p>
+		<ul>
+			<li>Maintenir votre session active lorsque vous êtes connecté</li>
+			<li>Vous reconnaître lors de vos visites ultérieures</li>
+			<li>Assurer la sécurité de votre compte</li>
+		</ul>
+		<p>Ces cookies sont temporaires et sont supprimés lorsque vous vous déconnectez ou fermez votre navigateur.</p>
+	</section>
+	<section>
+		<h2>Absence d'autres cookies</h2>
+		<p>Nous tenons à souligner qu'aucun autre type de cookie n'est utilisé sur notre site. Nous ne collectons pas de données à des fins de marketing, d'analyse de trafic ou de personnalisation du contenu via des cookies.</p>
+	</section>
+	<section>
+		<h2>Contrôle des cookies</h2>
+		<p>La plupart des navigateurs vous permettent de contrôler les cookies via leurs paramètres. Si vous choisissez de bloquer tous les cookies, veuillez noter que cela pourrait affecter votre capacité à vous connecter et à utiliser certaines fonctionnalités de notre blog.</p>
+	</section>
+	<section>
+		<h2>Mises à jour de la politique</h2>
+		<p>Nous pouvons occasionnellement mettre à jour cette politique. Toute modification sera publiée sur cette page.</p>
+	</section>
+	<section>
+		<h2>Contact</h2>
+		<p>Si vous avez des questions concernant notre utilisation des cookies, n'hésitez pas à nous contacter par mail : "contact@fahami.fr".</p>
+	</section>
+{% endblock %}

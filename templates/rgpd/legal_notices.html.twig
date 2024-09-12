@@ -1,0 +1,52 @@
+{# C'est la page des mentions légales #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Mentions légales
+{% endblock %}
+{% block stylesheets %}
+	{{ parent() }}
+	{{	encore_entry_link_tags('rgpd')}}
+{% endblock %}
+
+{% block body %}
+	<h1>Mention legals</h1>
+	<section>
+		<h2>Editeur du site</h2>
+		<ul>
+			<li>Editeur: Fahami.fr</li>
+			<li>Adresse: déménagement en cours</li>
+			<li>Téléphone:
+				<a href="tel:0756814878">0756814878</a>
+			</li>
+		</ul>
+	</section>
+	<section>
+		<h2>Hébergeur</h2>
+		<ul>
+			<li>Nom: Ionos</li>
+			<li>Adresse:7, place de la Gare,BP 70109, 57200 Sarreguemines Cedex,France
+			</li>
+			<li>Téléphone:
+				<a href="tel:0970 808 911">0970 808 911</a>
+			</li>
+		</ul>
+	</section>
+	<section>
+		<h2>Propriété intellectuelle</h2>
+		<p>L'ensemble des contenus originaux de ce blog (articles, podcasts, émissions.) sont protégés par le droit d'auteur. Toute reproduction, même partielle, nécessite l'autorisation préalable du propriétaire du site et/ou de l'auteur du contenu, sauf mention contraire avec les conditions d'adhésion.</p>
+		<p>Les images d'illustration sont la propriété de leur auteur originel. Le site ne réclame aucun droit d'auteur sur des oeuvres telles que des photographies ou de la musique dont il n'a pas la propriété.</p>
+	</section>
+	<section>
+		<h2>Données personnelles</h2>
+		<p>Ce blog n'utilise que des cookies essentiels à la gestion des connexions utilisateurs. Aucune autre donnée personnelle n'est collectée.</p>
+	</section>
+	<section>
+		<h2>Droit applicable</h2>
+		<p>Les présentes mentions légales sont soumises au droit français.</p>
+	</section>
+	<section>
+		<h2>Contact</h2>
+		<p>Pour toute question concernant ce blog, vous pouvez nous contacter à l'adresse email suivante : "contact@fahami.fr"</p>
+		<p>Dernière mise à jour : 09/09/2024</p>
+	</section>
+{% endblock %}

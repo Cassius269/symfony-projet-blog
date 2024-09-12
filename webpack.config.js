@@ -41,6 +41,7 @@ Encore
     .addEntry('notifications',['./assets/js/features/notifications.js'])
     .addEntry('episodePageDetail',['./assets/styles/pages/_episodePageDetail.scss', './assets/js/pages/all_podcasts.js'])
     .addEntry('errorMessages',['./assets/styles/components/_errorMessages.scss'])
+    .addEntry('rgpd', ['./assets/styles/components/_rgpd.scss'])
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
 

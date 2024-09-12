@@ -12,6 +12,6 @@ input {
 
     &:focus {// Quand on clique sur un input, la couleur du background change et la couleur du texte
         background: #FFC107;
-        color: white;
+        color:  $fifthColor;
     }
 }

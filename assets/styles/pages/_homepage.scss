@@ -25,7 +25,7 @@ main {
                 justify-content: center;
             }
             p {
-                color: white;
+                color:  $fifthColor;
                 font-weight: 100;
                 margin-left: 1rem;
                 position: relative;
@@ -55,7 +55,7 @@ main {
         a{
             .primaryButton {// Le bouton 'lire l'article maintenant !' de la page d'accueil
                 background-color: #FA6C30;
-                color: white;
+                color:  $fifthColor;
                 display: block;
                 margin: auto;
                 margin-top: 2rem;

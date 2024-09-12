@@ -8,7 +8,7 @@ button {
 }
 
 .primaryButton {
-    background: #ec751e;
+    background: $fourthColor;
     border: none;
     border-radius: 30px;
     color: #fff;
@@ -19,7 +19,7 @@ button {
     @media screen and (min-width:1024px) {
         height: 58px;
         font-size: 24px;
-        background: #ec751e;
+        background: $fourthColor;
         padding: 0px 3rem;    }
 }
 
@@ -30,7 +30,7 @@ button {
     padding: 0rem 1rem;
     margin-top: 1rem;
     color: #714534;
-    background-color: white;
+    background-color: $fifthColor;
     border: 3px solid #714534;//3px
     width: auto;
     font-size: 12px;  
@@ -51,7 +51,7 @@ button {
     margin-top: 1rem;
     width: 190px;
     color: $primaryColor;
-    background-color: white;
+    background-color:  $fifthColor;
     border-bottom: 3px solid $primaryColor;//3px
     width: 120px;
     padding: 10px;
