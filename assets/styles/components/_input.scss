@@ -2,16 +2,20 @@
 input {
     border: 1px solid black;
     height: 50px;
+    // padding: 0px 1rem;
     label {
         margin-top: 0.8rem;
     }
 
     &::placeholder {
-        color: #714534;
+        color: $tertiaryColor;
     }
 
-    &:focus {// Quand on clique sur un input, la couleur du background change et la couleur du texte
-        background: #FFC107;
-        color:  $fifthColor;
+    &:focus {// Quand on clique sur un input, les couleur du background et la couleur du texte changent
+        background: #ffc1075c;
+        color:  black;
+        &::placeholder {
+            visibility:hidden;// Quand on clique sur un input, le texte de substitution de l'input disparait 
+        }
     }
 }

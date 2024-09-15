@@ -3,6 +3,10 @@ form {
     justify-content: center;
     margin-top: 2.7rem;
     margin-left: 2rem;
+    input {
+      // text-align: center;
+    }
+
     // L'input servant à contenir le contenu de la requête
     input[type="image"]{
       position: relative;

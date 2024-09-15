@@ -159,7 +159,7 @@ class ArticleController extends AbstractController
                     ->setNbreOfViews(0); // Iniitialiser le compteur du nombre de vues d'un articles à zéro
 
                 // Gestion de la photo
-                $article->getMainImageIllustration()->setCreatedAt(new \DateTimeImmutable());
+                $article->getMainImageIllustration()->setCreatedAt(new \DateTimeImmutable()); // L'assignation de la date de création à l'image principale a permis de débogguer l'ereur de non persistance de l'article en base de données
 
                 // Enregistrer en base de donnée le nouvel article ayant été soumis et validé
                 $entityManager->persist($article);

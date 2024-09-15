@@ -1,5 +1,6 @@
-<script>
-	// Fonctionnalité: afficher dynamiquement les notifications instantannées
+{% if is_granted("ROLE_ADMIN") %}
+	<script>
+		// Fonctionnalité: afficher dynamiquement les notifications instantannées
 let listeNotifications = document.querySelector("#listNotifications");
 let numberOfNotifcationsElement = document.querySelector("#numberOfNotifcations");
 
@@ -30,14 +31,14 @@ elementNumberNotification.textContent ++; // Prendre la valeur contenu dans l'é
 }
 
 // Fonction pour afficher le nombre de notifications non lues uniquement si il y en a
-function showNumberOfUnreadNotification(elementNumberNotification){
-	if(elementNumberNotification.textContent == 0){
-		elementNumberNotification.style.visibility = "hidden";
-	}else {
-				elementNumberNotification.style.visibility = "visible";
-	}
+function showNumberOfUnreadNotification(elementNumberNotification) {
+if (elementNumberNotification.textContent == 0) {
+elementNumberNotification.style.visibility = "hidden";
+} else {
+elementNumberNotification.style.visibility = "visible";
+}
 }
 
 showNumberOfUnreadNotification(numberOfNotifcationsElement);
-
-</script>
+	</script>
+{% endif %}

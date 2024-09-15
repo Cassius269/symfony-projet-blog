@@ -29,7 +29,8 @@ class HomeController extends AbstractController
         $topArticle->setImage($file);
 
         // Récupérer le top 3 des Artciles dans l'ordre décroissant (du plus grand nombre de vues au plus petit nombre de vues)
-        $topArticles = $articleRepository->getTopArticles(3);
+        $limit = 3;
+        $topArticles = $articleRepository->getTopArticles($limit);
         // dd($topArticles);
         // Mettre à jour à la vue la source du fichier image de chaque article, sans mise à jour de la base de données
         foreach ($topArticles as $article) {
