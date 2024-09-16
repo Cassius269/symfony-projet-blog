@@ -3,6 +3,10 @@
 	{# Titre de la page #}
 	{{article.title}}
 {% endblock %}
+{# Pour le referencement naturel de la page #}
+{% block meta_description %}
+	{{article.title}}
+{% endblock %}
 {% block stylesheets %}
 	{{parent()}}
 	{{ encore_entry_link_tags('articlePageDetail') }}

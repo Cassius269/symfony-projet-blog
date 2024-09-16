@@ -12,11 +12,10 @@
 {% endblock %}
 {% block javascripts %}
 	{{ parent() }}
-	{{ encore_entry_script_tags('createArticlePage') }}
 	{# Chargement des scripts de CK Editor via le CDN #}
 	<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 	{# Ecrasement du CK Editor via le fichier CK Editor personnalisé #}
-	<script src=" {{asset('js/ckeditor.js')}}"></script>
+	{{ encore_entry_script_tags('createArticlePage') }}
 {% endblock %}
 {% block body %}
 	{# Modification du gros titre de la page en fonction du chemin de la route #}

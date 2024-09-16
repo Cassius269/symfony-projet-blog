@@ -2,12 +2,15 @@
 <html lang="fr-fr">
 	<head>
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<meta
+		name="viewport" content="width=device-width, initial-scale=1"/>
+		{# Balise meta description pour le referencement naturel #}
+		<meta name="description" content={% block meta_description %} {% endblock %}>
 		<title>
 			{% block title %}Welcome!
 			{% endblock %}
 		</title>
-		<link rel="icon" href="{{ asset('build/images/logo.svg')}}"> {% block metadescription %}{% endblock %}
+		<link rel="icon" href="{{ asset('build/images/logo.svg')}}">
 		{% block stylesheets %}
 			{{ encore_entry_link_tags('app') }}
 		{% endblock %}
