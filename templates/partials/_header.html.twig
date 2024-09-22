@@ -1,64 +1,66 @@
 <!-- Header sur écran mobile -->
-<header class="header headerMobile">
-	<div id="headerDivIconesLogoPlusMenu">
-		<a href="{{ path('home') }}" title="lien vers la page d'accueil de l'application"><img src=" {{ asset('build/images/logo.svg')}} " alt=" icône représentant le logo du site" class="icone"></a>
-		<img src="{{ asset('build/images/menuBurger.svg') }}" alt="icône représentant un menu burger" class="icone menuBurger">
-	</div>
-	<nav>
-		<div class="headerListLinks">
-			<div class="divLogoExitMenu">
-				<img src="{{ asset('build/images/closeMenu.svg') }}" alt="icône représentant un croix de sortie fermeture du menu burger" class="icone iconeExitMenu">
-			</div>
-			<div class="divImageProfilePlusHeaderLinks">
-				<a href="" title="s" id="linkDefaultProfile"><img src="{{asset('build/images/iconeProfile.svg')}}" alt="icône représentant le profile utilisateur" class="imageProfile"></a>
-				<ul class="headerNavListLinksRight">
-					<li>
-						<a href="{{path('articles_showAll')}}" title="lien vers la page des articles">
-							<button>Articles</button>
-						</a>
-					</li>
-					<li>
-						<a href="{{ path('podcasts_show_all') }}" title="lien vers la page de présentation de tous les podcasts">
-							<button>Podcasts</button>
-						</a>
-					</li>
-					{% if app.user == null %}
-						<li>
-							<a href="{{ path('admin_get_demand_members') }}" title="Lien vers la page devenir contributeur">
-								<button>Devenir Contributeur</button>
-							</a>
-						</li>
-					{% endif %}
-					{% if is_granted("IS_AUTHENTICATED_FULLY") %}
-						<li>
-
-							<a href="{{ path('dashboard') }}" title="lien vers le dashboard">
-								<button id="buttonConnect">Dashboard</button>
-							</a>
-						</li>
-						<li></li>
-						<li>
-
-							<a href=" {{ path('logout')}}" title="lien de déconnexion de l'application">
-								<button id="buttonConnect">Se déconnecter</button>
-							</a>
-						</li>
-						<li>
-
-						{% else %}
-							<a href=" {{ path('login')}}" title="lien vers la page de connexion">
-								<button id="buttonConnect">Se connecter</button>
-							</a>
-
-					{% endif %}
-
-				</li>
-			</ul>
+<header class="headerMobile">
+	<div class="header headerMobile">
+		<div id="headerDivIconesLogoPlusMenu">
+			<a href="{{ path('home') }}" title="lien vers la page d'accueil de l'application"><img src=" {{ asset('build/images/logo.svg')}} " alt=" icône représentant le logo du site" class="icone"></a>
+			<img src="{{ asset('build/images/menuBurger.svg') }}" alt="icône représentant un menu burger" class="icone menuBurger">
 		</div>
-	</div>
+		<nav>
+			<div class="headerListLinks">
+				<div class="divLogoExitMenu">
+					<img src="{{ asset('build/images/closeMenu.svg') }}" alt="icône représentant un croix de sortie fermeture du menu burger" class="icone iconeExitMenu">
+				</div>
+				<div class="divImageProfilePlusHeaderLinks">
+					<a href="" title="s" id="linkDefaultProfile"><img src="{{asset('build/images/iconeProfile.svg')}}" alt="icône représentant le profile utilisateur" class="imageProfile"></a>
+					<ul class="headerNavListLinksRight">
+						<li>
+							<a href="{{path('articles_showAll')}}" title="lien vers la page des articles">
+								<button>Articles</button>
+							</a>
+						</li>
+						<li>
+							<a href="{{ path('podcasts_show_all') }}" title="lien vers la page de présentation de tous les podcasts">
+								<button>Podcasts</button>
+							</a>
+						</li>
+						{% if app.user == null %}
+							<li>
+								<a href="{{ path('admin_get_demand_members') }}" title="Lien vers la page devenir contributeur">
+									<button>Devenir Contributeur</button>
+								</a>
+							</li>
+						{% endif %}
+						{% if is_granted("IS_AUTHENTICATED_FULLY") %}
+							<li>
 
-</nav></header><!-- Header sur écran desktop  --><header class="header headerDesktop">
-<div class="divHeaderDesktop">
+								<a href="{{ path('dashboard') }}" title="lien vers le dashboard">
+									<button id="buttonConnect">Dashboard</button>
+								</a>
+							</li>
+							<li></li>
+							<li>
+
+								<a href=" {{ path('logout')}}" title="lien de déconnexion de l'application">
+									<button id="buttonConnect">Se déconnecter</button>
+								</a>
+							</li>
+							<li>
+
+							{% else %}
+								<a href=" {{ path('login')}}" title="lien vers la page de connexion">
+									<button id="buttonConnect">Se connecter</button>
+								</a>
+
+						{% endif %}
+
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	</nav>
+</div></header><!-- Header sur écran desktop  --><div class="header headerDesktop">
+<div class="header divHeaderDesktop">
 	<a href="{{ path('home') }}" title="lien vers la page d'accueil de l'application"><img src=" {{ asset('build/images/logo.svg')}} " alt=" icône représentant le logo du site" class="icone"></a>
 	<div class="headerDivListLinksPlusNotififications">
 		<ul>
@@ -99,12 +101,10 @@
 			{% endif %}
 		</li>
 	</ul>
-	{% include "/partials/_notifications.html.twig" %}
-</div>
-
-<a href="{{ path('login')}}" title="lien vers la page de connexion"><img src="{{asset('build/images/iconeProfile.svg')}}" alt="icône représentant le profile utilisateur" class="imageProfile"></a></div></header>{# Affichage des messages flash #}<ul class="listMessage">{% for typeOfMessage,message in app.flashes(["success","error"]) %}
+	{% include "/partials/_notifications.html.twig" %}</div>
+<a href="{{ path('login')}}" title="lien vers la page de connexion"><img src="{{asset('build/images/iconeProfile.svg')}}" alt="icône représentant le profile utilisateur" class="imageProfile"></a></div></div>{# Affichage des messages flash #}<ul class="listMessage">{% for typeOfMessage,message in app.flashes(["success","error"]) %}
 {% for flashMessage in message %}
 	<li class="flash-{{typeOfMessage}}">{{flashMessage}}</li>
 {% endfor %}{% endfor %}</ul>{#
-											    position: relative;
-											    right: 25rem;#}
+																		    position: relative;
+																		    right: 25rem;#}
