@@ -12,6 +12,7 @@ use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\NotificationRepository;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -59,12 +60,11 @@ class ArticleController extends AbstractController
         methods: 'GET'
     )]
     public function showDetailledArticle(
-        ?Article $article,
+        #[MapEntity(id: 'id')] ?Article $article,
         EntityManagerInterface $entityManager,
         AwsManager $awsManager,
         Request $request,
         NotificationRepository $notificationRepository,
-        Notificator $notificator
     ): Response {
         // dd($idNotif);
         // dd($article);
@@ -207,8 +207,11 @@ class ArticleController extends AbstractController
         name: 'remove',
         methods: 'POST'
     )]
-    public function removeArticle(?Article $article, EntityManagerInterface $entityManager, Request $request): Response
-    {
+    public function removeArticle(
+        #[MapEntity(id: 'id')] ?Article $article,
+        EntityManagerInterface $entityManager,
+        Request $request
+    ): Response {
         // Garantir que l'action de suppresion d'un article ne sera autorisée que par l'Admin ou l'auteur de l'article lui-même
         $this->denyAccessUnlessGranted('REMOVE_ARTICLE', $article); // Gestion de la permission de suppresion par un voter
 
@@ -236,7 +239,7 @@ class ArticleController extends AbstractController
 
     #[Route(path: '/author/update-article/{id}', name: 'update', methods: ['GET', 'POST'])]
     #[IsGranted("ROLE_AUTHOR")]
-    public function updateArticle(?Article $article, Request $request, EntityManagerInterface $entityManager, HtmlSanitizerInterface $htmlSanitizer, AwsManager $awsManager): Response
+    public function updateArticle(#[MapEntity(id: 'id')] ?Article $article, Request $request, EntityManagerInterface $entityManager, HtmlSanitizerInterface $htmlSanitizer, AwsManager $awsManager): Response
     {
         $this->denyAccessUnlessGranted('UPDATE_ARTICLE', $article); // Gestion de la permission de modification d'un artickle via un voter
 

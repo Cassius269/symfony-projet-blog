@@ -14,6 +14,7 @@ use App\Repository\NotificationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -113,7 +114,7 @@ class AdminController extends AbstractController
     // Action pour étudier une demande de devenir collaborateur en particulier
     #[Route(path: '/list-demands/{id}', name: 'detail_demand', methods: ['GET', 'POST'])] // Les méthodes sont GET et POST car il y a un formulaire intégré prévu
     #[IsGranted('ROLE_ADMIN')] // Seul un utilisateur ayant le rôle "ROLE_ADMIN" à cette route
-    public function giveResponseToDemand(Demand $demand, Request $request, EntityManagerInterface $entityManager, AwsManager $awsStorage, NotificationRepository $notificationRepository): Response
+    public function giveResponseToDemand(#[MapEntity(id: 'id')] Demand $demand, Request $request, EntityManagerInterface $entityManager, AwsManager $awsStorage, NotificationRepository $notificationRepository): Response
     {
         // dump($demand);
         $user = new User();

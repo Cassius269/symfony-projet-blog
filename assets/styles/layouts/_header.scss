@@ -1,10 +1,9 @@
-.header {
-    display: none;
-}
-
 .headerMobile {
     width: 85vw;
     margin: auto;
+    @media screen and (width >= 1024px) {
+        display: none;
+    }
     .icone{
         height: 40px;
     }
@@ -98,6 +97,7 @@
 
 // Stylisation du header en destop
 .headerDesktop {
+    display: none;
     @media screen and (min-width: 1024px) {
         display: block;
     }

@@ -1,6 +1,6 @@
 <header>
 	<!-- Header sur écran mobile -->
-	<div class="header headerMobile">
+	<div class="headerMobile">
 		<div id="headerDivIconesLogoPlusMenu">
 			<a href="{{ path('home') }}" title="lien vers la page d'accueil de l'application"><img src=" {{ asset('build/images/logo.svg')}} " alt=" icône représentant le logo du site" class="icone"></a>
 			<img src="{{ asset('build/images/menuBurger.svg') }}" alt="icône représentant un menu burger" class="icone menuBurger">
@@ -60,7 +60,7 @@
 
 	</nav>
 </div><!-- Header sur écran desktop  --><div class="header headerDesktop">
-	<div class="header divHeaderDesktop">
+	<div class="divHeaderDesktop">
 		<a href="{{ path('home') }}" title="lien vers la page d'accueil de l'application"><img src=" {{ asset('build/images/logo.svg')}} " alt=" icône représentant le logo du site" class="icone"></a>
 		<div class="headerDivListLinksPlusNotififications">
 			<ul>
@@ -107,5 +107,5 @@
 {% for flashMessage in message %}
 	<li class="flash-{{typeOfMessage}}">{{flashMessage}}</li>
 {% endfor %}{% endfor %}</ul>{#
-																						    position: relative;
-																						    right: 25rem;#}
+																							    position: relative;
+																							    right: 25rem;#}
