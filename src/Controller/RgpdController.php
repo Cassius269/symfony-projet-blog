@@ -6,9 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+// Préfixation de toutes les routes de ce controller RgpdController
 #[Route(
     path: '/rgpd',
-    name: 'rgpd_'
+    name: 'rgpd_',
+    methods: ['GET'] // Les données sont récupérées en méthode GET
 )]
 class RgpdController extends AbstractController
 {

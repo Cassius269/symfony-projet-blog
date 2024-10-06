@@ -37,8 +37,8 @@ export function editWithCKEditor(typeOfEditor, IDinputHiddenContent ){
      { 
         // Les identifiants de services
    cloudServices: { 
-       tokenUrl: 'https://115257.cke-cs.com/token/dev/DmvhQCQgc4svhhMymURotIayEYZG6sr750kL?limit=10', 
-       uploadUrl: 'https://115257.cke-cs.com/easyimage/upload/' 
+       tokenUrl: 'https://120090.cke-cs.com/token/dev/5sNVm4KFV2rj9PQAXPl3OJflVp6pgIhZPS8i?limit=10 ', 
+       uploadUrl: 'https://120090.cke-cs.com/easyimage/upload/' 
    }
    }) 
    .then(editor => { 
