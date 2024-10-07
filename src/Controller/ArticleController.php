@@ -22,11 +22,24 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\HtmlSanitizer\HtmlSanitizerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
+// Préfixation des routes du controller ArticleController
 #[Route(path: '/articles', name: 'articles_')]
 class ArticleController extends AbstractController
 {
-    #[Route(path: '/', name: 'showAll', methods: 'GET')]
+
+    // Injection des dépendances 
+    public function __construct(private SluggerInterface $slugger) {}
+
+
+    // Déclaration des actions sur les articles (CRUD)
+
+    #[Route(
+        path: '/',
+        name: 'showAll',
+        methods: 'GET'
+    )]
     public function index(ArticleRepository $articleRepository, Request $request, PaginatorInterface $paginator, AwsManager $awsManager): Response
     {
         // Récupération des articles du récent au plus ancien
@@ -55,12 +68,12 @@ class ArticleController extends AbstractController
     }
 
     #[Route(
-        path: '/{id}',
+        path: '/{slug}',
         name: 'showDetailedArticle',
         methods: 'GET'
     )]
     public function showDetailledArticle(
-        #[MapEntity(id: 'id')] ?Article $article,
+        #[MapEntity(mapping: ['slug' => 'slug'])] ?Article $article,
         EntityManagerInterface $entityManager,
         AwsManager $awsManager,
         Request $request,
@@ -156,6 +169,7 @@ class ArticleController extends AbstractController
                 $article->setContent($safeContentArticle)
                     ->setCreatedAt(new DateTimeImmutable())
                     ->setAuthor($user)
+                    ->setSlug($this->slugger->slug($article->getTitle())) // Sluggification du titre
                     ->setNbreOfViews(0); // Iniitialiser le compteur du nombre de vues d'un articles à zéro
 
                 // Gestion de la photo
@@ -237,9 +251,13 @@ class ArticleController extends AbstractController
         return $this->redirectToRoute('home');
     }
 
-    #[Route(path: '/author/update-article/{id}', name: 'update', methods: ['GET', 'POST'])]
+    #[Route(
+        path: '/author/update-article/{id}',
+        name: 'update',
+        methods: ['GET', 'POST']
+    )]
     #[IsGranted("ROLE_AUTHOR")]
-    public function updateArticle(#[MapEntity(id: 'id')] ?Article $article, Request $request, EntityManagerInterface $entityManager, HtmlSanitizerInterface $htmlSanitizer, AwsManager $awsManager): Response
+    public function updateArticle(#[MapEntity(id: 'id')] ?Article $article, Request $request, EntityManagerInterface $entityManager, HtmlSanitizerInterface $htmlSanitizer, AwsManager $awsManager, SluggerInterface $slugger): Response
     {
         $this->denyAccessUnlessGranted('UPDATE_ARTICLE', $article); // Gestion de la permission de modification d'un artickle via un voter
 
@@ -259,9 +277,11 @@ class ArticleController extends AbstractController
             $unsafeContentArticle = $form->get('content')->getData();
             $safeContentArticle = $htmlSanitizer->sanitize($unsafeContentArticle);
 
-            $article->setContent($safeContentArticle);
-            $article->setUpdatedAt(new \DateTime());
-            $entityManager->flush();
+            $article->setContent($safeContentArticle)
+                ->setSlug($this->slugger->slug($article->getTitle())) // Sluggification du titre
+                ->setUpdatedAt(new \DateTime());
+
+            $entityManager->flush(); // Envoyer l'article mise à jour en base de donnnées
 
             $this->addFlash('success', 'Votre article a été mise à jour');
             return $this->redirectToRoute('home');

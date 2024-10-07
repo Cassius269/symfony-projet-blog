@@ -2,18 +2,24 @@
 
 namespace App\Entity;
 
-use App\Repository\ArticleRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
-use Symfony\Component\Validator\Constraints as Assert;
+use App\Entity\Trait\SlugTrait;
+use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ArticleRepository;
 // use Symfony\Component\HttpFoundation\File\File;
 // use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Persistence\Event\LifecycleEventArgs;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
+#[ORM\HasLifecycleCallbacks()] // Mise en place des évenements de Doctrine
 class Article
 {
+    use SlugTrait; // Utilisation du trait pour ajouter une propriété Slug et ses getteur et setteur
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -66,6 +72,7 @@ class Article
      */
     #[ORM\OneToMany(targetEntity: Notification::class, cascade: ["remove"], mappedBy: 'article')]
     private Collection $notifications;
+
 
     public function __construct()
     {
@@ -234,4 +241,27 @@ class Article
 
         return $this;
     }
+
+    // // Avant de persister l'article nouvellement créé, slugifier le titre
+    // #[ORM\PrePersist]
+    // public function slugifyTitleOnCreating(LifecycleEventArgs $args)
+    // {
+
+    //     // $this->setSlug()
+    // }
+
+    // // Avant de mettre à jour un article, slugifier le titre
+    // #[ORM\PreUpdate]
+    // public function slugifyTitleOnUpdating(LifecycleEventArgs $args)
+    // {
+    //     $updatedArticle = $args->getObject();
+    //     $title = $updatedArticle->getTitle();
+    //     // dd($title);
+    //     // $slugiffiedTitle = sg($title);
+    //     // $updatedArticle->setSlug($title);
+    //     // dd($args->getObject());
+    //     dd($this->slugger->slug($title));
+    //     $updatedArticle->setSlug($title);
+    //     // dd($title);
+    // }
 }

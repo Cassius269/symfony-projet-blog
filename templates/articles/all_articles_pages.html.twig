@@ -17,7 +17,7 @@
 	{% if articles.items is not empty%}
 		<div class="divAllArticles">
 			{% for article in articles %}
-				<a href="{{ path("articles_showDetailedArticle", {id: article.id }) }}">
+				<a href="{{ path("articles_showDetailedArticle", {slug: article.slug }) }}">
 					<article class="boxArticle" style="background-image: url({{ article.image }})">
 						<h3>{{ article.title }}</h3>
 						<div
