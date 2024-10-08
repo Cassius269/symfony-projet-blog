@@ -16,7 +16,7 @@
 				{% if notif.type is same as 'article' %}
 					{# Si la notification est lié à un article, le lien de l'article devient cliquable #}
 					<li>
-						<a href="{{ path('articles_showDetailedArticle', {id: notif.article.id, id_notif: notif.id})}}">{{ notif.content }}
+						<a href="{{ path('articles_showDetailedArticle', {slug: notif.article.slug, id_notif: notif.id})}}">{{ notif.content }}
 							par
 							{{ notif.author.fullname}}</a>
 					</li>

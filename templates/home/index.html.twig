@@ -14,7 +14,7 @@
 				<span>+</span>
 			</h1>
 		</article>
-		<a href="{{ path("articles_showDetailedArticle", {id: topArticle.id }) }}" title="lien vers l'article de la semaine">
+		<a href="{{ path("articles_showDetailedArticle", {slug: topArticle.slug }) }}" title="lien vers l'article de la semaine">
 			<button class="primaryButton">Lire l'article maintenant !</button>
 		</a>
 	</section>
@@ -30,7 +30,7 @@
 
 			<div class="divArticlesOfTheWeek">
 				{% for article in topArticles %}
-					<a href="{{ path("articles_showDetailedArticle", {id: article.id }) }}">
+					<a href="{{ path("articles_showDetailedArticle", {slug: article.slug }) }}">
 						<article class="boxArticle" style="background-image: url({{ article.image }})">
 							<h3>{{ article.title }}</h3>
 							<div
