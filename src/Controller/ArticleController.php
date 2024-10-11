@@ -169,7 +169,7 @@ class ArticleController extends AbstractController
                 $article->setContent($safeContentArticle)
                     ->setCreatedAt(new DateTimeImmutable())
                     ->setAuthor($user)
-                    ->setSlug($this->slugger->slug($article->getTitle())) // Sluggification du titre
+                    ->setSlug($this->slugger->slug($article->getTitle())->lower()) // Sluggification du titre
                     ->setNbreOfViews(0); // Iniitialiser le compteur du nombre de vues d'un articles à zéro
 
                 // Gestion de la photo
@@ -278,7 +278,7 @@ class ArticleController extends AbstractController
             $safeContentArticle = $htmlSanitizer->sanitize($unsafeContentArticle);
 
             $article->setContent($safeContentArticle)
-                ->setSlug($this->slugger->slug($article->getTitle())) // Sluggification du titre
+                ->setSlug($this->slugger->slug($article->getTitle())->lower()) // Sluggification du titre en le mettant en miniscule avec des tirets de séparation
                 ->setUpdatedAt(new \DateTime());
 
             $entityManager->flush(); // Envoyer l'article mise à jour en base de donnnées
