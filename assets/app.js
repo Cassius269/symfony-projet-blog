@@ -6,4 +6,4 @@
  */
 import './styles/app.scss';
 
-// import './bootstrap.js';
+import './bootstrap.js';
