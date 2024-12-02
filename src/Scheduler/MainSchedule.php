@@ -9,7 +9,7 @@ use Symfony\Component\Scheduler\RecurringMessage;
 use Symfony\Component\Scheduler\Attribute\AsSchedule;
 use Symfony\Component\Scheduler\ScheduleProviderInterface;
 
-#[AsSchedule('RenewDateArticles')]
+#[AsSchedule('RenewDateArticles')] // Le nom du la tâche plannifié
 final class MainSchedule implements ScheduleProviderInterface
 {
     public function __construct(

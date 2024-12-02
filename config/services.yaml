@@ -6,6 +6,7 @@
 parameters:
   app.path.article_illustrations: /upload/articleillustration
   app.path.cv: /upload/cv
+  timezone: "%env(APP_TIMEZONE)%" # déclaration de la time zone en tant que paramètre
 
 services:
   # default configuration for services in *this* file
