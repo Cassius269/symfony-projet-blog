@@ -38,12 +38,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Le prénom ne peut pas être vide')]
-    #[Groups(['articles.index'])] // Groupe de sérialization pour l'API
+    #[Groups(['articles.index', 'articles.show'])] // Groupe de sérialization pour l'API
     private ?string $firstname = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Le nom de famille ne peut pas être vide')]
-    #[Groups(['articles.index'])] // Groupe de sérialization pour l'API
+    #[Groups(['articles.index', 'articles.show'])] // Groupe de sérialization pour l'API
     private ?string $lastname = null;
 
     #[ORM\Column]

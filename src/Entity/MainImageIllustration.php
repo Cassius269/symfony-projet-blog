@@ -35,7 +35,7 @@ class MainImageIllustration
     private ?string $source = null;
 
     #[ORM\ManyToOne(inversedBy: 'mainImageIllustrations', cascade: ['persist'])]
-    #[Groups(['articles.index'])] // Groupe de sérialization pour l'API
+    #[Groups(['articles.index', 'articles.show'])] // Groupe de sérialization pour l'API
     private ?Photographer $photographer = null;
 
     /**

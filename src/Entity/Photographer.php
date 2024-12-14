@@ -17,15 +17,15 @@ class Photographer
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['articles.index'])] // Groupe de sérialization pour l'API
+    #[Groups(['articles.index', 'articles.show'])] // Groupe de sérialization pour l'API
     private ?string $firstname = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['articles.index'])] // Groupe de sérialization pour l'API
+    #[Groups(['articles.index', 'articles.show'])] // Groupe de sérialization pour l'API
     private ?string $lastname = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['articles.index'])] // Groupe de sérialization pour l'API
+    #[Groups(['articles.index', 'articles.show'])] // Groupe de sérialization pour l'API
     private ?string $pseudonyme = null;
 
     /**
