@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\CategoryRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CategoryRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
@@ -22,6 +23,7 @@ class Category
         min: 12,
         minMessage: 'Le nom de la catégorie est trop court'
     )]
+    #[Groups(['articles.index'])] // Groupe de sérialization pour l'API
     private ?string $name = null;
 
     /**

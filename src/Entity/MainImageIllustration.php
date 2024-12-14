@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Attribute\Groups;
 use App\Repository\MainImageIllustrationRepository;
 use Symfony\Component\Serializer\Annotation\Ignore;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -34,6 +35,7 @@ class MainImageIllustration
     private ?string $source = null;
 
     #[ORM\ManyToOne(inversedBy: 'mainImageIllustrations', cascade: ['persist'])]
+    #[Groups(['articles.index'])] // Groupe de sérialization pour l'API
     private ?Photographer $photographer = null;
 
     /**

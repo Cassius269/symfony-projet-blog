@@ -11,6 +11,7 @@ use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
+use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -31,10 +32,12 @@ class Article
         min: 12,
         minMessage: 'Le titre est trop court'
     )]
+    #[Groups(['articles.index'])] // Groupe de sérialization pour l'API
     private ?string $title = null;
 
     #[ORM\ManyToOne(inversedBy: 'articles')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['articles.index'])] // Groupe de sérialization pour l'API
     private ?User $author = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -49,10 +52,12 @@ class Article
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['articles.index'])] // Groupe de sérialization pour l'API
     private ?int $nbreOfViews = null;
 
     #[ORM\ManyToOne(inversedBy: 'articles')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['articles.index'])] // Groupe de sérialization pour l'API
     private ?Category $category = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -63,6 +68,7 @@ class Article
 
     #[ORM\ManyToOne(inversedBy: 'articles', cascade: ['persist', 'remove'], fetch: "EAGER")]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['articles.index'])] // Groupe de sérialization pour l'API
     private ?MainImageIllustration $mainImageIllustration = null;
 
     private ?string $image = null;
