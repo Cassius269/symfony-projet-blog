@@ -22,9 +22,11 @@ class MainImageIllustration
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['articles.index', 'articles.show', 'articles.create'])] // Groupe de sérialization pour l'API
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['articles.create'])] // Groupe de sérialization pour l'API
     private ?string $imageName = null;
 
     #[Vich\UploadableField(mapping: 'articleIllustration', fileNameProperty: 'imageName')]
@@ -32,6 +34,7 @@ class MainImageIllustration
     private ?File $imageFile = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['articles.create'])] // Groupe de sérialization pour l'API
     private ?string $source = null;
 
     #[ORM\ManyToOne(inversedBy: 'mainImageIllustrations', cascade: ['persist'])]

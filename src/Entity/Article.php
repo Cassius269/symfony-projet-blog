@@ -5,18 +5,26 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use App\Entity\Trait\SlugTrait;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\ArticleRepository;
 // use Symfony\Component\HttpFoundation\File\File;
 // use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Persistence\Event\LifecycleEventArgs;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Attribute\Groups;
-use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
-#[ORM\HasLifecycleCallbacks()] // Mise en place des évenements de Doctrine
+// Vérifier séparemment si la donnée titre d'un article est unique dans la base de données
+#[UniqueEntity(
+    fields: ['title'],
+    message: 'Un titre similaire existe déjà'
+)]
+// Vérifier séparemment si la donnée contenu d'un article est unique dans la base de données
+#[UniqueEntity(
+    fields: ['content'],
+    message: 'Un contenu similaire existe déjà'
+)]
 class Article
 {
     use SlugTrait; // Utilisation du trait pour ajouter une propriété Slug et ses getteur et setteur
@@ -24,7 +32,7 @@ class Article
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['articles.index'])] // Groupe de sérialization pour l'API
+    #[Groups(['articles.index', 'articles.show', 'articles.create'])] // Groupe de sérialization pour l'API
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -33,7 +41,7 @@ class Article
         min: 12,
         minMessage: 'Le titre est trop court'
     )]
-    #[Groups(['articles.index', 'articles.show'])] // Groupe de sérialization pour l'API
+    #[Groups(['articles.index', 'articles.show', 'article.create'])] // Groupe de sérialization pour l'API
     private ?string $title = null;
 
     #[ORM\ManyToOne(inversedBy: 'articles')]
@@ -47,11 +55,11 @@ class Article
         min: 400,
         minMessage: 'L\'article est trop court'
     )]
-    #[Groups(['articles.show'])] // Groupe de sérialization pour l'API
+    #[Groups(['articles.show', 'article.create'])] // Groupe de sérialization pour l'API
     private ?string $content = null;
 
     #[ORM\Column]
-    #[Groups(['articles.index', 'articles.show'])] // Groupe de sérialization pour l'API
+    #[Groups(['articles.index', 'articles.show', 'article.create'])] // Groupe de sérialization pour l'API
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
@@ -60,10 +68,11 @@ class Article
 
     #[ORM\ManyToOne(inversedBy: 'articles')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['articles.index', 'articles.show'])] // Groupe de sérialization pour l'API
+    #[Groups(['articles.index', 'articles.show', 'article.create'])] // Groupe de sérialization pour l'API
     private ?Category $category = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['articles.show', 'article.create'])] // Groupe de sérialization pour l'API
     private ?string $abstract = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
@@ -71,7 +80,7 @@ class Article
 
     #[ORM\ManyToOne(inversedBy: 'articles', cascade: ['persist', 'remove'], fetch: "EAGER")]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['articles.index', 'articles.show'])] // Groupe de sérialization pour l'API
+    #[Groups(['articles.index', 'articles.show', 'article.create'])] // Groupe de sérialization pour l'API
     private ?MainImageIllustration $mainImageIllustration = null;
 
     private ?string $image = null;
@@ -250,27 +259,4 @@ class Article
 
         return $this;
     }
-
-    // // Avant de persister l'article nouvellement créé, slugifier le titre
-    // #[ORM\PrePersist]
-    // public function slugifyTitleOnCreating(LifecycleEventArgs $args)
-    // {
-
-    //     // $this->setSlug()
-    // }
-
-    // // Avant de mettre à jour un article, slugifier le titre
-    // #[ORM\PreUpdate]
-    // public function slugifyTitleOnUpdating(LifecycleEventArgs $args)
-    // {
-    //     $updatedArticle = $args->getObject();
-    //     $title = $updatedArticle->getTitle();
-    //     // dd($title);
-    //     // $slugiffiedTitle = sg($title);
-    //     // $updatedArticle->setSlug($title);
-    //     // dd($args->getObject());
-    //     dd($this->slugger->slug($title));
-    //     $updatedArticle->setSlug($title);
-    //     // dd($title);
-    // }
 }

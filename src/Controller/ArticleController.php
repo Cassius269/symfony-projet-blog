@@ -30,7 +30,7 @@ class ArticleController extends AbstractController
 {
 
     // Injection des dépendances 
-    public function __construct(private SluggerInterface $slugger) {}
+    // public function __construct(private SluggerInterface $slugger) {}
 
 
     // Déclaration des actions sur les articles (CRUD)
@@ -169,7 +169,7 @@ class ArticleController extends AbstractController
                 $article->setContent($safeContentArticle)
                     ->setCreatedAt(new DateTimeImmutable())
                     ->setAuthor($user)
-                    ->setSlug($this->slugger->slug($article->getTitle())->lower()) // Sluggification du titre
+                    // ->setSlug($this->slugger->slug($article->getTitle())->lower()) // Sluggification du titre
                     ->setNbreOfViews(0); // Iniitialiser le compteur du nombre de vues d'un articles à zéro
 
                 // Gestion de la photo

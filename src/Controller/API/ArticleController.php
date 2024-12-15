@@ -2,11 +2,18 @@
 
 namespace App\Controller\API;
 
+use Exception;
 use App\Entity\Article;
+use App\Repository\UserRepository;
+use App\Entity\MainImageIllustration;
 use App\Repository\ArticleRepository;
+use App\Repository\CategoryRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route(name: 'api_')]
@@ -42,6 +49,79 @@ class ArticleController extends AbstractController
 
         return $this->json($article, 200, [], [
             'groups' => ['articles.show']
+        ]);
+    }
+
+    #[Route(
+        path: '/api/articles/',
+        name: 'create_new_article',
+        methods: ['POST']
+    )]
+    public function create(EntityManagerInterface $entityManager, Request $request, ArticleRepository $articleRepository, CategoryRepository $categoryRepository, UserRepository $userRepository, ValidatorInterface $validator): Response
+    {
+        // Récupérer l'article envoyé au serveur et le convertir en objet classique
+        $content = json_decode($request->getContent());
+
+        // // chercher si il n'y a pas d'article simillaire ayant le même titre et contenu
+        // $searchSameRecipe = $articleRepository->findBy(
+        //     [
+        //         'title' => $content->title,
+        //         'content' => $content->content
+        //     ]
+        // );
+
+        // if ($searchSameRecipe) {
+        //     throw new Exception('Impossible d\'envoyer la nouvelle ressource au serveur : une ressource simillaire de type article existe');
+        // };
+
+
+        // Création d'un nouvel objet article
+        $category = $categoryRepository->findOneBy(
+            ['name' => $content->category->name]
+        );
+
+        $article = new Article();
+        $article->setTitle($content->title)
+            ->setContent($content->content)
+            ->setAbstract($content->abstract)
+            ->setCategory($category);
+
+        // Rechercher si l'auteur de l'article existe via son mail: 1er volet de sécurité
+        $searchSimilarUser = $userRepository->findOneBy(
+            [
+                'email' => $content->author->email
+            ]
+        );
+
+        if ($searchSimilarUser) {
+            $article->setAuthor($searchSimilarUser);
+        } else {
+            throw new \Exception('Auteur inconnu au bataillon des auteurs du blog');
+        }
+
+        // Création d'un objet image d'illustration comportant les informations de l'image associé à l'article
+        $mainImageIllustration =  new MainImageIllustration;
+        $mainImageIllustration->setCreatedAt(new \DateTimeImmutable())
+            ->setTitle($content->mainImageIllustration->title)
+            ->setImageName($content->mainImageIllustration->imagename)
+            ->setSource($content->mainImageIllustration->source);
+
+        $article->setMainImageIllustration($mainImageIllustration);
+
+        $errors = $validator->validate($article);
+
+        if (count($errors) > 0) {
+            // Renvoyer chaque erreur rencontrée (cela implique un arrêt de script)
+            foreach ($errors as $error) {
+                throw new Exception($error->getPropertyPath() . ' : ' . $error->getMessage());
+            }
+        }
+
+        $entityManager->persist($article);
+        $entityManager->flush();
+
+        return $this->json($article, 201, [], [
+            'groups' => ['article.create']
         ]);
     }
 }
