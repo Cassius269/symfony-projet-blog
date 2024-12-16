@@ -22,17 +22,11 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\HtmlSanitizer\HtmlSanitizerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\String\Slugger\SluggerInterface;
 
 // Préfixation des routes du controller ArticleController
 #[Route(path: '/articles', name: 'articles_')]
 class ArticleController extends AbstractController
 {
-
-    // Injection des dépendances 
-    // public function __construct(private SluggerInterface $slugger) {}
-
-
     // Déclaration des actions sur les articles (CRUD)
 
     #[Route(
@@ -169,7 +163,6 @@ class ArticleController extends AbstractController
                 $article->setContent($safeContentArticle)
                     ->setCreatedAt(new DateTimeImmutable())
                     ->setAuthor($user)
-                    // ->setSlug($this->slugger->slug($article->getTitle())->lower()) // Sluggification du titre
                     ->setNbreOfViews(0); // Iniitialiser le compteur du nombre de vues d'un articles à zéro
 
                 // Gestion de la photo
@@ -257,7 +250,7 @@ class ArticleController extends AbstractController
         methods: ['GET', 'POST']
     )]
     #[IsGranted("ROLE_AUTHOR")]
-    public function updateArticle(#[MapEntity(id: 'id')] ?Article $article, Request $request, EntityManagerInterface $entityManager, HtmlSanitizerInterface $htmlSanitizer, AwsManager $awsManager, SluggerInterface $slugger): Response
+    public function updateArticle(#[MapEntity(id: 'id')] ?Article $article, Request $request, EntityManagerInterface $entityManager, HtmlSanitizerInterface $htmlSanitizer, AwsManager $awsManager): Response
     {
         $this->denyAccessUnlessGranted('UPDATE_ARTICLE', $article); // Gestion de la permission de modification d'un artickle via un voter
 
@@ -278,7 +271,6 @@ class ArticleController extends AbstractController
             $safeContentArticle = $htmlSanitizer->sanitize($unsafeContentArticle);
 
             $article->setContent($safeContentArticle)
-                ->setSlug($this->slugger->slug($article->getTitle())->lower()) // Sluggification du titre en le mettant en miniscule avec des tirets de séparation
                 ->setUpdatedAt(new \DateTime());
 
             $entityManager->flush(); // Envoyer l'article mise à jour en base de donnnées

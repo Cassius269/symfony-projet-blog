@@ -144,4 +144,31 @@ class ArticleController extends AbstractController
         // Envoyer une réponse vide 
         return $this->json(null, 204);
     }
+
+    #[Route(
+        path: '/api/articles/{id}',
+        name: 'update_an_article',
+        methods: ['PUT']
+    )]
+    public function update(?Article $article, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        // Gestion des erreurs
+        if (!$article) {
+            throw $this->createNotFoundException('La ressource à mettre à jour n\'existe pas');
+        }
+
+        // Récuperer le body de la requête contenant la charge utile
+        $content = json_decode($request->getContent());
+
+        // Modifier l'article se trouvant sur le serveur en substituant les valeurs modifiés des champs 
+        $article->setTitle($content->title)
+            ->setContent($content->content);
+
+        // Envoyer la donnée modifiée au serveur
+        $entityManager->flush();
+
+        return $this->json($article, 200, [], [
+            'groups' => ['articles.update']
+        ]);
+    }
 }
