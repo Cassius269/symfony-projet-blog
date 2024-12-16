@@ -124,4 +124,24 @@ class ArticleController extends AbstractController
             'groups' => ['article.create']
         ]);
     }
+
+    #[Route(
+        path: '/api/articles/{id}',
+        name: 'delete_an_article',
+        methods: ["DELETE"]
+    )]
+    public function delete(#[MapEntity(id: 'id')] ?Article $article, EntityManagerInterface $entityManager): Response
+    {
+        // Vérifier si la ressource de type article à supprimer est bien présente dans le serveur
+        if (!$article) {
+            throw $this->createNotFoundException('La ressource à supprimer n\'existe pas');
+        }
+
+
+        $entityManager->remove($article);
+        $entityManager->flush();
+
+        // Envoyer une réponse vide 
+        return $this->json(null, 204);
+    }
 }
