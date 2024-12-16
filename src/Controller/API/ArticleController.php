@@ -62,19 +62,6 @@ class ArticleController extends AbstractController
         // Récupérer l'article envoyé au serveur et le convertir en objet classique
         $content = json_decode($request->getContent());
 
-        // // chercher si il n'y a pas d'article simillaire ayant le même titre et contenu
-        // $searchSameRecipe = $articleRepository->findBy(
-        //     [
-        //         'title' => $content->title,
-        //         'content' => $content->content
-        //     ]
-        // );
-
-        // if ($searchSameRecipe) {
-        //     throw new Exception('Impossible d\'envoyer la nouvelle ressource au serveur : une ressource simillaire de type article existe');
-        // };
-
-
         // Création d'un nouvel objet article
         $category = $categoryRepository->findOneBy(
             ['name' => $content->category->name]
@@ -150,7 +137,7 @@ class ArticleController extends AbstractController
         name: 'update_an_article',
         methods: ['PUT']
     )]
-    public function update(?Article $article, Request $request, EntityManagerInterface $entityManager): Response
+    public function update(?Article $article, Request $request, EntityManagerInterface $entityManager, ValidatorInterface $validator): Response
     {
         // Gestion des erreurs
         if (!$article) {
@@ -163,6 +150,16 @@ class ArticleController extends AbstractController
         // Modifier l'article se trouvant sur le serveur en substituant les valeurs modifiés des champs 
         $article->setTitle($content->title)
             ->setContent($content->content);
+
+        // Valider les données
+        $errors = $validator->validate($article);
+
+        if (count($errors) > 0) {
+            // Renvoyer chaque erreur rencontrée (cela implique un arrêt de script)
+            foreach ($errors as $error) {
+                throw new Exception($error->getPropertyPath() . ' : ' . $error->getMessage());
+            }
+        }
 
         // Envoyer la donnée modifiée au serveur
         $entityManager->flush();

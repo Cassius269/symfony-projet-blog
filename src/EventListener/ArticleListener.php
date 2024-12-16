@@ -3,9 +3,9 @@
 namespace App\EventListener;
 
 use App\Entity\Article;
+use App\Services\Sluggificator;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\Event\PrePersistEventArgs;
-use Symfony\Component\String\Slugger\SluggerInterface;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 
@@ -15,13 +15,12 @@ class ArticleListener
 {
 
     // Injection des dépendances 
-    public function __construct(private SluggerInterface $slugger) {}
+    public function __construct(private Sluggificator $sluggificator) {}
 
     public function prePersist(Article $article, PrePersistEventArgs $event)
     {
         //Sluggifier le titre de l'article
-        $title = $article->getTitle();
-        $slugTitle = $this->slugger->slug($title)->lower(); // Slugfication du titre de l'article avant persistance en base de données
+        $slugTitle = $this->sluggificator->getSluggifiedTitle($article);
 
         // Insérer la date du jour comme date de création de l'article au moment de l'envoi de la donnée en BDD
         $article->setCreatedAt(new \DateTimeImmutable())
@@ -31,9 +30,7 @@ class ArticleListener
     public function preUpdate(Article $article, PreUpdateEventArgs $event)
     {
         //Sluggifier le titre de l'article
-        $title = $article->getTitle();
-        $slugTitle = $this->slugger->slug($title)->lower(); // Slugfication du titre de l'article avant persistance en base de données
-
+        $slugTitle = $this->sluggificator->getSluggifiedTitle($article);
 
         // Insérer la date du jour comme date de création de l'article au moment de l'envoi de la donnée en BDD
         $article->setSlug($slugTitle)
