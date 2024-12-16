@@ -20,6 +20,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ArticleController extends AbstractController
 {
 
+    public function __construct(private EntityManagerInterface $entityManager, private ValidatorInterface $validator) {}
+
     #[Route(
         path: '/api/articles',
         name: 'get_all_articles',
@@ -57,7 +59,7 @@ class ArticleController extends AbstractController
         name: 'create_new_article',
         methods: ['POST']
     )]
-    public function create(EntityManagerInterface $entityManager, Request $request, ArticleRepository $articleRepository, CategoryRepository $categoryRepository, UserRepository $userRepository, ValidatorInterface $validator): Response
+    public function create(Request $request, CategoryRepository $categoryRepository, UserRepository $userRepository): Response
     {
         // Récupérer l'article envoyé au serveur et le convertir en objet classique
         $content = json_decode($request->getContent());
@@ -95,7 +97,8 @@ class ArticleController extends AbstractController
 
         $article->setMainImageIllustration($mainImageIllustration);
 
-        $errors = $validator->validate($article);
+        // Gestion des erreurs
+        $errors = $this->validator->validate($article);
 
         if (count($errors) > 0) {
             // Renvoyer chaque erreur rencontrée (cela implique un arrêt de script)
@@ -104,8 +107,9 @@ class ArticleController extends AbstractController
             }
         }
 
-        $entityManager->persist($article);
-        $entityManager->flush();
+        // Persistance des données et envoi en base de données
+        $this->entityManager->persist($article);
+        $this->entityManager->flush();
 
         return $this->json($article, 201, [], [
             'groups' => ['article.create']
@@ -117,7 +121,7 @@ class ArticleController extends AbstractController
         name: 'delete_an_article',
         methods: ["DELETE"]
     )]
-    public function delete(#[MapEntity(id: 'id')] ?Article $article, EntityManagerInterface $entityManager): Response
+    public function delete(#[MapEntity(id: 'id')] ?Article $article): Response
     {
         // Vérifier si la ressource de type article à supprimer est bien présente dans le serveur
         if (!$article) {
@@ -125,8 +129,8 @@ class ArticleController extends AbstractController
         }
 
 
-        $entityManager->remove($article);
-        $entityManager->flush();
+        $this->entityManager->remove($article);
+        $this->entityManager->flush();
 
         // Envoyer une réponse vide 
         return $this->json(null, 204);
@@ -137,7 +141,7 @@ class ArticleController extends AbstractController
         name: 'update_an_article',
         methods: ['PUT']
     )]
-    public function update(?Article $article, Request $request, EntityManagerInterface $entityManager, ValidatorInterface $validator): Response
+    public function update(?Article $article, Request $request): Response
     {
         // Gestion des erreurs
         if (!$article) {
@@ -152,7 +156,7 @@ class ArticleController extends AbstractController
             ->setContent($content->content);
 
         // Valider les données
-        $errors = $validator->validate($article);
+        $errors = $this->validator->validate($article);
 
         if (count($errors) > 0) {
             // Renvoyer chaque erreur rencontrée (cela implique un arrêt de script)
@@ -162,7 +166,7 @@ class ArticleController extends AbstractController
         }
 
         // Envoyer la donnée modifiée au serveur
-        $entityManager->flush();
+        $this->entityManager->flush();
 
         return $this->json($article, 200, [], [
             'groups' => ['articles.update']
