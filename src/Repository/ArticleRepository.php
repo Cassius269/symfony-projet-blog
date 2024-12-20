@@ -71,4 +71,15 @@ class ArticleRepository extends ServiceEntityRepository
 
         return $result ? $result[0] : null;
     }
+
+    // Requête personnalisée pour obtenir les articles dans l'ordre du plus récent au plus ancien
+    public function getAllArticlesFromNewest()
+    {
+        return $this->createQueryBuilder('a')
+            // ->select('a.id, a.title, a.createdAt, author.firstname') // Sélectionner uniquement les champs nécessaires pour réduire la charge
+            ->join('a.author', 'author') // Joindre l'entité auteur
+            ->orderBy('a.createdAt', 'DESC') // ordonner le résultat de tous les objets articles, du plus récent au plus ancien
+            ->getQuery()
+            ->getResult();
+    }
 }

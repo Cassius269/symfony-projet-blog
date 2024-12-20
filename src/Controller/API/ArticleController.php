@@ -30,7 +30,7 @@ class ArticleController extends AbstractController
     public function index(ArticleRepository $articleRepository): Response
     {
         // Récupération de tous les articles
-        $data = $articleRepository->findAll();
+        $data = $articleRepository->getAllArticlesFromNewest();
 
         // Retourner la réponse JSON contenant toutes les ressources articles
         return $this->json($data, 200, [], [
