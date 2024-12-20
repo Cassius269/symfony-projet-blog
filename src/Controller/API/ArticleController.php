@@ -32,6 +32,11 @@ class ArticleController extends AbstractController
         // Récupération de tous les articles
         $data = $articleRepository->getAllArticlesFromNewest();
 
+        // Obtenir l'extrait de chaque article
+        foreach ($data as $article) {
+            $article->setContent(substr($article->getContent(), 0, 100) . '...'); // Mettre à jour le contenu de chaque article avec un extrait de 100 caractères
+        }
+
         // Retourner la réponse JSON contenant toutes les ressources articles
         return $this->json($data, 200, [], [
             'groups' => ['articles.index']

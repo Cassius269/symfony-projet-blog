@@ -55,7 +55,7 @@ class Article
         min: 400,
         minMessage: 'L\'article est trop court'
     )]
-    #[Groups(['articles.show', 'article.create', 'articles.update'])] // Groupe de sérialization pour l'API
+    #[Groups(['articles.index', 'articles.show', 'article.create', 'articles.update'])] // Groupe de sérialization pour l'API
     private ?string $content = null;
 
     #[ORM\Column]
@@ -72,7 +72,7 @@ class Article
     private ?Category $category = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Groups(['articles.show', 'article.create'])] // Groupe de sérialization pour l'API
+    #[Groups(['articles.index', 'articles.show', 'article.create'])] // Groupe de sérialization pour l'API
     private ?string $abstract = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
