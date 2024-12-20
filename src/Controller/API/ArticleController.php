@@ -9,6 +9,7 @@ use App\Entity\MainImageIllustration;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -27,18 +28,30 @@ class ArticleController extends AbstractController
         name: 'get_all_articles',
         methods: ['GET'] //Ce point de terminaison est accessible en méthode GET
     )]
-    public function index(ArticleRepository $articleRepository): Response
+    public function index(ArticleRepository $articleRepository, PaginatorInterface $paginator, Request $request): Response
     {
         // Récupération de tous les articles
         $data = $articleRepository->getAllArticlesFromNewest();
 
-        // Obtenir l'extrait de chaque article
+        // Vérifier si il y a un ou plusieurs dans le serveur
+        if (!$data) {
+            throw $this->createNotFoundException('Aucune ressource trouvée');
+        }
+
+        // Si au moins un article est diponible sur le serveur, obtenir l'extrait de chaque article
         foreach ($data as $article) {
             $article->setContent(substr($article->getContent(), 0, 100) . '...'); // Mettre à jour le contenu de chaque article avec un extrait de 100 caractères
         }
 
-        // Retourner la réponse JSON contenant toutes les ressources articles
-        return $this->json($data, 200, [], [
+        // Paginer les données
+        $paginatedArticles = $paginator->paginate(
+            $data, // données à paginer
+            $request->query->getInt('page', 1), // commencer à la page 1
+            5 // limiter à 5 articles par page
+        );
+
+        // Retourner la réponse JSON contenant toutes les ressources articles paginés
+        return $this->json($paginatedArticles, 200, [], [
             'groups' => ['articles.index']
         ]);
     }
