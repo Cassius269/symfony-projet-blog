@@ -16,6 +16,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route(name: 'api_')]
 class ArticleController extends AbstractController
@@ -28,6 +29,7 @@ class ArticleController extends AbstractController
         name: 'get_all_articles',
         methods: ['GET'] //Ce point de terminaison est accessible en méthode GET
     )]
+    // #[IsGranted('ROLE_USER')]
     public function index(ArticleRepository $articleRepository, PaginatorInterface $paginator, Request $request): Response
     {
         // Récupération de tous les articles
@@ -61,6 +63,7 @@ class ArticleController extends AbstractController
         name: 'get_article_by_id',
         methods: ['GET']
     )]
+    // #[IsGranted('ROLE_USER')]
     public function show(#[MapEntity(id: 'id')] ?Article $article): Response
     {
         if (!$article) {
@@ -77,6 +80,7 @@ class ArticleController extends AbstractController
         name: 'create_new_article',
         methods: ['POST']
     )]
+    #[IsGranted('ROLE_AUTHOR')]
     public function create(Request $request, CategoryRepository $categoryRepository, UserRepository $userRepository): Response
     {
         // Récupérer l'article envoyé au serveur et le convertir en objet classique
@@ -139,6 +143,7 @@ class ArticleController extends AbstractController
         name: 'delete_an_article',
         methods: ["DELETE"]
     )]
+    #[IsGranted('ROLE_AUTHOR')]
     public function delete(#[MapEntity(id: 'id')] ?Article $article): Response
     {
         // Vérifier si la ressource de type article à supprimer est bien présente dans le serveur
@@ -159,6 +164,7 @@ class ArticleController extends AbstractController
         name: 'update_an_article',
         methods: ['PUT']
     )]
+    #[IsGranted('ROLE_AUTHOR')]
     public function update(?Article $article, Request $request): Response
     {
         // Gestion des erreurs

@@ -38,12 +38,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Le prénom ne peut pas être vide')]
-    #[Groups(['articles.index', 'articles.show', 'articles.update'])] // Groupe de sérialization pour l'API
+    #[Groups(['articles.index', 'articles.show', 'articles.update', 'users.me'])] // Groupe de sérialization pour l'API
     private ?string $firstname = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Le nom de famille ne peut pas être vide')]
-    #[Groups(['articles.index', 'articles.show', 'articles.update'])] // Groupe de sérialization pour l'API
+    #[Groups(['articles.index', 'articles.show', 'articles.update', 'users.me'])] // Groupe de sérialization pour l'API
     private ?string $lastname = null;
 
     #[ORM\Column]
@@ -91,6 +91,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\OneToMany(targetEntity: Notification::class, mappedBy: 'author', orphanRemoval: true)]
     private Collection $notifications;
+
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $apiToken = null;
 
     public function __construct()
     {
@@ -403,6 +406,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $notification->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getApiToken(): ?string
+    {
+        return $this->apiToken;
+    }
+
+    public function setApiToken(?string $apiToken): static
+    {
+        $this->apiToken = $apiToken;
 
         return $this;
     }
