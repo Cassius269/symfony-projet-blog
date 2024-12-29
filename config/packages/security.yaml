@@ -9,7 +9,7 @@ security:
       entity:
         class: App\Entity\User
         property: email
-    api_user_provider:
+    api_user_provider: # la source d'authentification de l'API est la propriété apiToken de l'entité User
       entity:
         class: App\Entity\User
         property: apiToken
@@ -19,7 +19,7 @@ security:
       security: false
     api:
       pattern: ^/api/
-      provider: api_user_provider
+      provider: api_user_provider # faire appel à la source d'authentification de l'API
       custom_authenticator: App\Security\APIAuthenticator
       stateless: true
       lazy: true
@@ -51,6 +51,7 @@ security:
   access_control:
     # - { path: ^/admin, roles: ROLE_ADMIN }
     # - { path: ^/profile, roles: ROLE_USER }
+    - { path: ^/api/, roles: IS_AUTHENTICATED_FULLY } # Forcer l'utilisateur à entrer le token d'accès dans la requête
 
 when@test:
   security:

@@ -7,6 +7,7 @@ parameters:
   app.path.article_illustrations: /upload/articleillustration
   app.path.cv: /upload/cv
   timezone: "%env(APP_TIMEZONE)%" # déclaration de la time zone en tant que paramètre
+  CORS_ALLOW_ORIGIN: "%env(CORS_ALLOW_ORIGIN)%" # déclaration du CORS origin de l'application en tant que paramètre
 
 services:
   # default configuration for services in *this* file
