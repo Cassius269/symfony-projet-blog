@@ -27,3 +27,4 @@ yarn-error.log
 ####> images of the project ###
 /public/images/
 /public/upload/
+node_modules
