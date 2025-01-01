@@ -47,7 +47,7 @@ class Article
     #[ORM\ManyToOne(inversedBy: 'articles')]
     #[ORM\JoinColumn(nullable: false)]
     #[Groups(['articles.index', 'articles.show', 'articles.update'])] // Groupe de sérialization pour l'API
-    private ?User $author = null;
+    private ?Author $author = null;
 
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\NotBlank(message: 'Le contenu d\'un article ne peut pas être vide')]
@@ -115,12 +115,12 @@ class Article
         return $this;
     }
 
-    public function getAuthor(): ?User
+    public function getAuthor(): ?Author
     {
         return $this->author;
     }
 
-    public function setAuthor(?User $author): static
+    public function setAuthor(?Author $author): static
     {
         $this->author = $author;
 

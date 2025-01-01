@@ -27,7 +27,7 @@ class Episode
 
     #[ORM\ManyToOne(inversedBy: 'episodes')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $podcaster = null;
+    private ?Podcastor $podcaster = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotNull(message: 'Veuillez charger une image d\'illustration de \'épisode')]
@@ -82,12 +82,12 @@ class Episode
         return $this;
     }
 
-    public function getPodcaster(): ?User
+    public function getPodcaster(): ?Podcastor
     {
         return $this->podcaster;
     }
 
-    public function setPodcaster(?User $podcaster): static
+    public function setPodcaster(?Podcastor $podcaster): static
     {
         $this->podcaster = $podcaster;
 

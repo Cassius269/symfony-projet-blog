@@ -126,11 +126,11 @@ class ArticleController extends AbstractController
     #[IsGranted("ROLE_AUTHOR")]
     public function createArticle(Request $request, Security $security, EntityManagerInterface $entityManager, HtmlSanitizerInterface $htmlSanitizer, Notificator $notif, ArticleRepository $articleRepository): Response
     {
-        /** @var User $user */
-        $user = $security->getUser();
+        /** @var Author $author */
+        $author = $security->getUser();
 
-        // dump($user);
-        if ($user->isAccepted() == true) {
+        // dump($author);
+        if ($author->isAccepted() == true) {
             // Création d'un objet vide Article
             $article = new Article();
 
@@ -162,7 +162,7 @@ class ArticleController extends AbstractController
 
                 $article->setContent($safeContentArticle)
                     ->setCreatedAt(new DateTimeImmutable())
-                    ->setAuthor($user)
+                    ->setAuthor($author)
                     ->setNbreOfViews(0); // Iniitialiser le compteur du nombre de vues d'un articles à zéro
 
                 // Gestion de la photo
@@ -180,7 +180,7 @@ class ArticleController extends AbstractController
 
                 $notification = new Notification();
                 $notification->setCreatedAt(new \DateTimeImmutable())
-                    ->setAuthor($user)
+                    ->setAuthor($author)
                     ->setType($type)
                     ->setRead(false)
                     ->setContent($message)
