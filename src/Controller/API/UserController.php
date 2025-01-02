@@ -25,7 +25,7 @@ class UserController extends AbstractController
         name: "api_me" // nom de la route portant l'action me 
     )]
 
-    #[IsGranted("ROLE_USER")] // Seul un utilisateur ayant le rôle ROLE_USER peut accéder à cette route 
+    #[IsGranted("ROLE_AUTHOR")] // Seul un utilisateur ayant le rôle ROLE_AUTHOR peut accéder à cette route 
     public function me(): Response
     {
         // Renvoyer l'utilisateur autorisé depuis le token API entré dans les headers sur la clé Authorization 

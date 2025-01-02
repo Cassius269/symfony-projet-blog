@@ -27,7 +27,7 @@ class APIAuthenticator extends AbstractAuthenticator
         return $request->headers->has('Authorization') && str_contains($request->headers->get('Authorization'), 'Bearer');
     }
 
-    // // Authentifie la requête 
+    // // 1ère méthode : Authentifie la requête 
     // public function authenticate(Request $request): Passport
     // {
     //     // Extrait le jeton d'authentification de l'en-tête 
@@ -39,6 +39,7 @@ class APIAuthenticator extends AbstractAuthenticator
     //     );
     // }
 
+    // 2ème méthode : Authentifie la requête avec avantage de traduction de personnalisation de l'erreur de l'authentification
     public function authenticate(Request $request): Passport
     {
         $authHeader = $request->headers->get('Authorization');
