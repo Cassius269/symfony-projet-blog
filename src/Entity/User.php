@@ -75,7 +75,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Notification::class, mappedBy: 'author', orphanRemoval: true)]
     private Collection $notifications;
 
-    #[ORM\Column(length: 50, nullable: true)]
+    #[ORM\Column(length: 64, nullable: true)]
     private ?string $apiToken = null;
 
     public function __construct()
