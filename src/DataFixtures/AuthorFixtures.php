@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use Faker\Factory;
 use App\Entity\Author;
+use App\Services\PasswordUtilityService;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -12,14 +13,14 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class AuthorFixtures extends Fixture
 {
     // Injection de dépendances
-    public function __construct(private UserPasswordHasherInterface $passwordHasher, private ParameterBagInterface $parameterBag) {}
+    public function __construct(private PasswordUtilityService $passwordUtilityService) {}
 
     public function load(ObjectManager $manager): void
     {
         // Créer une instance de Faker
         $faker = Factory::create('fr_FR'); // Régionalisation de Faker en français
 
-        // Génération automatique de 20 auteurs
+        // Génération automatique de 20 auteurs ayant chacun surtout un email identique
         for ($i = 0; $i < 10; $i++) {
             $author = new Author;
             $author->setCreatedAt(new \DateTimeImmutable())
@@ -34,14 +35,7 @@ class AuthorFixtures extends Fixture
                 $author->setApiToken($faker->SHA256()); // génération de token solide et sécurisé
             }
 
-            // Création du mot de passe
-            $plaintextPassword =  $this->parameterBag->get('default_password') ?? 'defaultPassword'; // Récupération de la variable d'environnement depuis les services, sinon le mot de passe sera par défaut "defaultPassword"
-
-            $hashedPassword = $this->passwordHasher->hashPassword(
-                $author,
-                $plaintextPassword
-            );
-            $author->setPassword($hashedPassword); // entrer le mot de passe hashé dans le nouvel objet auteur
+            $author->setPassword($this->passwordUtilityService->getAhashedPassword($author)); // entrer le mot de passe hashé à l'aide d'un service personnalisé dans le nouvel objet auteur
 
             // Ecrire la requête SQL de création de nouvel utilisateur
             $manager->persist($author);

@@ -5,11 +5,11 @@ security:
   # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
   providers:
     # used to reload user from session & other features (e.g. switch_user)
-    app_user_provider:
+    app_user_provider: # l'entité source d'authentification est le User basé sur le champs unique email de chaque utilisateur
       entity:
         class: App\Entity\User
         property: email
-    api_user_provider: # la source d'authentification de l'API est la propriété apiToken de l'entité User
+    api_user_provider: # la source d'authentification de l'API est l'entité User et l'authentification est basée sur la propriété apiToken de l'entité User
       entity:
         class: App\Entity\User
         property: apiToken

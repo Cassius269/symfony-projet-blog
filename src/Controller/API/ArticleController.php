@@ -21,7 +21,6 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[Route(name: 'api_')]
 class ArticleController extends AbstractController
 {
-
     public function __construct(private EntityManagerInterface $entityManager, private ValidatorInterface $validator) {}
 
     #[Route(
@@ -97,7 +96,7 @@ class ArticleController extends AbstractController
             ->setAbstract($content->abstract)
             ->setCategory($category);
 
-        // Rechercher si l'auteur de l'article existe via son mail: 1er volet de sécurité
+        // Rechercher si l'auteur de l'article existe via son mail: 2ème volet de sécurité
         $searchSimilarUser = $userRepository->findOneBy(
             [
                 'email' => $content->author->email
@@ -143,7 +142,7 @@ class ArticleController extends AbstractController
         name: 'delete_an_article',
         methods: ["DELETE"]
     )]
-    #[IsGranted('ROLE_AUTHOR')]
+    #[IsGranted('ROLE_AUTHOR')]  // route réservé aux auteurs
     public function delete(#[MapEntity(id: 'id')] ?Article $article): Response
     {
         // Vérifier si la ressource de type article à supprimer est bien présente dans le serveur
