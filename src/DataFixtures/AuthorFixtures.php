@@ -7,8 +7,6 @@ use App\Entity\Author;
 use App\Services\PasswordUtilityService;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AuthorFixtures extends Fixture
 {
@@ -36,6 +34,9 @@ class AuthorFixtures extends Fixture
             }
 
             $author->setPassword($this->passwordUtilityService->getAhashedPassword($author)); // entrer le mot de passe hashé à l'aide d'un service personnalisé dans le nouvel objet auteur
+
+            // Création de réference unique pour chaque auteur en vue des relations entre les autres entités avec l'entité auteur
+            $this->addReference('auteur' . $i, $author);
 
             // Ecrire la requête SQL de création de nouvel utilisateur
             $manager->persist($author);
