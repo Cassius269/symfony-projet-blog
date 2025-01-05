@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[Route(name: "api_")] // Préfixation des noms de routes de ce controller
@@ -66,8 +67,6 @@ class UserController extends AbstractController
             }
         }
 
-        dd('identifiants non valides');
-        // $security->login($content, APIAuthenticator::class);
-        // dd($content);
+        throw new UnauthorizedHttpException("", "Authentification échouée"); // Si identifiants invalides, envoyer une exception de refus d'accès
     }
 }
