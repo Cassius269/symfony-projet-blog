@@ -51,6 +51,7 @@ security:
   access_control:
     # - { path: ^/admin, roles: ROLE_ADMIN }
     # - { path: ^/profile, roles: ROLE_USER }
+    - { path: ^/api/auth$, roles: PUBLIC_ACCESS }
     - { path: ^/api/, roles: IS_AUTHENTICATED_FULLY } # Forcer l'utilisateur à entrer le token d'accès dans la requête
 
 when@test:

@@ -164,7 +164,7 @@ class ArticleController extends AbstractController
         methods: ['PUT']
     )]
     #[IsGranted('ROLE_AUTHOR')]
-    public function update(?Article $article, Request $request): Response
+    public function update(#[MapEntity(id: 'id')] ?Article $article, Request $request): Response
     {
         // Gestion des erreurs
         if (!$article) {
