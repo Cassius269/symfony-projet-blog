@@ -1,0 +1,33 @@
+version: '3.8' 
+
+  
+
+services: 
+
+  mercure: 
+    image: dunglas/mercure 
+    restart: unless-stopped 
+    env_file:  
+      - .env 
+      - .env.local 
+    environment: 
+      SERVER_NAME: fahami.fr:443  # Utiliser HTTPS sur le port 443 
+      MERCURE_EXTRA_DIRECTIVES: "tls_cert_file=/etc/ssl/certs/fahami.fr-chain.pem; tls_key_file=/etc/ssl/private/_.fahami.fr_private_key.key" 
+    volumes: 
+      - mercure_data:/data 
+      - mercure_config:/config 
+      - /etc/ssl/certs:/etc/ssl/certs:ro 
+      - /etc/ssl/private:/etc/ssl/private:ro 
+    ports: 
+      - "443:443"  # Exposer le port HTTPS 
+    healthcheck: 
+      test: [ "CMD", "curl", "-f", "https://localhost/healthz" ] 
+      timeout: 5s 
+      retries: 5 
+      start_period: 60s 
+
+  
+
+volumes: 
+  mercure_data: 
+  mercure_config: 
