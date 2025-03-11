@@ -19,13 +19,13 @@ class Podcastor extends User
     /**
      * @var Collection<int, Podcast>
      */
-    #[ORM\OneToMany(targetEntity: Podcast::class, mappedBy: 'podcaster')]
+    #[ORM\OneToMany(targetEntity: Podcast::class, mappedBy: 'podcastor')]
     private Collection $podcasts;
 
     /**
      * @var Collection<int, Episode>
      */
-    #[ORM\OneToMany(targetEntity: Episode::class, mappedBy: 'podcaster', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Episode::class, mappedBy: 'podcastor', orphanRemoval: true)]
     private Collection $episodes;
 
     /**
@@ -40,7 +40,7 @@ class Podcastor extends User
     {
         if (!$this->episodes->contains($episode)) {
             $this->episodes->add($episode);
-            $episode->setPodcaster($this);
+            $episode->setPodcastor($this);
         }
 
         return $this;
@@ -50,8 +50,8 @@ class Podcastor extends User
     {
         if ($this->episodes->removeElement($episode)) {
             // set the owning side to null (unless already changed)
-            if ($episode->getPodcaster() === $this) {
-                $episode->setPodcaster(null);
+            if ($episode->getPodcastor() === $this) {
+                $episode->setPodcastor(null);
             }
         }
 
@@ -70,7 +70,7 @@ class Podcastor extends User
     {
         if (!$this->podcasts->contains($podcast)) {
             $this->podcasts->add($podcast);
-            $podcast->setPodcaster($this);
+            $podcast->setPodcastor($this);
         }
 
         return $this;
@@ -80,8 +80,8 @@ class Podcastor extends User
     {
         if ($this->podcasts->removeElement($podcast)) {
             // set the owning side to null (unless already changed)
-            if ($podcast->getPodcaster() === $this) {
-                $podcast->setPodcaster(null);
+            if ($podcast->getPodcastor() === $this) {
+                $podcast->setPodcastor(null);
             }
         }
 
