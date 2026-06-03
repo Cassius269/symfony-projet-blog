@@ -2,21 +2,21 @@
 
 namespace App\Controller\API;
 
-use Exception;
 use App\Entity\Article;
-use App\Repository\UserRepository;
 use App\Entity\MainImageIllustration;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Bridge\Doctrine\Attribute\MapEntity;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 #[Route(name: 'api_')]
 class ArticleController extends AbstractController
@@ -124,8 +124,12 @@ class ArticleController extends AbstractController
         if (count($errors) > 0) {
             // Renvoyer chaque erreur rencontrée (cela implique un arrêt de script)
             foreach ($errors as $error) {
-                throw new Exception($error->getPropertyPath() . ' : ' . $error->getMessage());
+                if ($error->getPropertyPath() != "createdAt") {
+                    $errorMessages[$error->getPropertyPath()][] = $error->getMessage();
+                }
             }
+
+            throw new UnprocessableEntityHttpException(json_encode($errorMessages));
         }
 
         // Persistance des données et envoi en base de données
@@ -184,8 +188,12 @@ class ArticleController extends AbstractController
         if (count($errors) > 0) {
             // Renvoyer chaque erreur rencontrée (cela implique un arrêt de script)
             foreach ($errors as $error) {
-                throw new Exception($error->getPropertyPath() . ' : ' . $error->getMessage());
+                if ($error->getPropertyPath() != "createdAt") {
+                    $errorMessages[$error->getPropertyPath()][] = $error->getMessage();
+                }
             }
+
+            throw new UnprocessableEntityHttpException(json_encode($errorMessages));
         }
 
         // Envoyer la donnée modifiée au serveur

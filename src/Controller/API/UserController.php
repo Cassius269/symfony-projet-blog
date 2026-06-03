@@ -5,7 +5,6 @@
 namespace App\Controller\API;
 
 use App\Repository\UserRepository;
-use App\Security\APIAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 
@@ -28,7 +27,7 @@ class UserController extends AbstractController
         name: "me" // nom de la route portant l'action me 
     )]
 
-    #[IsGranted("ROLE_AUTHOR")] // Seul un utilisateur ayant le rôle ROLE_AUTHOR peut accéder à cette route 
+    #[IsGranted("", message: "Accès refusé, connexion requise")] // Seul un utilisateur ayant le rôle ROLE_ADMIN peut accéder à cette route 
     public function me(): Response
     {
         // Renvoyer l'utilisateur autorisé depuis le token API entré dans les headers sur la clé Authorization 
@@ -40,7 +39,7 @@ class UserController extends AbstractController
     #[Route(
         path: '/api/auth',
         name: "generating_token",
-        methods: ['POST', 'GET'] // La méthode POST pour recevoir les identifiants et la méthode GET pour renvoyer le token
+        methods: ['POST', 'GET'] // La méthode POST pour envoyer les identifiants et la méthode GET pour recevoir le token généré en cas d'identifiants valides
     )]
     public function generateToken(Request $request, Security $security, UserRepository $userRepository, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response
     {
