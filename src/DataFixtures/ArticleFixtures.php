@@ -46,7 +46,7 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
     }
 
     // Récupérer les données fictives des auteurs comme dépendance 
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             AuthorFixtures::class,

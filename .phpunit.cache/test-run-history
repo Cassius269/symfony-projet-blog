@@ -1,0 +1,1 @@
+{"version":2,"defects":[],"times":{"App\\Tests\\Unit\\Entity\\AuthorTest::it_creates_an_author_with_given_values":0.001,"App\\Tests\\Unit\\Entity\\AuthorTest::it_adds_an_article_to_an_author":0,"App\\Tests\\Unit\\Entity\\AuthorTest::it_removes_an_article_from_an_author":0,"App\\Tests\\Unit\\Entity\\AuthorTest::it_does_not_add_same_article_twice":0}}
