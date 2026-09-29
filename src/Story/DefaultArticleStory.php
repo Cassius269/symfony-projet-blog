@@ -12,7 +12,13 @@ final class DefaultArticleStory extends Story
         ArticleFactory::createMany(30);
 
         ArticleFactory::createOne([
-            'title' => "Je suis un titre specifique d'un article spécifique"
+            'title' => "Je suis un titre specifique d'un article spécifique",
+            'nbreOfViews' => 100
+        ]);
+
+        ArticleFactory::createOne([
+            'title' => "Je suis un titre d'article de 400 vues",
+            'nbreOfViews' => 400
         ]);
 
         dump('Story Articles executée');

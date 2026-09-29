@@ -12,5 +12,11 @@ final class DefaultAuthorStory extends Story
         // Créer 100 auteurs par défaut
         AuthorFactory::createMany(100);
         dump('Story Auteurs executée');
+
+        // Créer un auteur spécifique
+        AuthorFactory::createOne([
+            'email' => 'jean-dupont@test.com',
+            'password' => '123456789'
+        ]);
     }
 }
