@@ -49,6 +49,26 @@ jobs:
       - name: install deps
         run: composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader --ansi
 
+      - name: install deps
+        run: composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader --ansi
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Activer Yarn
+        run: corepack enable
+
+      - name: Installer les dépendances JavaScript
+        run: yarn install
+
+      - name: Compiler les assets
+        run: yarn encore production
+
+      - name: Vérifier le fichier entrypoints.json
+        run: test -f public/build/entrypoints.json
+
       - name: Tests
         run: composer app-tests
         env:
