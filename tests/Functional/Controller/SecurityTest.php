@@ -57,21 +57,17 @@ final class SecurityTest extends WebTestCase
         $testUser = $userRepository->findOneByEmail('jean-dupont@test.com');
         $this->assertNotNull($testUser, 'Utilisateur de test introuvable en base');
         $client->loginUser($testUser);
-        // dd($testUser);
 
-        // Récupérer la requête
-        $crawler = $client->request('GET', '/');
+
+        $client->request('GET', '/');
         $this->assertResponseIsSuccessful();
+        $this->assertSelectorTextContains('body', 'Se déconnecter');
 
-        // Cliquer sur le bouton déconnecter
-        $crawler = $client->clickLink('Se déconnecter');
-        $this->assertResponseRedirects(
-            '/',
-            message: 'Echec de la déconnexion et de la redirection'
-        );
+        $client->clickLink('Se déconnecter');
+        $this->assertResponseRedirects('/', 302);
 
         $client->followRedirect();
-
         $this->assertResponseIsSuccessful();
+        $this->assertSelectorTextNotContains('body', 'Se déconnecter');
     }
 }
